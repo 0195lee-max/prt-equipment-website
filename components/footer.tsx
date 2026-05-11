@@ -21,7 +21,7 @@ const translations = {
       equipment: "Equipment",
       engineering: "Engineering",
       installedBase: "Installed Base",
-      exhibitions: "Exhibitions",
+      news: "News",
       contact: "Contact",
     },
     focus: [
@@ -44,7 +44,7 @@ const translations = {
       equipment: "Equipment",
       engineering: "Engineering",
       installedBase: "Installed Base",
-      exhibitions: "Exhibitions",
+      news: "News",
       contact: "Contact",
     },
     focus: [
@@ -67,7 +67,7 @@ const translations = {
       equipment: "Equipment",
       engineering: "Engineering",
       installedBase: "Installed Base",
-      exhibitions: "Exhibitions",
+      news: "News",
       contact: "Contact",
     },
     focus: [
@@ -188,10 +188,10 @@ export function Footer({ lang = "en" }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="/exhibitions"
+                  href="/news"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
-                  {t.nav.exhibitions}
+                  {t.nav.news}
                 </a>
               </li>
               <li>

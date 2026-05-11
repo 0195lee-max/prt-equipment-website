@@ -72,7 +72,7 @@ const translations = {
       { label: "본사", value: "경기도 안양시 동안구 LS로 76, 더오밸리 425호" },
       { label: "공장", value: "경기도 시흥시 다지골길 15-3" },
     ],
-    contactCta: "문의하기",
+    contactCta: "Contact Sales",
     productsCta: "장비 보기",
   },
   en: {
@@ -139,7 +139,7 @@ const translations = {
       { label: "Headquarters", value: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117" },
       { label: "Factory", value: "15-3 Dajigol-gil, Siheung-si, Gyeonggi-do 14957" },
     ],
-    contactCta: "Contact Us",
+    contactCta: "Contact Sales",
     productsCta: "View Equipment",
   },
   zh: {
@@ -206,7 +206,7 @@ const translations = {
       { label: "总部地址", value: "韩国京畿道安养市东安区LS路76号 The O Valley 425室" },
       { label: "工厂地址", value: "韩国京畿道始兴市다지골길15-3" },
     ],
-    contactCta: "联系我们",
+    contactCta: "Contact Sales",
     productsCta: "查看设备",
   },
 }

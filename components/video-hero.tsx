@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ChevronDown, Globe, ArrowRight } from "lucide-react"
+import { ChevronDown, Globe, ArrowRight, Menu, X } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
@@ -32,7 +32,7 @@ const translations = {
       equipment: "장비",
       engineering: "엔지니어링",
       installedBase: "납품 실적",
-      exhibitions: "전시회",
+      news: "뉴스",
       contact: "문의",
     },
   },
@@ -49,7 +49,7 @@ const translations = {
       equipment: "Equipment",
       engineering: "Engineering",
       installedBase: "Installed Base",
-      exhibitions: "Exhibitions",
+      news: "News",
       contact: "Contact",
     },
   },
@@ -66,7 +66,7 @@ const translations = {
       equipment: "设备",
       engineering: "工程技术",
       installedBase: "交付业绩",
-      exhibitions: "展会",
+      news: "新闻",
       contact: "联系我们",
     },
   },
@@ -81,6 +81,7 @@ interface VideoHeroProps {
 export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps) {
   const t = translations[lang]
   const [isLangOpen, setIsLangOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const langRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -92,6 +93,26 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuOpen])
+
+  const navLinks: Array<{ href: string; label: string }> = [
+    { href: "/company", label: t.nav.company },
+    { href: "/products", label: t.nav.equipment },
+    { href: "/engineering", label: t.nav.engineering },
+    { href: "/installed-base", label: t.nav.installedBase },
+    { href: "/news", label: t.nav.news },
+    { href: "/contact", label: t.nav.contact },
+  ]
 
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
@@ -147,12 +168,12 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
 
       {/* ── Navigation ───────────────────────────────────────────────────── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center px-10 py-5 lg:px-16 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center px-6 py-5 md:px-10 lg:px-16 transition-transform duration-300 ${
           isNavVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        } ${isMenuOpen ? "bg-slate-950/95 backdrop-blur-xl" : ""}`}
       >
         {/* Logo */}
-        <div className="flex justify-end md:w-[22vw]">
+        <div className="flex justify-start md:justify-end md:w-[22vw] flex-1 md:flex-none">
           <a href="/" className="flex flex-col items-start transition-opacity hover:opacity-80">
             <span className="text-[10px] font-medium tracking-[0.18em] text-white/45 uppercase">
               {t.tagline}
@@ -166,58 +187,87 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
           </a>
         </div>
 
-        {/* Menu */}
+        {/* Desktop Menu */}
         <div className="hidden flex-1 items-center justify-center gap-10 md:flex lg:gap-14">
-          <a href="/company" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.company}
-          </a>
-          <a href="/products" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.equipment}
-          </a>
-          <a href="/engineering" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.engineering}
-          </a>
-          <a href="/installed-base" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.installedBase}
-          </a>
-          <a href="/exhibitions" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.exhibitions}
-          </a>
-          <a href="/contact" className="text-sm font-medium text-white/80 transition-colors hover:text-white">
-            {t.nav.contact}
-          </a>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-white/80 transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
-        {/* Language selector */}
-        <div ref={langRef} className="relative md:w-[22vw] flex justify-start">
-          <button
-            onClick={() => setIsLangOpen(!isLangOpen)}
-            aria-label="Select language"
-            className="flex items-center justify-center rounded-full border border-white/15 bg-white/5 p-2.5 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/30"
-          >
-            <Globe className="h-4 w-4" />
-          </button>
+        {/* Right cluster */}
+        <div className="flex items-center gap-2 md:w-[22vw] md:justify-start">
+          {/* Language selector */}
+          <div ref={langRef} className="relative">
+            <button
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              aria-label="Select language"
+              className="flex items-center justify-center rounded-full border border-white/15 bg-white/5 p-2.5 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/30"
+            >
+              <Globe className="h-4 w-4" />
+            </button>
 
-          {isLangOpen && (
-            <div className="absolute left-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl">
-              {(["en", "ko", "zh"] as Language[]).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => { setLang(l); setIsLangOpen(false) }}
-                  className={`flex w-full items-center gap-2 px-4 py-3 text-sm transition-colors ${
-                    lang === l
-                      ? "text-white font-medium"
-                      : "text-slate-300 hover:bg-white/10 hover:text-white"
-                  }`}
-                  style={lang === l ? { backgroundColor: "rgba(199,168,109,0.15)" } : {}}
-                >
-                  {languageNames[l]}
-                </button>
-              ))}
-            </div>
-          )}
+            {isLangOpen && (
+              <div className="absolute right-0 md:left-0 md:right-auto top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl z-50">
+                {(["en", "ko", "zh"] as Language[]).map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => { setLang(l); setIsLangOpen(false) }}
+                    className={`flex w-full items-center gap-2 px-4 py-3 text-sm transition-colors ${
+                      lang === l
+                        ? "text-white font-medium"
+                        : "text-slate-300 hover:bg-white/10 hover:text-white"
+                    }`}
+                    style={lang === l ? { backgroundColor: "rgba(199,168,109,0.15)" } : {}}
+                  >
+                    {languageNames[l]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            className="md:hidden flex items-center justify-center rounded-full border border-white/15 bg-white/5 p-2.5 text-white/80 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/30"
+          >
+            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile menu drawer */}
+      <div
+        className={`fixed inset-x-0 top-[76px] z-40 md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-700/30 transition-all duration-300 ${
+          isMenuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <div className="px-6 py-6">
+          <ul className="space-y-1">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-4 py-3 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/5 border-b border-slate-800 transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
       {/* ── Hero content ─────────────────────────────────────────────────── */}
       <div className="relative flex h-full flex-col items-center justify-center px-6 pb-40 lg:px-16">

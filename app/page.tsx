@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { VideoHero } from "@/components/video-hero"
 import { Hero } from "@/components/hero"
 import { ApplicationsSection } from "@/components/applications-section"
-import { ExhibitionTeaser } from "@/components/exhibition-teaser"
+import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
@@ -88,7 +88,7 @@ export default function Page() {
         <ApplicationsSection lang={lang} />
       </div>
       <div>
-        <ExhibitionTeaser lang={lang} />
+        <NewsTeaser lang={lang} />
       </div>
       <Footer lang={lang} />
     </main>
