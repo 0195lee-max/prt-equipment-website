@@ -11,13 +11,6 @@ const languageNames: Record<Language, string> = {
   zh: "中文",
 }
 
-const kpis = [
-  { value: "50+", label: "Installed Systems" },
-  { value: "Since 2010", label: "Engineering" },
-  { value: "5+", label: "Countries" },
-  { value: "±5μm", label: "Alignment Accuracy" },
-]
-
 const translations = {
   ko: {
     tagline: "Precision Roll-to-Roll Technology",
@@ -270,7 +263,7 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
       </div>
 
       {/* ── Hero content ─────────────────────────────────────────────────── */}
-      <div className="relative flex h-full flex-col items-center justify-center px-6 pb-40 lg:px-16">
+      <div className="relative flex h-full flex-col items-center justify-center px-6 lg:px-16">
         {/* Sector label */}
         <div
           className="mb-10 flex items-center gap-4 prt-fade-up"
@@ -327,39 +320,10 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
         </div>
       </div>
 
-      {/* ── KPI Metrics Bar — anchored to hero bottom ────────────────────── */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-black/30 backdrop-blur-sm prt-fade-in"
-        style={{ animationDelay: "650ms" }}
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-4">
-            {kpis.map((kpi, idx) => (
-              <div
-                key={idx}
-                className={`px-6 py-7 text-center md:py-8 ${
-                  idx > 0 ? "border-l border-white/10" : ""
-                } ${idx === 2 ? "border-l-0 md:border-l" : ""}`}
-              >
-                <div
-                  className="text-2xl font-bold tracking-tight sm:text-3xl"
-                  style={{ color: "#C7A86D" }}
-                >
-                  {kpi.value}
-                </div>
-                <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55">
-                  {kpi.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator — above KPI bar */}
+      {/* Scroll indicator */}
       <button
         onClick={scrollToContent}
-        className="absolute bottom-36 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/30 transition-colors hover:text-white/60 prt-fade-in"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/30 transition-colors hover:text-white/60 prt-fade-in"
         style={{ animationDelay: "800ms" }}
         aria-label="Scroll to content"
       >

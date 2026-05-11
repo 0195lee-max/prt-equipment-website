@@ -31,8 +31,7 @@ const translations = {
       { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
-    installedBaseStatement:
-      "Running in Leadframe and Semiconductor Packaging production lines across Asia.",
+    installedBaseStatement: "Running in production lines across Asia.",
     regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
     viewMore: "View Full Installed Base",
   },
@@ -62,8 +61,7 @@ const translations = {
       { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
-    installedBaseStatement:
-      "Running in Leadframe and Semiconductor Packaging production lines across Asia.",
+    installedBaseStatement: "Running in production lines across Asia.",
     regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
     viewMore: "View Full Installed Base",
   },
@@ -93,8 +91,7 @@ const translations = {
       { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
-    installedBaseStatement:
-      "Running in Leadframe and Semiconductor Packaging production lines across Asia.",
+    installedBaseStatement: "Running in production lines across Asia.",
     regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
     viewMore: "View Full Installed Base",
   },

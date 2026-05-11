@@ -9,7 +9,6 @@ const translations = {
   ko: {
     sectionLabel: "Core Equipment",
     heading: "Built for Stable Mass Production",
-    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
     laminator: {
       name: "Roll-to-Roll Laminator",
       model: "PRTLA-350A-PT",
@@ -38,7 +37,6 @@ const translations = {
   en: {
     sectionLabel: "Core Equipment",
     heading: "Built for Stable Mass Production",
-    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
     laminator: {
       name: "Roll-to-Roll Laminator",
       model: "PRTLA-350A-PT",
@@ -67,7 +65,6 @@ const translations = {
   zh: {
     sectionLabel: "Core Equipment",
     heading: "Built for Stable Mass Production",
-    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
     laminator: {
       name: "Roll-to-Roll Laminator",
       model: "PRTLA-350A-PT",
@@ -169,10 +166,9 @@ export function Hero({ lang }: HeroProps) {
                 {t.sectionLabel}
               </p>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-3">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               {t.heading}
             </h2>
-            <p className="max-w-2xl text-sm text-slate-400 leading-relaxed">{t.sub}</p>
           </div>
 
           <div className="grid gap-5 lg:grid-cols-2">
