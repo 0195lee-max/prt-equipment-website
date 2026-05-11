@@ -11,7 +11,15 @@
       "Bash(git init *)",
       "Bash(git branch *)",
       "Bash(git remote *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(git commit -m 'PRT website: company info, products, engineering, installed base pages *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(git checkout *)",
+      "Bash(git commit -m 'Merge: keep updated PRT website code over remote base *)",
+      "Bash(git commit -m 'Add vercel.json: fix pnpm frozen-lockfile error on Vercel build *)"
     ]
   }
 }

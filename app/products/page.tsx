@@ -15,11 +15,10 @@ const translations = {
     modulesSection: "라인 구성 모듈",
     modulesDesc: "메인 장비와 통합되는 라인 구성 시스템. 웹 폭·소재·공정 요구사항에 따라 설계됩니다.",
     configNote: "모든 시스템은 Web Width · 소재 사양 · 처리량 · 자동화 수준 · 라인 연계 요구사항에 따라 맞춤 설계됩니다.",
-    contactCta: "사양 문의 / RFQ",
-    specsLabel: "사양",
-    materialsLabel: "대응 소재",
-    applicationLabel: "적용 산업",
-    photoNote: "Photo available on request",
+    contactCta: "Contact Sales",
+    specsLabel: "Specifications",
+    materialsLabel: "Compatible Materials",
+    applicationLabel: "Application",
     laminators: [
       {
         model: "PRTLA-350A-PT",
@@ -126,11 +125,10 @@ const translations = {
     modulesSection: "Line Configuration Modules",
     modulesDesc: "Line configuration systems integrated with main production equipment. Engineered to match web width, material, and process requirements.",
     configNote: "All systems are configured based on Web Width · Material Spec · Throughput · Automation Level · Line Integration requirements.",
-    contactCta: "Specification Inquiry / RFQ",
+    contactCta: "Contact Sales",
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
     applicationLabel: "Application",
-    photoNote: "Photo available on request",
     laminators: [
       {
         model: "PRTLA-350A-PT",
@@ -237,11 +235,10 @@ const translations = {
     modulesSection: "生产线配置模块",
     modulesDesc: "与主生产设备集成的生产线配置系统。根据卷材宽度、材料和工艺要求进行设计。",
     configNote: "所有系统均根据卷材宽度·材料规格·产量·自动化水平·生产线集成要求进行定制配置。",
-    contactCta: "规格咨询 / RFQ",
-    specsLabel: "技术规格",
-    materialsLabel: "兼容材料",
-    applicationLabel: "应用领域",
-    photoNote: "Photo available on request",
+    contactCta: "Contact Sales",
+    specsLabel: "Specifications",
+    materialsLabel: "Compatible Materials",
+    applicationLabel: "Application",
     laminators: [
       {
         model: "PRTLA-350A-PT",
@@ -351,7 +348,6 @@ function ProductCard({
   specsLabel,
   materialsLabel,
   applicationLabel,
-  photoNote,
   contactCta,
 }: {
   model: string
@@ -363,34 +359,62 @@ function ProductCard({
   specsLabel: string
   materialsLabel: string
   applicationLabel: string
-  photoNote: string
   contactCta: string
 }) {
   return (
     <div className="group relative overflow-hidden rounded-lg border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/60 transition-all hover:border-slate-600">
-      {/* Top accent */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)" }}
       />
-      {/* Corner accents */}
       <div className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-slate-600/40" />
       <div className="absolute -right-px -top-px h-6 w-6 border-r-2 border-t-2 border-slate-600/40" />
       <div className="absolute -bottom-px -left-px h-6 w-6 border-b-2 border-l-2 border-slate-600/40" />
       <div className="absolute -bottom-px -right-px h-6 w-6 border-b-2 border-r-2 border-slate-600/40" />
 
-      {/* Photo placeholder — replace with real equipment image */}
-      <div className="relative aspect-[16/9] bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(199,168,109,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(199,168,109,0.03)_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-        <div className="text-center px-8">
-          <p className="text-xs font-mono text-slate-600 mb-2 tracking-widest">{type.toUpperCase()}</p>
-          <p className="text-base font-semibold text-slate-400">{model}</p>
-          <p
-            className="mt-3 text-[10px] font-mono tracking-widest uppercase"
-            style={{ color: "rgba(199,168,109,0.35)" }}
-          >
-            {photoNote}
-          </p>
+      {/* Image-ready placeholder — swap to /public/images/equipment/{model}.jpg */}
+      <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0F1A2E] via-[#0B1220] to-[#060912] overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(199,168,109,0.06) 0%, transparent 70%)",
+          }}
+        />
+        {/* Corner brackets */}
+        <div
+          className="absolute top-4 left-4 h-3 w-3 border-l border-t"
+          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        />
+        <div
+          className="absolute top-4 right-4 h-3 w-3 border-r border-t"
+          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        />
+        <div
+          className="absolute bottom-4 left-4 h-3 w-3 border-l border-b"
+          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        />
+        <div
+          className="absolute bottom-4 right-4 h-3 w-3 border-r border-b"
+          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-8">
+            <p className="text-[9px] font-mono text-slate-600 mb-2 tracking-[0.3em]">
+              {type.toUpperCase()}
+            </p>
+            <p className="text-base font-semibold text-slate-400">{model}</p>
+          </div>
         </div>
       </div>
 
@@ -456,7 +480,7 @@ function SectionDivider({ label }: { label: string }) {
 }
 
 export default function ProductsPage() {
-  const [lang, setLang] = useState<Language>("ko")
+  const [lang, setLang] = useState<Language>("en")
   const t = translations[lang]
 
   return (
@@ -512,7 +536,6 @@ export default function ProductsPage() {
                   specsLabel={t.specsLabel}
                   materialsLabel={t.materialsLabel}
                   applicationLabel={t.applicationLabel}
-                  photoNote={t.photoNote}
                   contactCta={t.contactCta}
                 />
               ))}
@@ -530,7 +553,6 @@ export default function ProductsPage() {
                   specsLabel={t.specsLabel}
                   materialsLabel={t.materialsLabel}
                   applicationLabel={t.applicationLabel}
-                  photoNote={t.photoNote}
                   contactCta={t.contactCta}
                 />
               ))}

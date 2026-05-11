@@ -35,8 +35,8 @@ const translations = {
     factoryAddress: "경기도 시흥시 다지골길 15-3",
   },
   en: {
-    title: "Contact Us",
-    subtitle: "Reach out for equipment inquiries, technical specifications, or field support.",
+    title: "Contact Sales",
+    subtitle: "Equipment inquiries, technical specifications, and field support.",
     formSection: "Send a Message",
     infoSection: "Contact Information",
     name: "Name",
@@ -85,7 +85,7 @@ const translations = {
 }
 
 export default function ContactPage() {
-  const [lang, setLang] = useState<Language>("ko")
+  const [lang, setLang] = useState<Language>("en")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [formData, setFormData] = useState({

@@ -211,7 +211,7 @@ const translations = {
 }
 
 export default function CompanyPage() {
-  const [lang, setLang] = useState<Language>("ko")
+  const [lang, setLang] = useState<Language>("en")
   const t = translations[lang]
 
   return (

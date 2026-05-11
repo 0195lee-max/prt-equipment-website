@@ -7,56 +7,54 @@ type Language = "ko" | "en" | "zh"
 
 const translations = {
   ko: {
-    headline: "리드프레임 & 반도체 패키징 장비",
-    headlineSub: "Roll-to-Roll Laminator\n& Exposure Systems",
-    subheadline: "리드프레임 및 반도체 패키징 양산 라인을 위한 Roll-to-Roll 공정 장비",
-    equipmentPreview: "핵심 장비",
+    sectionLabel: "Core Equipment",
+    heading: "Built for Stable Mass Production",
+    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
     laminator: {
       name: "Roll-to-Roll Laminator",
       model: "PRTLA-350A-PT",
-      desc: "리드프레임 양산용 Roll-to-Roll 드라이필름 라미네이션 시스템",
+      desc: "Continuous dry-film lamination for Leadframe mass production.",
       specs: [
-        "Max Web Width: 350mm",
-        "Speed: 0.1~5.0 m/min",
+        "Web Width: Up to 350mm",
+        "Speed: 0.1 – 5.0 m/min",
         "Temp Accuracy: ±3°C",
-        "Pressure: ±0.1kg/㎠",
-      ],
-      cta: "장비 상세 보기",
-    },
-    exposure: {
-      name: "Roll-to-Roll Exposure System",
-      model: "PRTEX-380VAN-LF-LED",
-      desc: "리드프레임 패턴 형성용 Vertical Roll-to-Roll LED 노광 시스템",
-      specs: [
-        "Resolution: 20μm ±2μm",
-        "Alignment: ±5μm",
-        "UV: 365nm LED",
-        "Tact Time: 12 sec",
-      ],
-      cta: "장비 상세 보기",
-    },
-  },
-  en: {
-    headline: "Leadframe & Semiconductor Packaging Equipment",
-    headlineSub: "Roll-to-Roll Laminator\n& Exposure Systems",
-    subheadline: "Production-proven Roll-to-Roll process equipment for Leadframe and Semiconductor Packaging manufacturing lines.",
-    equipmentPreview: "Core Equipment",
-    laminator: {
-      name: "Roll-to-Roll Laminator",
-      model: "PRTLA-350A-PT",
-      desc: "Roll-to-Roll dry film lamination system for Leadframe mass production environments",
-      specs: [
-        "Max Web Width: 350mm",
-        "Speed: 0.1~5.0 m/min",
-        "Temp Accuracy: ±3°C",
-        "Pressure: ±0.1kg/㎠",
+        "Pressure: ±0.1 kg/㎠",
       ],
       cta: "View Details",
     },
     exposure: {
       name: "Roll-to-Roll Exposure System",
       model: "PRTEX-380VAN-LF-LED",
-      desc: "Vertical Roll-to-Roll LED exposure system for Leadframe patterning",
+      desc: "Vertical Roll-to-Roll LED exposure for Leadframe patterning.",
+      specs: [
+        "Resolution: 20μm ±2μm",
+        "Alignment: ±5μm",
+        "UV: 365nm LED",
+        "Tact Time: 12 sec",
+      ],
+      cta: "View Details",
+    },
+  },
+  en: {
+    sectionLabel: "Core Equipment",
+    heading: "Built for Stable Mass Production",
+    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
+    laminator: {
+      name: "Roll-to-Roll Laminator",
+      model: "PRTLA-350A-PT",
+      desc: "Continuous dry-film lamination for Leadframe mass production.",
+      specs: [
+        "Web Width: Up to 350mm",
+        "Speed: 0.1 – 5.0 m/min",
+        "Temp Accuracy: ±3°C",
+        "Pressure: ±0.1 kg/㎠",
+      ],
+      cta: "View Details",
+    },
+    exposure: {
+      name: "Roll-to-Roll Exposure System",
+      model: "PRTEX-380VAN-LF-LED",
+      desc: "Vertical Roll-to-Roll LED exposure for Leadframe patterning.",
       specs: [
         "Resolution: 20μm ±2μm",
         "Alignment: ±5μm",
@@ -67,33 +65,32 @@ const translations = {
     },
   },
   zh: {
-    headline: "引线框架 & 半导体封装设备",
-    headlineSub: "卷对卷层压机\n& 曝光系统",
-    subheadline: "面向引线框架及半导体封装量产线的卷对卷工艺设备",
-    equipmentPreview: "核心设备",
+    sectionLabel: "Core Equipment",
+    heading: "Built for Stable Mass Production",
+    sub: "Production-proven Roll-to-Roll systems engineered for Leadframe and Semiconductor Packaging lines.",
     laminator: {
-      name: "卷对卷层压机",
+      name: "Roll-to-Roll Laminator",
       model: "PRTLA-350A-PT",
-      desc: "面向引线框架量产环境的卷对卷干膜层压系统",
+      desc: "Continuous dry-film lamination for Leadframe mass production.",
       specs: [
-        "最大卷材宽度: 350mm",
-        "速度: 0.1~5.0 m/min",
-        "温度精度: ±3°C",
-        "压力: ±0.1kg/㎠",
+        "Web Width: Up to 350mm",
+        "Speed: 0.1 – 5.0 m/min",
+        "Temp Accuracy: ±3°C",
+        "Pressure: ±0.1 kg/㎠",
       ],
-      cta: "查看详情",
+      cta: "View Details",
     },
     exposure: {
-      name: "卷对卷曝光系统",
+      name: "Roll-to-Roll Exposure System",
       model: "PRTEX-380VAN-LF-LED",
-      desc: "用于引线框架图案形成的垂直卷对卷LED曝光系统",
+      desc: "Vertical Roll-to-Roll LED exposure for Leadframe patterning.",
       specs: [
-        "分辨率: 20μm ±2μm",
-        "对准精度: ±5μm",
-        "UV光源: 365nm LED",
-        "节拍时间: 12 sec",
+        "Resolution: 20μm ±2μm",
+        "Alignment: ±5μm",
+        "UV: 365nm LED",
+        "Tact Time: 12 sec",
       ],
-      cta: "查看详情",
+      cta: "View Details",
     },
   },
 }
@@ -102,167 +99,213 @@ interface HeroProps {
   lang: Language
 }
 
+/**
+ * Image-ready placeholder block for equipment cards.
+ * Swap to <Image src="/images/equipment/{model}.jpg" ... /> when real photos are available.
+ */
+function EquipmentImagePlaceholder({ model, index }: { model: string; index: string }) {
+  return (
+    <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0F1A2E] via-[#0B1220] to-[#060912] overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(199,168,109,0.05) 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute top-4 left-4 h-3 w-3 border-l border-t"
+        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+      />
+      <div
+        className="absolute top-4 right-4 h-3 w-3 border-r border-t"
+        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+      />
+      <div
+        className="absolute bottom-4 left-4 h-3 w-3 border-l border-b"
+        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+      />
+      <div
+        className="absolute bottom-4 right-4 h-3 w-3 border-r border-b"
+        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+      />
+      <div className="absolute left-4 top-4 flex items-center gap-1.5 pl-5">
+        <span className="text-[9px] font-mono text-slate-600">{index}</span>
+      </div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span
+          className="text-3xl font-bold tracking-tight opacity-25"
+          style={{ color: "#C7A86D" }}
+        >
+          {model.split("-")[0]}
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export function Hero({ lang }: HeroProps) {
   const t = translations[lang]
 
   return (
-    <section id="about" className="relative min-h-screen bg-slate-900">
-      {/* Background image */}
+    <section id="about" className="relative min-h-screen bg-[#0A0D14]">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/equipment-bg.jpg')" }}
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(180deg, #060912 0%, #0B1220 50%, #0F1A2E 100%)",
+        }}
       />
-      {/* Dark overlay for legibility */}
-      <div className="absolute inset-0 bg-slate-900/75" />
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      {/* Bottom fade — maintains dark industrial tone into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-slate-800 to-transparent pointer-events-none z-10" />
-      
-      {/* Hero Section */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-25"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0A0D14] to-transparent pointer-events-none z-10"
+      />
+
       <div className="relative flex min-h-screen flex-col justify-center px-6 py-16 lg:px-8">
         <div className="mx-auto w-full max-w-6xl">
-          {/* Header - Scaled up */}
-          <div className="mb-16 text-center">
-            <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              <span className="block text-slate-400 text-lg sm:text-xl lg:text-2xl font-normal mb-4">{t.headline}</span>
-              <span className="block leading-tight whitespace-pre-line">{t.headlineSub}</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-400 leading-relaxed">
-              {t.subheadline}
-            </p>
-          </div>
-
-          {/* Equipment Section Label */}
-          <div className="mb-12 flex items-center gap-4">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-slate-600" />
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              {t.equipmentPreview}
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+                {t.sectionLabel}
+              </p>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-3">
+              {t.heading}
             </h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-slate-600 via-slate-700 to-transparent" />
+            <p className="max-w-2xl text-sm text-slate-400 leading-relaxed">{t.sub}</p>
           </div>
 
-          {/* Side-by-Side Equipment Cards - Enlarged */}
-          <div className="grid gap-4 lg:grid-cols-2">
-            {/* Laminator Card */}
-            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm shadow-xl">
-              {/* Blueprint corners */}
-              <div className="absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-blue-500/40" />
-              <div className="absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-blue-500/40" />
-              <div className="absolute -bottom-px -left-px h-5 w-5 border-b-2 border-l-2 border-blue-500/40" />
-              <div className="absolute -bottom-px -right-px h-5 w-5 border-b-2 border-r-2 border-blue-500/40" />
-              
-              {/* Image Area - Larger */}
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-slate-700 to-slate-800">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px]" />
-                
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-xl border border-slate-600 bg-slate-700/80 shadow-lg">
-                      <svg className="h-10 w-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
-                      </svg>
-                    </div>
-                    <p className="text-base font-semibold text-slate-300">{t.laminator.model}</p>
-                    <p className="text-sm text-slate-500">Photo available on request</p>
-                  </div>
-                </div>
-                
-                {/* Corner markers */}
-                <div className="absolute left-4 top-4 flex items-center gap-1">
-                  <div className="h-2 w-2 border-l border-t border-slate-500/50" />
-                  <span className="text-[9px] font-mono text-slate-500">01</span>
-                </div>
-                <div className="absolute right-4 bottom-4 flex items-center gap-1">
-                  <span className="text-[9px] font-mono text-slate-500">350mm</span>
-                  <div className="h-2 w-2 border-r border-b border-slate-500/50" />
-                </div>
-              </div>
-              
-              {/* Info Panel - Larger padding */}
+          <div className="grid gap-5 lg:grid-cols-2">
+            {/* Laminator */}
+            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm shadow-xl transition-colors hover:border-slate-600">
+              <div
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)",
+                }}
+              />
+              <EquipmentImagePlaceholder model={t.laminator.model} index="01" />
+
               <div className="border-t border-slate-700/50 p-6">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-blue-400">{t.laminator.model}</span>
+                <div className="mb-2 flex items-center gap-2">
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: "#C7A86D" }}
+                  />
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-[0.2em]"
+                    style={{ color: "#C7A86D" }}
+                  >
+                    {t.laminator.model}
+                  </span>
                 </div>
                 <h3 className="text-lg font-semibold text-white">{t.laminator.name}</h3>
-                <p className="mt-3 text-base leading-relaxed text-slate-400">{t.laminator.desc}</p>
-                
-                {/* Specs */}
-                <div className="mt-5 space-y-2">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  {t.laminator.desc}
+                </p>
+
+                <div className="mt-4 space-y-1.5">
                   {t.laminator.specs.map((spec, idx) => (
-                    <div key={idx} className="text-xs font-mono text-slate-400">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 text-xs font-mono text-slate-400"
+                    >
+                      <span
+                        className="h-px w-3 flex-shrink-0"
+                        style={{ backgroundColor: "#C7A86D", opacity: 0.4 }}
+                      />
                       {spec}
                     </div>
                   ))}
                 </div>
-                
-                <Button variant="outline" size="lg" className="mt-5 w-full border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white text-base" asChild>
+
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="mt-5 w-full border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white"
+                  asChild
+                >
                   <a href="/products">
                     {t.laminator.cta}
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
               </div>
             </div>
 
-            {/* Exposure Card */}
-            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm shadow-xl">
-              {/* Blueprint corners */}
-              <div className="absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-blue-500/40" />
-              <div className="absolute -right-px -top-px h-5 w-5 border-r-2 border-t-2 border-blue-500/40" />
-              <div className="absolute -bottom-px -left-px h-5 w-5 border-b-2 border-l-2 border-blue-500/40" />
-              <div className="absolute -bottom-px -right-px h-5 w-5 border-b-2 border-r-2 border-blue-500/40" />
-              
-              {/* Image Area - Larger */}
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-slate-700 to-slate-800">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px]" />
-                
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-xl border border-slate-600 bg-slate-700/80 shadow-lg">
-                      <svg className="h-10 w-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                      </svg>
-                    </div>
-                    <p className="text-base font-semibold text-slate-300">{t.exposure.model}</p>
-                    <p className="text-sm text-slate-500">Photo available on request</p>
-                  </div>
-                </div>
-                
-                {/* Corner markers */}
-                <div className="absolute left-4 top-4 flex items-center gap-1">
-                  <div className="h-2 w-2 border-l border-t border-slate-500/50" />
-                  <span className="text-[9px] font-mono text-slate-500">02</span>
-                </div>
-                <div className="absolute right-4 bottom-4 flex items-center gap-1">
-                  <span className="text-[9px] font-mono text-slate-500">±10μm</span>
-                  <div className="h-2 w-2 border-r border-b border-slate-500/50" />
-                </div>
-              </div>
-              
-              {/* Info Panel - Larger padding */}
+            {/* Exposure */}
+            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm shadow-xl transition-colors hover:border-slate-600">
+              <div
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)",
+                }}
+              />
+              <EquipmentImagePlaceholder model={t.exposure.model} index="02" />
+
               <div className="border-t border-slate-700/50 p-6">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-blue-400">{t.exposure.model}</span>
+                <div className="mb-2 flex items-center gap-2">
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: "#C7A86D" }}
+                  />
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-[0.2em]"
+                    style={{ color: "#C7A86D" }}
+                  >
+                    {t.exposure.model}
+                  </span>
                 </div>
                 <h3 className="text-lg font-semibold text-white">{t.exposure.name}</h3>
-                <p className="mt-3 text-base leading-relaxed text-slate-400">{t.exposure.desc}</p>
-                
-                {/* Specs */}
-                <div className="mt-5 space-y-2">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  {t.exposure.desc}
+                </p>
+
+                <div className="mt-4 space-y-1.5">
                   {t.exposure.specs.map((spec, idx) => (
-                    <div key={idx} className="text-xs font-mono text-slate-400">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 text-xs font-mono text-slate-400"
+                    >
+                      <span
+                        className="h-px w-3 flex-shrink-0"
+                        style={{ backgroundColor: "#C7A86D", opacity: 0.4 }}
+                      />
                       {spec}
                     </div>
                   ))}
                 </div>
-                
-                <Button variant="outline" size="lg" className="mt-5 w-full border-slate-700 bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white text-base" asChild>
+
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="mt-5 w-full border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white"
+                  asChild
+                >
                   <a href="/products">
                     {t.exposure.cta}
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
               </div>
