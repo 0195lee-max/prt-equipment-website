@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
 
@@ -14,9 +15,9 @@ const translations = {
     positioningBody:
       "PRT는 범용 장비를 만들지 않습니다. 2010년부터 리드프레임 양산 공정만을 집중적으로 연구하고, 실제 양산 현장에서 검증된 Roll-to-Roll 라미네이션 및 노광 시스템을 설계합니다. 지금까지 아시아 5개국 양산 현장에 50기 이상을 납품했으며, 다수의 고객사로부터 반복 발주를 받고 있습니다.",
     pillars: [
-      { value: "15+", label: "엔지니어링 경험", sub: "2010년부터" },
-      { value: "50+", label: "납품 시스템", sub: "아시아 5개국" },
-      { value: "2", label: "핵심 공정", sub: "라미네이션 + 노광" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
+      { value: "2", label: "Core Processes", sub: "Lamination + Exposure" },
     ],
     timelineLabel: "회사 연혁",
     timeline: [
@@ -81,8 +82,8 @@ const translations = {
     positioningBody:
       "PRT does not build general-purpose equipment. Since 2010, we have focused exclusively on Leadframe mass-production processes — engineering and delivering production-proven Roll-to-Roll lamination and exposure systems. We have delivered 50+ systems across five countries in Asia, and a significant portion of our business comes from repeat orders by existing customers.",
     pillars: [
-      { value: "15+", label: "Years of Engineering", sub: "Since 2010" },
-      { value: "50+", label: "Installed Systems", sub: "5 Countries in Asia" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
       { value: "2", label: "Core Processes", sub: "Lamination + Exposure" },
     ],
     timelineLabel: "Company History",
@@ -148,8 +149,8 @@ const translations = {
     positioningBody:
       "PRT不生产通用设备。自2010年起，我们专注于引线框架量产工艺，设计并交付经过量产验证的卷对卷层压与曝光系统。迄今为止，我们已在亚洲五个国家交付50套以上系统，相当大比例的订单来自现有客户的重复采购。",
     pillars: [
-      { value: "15+", label: "工程经验", sub: "自2010年起" },
-      { value: "50+", label: "已交付系统", sub: "亚洲5个国家" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
       { value: "2", label: "核心工艺", sub: "层压 + 曝光" },
     ],
     timelineLabel: "公司历程",
@@ -247,7 +248,7 @@ export default function CompanyPage() {
               <div key={idx}>
                 <div className="text-4xl font-semibold" style={{ color: "#C7A86D" }}>{p.value}</div>
                 <p className="mt-1 text-sm font-medium text-slate-300">{p.label}</p>
-                <p className="text-xs text-slate-500">{p.sub}</p>
+                {p.sub && <p className="text-xs text-slate-500">{p.sub}</p>}
               </div>
             ))}
           </div>
@@ -417,6 +418,8 @@ export default function CompanyPage() {
           </div>
         </div>
       </section>
+
+      <Footer lang={lang} />
     </main>
   )
 }

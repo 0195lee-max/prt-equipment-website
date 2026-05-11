@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'PRT Co., Ltd.', url: 'https://prt-kr.com' }],
   openGraph: {
     type: 'website',
-    locale: 'ko_KR',
+    locale: 'en_US',
     url: 'https://prt-kr.com',
     siteName: 'PRT Co., Ltd.',
     title: 'PRT Co., Ltd. | Roll-to-Roll Equipment for Leadframe & Semiconductor Packaging',
@@ -69,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

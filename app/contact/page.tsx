@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Mail, Phone, MapPin, Clock, Printer } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
 
@@ -376,6 +377,8 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      <Footer lang={lang} />
     </main>
   )
 }

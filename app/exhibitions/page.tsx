@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import { Calendar, MapPin, Hash, ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
@@ -306,6 +307,8 @@ export default function ExhibitionsPage() {
           <p className="text-sm text-slate-600 italic">{t.pastEmpty}</p>
         </div>
       </section>
+
+      <Footer lang={lang} />
     </main>
   )
 }

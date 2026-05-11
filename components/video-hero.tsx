@@ -15,11 +15,11 @@ const translations = {
   ko: {
     tagline: "Precision Roll-to-Roll Solution Partner",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
-    headlineLine1: "Precision Roll-to-Roll Equipment",
-    headlineLine2: "for Leadframe & Semiconductor Packaging",
-    subheadline: "Laminator & Exposure Systems for High-Stability Mass Production Lines.",
+    headlineLine1: "Precision Roll-to-Roll",
+    headlineLine2: "Technology",
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
     differentiators: [
-      "Engineering Experience Since 2010",
+      "Engineering Since 2010",
       "50+ Installed Systems",
       "5+ Countries",
     ],
@@ -37,11 +37,11 @@ const translations = {
   en: {
     tagline: "Precision Roll-to-Roll Solution Partner",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
-    headlineLine1: "Precision Roll-to-Roll Equipment",
-    headlineLine2: "for Leadframe & Semiconductor Packaging",
-    subheadline: "Laminator & Exposure Systems for High-Stability Mass Production Lines.",
+    headlineLine1: "Precision Roll-to-Roll",
+    headlineLine2: "Technology",
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
     differentiators: [
-      "Engineering Experience Since 2010",
+      "Engineering Since 2010",
       "50+ Installed Systems",
       "5+ Countries",
     ],
@@ -59,11 +59,11 @@ const translations = {
   zh: {
     tagline: "精密卷对卷解决方案合作伙伴",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
-    headlineLine1: "Precision Roll-to-Roll Equipment",
-    headlineLine2: "for Leadframe & Semiconductor Packaging",
-    subheadline: "Laminator & Exposure Systems for High-Stability Mass Production Lines.",
+    headlineLine1: "Precision Roll-to-Roll",
+    headlineLine2: "Technology",
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
     differentiators: [
-      "Engineering Experience Since 2010",
+      "Engineering Since 2010",
       "50+ Installed Systems",
       "5+ Countries",
     ],

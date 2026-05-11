@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Cpu, Zap, Settings, Package } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
 
@@ -117,7 +118,7 @@ const translations = {
 const platformIcons = [Cpu, Zap, Settings, Package]
 
 export default function SpecificationsPage() {
-  const [lang, setLang] = useState<Language>("ko")
+  const [lang, setLang] = useState<Language>("en")
   const t = translations[lang]
   
   return (
@@ -203,6 +204,8 @@ export default function SpecificationsPage() {
           <p className="mt-12 text-center text-sm text-slate-400">{t.footnote}</p>
         </div>
       </section>
+
+      <Footer lang={lang} />
     </main>
   )
 }

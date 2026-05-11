@@ -38,7 +38,7 @@ const translations = {
     installedBase: "Installed Base",
     installedStats: [
       { value: "50+", label: "Installed Systems" },
-      { value: "2010", label: "Engineering Since" },
+      { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
     installedBaseStatement:
@@ -84,7 +84,7 @@ const translations = {
     installedBase: "Installed Base",
     installedStats: [
       { value: "50+", label: "Installed Systems" },
-      { value: "2010", label: "Engineering Since" },
+      { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
     installedBaseStatement:
@@ -130,7 +130,7 @@ const translations = {
     installedBase: "Installed Base",
     installedStats: [
       { value: "50+", label: "Installed Systems" },
-      { value: "2010", label: "Engineering Since" },
+      { value: "Since 2010", label: "Engineering" },
       { value: "5+", label: "Countries" },
     ],
     installedBaseStatement:

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
 
@@ -533,6 +534,8 @@ export default function EngineeringPage() {
           </div>
         </div>
       </section>
+
+      <Footer lang={lang} />
     </main>
   )
 }

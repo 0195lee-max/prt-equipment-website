@@ -12,9 +12,9 @@ const translations = {
     description:
       "사양서가 아닌, 실제 가동 이력이 증거입니다. 리드프레임 및 반도체 패키징 양산 라인에 납품된 50기 이상의 PRT 시스템은 지금 이 순간도 가동 중입니다.",
     stats: [
-      { value: "50+", label: "총 납품 시스템", sub: "누적 기준" },
-      { value: "2010~", label: "엔지니어링 시작", sub: "15년 이상 경험" },
-      { value: "5", label: "진출 국가", sub: "아시아 양산 현장" },
+      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
     ],
     repeatOrderLabel: "반복 발주",
     repeatOrderText:
@@ -79,9 +79,9 @@ const translations = {
     description:
       "Operating history, not specification sheets, is the proof. 50+ PRT systems deployed in Leadframe and Semiconductor Packaging production lines are in active operation today.",
     stats: [
-      { value: "50+", label: "Total Installed Systems", sub: "Cumulative" },
-      { value: "2010~", label: "Engineering Since", sub: "15+ Years of Experience" },
-      { value: "5", label: "Countries", sub: "Asia Production Sites" },
+      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
     ],
     repeatOrderLabel: "Repeat Orders",
     repeatOrderText:
@@ -146,9 +146,9 @@ const translations = {
     description:
       "运行历史，而非规格表，才是证明。目前已有50套以上PRT系统部署在引线框架和半导体封装量产线上并持续运行。",
     stats: [
-      { value: "50+", label: "已交付系统总量", sub: "累计" },
-      { value: "2010~", label: "工程起点", sub: "15年以上经验" },
-      { value: "5", label: "覆盖国家", sub: "亚洲量产现场" },
+      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "Since 2010", label: "Engineering", sub: "" },
+      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
     ],
     repeatOrderLabel: "重复订单",
     repeatOrderText:
@@ -245,7 +245,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
               <div key={idx}>
                 <div className="text-4xl font-semibold" style={{ color: "#C7A86D" }}>{s.value}</div>
                 <p className="mt-1 text-sm font-medium text-slate-300">{s.label}</p>
-                <p className="text-xs text-slate-500">{s.sub}</p>
+                {s.sub && <p className="text-xs text-slate-500">{s.sub}</p>}
               </div>
             ))}
           </div>

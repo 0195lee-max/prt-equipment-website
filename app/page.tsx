@@ -5,6 +5,7 @@ import { VideoHero } from "@/components/video-hero"
 import { Hero } from "@/components/hero"
 import { ApplicationsSection } from "@/components/applications-section"
 import { ExhibitionTeaser } from "@/components/exhibition-teaser"
+import { Footer } from "@/components/footer"
 
 type Language = "ko" | "en" | "zh"
 
@@ -89,6 +90,7 @@ export default function Page() {
       <div>
         <ExhibitionTeaser lang={lang} />
       </div>
+      <Footer lang={lang} />
     </main>
   )
 }
