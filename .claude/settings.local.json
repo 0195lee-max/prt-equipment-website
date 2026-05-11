@@ -19,7 +19,11 @@
       "Bash(git pull *)",
       "Bash(git checkout *)",
       "Bash(git commit -m 'Merge: keep updated PRT website code over remote base *)",
-      "Bash(git commit -m 'Add vercel.json: fix pnpm frozen-lockfile error on Vercel build *)"
+      "Bash(git commit -m 'Add vercel.json: fix pnpm frozen-lockfile error on Vercel build *)",
+      "Bash(git stash *)",
+      "Bash(npx tsc *)",
+      "Bash(git restore *)",
+      "Bash(git commit *)"
     ]
   }
 }
