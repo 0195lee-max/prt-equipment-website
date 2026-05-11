@@ -164,14 +164,14 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
 
   return (
     <section className="relative">
-      <div className="relative bg-[#0F1A2E]">
+      <div className="relative bg-[#0A0F1A] border-t border-slate-800/60">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
+              "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
           }}
         />
 
@@ -204,79 +204,58 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
               {t.coreCapabilities}
             </p>
           </div>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-0 lg:grid-cols-3 border-t border-l border-slate-800">
             {t.cards.map((card, idx) => (
               <div
                 key={idx}
-                className="relative overflow-hidden rounded-lg border border-slate-700 bg-slate-900/60 backdrop-blur-sm"
+                className="relative overflow-hidden border-r border-b border-slate-800 bg-slate-950/50"
               >
-                <div
-                  className="absolute top-0 left-0 right-0 h-px"
-                  style={{
-                    background:
-                      "linear-gradient(to right, transparent, rgba(199,168,109,0.4), transparent)",
-                  }}
-                />
-
                 {/* Image-ready placeholder — swap to /public/images/equipment/{file}.jpg */}
-                <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-[#0F1A2E] via-[#0B1220] to-[#060912]">
+                <div className="aspect-[4/3] relative overflow-hidden bg-[#0A0F1A] border-b border-slate-800/60">
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0"
+                    className="absolute inset-0 opacity-40"
                     style={{
                       backgroundImage:
-                        "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
-                      backgroundSize: "24px 24px",
+                        "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+                      backgroundSize: "32px 32px",
                     }}
                   />
                   <div
-                    aria-hidden="true"
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(199,168,109,0.06) 0%, transparent 70%)",
-                    }}
+                    className="absolute top-3 left-3 h-2 w-2 border-l border-t"
+                    style={{ borderColor: "rgba(199,168,109,0.4)" }}
                   />
                   <div
-                    className="absolute top-3 left-3 h-2.5 w-2.5 border-l border-t"
-                    style={{ borderColor: "rgba(199,168,109,0.35)" }}
+                    className="absolute top-3 right-3 h-2 w-2 border-r border-t"
+                    style={{ borderColor: "rgba(199,168,109,0.4)" }}
                   />
                   <div
-                    className="absolute top-3 right-3 h-2.5 w-2.5 border-r border-t"
-                    style={{ borderColor: "rgba(199,168,109,0.35)" }}
+                    className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
+                    style={{ borderColor: "rgba(199,168,109,0.4)" }}
                   />
                   <div
-                    className="absolute bottom-3 left-3 h-2.5 w-2.5 border-l border-b"
-                    style={{ borderColor: "rgba(199,168,109,0.35)" }}
-                  />
-                  <div
-                    className="absolute bottom-3 right-3 h-2.5 w-2.5 border-r border-b"
-                    style={{ borderColor: "rgba(199,168,109,0.35)" }}
+                    className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
+                    style={{ borderColor: "rgba(199,168,109,0.4)" }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center px-6">
-                      <p className="text-[9px] font-mono text-slate-600 tracking-[0.25em] mb-2">
-                        {card.label}
-                      </p>
-                      <p className="text-sm font-semibold text-slate-400">{card.title}</p>
-                    </div>
+                    <p className="text-[10px] font-mono text-slate-600 tracking-[0.25em]">
+                      {card.label}
+                    </p>
                   </div>
                 </div>
 
-                <div className="border-t border-slate-700/60 px-6 py-5 bg-slate-900/70">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
-                    {card.title}
-                  </p>
-                  <p className="text-xs text-slate-500 mb-4 leading-relaxed">{card.desc}</p>
-                  <div className="space-y-1">
+                <div className="px-6 py-6">
+                  <p className="text-sm font-semibold text-white mb-2">{card.title}</p>
+                  <p className="text-xs text-slate-500 mb-5 leading-relaxed">{card.desc}</p>
+                  <div className="space-y-1.5 border-t border-slate-800 pt-4">
                     {card.specs.map((spec, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-center gap-2 text-xs font-mono text-slate-500"
+                        className="flex items-center gap-2 text-xs font-mono text-slate-400"
                       >
                         <span
-                          className="h-px w-3 flex-shrink-0"
-                          style={{ backgroundColor: "#C7A86D", opacity: 0.4 }}
+                          className="h-px w-2.5 flex-shrink-0"
+                          style={{ backgroundColor: "#C7A86D", opacity: 0.5 }}
                         />
                         {spec}
                       </div>
@@ -287,22 +266,17 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
             ))}
           </div>
         </div>
-
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-          style={{ background: "linear-gradient(to top, #0B1220, transparent)" }}
-        />
       </div>
 
       {/* Installed Base */}
-      <div className="relative" style={{ backgroundColor: "#0B1220" }}>
+      <div className="relative bg-[#07090F] border-t border-slate-800/60">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
+              "linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
           }}
         />
 

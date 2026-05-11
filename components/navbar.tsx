@@ -13,7 +13,7 @@ const languageNames: Record<Language, string> = {
 
 const translations = {
   ko: {
-    tagline: "Precision Roll-to-Roll Solution Partner",
+    tagline: "Precision Roll-to-Roll Technology",
     nav: {
       company: "회사 소개",
       equipment: "장비",
@@ -24,7 +24,7 @@ const translations = {
     },
   },
   en: {
-    tagline: "Precision Roll-to-Roll Solution Partner",
+    tagline: "Precision Roll-to-Roll Technology",
     nav: {
       company: "Company",
       equipment: "Equipment",
@@ -35,7 +35,7 @@ const translations = {
     },
   },
   zh: {
-    tagline: "精密卷对卷解决方案合作伙伴",
+    tagline: "Precision Roll-to-Roll Technology",
     nav: {
       company: "公司介绍",
       equipment: "设备",

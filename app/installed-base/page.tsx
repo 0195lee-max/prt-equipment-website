@@ -11,11 +11,9 @@ export default function InstalledBasePage() {
   const [lang, setLang] = useState<Language>("en")
   
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-screen bg-[#07090F]">
       <Navbar lang={lang} setLang={setLang} />
-      <div className="pt-20">
-        <InstalledBase lang={lang} />
-      </div>
+      <InstalledBase lang={lang} />
       <Footer lang={lang} />
     </main>
   )

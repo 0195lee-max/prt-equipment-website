@@ -98,22 +98,18 @@ export default function ExhibitionsPage() {
   const t = translations[lang]
 
   return (
-    <main className="min-h-screen bg-[#0A0D14]">
+    <main className="min-h-screen bg-[#07090F]">
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center bg-gradient-to-b from-[#060912] via-[#0B1220] to-[#0F1A2E]">
+      <section className="relative min-h-[55vh] flex items-center bg-[#07090F] border-b border-slate-800/60">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage:
-              "radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%)",
+              "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
           }}
         />
 
@@ -134,25 +130,19 @@ export default function ExhibitionsPage() {
       </section>
 
       {/* ── Upcoming Exhibition Card ─────────────────────── */}
-      <section className="relative bg-[#0A0D14] py-20">
+      <section className="relative bg-[#07090F] py-20">
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <p className="mb-8 text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-            {t.upcomingLabel}
-          </p>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+              {t.upcomingLabel}
+            </p>
+          </div>
 
-          <div className="relative overflow-hidden rounded-lg border border-slate-700/60 bg-gradient-to-br from-slate-900/80 to-slate-950/80">
-            {/* Top accent */}
-            <div
-              className="absolute top-0 left-0 right-0 h-px"
-              style={{
-                background:
-                  "linear-gradient(to right, transparent, rgba(199,168,109,0.6), transparent)",
-              }}
-            />
-
+          <div className="relative border border-slate-800 bg-slate-950/50">
             <div className="grid lg:grid-cols-[1.2fr_1fr]">
               {/* Left: Event details */}
-              <div className="p-8 lg:p-10">
+              <div className="p-8 lg:p-10 lg:border-r border-slate-800">
                 <div className="space-y-7">
                   {/* Event name */}
                   <div>
@@ -215,10 +205,10 @@ export default function ExhibitionsPage() {
                   </div>
 
                   {/* CTAs */}
-                  <div className="flex flex-wrap gap-3 pt-4">
+                  <div className="flex flex-wrap gap-3 pt-5 border-t border-slate-800">
                     <a
                       href="/contact?subject=Exhibition+Meeting"
-                      className="group inline-flex items-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold text-slate-900 transition-all hover:shadow-lg hover:shadow-[#C7A86D]/20"
+                      className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#B89757]"
                       style={{ backgroundColor: "#C7A86D" }}
                     >
                       {t.ctaPrimary}
@@ -226,7 +216,7 @@ export default function ExhibitionsPage() {
                     </a>
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 rounded-sm border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
+                      className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
                     >
                       {t.ctaSecondary}
                     </a>
@@ -235,39 +225,35 @@ export default function ExhibitionsPage() {
               </div>
 
               {/* Right: Image-ready neutral panel */}
-              <div className="relative bg-gradient-to-br from-[#0B1220] to-[#060912] min-h-[280px] lg:min-h-full overflow-hidden">
+              <div className="relative bg-[#0A0F1A] min-h-[280px] lg:min-h-full overflow-hidden border-t lg:border-t-0 border-slate-800">
                 {/* Replace this block with: <Image src="/images/exhibitions/booth.jpg" alt="" fill className="object-cover" /> */}
                 <div
-                  className="absolute inset-0"
+                  aria-hidden="true"
+                  className="absolute inset-0 opacity-40"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
-                    backgroundSize: "30px 30px",
+                      "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
+                    backgroundSize: "32px 32px",
                   }}
                 />
-                {/* Corner brackets */}
                 <div
-                  className="absolute top-5 left-5 h-4 w-4 border-l border-t"
-                  style={{ borderColor: "rgba(199,168,109,0.3)" }}
+                  className="absolute top-4 left-4 h-2 w-2 border-l border-t"
+                  style={{ borderColor: "rgba(199,168,109,0.4)" }}
                 />
                 <div
-                  className="absolute top-5 right-5 h-4 w-4 border-r border-t"
-                  style={{ borderColor: "rgba(199,168,109,0.3)" }}
+                  className="absolute top-4 right-4 h-2 w-2 border-r border-t"
+                  style={{ borderColor: "rgba(199,168,109,0.4)" }}
                 />
                 <div
-                  className="absolute bottom-5 left-5 h-4 w-4 border-l border-b"
-                  style={{ borderColor: "rgba(199,168,109,0.3)" }}
+                  className="absolute bottom-4 left-4 h-2 w-2 border-l border-b"
+                  style={{ borderColor: "rgba(199,168,109,0.4)" }}
                 />
                 <div
-                  className="absolute bottom-5 right-5 h-4 w-4 border-r border-b"
-                  style={{ borderColor: "rgba(199,168,109,0.3)" }}
+                  className="absolute bottom-4 right-4 h-2 w-2 border-r border-b"
+                  style={{ borderColor: "rgba(199,168,109,0.4)" }}
                 />
-                {/* Center monogram */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="text-5xl font-bold tracking-tight opacity-25"
-                    style={{ color: "#C7A86D" }}
-                  >
+                  <span className="text-4xl font-bold tracking-tight text-slate-700">
                     PRT
                   </span>
                 </div>
@@ -278,18 +264,20 @@ export default function ExhibitionsPage() {
       </section>
 
       {/* ── What to Expect ───────────────────────────────── */}
-      <section className="relative bg-slate-950 py-20">
+      <section className="relative bg-[#0A0F1A] py-20 border-t border-slate-800/60">
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <p className="mb-10 text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-            {t.notesLabel}
-          </p>
+          <div className="flex items-center gap-3 mb-10">
+            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+              {t.notesLabel}
+            </p>
+          </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-0 sm:grid-cols-2 border-t border-l border-slate-800">
             {t.notes.map((note, idx) => (
               <div
                 key={idx}
-                className="flex gap-4 border-l-2 pl-5 py-1"
-                style={{ borderColor: "rgba(199,168,109,0.3)" }}
+                className="border-r border-b border-slate-800 bg-slate-950/30 p-6"
               >
                 <p className="text-sm text-slate-300 leading-relaxed">{note}</p>
               </div>
@@ -299,11 +287,14 @@ export default function ExhibitionsPage() {
       </section>
 
       {/* ── Past Exhibitions placeholder ─────────────────── */}
-      <section className="relative bg-[#0A0D14] py-20 border-t border-slate-900">
+      <section className="relative bg-[#07090F] py-20 border-t border-slate-800/60">
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-            {t.pastLabel}
-          </p>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+              {t.pastLabel}
+            </p>
+          </div>
           <p className="text-sm text-slate-600 italic">{t.pastEmpty}</p>
         </div>
       </section>

@@ -105,47 +105,38 @@ interface HeroProps {
  */
 function EquipmentImagePlaceholder({ model, index }: { model: string; index: string }) {
   return (
-    <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0F1A2E] via-[#0B1220] to-[#060912] overflow-hidden">
+    <div className="relative aspect-[16/9] bg-[#0A0F1A] overflow-hidden border-b border-slate-800/60">
       <div
         aria-hidden="true"
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+            "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
       <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(199,168,109,0.05) 0%, transparent 70%)",
-        }}
+        className="absolute top-3 left-3 h-2 w-2 border-l border-t"
+        style={{ borderColor: "rgba(199,168,109,0.4)" }}
       />
       <div
-        className="absolute top-4 left-4 h-3 w-3 border-l border-t"
-        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        className="absolute top-3 right-3 h-2 w-2 border-r border-t"
+        style={{ borderColor: "rgba(199,168,109,0.4)" }}
       />
       <div
-        className="absolute top-4 right-4 h-3 w-3 border-r border-t"
-        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
+        style={{ borderColor: "rgba(199,168,109,0.4)" }}
       />
       <div
-        className="absolute bottom-4 left-4 h-3 w-3 border-l border-b"
-        style={{ borderColor: "rgba(199,168,109,0.35)" }}
+        className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
+        style={{ borderColor: "rgba(199,168,109,0.4)" }}
       />
-      <div
-        className="absolute bottom-4 right-4 h-3 w-3 border-r border-b"
-        style={{ borderColor: "rgba(199,168,109,0.35)" }}
-      />
-      <div className="absolute left-4 top-4 flex items-center gap-1.5 pl-5">
-        <span className="text-[9px] font-mono text-slate-600">{index}</span>
+      <div className="absolute top-3 left-3 pl-4">
+        <span className="text-[9px] font-mono text-slate-600 tracking-wider">{index}</span>
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <span
-          className="text-3xl font-bold tracking-tight opacity-25"
-          style={{ color: "#C7A86D" }}
+          className="text-2xl font-bold tracking-tight text-slate-700"
         >
           {model.split("-")[0]}
         </span>
@@ -158,25 +149,15 @@ export function Hero({ lang }: HeroProps) {
   const t = translations[lang]
 
   return (
-    <section id="about" className="relative min-h-screen bg-[#0A0D14]">
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(180deg, #060912 0%, #0B1220 50%, #0F1A2E 100%)",
-        }}
-      />
+    <section id="about" className="relative min-h-screen bg-[#0A0F1A]">
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-25"
+        className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+            "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
         }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0A0D14] to-transparent pointer-events-none z-10"
       />
 
       <div className="relative flex min-h-screen flex-col justify-center px-6 py-16 lg:px-8">
@@ -196,14 +177,7 @@ export function Hero({ lang }: HeroProps) {
 
           <div className="grid gap-5 lg:grid-cols-2">
             {/* Laminator */}
-            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm shadow-xl transition-colors hover:border-slate-600">
-              <div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)",
-                }}
-              />
+            <div className="group relative overflow-hidden border border-slate-800 bg-slate-900/40 transition-colors hover:border-slate-700">
               <EquipmentImagePlaceholder model={t.laminator.model} index="01" />
 
               <div className="border-t border-slate-700/50 p-6">
@@ -242,7 +216,7 @@ export function Hero({ lang }: HeroProps) {
                 <Button
                   variant="outline"
                   size="default"
-                  className="mt-5 w-full border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white"
+                  className="mt-5 w-full rounded-none border-slate-700 bg-slate-900/50 text-slate-300 hover:bg-slate-800 hover:text-white text-xs font-semibold uppercase tracking-[0.08em]"
                   asChild
                 >
                   <a href="/products">
@@ -254,14 +228,7 @@ export function Hero({ lang }: HeroProps) {
             </div>
 
             {/* Exposure */}
-            <div className="group relative overflow-hidden rounded-lg border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm shadow-xl transition-colors hover:border-slate-600">
-              <div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)",
-                }}
-              />
+            <div className="group relative overflow-hidden border border-slate-800 bg-slate-900/40 transition-colors hover:border-slate-700">
               <EquipmentImagePlaceholder model={t.exposure.model} index="02" />
 
               <div className="border-t border-slate-700/50 p-6">
@@ -300,7 +267,7 @@ export function Hero({ lang }: HeroProps) {
                 <Button
                   variant="outline"
                   size="default"
-                  className="mt-5 w-full border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white"
+                  className="mt-5 w-full rounded-none border-slate-700 bg-slate-900/50 text-slate-300 hover:bg-slate-800 hover:text-white text-xs font-semibold uppercase tracking-[0.08em]"
                   asChild
                 >
                   <a href="/products">

@@ -11,18 +11,20 @@ const languageNames: Record<Language, string> = {
   zh: "中文",
 }
 
+const kpis = [
+  { value: "50+", label: "Installed Systems" },
+  { value: "Since 2010", label: "Engineering" },
+  { value: "5+", label: "Countries" },
+  { value: "±5μm", label: "Alignment Accuracy" },
+]
+
 const translations = {
   ko: {
-    tagline: "Precision Roll-to-Roll Solution Partner",
+    tagline: "Precision Roll-to-Roll Technology",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
     headlineLine1: "Precision Roll-to-Roll",
     headlineLine2: "Technology",
-    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
-    differentiators: [
-      "Engineering Since 2010",
-      "50+ Installed Systems",
-      "5+ Countries",
-    ],
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production.",
     ctaPrimary: "View Equipment",
     ctaSecondary: "Contact Sales",
     nav: {
@@ -35,16 +37,11 @@ const translations = {
     },
   },
   en: {
-    tagline: "Precision Roll-to-Roll Solution Partner",
+    tagline: "Precision Roll-to-Roll Technology",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
     headlineLine1: "Precision Roll-to-Roll",
     headlineLine2: "Technology",
-    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
-    differentiators: [
-      "Engineering Since 2010",
-      "50+ Installed Systems",
-      "5+ Countries",
-    ],
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production.",
     ctaPrimary: "View Equipment",
     ctaSecondary: "Contact Sales",
     nav: {
@@ -57,16 +54,11 @@ const translations = {
     },
   },
   zh: {
-    tagline: "精密卷对卷解决方案合作伙伴",
+    tagline: "Precision Roll-to-Roll Technology",
     sectorLabel: "Leadframe & Semiconductor Packaging Equipment",
     headlineLine1: "Precision Roll-to-Roll",
     headlineLine2: "Technology",
-    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production",
-    differentiators: [
-      "Engineering Since 2010",
-      "50+ Installed Systems",
-      "5+ Countries",
-    ],
+    subheadline: "Laminator & Exposure Systems for Leadframe and Semiconductor Packaging Production.",
     ctaPrimary: "View Equipment",
     ctaSecondary: "Contact Sales",
     nav: {
@@ -107,60 +99,49 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0A0D14]">
-      {/* ── Base: dark navy / charcoal vertical gradient ─────────────────── */}
+      {/* ── Base: flat dark charcoal ─────────────────────────────────────── */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #060912 0%, #0B1220 35%, #0F1A2E 70%, #0A1424 100%)",
+            "linear-gradient(180deg, #07090F 0%, #0A0F1A 100%)",
         }}
       />
 
       {/* ── Image placeholder layer (swap to /public/images/equipment/hero.jpg) ── */}
       {/* When the real equipment photo is ready, replace this <div> with:
-          <Image src="/images/equipment/hero.jpg" alt="" fill priority className="object-cover opacity-25" />
+          <Image src="/images/equipment/hero.jpg" alt="" fill priority className="object-cover opacity-15" />
       */}
+
+      {/* ── Industrial technical grid — even, structural ─────────────────── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 prt-fade-in"
+        className="absolute inset-0 opacity-[0.25]"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 70% 40%, rgba(199,168,109,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 20% 80%, rgba(22,61,107,0.25) 0%, transparent 60%)",
+            "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* ── Fine technical grid (subtle) ─────────────────────────────────── */}
+      {/* ── Fine secondary grid (denser, for depth) ──────────────────────── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.35] prt-fade-in"
+        className="absolute inset-0 opacity-[0.15]"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%)",
+          backgroundSize: "16px 16px",
         }}
       />
 
-      {/* ── Soft top gold glow ───────────────────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 h-[40vh] w-[80vw] prt-glow pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 100% at center top, rgba(199,168,109,0.08) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* ── Vignette ─────────────────────────────────────────────────────── */}
+      {/* ── Subtle vignette ──────────────────────────────────────────────── */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 50%, rgba(0,0,0,0.5) 100%)",
+            "radial-gradient(ellipse 110% 90% at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%)",
         }}
       />
 
@@ -239,65 +220,49 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
       </nav>
 
       {/* ── Hero content ─────────────────────────────────────────────────── */}
-      <div className="relative flex h-full flex-col items-center justify-center px-6 text-center lg:px-16">
+      <div className="relative flex h-full flex-col items-center justify-center px-6 pb-40 lg:px-16">
         {/* Sector label */}
         <div
           className="mb-10 flex items-center gap-4 prt-fade-up"
-          style={{ animationDelay: "100ms" }}
+          style={{ animationDelay: "80ms" }}
         >
-          <div className="h-px w-12 bg-white/25" />
+          <div className="h-px w-10 bg-white/25" />
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/55">
             {t.sectorLabel}
           </span>
-          <div className="h-px w-12 bg-white/25" />
+          <div className="h-px w-10 bg-white/25" />
         </div>
 
         {/* Main headline */}
         <h1
-          className="mb-2 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[64px] leading-[1.08] max-w-5xl prt-fade-up"
-          style={{ animationDelay: "250ms" }}
+          className="text-center mb-2 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[68px] leading-[1.05] max-w-5xl prt-fade-up"
+          style={{ animationDelay: "180ms" }}
         >
           {t.headlineLine1}
         </h1>
         <h1
-          className="mb-10 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl xl:text-[64px] leading-[1.08] max-w-5xl prt-fade-up"
-          style={{ color: "#C7A86D", animationDelay: "400ms" }}
+          className="text-center mb-10 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl xl:text-[68px] leading-[1.05] max-w-5xl prt-fade-up"
+          style={{ color: "#C7A86D", animationDelay: "280ms" }}
         >
           {t.headlineLine2}
         </h1>
 
         {/* Subheadline */}
         <p
-          className="mb-14 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg prt-fade-up"
-          style={{ animationDelay: "550ms" }}
+          className="text-center mb-12 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg prt-fade-up"
+          style={{ animationDelay: "380ms" }}
         >
           {t.subheadline}
         </p>
 
-        {/* Differentiators — short, hard facts */}
-        <div
-          className="mb-14 flex flex-col items-center gap-3 sm:flex-row sm:gap-10 prt-fade-up"
-          style={{ animationDelay: "700ms" }}
-        >
-          {t.differentiators.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2.5 text-sm text-white/75">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: "#C7A86D" }}
-              />
-              <span className="tracking-wide">{item}</span>
-            </div>
-          ))}
-        </div>
-
         {/* CTAs */}
         <div
           className="flex flex-col items-center gap-3 sm:flex-row prt-fade-up"
-          style={{ animationDelay: "850ms" }}
+          style={{ animationDelay: "480ms" }}
         >
           <a
             href="/products"
-            className="group inline-flex items-center gap-2 rounded-sm px-8 py-3.5 text-sm font-semibold text-slate-900 transition-all hover:shadow-lg hover:shadow-[#C7A86D]/20"
+            className="group inline-flex items-center gap-2 px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#B89757]"
             style={{ backgroundColor: "#C7A86D" }}
           >
             {t.ctaPrimary}
@@ -305,25 +270,51 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
           </a>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-sm border border-white/25 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white/50 hover:bg-white/5"
+            className="inline-flex items-center gap-2 border border-white/25 px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:border-white/60 hover:bg-white/[0.04]"
           >
             {t.ctaSecondary}
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── KPI Metrics Bar — anchored to hero bottom ────────────────────── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-black/30 backdrop-blur-sm prt-fade-in"
+        style={{ animationDelay: "650ms" }}
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {kpis.map((kpi, idx) => (
+              <div
+                key={idx}
+                className={`px-6 py-7 text-center md:py-8 ${
+                  idx > 0 ? "border-l border-white/10" : ""
+                } ${idx === 2 ? "border-l-0 md:border-l" : ""}`}
+              >
+                <div
+                  className="text-2xl font-bold tracking-tight sm:text-3xl"
+                  style={{ color: "#C7A86D" }}
+                >
+                  {kpi.value}
+                </div>
+                <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55">
+                  {kpi.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator — above KPI bar */}
       <button
         onClick={scrollToContent}
-        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-1 text-white/35 transition-colors hover:text-white/70 prt-fade-in"
-        style={{ animationDelay: "1100ms" }}
+        className="absolute bottom-36 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/30 transition-colors hover:text-white/60 prt-fade-in"
+        style={{ animationDelay: "800ms" }}
         aria-label="Scroll to content"
       >
-        <ChevronDown className="h-5 w-5 animate-bounce" />
+        <ChevronDown className="h-4 w-4 animate-bounce" />
       </button>
-
-      {/* Bottom gradient fade to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0D14] to-transparent pointer-events-none" />
     </section>
   )
 }
