@@ -8,10 +8,22 @@ const translations = {
   ko: {
     whyLabel: "Why PRT",
     whyPoints: [
-      "Production-Proven Systems",
-      "Stable Web Handling",
-      "Fast Field Support",
-      "Repeat Orders from Existing Customers",
+      {
+        title: "Production-Proven Systems",
+        sub: "50+ systems in continuous production operation",
+      },
+      {
+        title: "Stable Web Handling",
+        sub: "±0.3N tension variation under continuous runs",
+      },
+      {
+        title: "Fast Field Support",
+        sub: "Direct-access design. No black box. No waiting.",
+      },
+      {
+        title: "Repeat Orders from Existing Customers",
+        sub: "Majority of orders from returning production accounts",
+      },
     ],
     installedBase: "Installed Base",
     installedStats: [
@@ -27,10 +39,22 @@ const translations = {
   en: {
     whyLabel: "Why PRT",
     whyPoints: [
-      "Production-Proven Systems",
-      "Stable Web Handling",
-      "Fast Field Support",
-      "Repeat Orders from Existing Customers",
+      {
+        title: "Production-Proven Systems",
+        sub: "50+ systems in continuous production operation",
+      },
+      {
+        title: "Stable Web Handling",
+        sub: "±0.3N tension variation under continuous runs",
+      },
+      {
+        title: "Fast Field Support",
+        sub: "Direct-access design. No black box. No waiting.",
+      },
+      {
+        title: "Repeat Orders from Existing Customers",
+        sub: "Majority of orders from returning production accounts",
+      },
     ],
     installedBase: "Installed Base",
     installedStats: [
@@ -46,10 +70,22 @@ const translations = {
   zh: {
     whyLabel: "Why PRT",
     whyPoints: [
-      "Production-Proven Systems",
-      "Stable Web Handling",
-      "Fast Field Support",
-      "Repeat Orders from Existing Customers",
+      {
+        title: "Production-Proven Systems",
+        sub: "50+ systems in continuous production operation",
+      },
+      {
+        title: "Stable Web Handling",
+        sub: "±0.3N tension variation under continuous runs",
+      },
+      {
+        title: "Fast Field Support",
+        sub: "Direct-access design. No black box. No waiting.",
+      },
+      {
+        title: "Repeat Orders from Existing Customers",
+        sub: "Majority of orders from returning production accounts",
+      },
     ],
     installedBase: "Installed Base",
     installedStats: [
@@ -103,9 +139,14 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                   className="h-4 w-4 mt-0.5 flex-shrink-0"
                   style={{ color: "#C7A86D" }}
                 />
-                <p className="text-sm font-semibold text-slate-200 leading-snug">
-                  {point}
-                </p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-slate-200 leading-snug mb-1.5">
+                    {point.title}
+                  </p>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    {point.sub}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

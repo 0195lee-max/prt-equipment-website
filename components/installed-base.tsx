@@ -27,31 +27,31 @@ const translations = {
     regions: [
       {
         country: "China",
-        flag: "🇨🇳",
+        code: "CN",
         desc: "Multiple Leadframe & Semiconductor Packaging manufacturers.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Malaysia",
-        flag: "🇲🇾",
+        code: "MY",
         desc: "Laminator and Exposure systems in active production.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Taiwan",
-        flag: "🇹🇼",
+        code: "TW",
         desc: "Roll-to-Roll Exposure systems supplied to Leadframe lines.",
         equipmentTypes: ["Exposure"],
       },
       {
         country: "Japan",
-        flag: "🇯🇵",
+        code: "JP",
         desc: "Lamination systems delivered to packaging lines.",
         equipmentTypes: ["Laminator"],
       },
       {
         country: "Korea",
-        flag: "🇰🇷",
+        code: "KR",
         desc: "Laminator and Exposure systems on domestic production sites.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
@@ -98,31 +98,31 @@ const translations = {
     regions: [
       {
         country: "China",
-        flag: "🇨🇳",
+        code: "CN",
         desc: "Multiple Leadframe & Semiconductor Packaging manufacturers.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Malaysia",
-        flag: "🇲🇾",
+        code: "MY",
         desc: "Laminator and Exposure systems in active production.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Taiwan",
-        flag: "🇹🇼",
+        code: "TW",
         desc: "Roll-to-Roll Exposure systems supplied to Leadframe lines.",
         equipmentTypes: ["Exposure"],
       },
       {
         country: "Japan",
-        flag: "🇯🇵",
+        code: "JP",
         desc: "Lamination systems delivered to packaging lines.",
         equipmentTypes: ["Laminator"],
       },
       {
         country: "Korea",
-        flag: "🇰🇷",
+        code: "KR",
         desc: "Laminator and Exposure systems on domestic production sites.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
@@ -169,31 +169,31 @@ const translations = {
     regions: [
       {
         country: "China",
-        flag: "🇨🇳",
+        code: "CN",
         desc: "Multiple Leadframe & Semiconductor Packaging manufacturers.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Malaysia",
-        flag: "🇲🇾",
+        code: "MY",
         desc: "Laminator and Exposure systems in active production.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
       {
         country: "Taiwan",
-        flag: "🇹🇼",
+        code: "TW",
         desc: "Roll-to-Roll Exposure systems supplied to Leadframe lines.",
         equipmentTypes: ["Exposure"],
       },
       {
         country: "Japan",
-        flag: "🇯🇵",
+        code: "JP",
         desc: "Lamination systems delivered to packaging lines.",
         equipmentTypes: ["Laminator"],
       },
       {
         country: "Korea",
-        flag: "🇰🇷",
+        code: "KR",
         desc: "Laminator and Exposure systems on domestic production sites.",
         equipmentTypes: ["Laminator", "Exposure"],
       },
@@ -345,15 +345,29 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 key={idx}
                 className="relative border-r border-b border-slate-800 bg-slate-950/30 p-6 hover:bg-slate-900/40 transition-colors"
               >
-                <div className="text-3xl mb-4">{r.flag}</div>
-                <h3 className="text-sm font-bold text-white mb-3 tracking-wide">
+                {/* Country code badge — high-contrast, designed (replaces unreliable flag emoji) */}
+                <div
+                  className="inline-flex items-center justify-center mb-4 px-2.5 py-1 border"
+                  style={{
+                    borderColor: "rgba(199,168,109,0.45)",
+                    backgroundColor: "rgba(199,168,109,0.08)",
+                  }}
+                >
+                  <span
+                    className="text-sm font-bold font-mono tracking-[0.15em]"
+                    style={{ color: "#C7A86D" }}
+                  >
+                    {r.code}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-white mb-3 tracking-wide">
                   {r.country}
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {r.equipmentTypes.map((eq, eIdx) => (
                     <span
                       key={eIdx}
-                      className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono border border-slate-800 text-slate-400"
+                      className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono border border-slate-700 text-slate-300"
                     >
                       {eq}
                     </span>
