@@ -136,10 +136,9 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             <span>{t.headlineLine1}</span>
             <span>{t.headlineLine2}</span>
           </h1>
-          <p className="mb-9 max-w-xl text-lg md:text-xl leading-relaxed text-white/85">
-            {t.subLine1}
-            <br />
-            {t.subLine2}
+          <p className="mb-9 max-w-2xl text-lg md:text-xl leading-relaxed text-white/85">
+            <span className="block">{t.subLine1}</span>
+            <span className="block">{t.subLine2}</span>
           </p>
           <div className="flex flex-wrap gap-3">
             <a
