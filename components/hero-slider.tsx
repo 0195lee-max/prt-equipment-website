@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ChevronDown } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
@@ -41,35 +41,14 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-[62vh] min-h-[480px] max-h-[700px] w-full overflow-hidden bg-[#07090F]">
+    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start">
       {/* ── Slide layers ─────────────────────────────────────── */}
-      {/* Slide 1: still image */}
+      {/* Slide 1: video */}
       <div
         className={`absolute inset-0 transition-opacity duration-700 ease-out ${
           slide === 0 ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden={slide !== 0}
-      >
-        <Image
-          src="/images/ba5b421e-9218-450c-bec4-1d0cde317c6a.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{
-            objectPosition: "center right",
-            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
-          }}
-        />
-      </div>
-
-      {/* Slide 2: video */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-          slide === 1 ? "opacity-100" : "opacity-0"
-        }`}
-        aria-hidden={slide !== 1}
       >
         <video
           autoPlay
@@ -86,6 +65,27 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         >
           <source src="/videos/hero_loop_v10.mp4" type="video/mp4" />
         </video>
+      </div>
+
+      {/* Slide 2: still image */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+          slide === 1 ? "opacity-100" : "opacity-0"
+        }`}
+        aria-hidden={slide !== 1}
+      >
+        <Image
+          src="/images/ba5b421e-9218-450c-bec4-1d0cde317c6a.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{
+            objectPosition: "center right",
+            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+          }}
+        />
       </div>
 
       {/* ── Vignette stack: radial center + left-strong gradient + corner darken ─ */}
@@ -150,6 +150,19 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           </div>
         </div>
       </div>
+
+      {/* ── Scroll-down arrow ────────────────────────────────── */}
+      <button
+        type="button"
+        aria-label="Scroll to next section"
+        onClick={() => {
+          const next = document.getElementById("section-equipment")
+          next?.scrollIntoView({ behavior: "smooth" })
+        }}
+        className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-white/40 text-white/80 transition-all hover:border-white/80 hover:text-white animate-bounce"
+      >
+        <ChevronDown className="h-6 w-6" />
+      </button>
 
       {/* ── Slide dots — click only, no autoplay ─────────────── */}
       <div className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 flex items-center gap-3">
