@@ -44,14 +44,35 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start -mt-[88px]">
+    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start -mt-[120px]">
       {/* ── Slide layers ─────────────────────────────────────── */}
-      {/* Slide 1: video */}
+      {/* Slide 1: still image (equipment shot first) */}
       <div
         className={`absolute inset-0 transition-opacity duration-700 ease-out ${
           slide === 0 ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden={slide !== 0}
+      >
+        <Image
+          src="/images/ba5b421e-9218-450c-bec4-1d0cde317c6a.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{
+            objectPosition: "center right",
+            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+          }}
+        />
+      </div>
+
+      {/* Slide 2: video */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+          slide === 1 ? "opacity-100" : "opacity-0"
+        }`}
+        aria-hidden={slide !== 1}
       >
         <video
           autoPlay
@@ -68,27 +89,6 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         >
           <source src="/videos/hero_loop_v10.mp4" type="video/mp4" />
         </video>
-      </div>
-
-      {/* Slide 2: still image */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-          slide === 1 ? "opacity-100" : "opacity-0"
-        }`}
-        aria-hidden={slide !== 1}
-      >
-        <Image
-          src="/images/ba5b421e-9218-450c-bec4-1d0cde317c6a.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{
-            objectPosition: "center right",
-            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
-          }}
-        />
       </div>
 
       {/* ── Vignette stack: radial center + left-strong gradient + corner darken ─ */}
@@ -110,33 +110,33 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0,0,0,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,0,0,0.7) 0%, transparent 60%)",
         }}
       />
-      {/* Layer 3: center tint for centered text legibility */}
+      {/* Layer 3: left-side dark gradient for text legibility (covers text block area only) */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(7,9,15,0.55) 0%, rgba(7,9,15,0) 80%)",
+            "linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)",
         }}
       />
 
-      {/* ── Centered text block (overlay across both slides) ─── */}
-      <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
-        <div className="max-w-3xl">
+      {/* ── Left-aligned text block (overlay across both slides) ─ */}
+      <div className="relative z-20 flex h-full flex-col items-start justify-center pl-[10%] pr-6 sm:pr-10 lg:pr-16 -mt-[5vh]">
+        <div className="max-w-2xl">
           <p
-            className="mb-4 text-[11px] font-bold uppercase tracking-[0.32em]"
+            className="mb-5 text-sm font-bold uppercase tracking-[0.32em]"
             style={{ color: "#C7A86D" }}
           >
             {t.caption}
           </p>
-          <h1 className="mb-4 flex flex-col text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[56px] leading-[1.05]">
+          <h1 className="mb-6 flex flex-col text-6xl md:text-8xl font-bold tracking-tight text-white leading-[1.02]">
             <span>{t.headlineLine1}</span>
             <span>{t.headlineLine2}</span>
           </h1>
-          <p className="mb-7 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
+          <p className="mb-9 max-w-xl text-lg md:text-xl leading-relaxed text-white/85">
             {t.sub}
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-3">
             <a
               href="/products"
               className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"

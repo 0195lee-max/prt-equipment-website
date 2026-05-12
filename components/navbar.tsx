@@ -136,7 +136,7 @@ export function Navbar({ lang, setLang }: NavbarProps) {
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 flex items-center px-6 py-5 md:px-10 lg:px-16 transition-all duration-300 ${
+        className={`sticky top-0 z-50 flex items-center px-6 py-7 md:px-10 lg:px-16 md:py-8 transition-all duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${navBgClass}`}
       >
@@ -144,12 +144,12 @@ export function Navbar({ lang, setLang }: NavbarProps) {
         <div className="flex justify-start md:justify-end md:w-[22vw] flex-1 md:flex-none">
           <a href="/" className="flex flex-col items-start transition-opacity hover:opacity-80">
             <span
-              className={`text-[10px] font-medium tracking-[0.18em] uppercase ${logoTextColor}`}
+              className={`text-xs font-medium tracking-[0.18em] uppercase ${logoTextColor}`}
             >
               {t.tagline}
             </span>
             <span
-              className="text-3xl font-bold tracking-tight leading-none mt-0.5"
+              className="text-4xl font-bold tracking-tight leading-none mt-1"
               style={{ color: "#C7A86D" }}
             >
               PRT
@@ -158,12 +158,12 @@ export function Navbar({ lang, setLang }: NavbarProps) {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden flex-1 items-center justify-center gap-10 md:flex lg:gap-14">
+        <div className="hidden flex-1 items-center justify-center gap-14 md:flex lg:gap-20">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors ${textColor}`}
+              className={`text-base font-medium transition-colors ${textColor}`}
             >
               {link.label}
             </a>
