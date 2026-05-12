@@ -10,28 +10,28 @@ type Language = "ko" | "en" | "zh"
 const translations = {
   ko: {
     meta: "회사 소개",
-    positioning: "우리는 대량 생산 장비 제조사가 아닙니다.",
+    positioning: "범용 장비는 만들지 않습니다.",
     positioningSub: "리드프레임 · 반도체 패키징 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
     positioningBody:
-      "PRT는 범용 장비를 만들지 않습니다. 2010년부터 리드프레임 양산 공정만을 집중적으로 연구하고, 실제 양산 현장에서 검증된 Roll-to-Roll 라미네이션 및 노광 시스템을 설계합니다. 지금까지 아시아 5개국 양산 현장에 50기 이상을 납품했으며, 다수의 고객사로부터 반복 발주를 받고 있습니다.",
+      "2010년부터 당사 엔지니어링 팀은 리드프레임 및 반도체 패키징 양산을 위한 Roll-to-Roll 공정 장비에 집중해왔습니다. 양산 검증된 라미네이션·노광 시스템을 설계·납품하며, 아시아 전역 50기 이상의 설치 실적과 기존 고객사의 반복 발주가 매출의 상당 부분을 차지합니다.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
-      { value: "2", label: "Core Processes", sub: "Lamination + Exposure" },
+      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "Focused", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "회사 연혁",
     timeline: [
-      { year: "2010", title: "PRETECH 설립", desc: "Roll-to-Roll 라미네이터 개발 착수. 리드프레임 공정 특화 설계 시작." },
-      { year: "2011", title: "첫 라미네이터 납품", desc: "리드프레임 양산 라인에 Roll-to-Roll 드라이필름 라미네이션 시스템 최초 납품." },
-      { year: "2014", title: "노광 시스템 개발", desc: "LED UV 노광 기술 자체 개발. 리드프레임 패턴 형성 전용 Roll-to-Roll 노광 시스템 공급 시작." },
-      { year: "2018", title: "PRT 브랜드 설립", desc: "㈜피알티 법인 설립. Precision Roll-to-Roll Technology 브랜드로 리포지셔닝." },
-      { year: "2020", title: "해외 납품 확대", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 범위 확장. 아시아 양산 레퍼런스 구축." },
-      { year: "2024", title: "현재", desc: "아시아 5개국 50기 이상 납품. 주요 고객사 반복 발주 지속. 차세대 고정밀 노광 시스템 개발 중." },
+      { year: "2010", title: "PRETECH 설립", desc: "Roll-to-Roll 라미네이터 개발 착수. 리드프레임 공정 응용에 집중." },
+      { year: "2011", title: "첫 라미네이터 납품", desc: "리드프레임 양산 라인용 PRETECH Roll-to-Roll 드라이필름 라미네이션 시스템 첫 납품." },
+      { year: "2014", title: "노광 시스템 개발", desc: "Roll-to-Roll 리드프레임 패턴 형성용 LED UV 노광 기술 개발." },
+      { year: "2018", title: "PRT 브랜드 설립", desc: "Roll-to-Roll 기술 브랜드와 장비 사업 확장을 위해 ㈜피알티 설립." },
+      { year: "2020", title: "아시아 납품 확대", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 확대." },
+      { year: "2024", title: "현재", desc: "아시아 50기 이상 설치. 기존 양산 고객사로부터 반복 발주 지속." },
     ],
     specializationLabel: "전문화 영역",
     specializationTitle: "우리가 집중하는 것",
     specializationBody:
-      "PRT는 반도체 장비 전반을 다루지 않습니다. 리드프레임과 반도체 패키징 공정에서 Roll-to-Roll 연속 이송 방식이 요구되는 라미네이션·노광 공정 두 가지에 집중합니다. 넓게 보지 않고 깊게 파고든 결과, 양산 현장에서 실제로 작동하는 장비를 만들 수 있었습니다.",
+      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. 리드프레임과 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 요구되는 라미네이션과 UV 노광 두 가지 공정에 집중합니다. 이러한 집중된 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
     specializationCards: [
       {
         title: "Roll-to-Roll 라미네이션",
@@ -51,8 +51,8 @@ const translations = {
         desc: "사양서에 적힌 수치가 아니라, 실제 양산 라인에서 수년간 연속 가동 중인 장비로 증명합니다.",
       },
       {
-        title: "문제 발생 시 빠른 대응",
-        desc: "PRT 장비는 현장 엔지니어가 직접 진단할 수 있도록 설계되어 있습니다. 복잡하게 감추지 않습니다.",
+        title: "엔지니어 직접 지원",
+        desc: "PRT 장비는 현장 엔지니어가 핵심 기계 구조를 직접 진단·정비할 수 있도록 설계되어, 불필요한 다운타임과 커뮤니케이션 지연을 줄입니다.",
       },
       {
         title: "고객별 맞춤 엔지니어링",
@@ -77,28 +77,28 @@ const translations = {
   },
   en: {
     meta: "Company",
-    positioning: "We are not a mass-production equipment maker.",
+    positioning: "We do not build generic equipment.",
     positioningSub: "We are a specialized engineering company\nfocused on stable RTR semiconductor process systems.",
     positioningBody:
-      "PRT does not build general-purpose equipment. Since 2010, we have focused exclusively on Leadframe mass-production processes — engineering and delivering production-proven Roll-to-Roll lamination and exposure systems. We have delivered 50+ systems across five countries in Asia, and a significant portion of our business comes from repeat orders by existing customers.",
+      "Since 2010, our engineering team has focused on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 50+ installed systems across Asia and a significant share of repeat orders from existing customers.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
-      { value: "2", label: "Core Processes", sub: "Lamination + Exposure" },
+      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "Focused", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
     timeline: [
-      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll laminator development begins. Specialized engineering for Leadframe process applications." },
-      { year: "2011", title: "First Laminator Delivery", desc: "First Roll-to-Roll dry film lamination system delivered to a Leadframe mass production line." },
-      { year: "2014", title: "Exposure System Development", desc: "Proprietary LED UV exposure technology developed. Roll-to-Roll exposure systems for Leadframe patterning deployed." },
-      { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. incorporated. Repositioned under Precision Roll-to-Roll Technology brand." },
-      { year: "2020", title: "Asia Expansion", desc: "Deliveries expanded to semiconductor packaging manufacturers in China and Malaysia. Asia production references established." },
-      { year: "2024", title: "Present", desc: "50+ systems installed across 5 countries in Asia. Repeat orders continuing from major customers. Next-generation high-precision exposure systems in development." },
+      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll laminator development begins, focused on Leadframe process applications." },
+      { year: "2011", title: "First Laminator Delivery", desc: "First PRETECH Roll-to-Roll dry film lamination system delivered for a Leadframe production line." },
+      { year: "2014", title: "Exposure System Development", desc: "LED UV exposure technology developed for Roll-to-Roll Leadframe patterning applications." },
+      { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. established to expand the Roll-to-Roll technology brand and equipment business." },
+      { year: "2020", title: "Asia Expansion", desc: "Deliveries expanded to semiconductor packaging manufacturers in China and Malaysia." },
+      { year: "2024", title: "Present", desc: "50+ systems installed across Asia, with repeat orders continuing from existing production customers." },
     ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT does not cover the full spectrum of semiconductor equipment. We focus on two specific process steps — lamination and UV exposure — where Roll-to-Roll continuous transport is required in Leadframe and Semiconductor Packaging manufacturing. The depth of this focus is what allows us to build equipment that actually works on the production floor.",
+      "PRT does not try to cover the entire semiconductor equipment spectrum. We focus on two specific process steps — lamination and UV exposure — where Roll-to-Roll continuous transport is required in Leadframe and Semiconductor Packaging manufacturing. This focused experience allows us to build systems that perform reliably on real production floors.",
     specializationCards: [
       {
         title: "Roll-to-Roll Lamination",
@@ -118,8 +118,8 @@ const translations = {
         desc: "We demonstrate capability through systems that have been running continuously on real production lines for years — not through numbers on a datasheet.",
       },
       {
-        title: "Fast Response When Issues Arise",
-        desc: "PRT equipment is designed so that on-site engineers can diagnose problems directly. We do not hide complexity behind proprietary black boxes.",
+        title: "Direct Engineering Support",
+        desc: "PRT equipment is designed so on-site engineers can diagnose and maintain key mechanical structures directly, reducing unnecessary downtime and communication delays.",
       },
       {
         title: "Engineered to Your Line Conditions",
@@ -144,28 +144,28 @@ const translations = {
   },
   zh: {
     meta: "公司介绍",
-    positioning: "我们不是量产设备制造商。",
+    positioning: "我们不做通用设备。",
     positioningSub: "我们是专注于稳定RTR半导体工艺系统的\n专业化工程公司。",
     positioningBody:
-      "PRT不生产通用设备。自2010年起，我们专注于引线框架量产工艺，设计并交付经过量产验证的卷对卷层压与曝光系统。迄今为止，我们已在亚洲五个国家交付50套以上系统，相当大比例的订单来自现有客户的重复采购。",
+      "自2010年起，我们的工程团队专注于面向引线框架与半导体封装生产的卷对卷工艺设备。我们设计并交付经过量产验证的层压与曝光系统，已在亚洲交付50套以上设备，相当大比例的订单来自现有客户的重复采购。",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "5+ Countries in Asia" },
-      { value: "2", label: "核心工艺", sub: "层压 + 曝光" },
+      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "Focused", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "公司历程",
     timeline: [
-      { year: "2010", title: "PRETECH成立", desc: "开始卷对卷层压机研发。专注引线框架工艺的专业化设计正式启动。" },
-      { year: "2011", title: "首台层压机交付", desc: "首套卷对卷干膜层压系统交付至引线框架量产线。" },
-      { year: "2014", title: "曝光系统研发", desc: "自主研发LED UV曝光技术，开始向引线框架图案形成工艺供应卷对卷曝光系统。" },
-      { year: "2018", title: "PRT品牌成立", desc: "㈜피알티法人成立，以Precision Roll-to-Roll Technology品牌重新定位。" },
-      { year: "2020", title: "亚洲市场扩展", desc: "向中国、马来西亚半导体封装制造商扩展交付范围，建立亚洲量产参考案例。" },
-      { year: "2024", title: "现状", desc: "亚洲5国已交付50套以上系统，主要客户持续重复下单，新一代高精度曝光系统研发中。" },
+      { year: "2010", title: "PRETECH成立", desc: "卷对卷层压机研发启动，聚焦引线框架工艺应用。" },
+      { year: "2011", title: "首台层压机交付", desc: "首套PRETECH卷对卷干膜层压系统交付至引线框架生产线。" },
+      { year: "2014", title: "曝光系统研发", desc: "面向卷对卷引线框架图案形成应用的LED UV曝光技术开发完成。" },
+      { year: "2018", title: "PRT品牌成立", desc: "PRT Co., Ltd.成立，扩展卷对卷技术品牌及设备业务。" },
+      { year: "2020", title: "亚洲市场扩展", desc: "向中国与马来西亚的半导体封装制造商扩展交付范围。" },
+      { year: "2024", title: "现状", desc: "亚洲累计交付50套以上系统，现有量产客户重复下单持续进行。" },
     ],
     specializationLabel: "专业化领域",
     specializationTitle: "我们专注的方向",
     specializationBody:
-      "PRT不涉及半导体设备的全领域。我们专注于引线框架和半导体封装制造中需要卷对卷连续传输的两个特定工艺步骤——层压和UV曝光。正是这种深度专注，使我们能够制造出真正在量产现场有效运行的设备。",
+      "PRT不试图覆盖半导体设备的全领域。我们专注于引线框架与半导体封装制造中需要卷对卷连续传输的两个特定工艺步骤——层压与UV曝光。这种集中积累的经验使我们能够制造在真实量产现场可靠运行的系统。",
     specializationCards: [
       {
         title: "卷对卷层压",
@@ -185,8 +185,8 @@ const translations = {
         desc: "我们通过在真实量产线上连续运行多年的系统来证明能力，而不是通过数据表上的数字。",
       },
       {
-        title: "出现问题时快速响应",
-        desc: "PRT设备的设计使现场工程师能够直接诊断问题，我们不将复杂性隐藏在专有黑盒后面。",
+        title: "工程师直接技术支持",
+        desc: "PRT设备的设计使现场工程师可直接诊断与维护关键机械结构，减少不必要的停机与沟通延迟。",
       },
       {
         title: "针对您的生产线定制工程",
@@ -325,18 +325,18 @@ export default function CompanyPage() {
             {t.specializationCards.map((card, idx) => (
               <div
                 key={idx}
-                className="relative rounded-lg border border-slate-700 bg-slate-900/60 p-6 overflow-hidden"
+                className="relative rounded-lg border border-slate-700 bg-slate-900/60 p-7 overflow-hidden"
               >
                 <div
                   className="absolute top-0 left-0 right-0 h-px"
                   style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)" }}
                 />
-                <h3 className="text-sm font-semibold text-white mb-3">{card.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed mb-5">{card.desc}</p>
-                <div className="space-y-1.5">
+                <h3 className="text-base font-semibold text-white mb-3">{card.title}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">{card.desc}</p>
+                <div className="space-y-2 border-t border-slate-700/60 pt-4">
                   {card.specs.map((spec, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-2 text-xs font-mono text-slate-500">
-                      <span className="h-px w-3 flex-shrink-0" style={{ backgroundColor: "#C7A86D", opacity: 0.5 }} />
+                    <div key={sIdx} className="flex items-center gap-3 text-sm font-mono text-slate-200">
+                      <span className="h-px w-4 flex-shrink-0" style={{ backgroundColor: "#C7A86D" }} />
                       {spec}
                     </div>
                   ))}
