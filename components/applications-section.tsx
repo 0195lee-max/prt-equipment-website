@@ -131,13 +131,13 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
             {t.whyPoints.map((point, idx) => (
               <div
                 key={idx}
-                className="border-r border-b border-slate-800 bg-slate-950/30 px-5 py-4 flex items-start gap-3"
+                className="border-r border-b border-slate-800 bg-slate-950/30 px-5 py-5 flex flex-col items-center justify-center text-center gap-2"
               >
                 <CheckCircle2
-                  className="h-4 w-4 mt-0.5 flex-shrink-0"
+                  className="h-4 w-4 flex-shrink-0"
                   style={{ color: "#C7A86D" }}
                 />
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-slate-200 leading-snug mb-1">
                     {point.title}
                   </p>
