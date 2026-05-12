@@ -119,8 +119,8 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-16">
-          <div className="flex items-center gap-3 mb-8">
+        <div className="relative mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
+          <div className="flex items-center gap-3 mb-5">
             <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.whyLabel}
@@ -131,17 +131,17 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
             {t.whyPoints.map((point, idx) => (
               <div
                 key={idx}
-                className="border-r border-b border-slate-800 bg-slate-950/30 px-6 py-7 flex items-start gap-3"
+                className="border-r border-b border-slate-800 bg-slate-950/30 px-5 py-4 flex items-start gap-3"
               >
                 <CheckCircle2
                   className="h-4 w-4 mt-0.5 flex-shrink-0"
                   style={{ color: "#C7A86D" }}
                 />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-slate-200 leading-snug mb-1.5">
+                  <p className="text-sm font-semibold text-slate-200 leading-snug mb-1">
                     {point.title}
                   </p>
-                  <p className="text-xs text-slate-500 leading-relaxed">
+                  <p className="text-xs text-slate-500 leading-snug">
                     {point.sub}
                   </p>
                 </div>
