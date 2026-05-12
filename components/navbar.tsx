@@ -142,14 +142,9 @@ export function Navbar({ lang, setLang }: NavbarProps) {
       >
         {/* Logo */}
         <div className="flex justify-start md:justify-end md:w-[22vw] flex-1 md:flex-none">
-          <a href="/" className="flex flex-col items-start transition-opacity hover:opacity-80">
+          <a href="/" className="flex items-center transition-opacity hover:opacity-80">
             <span
-              className={`text-xs font-medium tracking-[0.18em] uppercase ${logoTextColor}`}
-            >
-              {t.tagline}
-            </span>
-            <span
-              className="text-4xl font-bold tracking-tight leading-none mt-1"
+              className="text-4xl font-bold tracking-tight leading-none"
               style={{ color: "#C7A86D" }}
             >
               PRT
