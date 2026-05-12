@@ -9,21 +9,21 @@ type Language = "ko" | "en" | "zh"
 const translations = {
   ko: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Precision Roll-to-Roll Technology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   en: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Precision Roll-to-Roll Technology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   zh: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Precision Roll-to-Roll Technology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
@@ -57,6 +57,10 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           priority
           sizes="100vw"
           className="object-cover"
+          style={{
+            objectPosition: "center right",
+            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+          }}
         />
       </div>
 
@@ -75,6 +79,10 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           preload="auto"
           aria-hidden="true"
           className="h-full w-full object-cover"
+          style={{
+            objectPosition: "center right",
+            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+          }}
         >
           <source src="/videos/hero_loop_v10.mp4" type="video/mp4" />
         </video>

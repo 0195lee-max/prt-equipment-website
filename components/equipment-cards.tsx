@@ -36,21 +36,26 @@ interface EquipmentCardsProps {
 export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
   return (
     <section className="relative bg-[#0A0A0A]">
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8 lg:py-8">
+      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
         <div className="grid gap-6 md:grid-cols-3 md:items-start">
           {cards.map((card, idx) => (
             <a
               key={idx}
               href={card.href}
-              className="group grid grid-cols-[40%_1fr] gap-4 md:gap-5 items-center"
+              className="group grid grid-cols-[45%_1fr] gap-5 items-center"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#0A0F1A]">
+              {/* Image area — no border, no gold/amber edge, blends into page bg */}
+              <div className="relative h-[260px] lg:h-[280px] overflow-hidden bg-[#0A0A0A]">
                 <Image
                   src={card.image}
                   alt={card.title}
                   fill
-                  sizes="(min-width: 1024px) 14vw, (min-width: 768px) 20vw, 40vw"
+                  sizes="(min-width: 1024px) 16vw, (min-width: 768px) 22vw, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  style={{
+                    objectPosition: "center",
+                    filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+                  }}
                 />
               </div>
               <div className="min-w-0">
