@@ -106,7 +106,9 @@ export function Navbar({ lang, setLang }: NavbarProps) {
     }
   }, [isMenuOpen])
 
-  const isTransparent = !isScrolled && !isMenuOpen
+  // Always transparent — only solid when mobile menu is open for legibility
+  const isTransparent = !isMenuOpen
+  void isScrolled
 
   const navBgClass = isTransparent
     ? "bg-transparent border-b border-transparent"

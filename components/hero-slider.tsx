@@ -44,7 +44,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start">
+    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start -mt-[88px]">
       {/* ── Slide layers ─────────────────────────────────────── */}
       {/* Slide 1: video */}
       <div
