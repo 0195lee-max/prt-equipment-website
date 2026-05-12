@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image"
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2, Globe, Users, Settings, ShieldCheck } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
@@ -19,22 +18,20 @@ const translations = {
       },
       {
         title: "Fast Field Support",
-        sub: "Direct-access design. No black box. No waiting.",
+        sub: "Direct-access mechanical structure for faster troubleshooting and maintenance.",
       },
       {
         title: "Repeat Orders from Existing Customers",
         sub: "Majority of orders from returning production accounts",
       },
     ],
-    installedBase: "Installed Base",
-    installedStats: [
-      { value: "50+", label: "Installed Systems" },
-      { value: "Since 2010", label: "Engineering" },
-      { value: "5+", label: "Countries" },
+    kpiLabel: "Installed Base",
+    kpis: [
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
+      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
+      { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
     ],
-    installedBaseStatement: "Running in production lines across Asia.",
-    regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
-    viewMore: "View Full Installed Base",
   },
   en: {
     whyLabel: "Why PRT",
@@ -49,22 +46,20 @@ const translations = {
       },
       {
         title: "Fast Field Support",
-        sub: "Direct-access design. No black box. No waiting.",
+        sub: "Direct-access mechanical structure for faster troubleshooting and maintenance.",
       },
       {
         title: "Repeat Orders from Existing Customers",
         sub: "Majority of orders from returning production accounts",
       },
     ],
-    installedBase: "Installed Base",
-    installedStats: [
-      { value: "50+", label: "Installed Systems" },
-      { value: "Since 2010", label: "Engineering" },
-      { value: "5+", label: "Countries" },
+    kpiLabel: "Installed Base",
+    kpis: [
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
+      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
+      { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
     ],
-    installedBaseStatement: "Running in production lines across Asia.",
-    regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
-    viewMore: "View Full Installed Base",
   },
   zh: {
     whyLabel: "Why PRT",
@@ -79,24 +74,29 @@ const translations = {
       },
       {
         title: "Fast Field Support",
-        sub: "Direct-access design. No black box. No waiting.",
+        sub: "Direct-access mechanical structure for faster troubleshooting and maintenance.",
       },
       {
         title: "Repeat Orders from Existing Customers",
         sub: "Majority of orders from returning production accounts",
       },
     ],
-    installedBase: "Installed Base",
-    installedStats: [
-      { value: "50+", label: "Installed Systems" },
-      { value: "Since 2010", label: "Engineering" },
-      { value: "5+", label: "Countries" },
+    kpiLabel: "Installed Base",
+    kpis: [
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
+      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
+      { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
     ],
-    installedBaseStatement: "Running in production lines across Asia.",
-    regions: ["China", "Malaysia", "Taiwan", "Japan", "Korea"],
-    viewMore: "View Full Installed Base",
   },
 }
+
+const ICON_MAP = {
+  globe: Globe,
+  users: Users,
+  settings: Settings,
+  shield: ShieldCheck,
+} as const
 
 interface ApplicationsSectionProps {
   lang: Language
@@ -107,19 +107,19 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
 
   return (
     <section className="relative">
-      {/* ── Why PRT — 4 short bullets only ─────────────────── */}
-      <div className="relative bg-[#0A0F1A] border-t border-slate-800/60">
+      {/* ── Why PRT — 4-bullet grid, dark solid bg ─────────── */}
+      <div className="relative bg-[#0A0A0A] border-t border-slate-800/60">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+              "linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
           }}
         />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-10">
             <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
@@ -151,88 +151,44 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
         </div>
       </div>
 
-      {/* ── Installed Base — compact: numbers + countries only ─ */}
-      <div className="relative bg-[#07090F] border-t border-slate-800/60 overflow-hidden">
-        {/* Background photo */}
-        <Image
-          src="/images/installed-base-hero.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-25"
-          aria-hidden="true"
-        />
-        {/* Dark overlay for legibility */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(7,9,15,0.7) 0%, rgba(7,9,15,0.78) 60%, rgba(7,9,15,0.92) 100%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
-
-        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-              {t.installedBase}
-            </p>
-          </div>
-
-          {/* Stats strip */}
-          <div className="grid grid-cols-3 border border-slate-800 mb-10">
-            {t.installedStats.map((stat, idx) => (
-              <div
-                key={idx}
-                className={`px-6 py-8 text-center ${
-                  idx > 0 ? "border-l border-slate-800" : ""
-                }`}
-              >
+      {/* ── Installed Base — Icon KPI Bar ───────────────────── */}
+      <div className="relative bg-[#0A0A0A] border-t border-b border-slate-800/60">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {t.kpis.map((kpi, idx) => {
+              const Icon = ICON_MAP[kpi.icon as keyof typeof ICON_MAP]
+              return (
                 <div
-                  className="text-3xl sm:text-4xl font-semibold leading-tight"
-                  style={{ color: "#C7A86D" }}
+                  key={idx}
+                  className={`flex items-center gap-5 py-10 px-6 ${
+                    idx > 0 ? "lg:border-l border-slate-800/80" : ""
+                  } ${idx === 2 ? "lg:border-l border-slate-800/80" : ""} ${
+                    idx === 1 || idx === 3 ? "sm:border-l border-slate-800/80 lg:border-l" : ""
+                  }`}
                 >
-                  {stat.value}
+                  <Icon
+                    className="h-12 w-12 flex-shrink-0"
+                    style={{ color: "#C7A86D" }}
+                    strokeWidth={1.2}
+                  />
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500 mb-1.5">
+                      {kpi.top}
+                    </p>
+                    <p
+                      className="text-2xl lg:text-3xl font-bold tracking-tight leading-tight"
+                      style={{ color: "#C7A86D" }}
+                    >
+                      {kpi.value}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                      {kpi.sub}
+                    </p>
+                  </div>
                 </div>
-                <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+              )
+            })}
           </div>
-
-          <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mb-8">
-            {t.installedBaseStatement}
-          </p>
-
-          {/* Countries */}
-          <div className="flex items-center gap-2 flex-wrap mb-10">
-            {t.regions.map((region, idx) => (
-              <span key={idx} className="text-sm text-slate-300 tracking-wide">
-                {region}
-                {idx < t.regions.length - 1 && (
-                  <span className="mx-2 text-slate-600">·</span>
-                )}
-              </span>
-            ))}
-          </div>
-
-          <a
-            href="/installed-base"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 border-b border-slate-700 pb-1 transition-all hover:text-slate-200 hover:border-slate-500"
-          >
-            {t.viewMore} <span>→</span>
-          </a>
         </div>
       </div>
     </section>
