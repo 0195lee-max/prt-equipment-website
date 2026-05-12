@@ -110,18 +110,18 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0,0,0,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,0,0,0.7) 0%, transparent 60%)",
         }}
       />
-      {/* Layer 3: bottom-left tint for text legibility */}
+      {/* Layer 3: center tint for centered text legibility */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to top right, rgba(7,9,15,0.85) 0%, rgba(7,9,15,0.5) 35%, rgba(7,9,15,0) 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(7,9,15,0.55) 0%, rgba(7,9,15,0) 80%)",
         }}
       />
 
-      {/* ── Bottom-left text block (overlay across both slides) ─ */}
-      <div className="relative z-20 flex h-full items-end pb-24 sm:pb-28 pt-24 px-6 sm:px-10 lg:px-16">
+      {/* ── Centered text block (overlay across both slides) ─── */}
+      <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
         <div className="max-w-3xl">
           <p
             className="mb-4 text-[11px] font-bold uppercase tracking-[0.32em]"
@@ -133,10 +133,10 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             <span>{t.headlineLine1}</span>
             <span>{t.headlineLine2}</span>
           </h1>
-          <p className="mb-7 max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
+          <p className="mb-7 mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
             {t.sub}
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center">
             <a
               href="/products"
               className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"
