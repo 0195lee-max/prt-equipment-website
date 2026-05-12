@@ -36,8 +36,8 @@ interface EquipmentCardsProps {
 export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
   return (
     <section className="relative bg-[#0A0A0A]">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
-        <div className="grid gap-10 md:grid-cols-3 md:items-start">
+      <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-12">
+        <div className="grid gap-6 md:gap-8 md:grid-cols-3 md:items-start">
           {cards.map((card, idx) => (
             <a
               key={idx}
@@ -45,7 +45,7 @@ export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
               className="group flex flex-col"
             >
               {/* Image area — full-width on top, taller, no crop */}
-              <div className="relative w-full h-[320px] lg:h-[380px] overflow-hidden bg-[#0A0A0A] mb-5">
+              <div className="relative w-full h-[220px] lg:h-[260px] overflow-hidden bg-[#0A0A0A] mb-4">
                 <Image
                   src={card.image}
                   alt={card.title}
