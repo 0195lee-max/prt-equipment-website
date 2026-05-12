@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { CheckCircle2 } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
@@ -151,7 +152,25 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
       </div>
 
       {/* ── Installed Base — compact: numbers + countries only ─ */}
-      <div className="relative bg-[#07090F] border-t border-slate-800/60">
+      <div className="relative bg-[#07090F] border-t border-slate-800/60 overflow-hidden">
+        {/* Background photo */}
+        <Image
+          src="/images/installed-base-hero.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25"
+          aria-hidden="true"
+        />
+        {/* Dark overlay for legibility */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(7,9,15,0.7) 0%, rgba(7,9,15,0.78) 60%, rgba(7,9,15,0.92) 100%)",
+          }}
+        />
         <div
           aria-hidden="true"
           className="absolute inset-0 opacity-20"

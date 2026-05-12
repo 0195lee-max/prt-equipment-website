@@ -122,10 +122,28 @@ export function VideoHero({ lang, setLang, isNavVisible = true }: VideoHeroProps
         }}
       />
 
-      {/* ── Image placeholder layer (swap to /public/images/equipment/hero.jpg) ── */}
-      {/* When the real equipment photo is ready, replace this <div> with:
-          <Image src="/images/equipment/hero.jpg" alt="" fill priority className="object-cover opacity-15" />
-      */}
+      {/* ── Background hero video ────────────────────────────────────────── */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover opacity-45"
+      >
+        <source src="/videos/hero_loop_v10.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark gradient overlay for headline legibility */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(7,9,15,0.55) 0%, rgba(10,15,26,0.65) 50%, rgba(7,9,15,0.85) 100%)",
+        }}
+      />
 
       {/* ── Industrial technical grid — even, structural ─────────────────── */}
       <div

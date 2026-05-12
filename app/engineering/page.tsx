@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
@@ -607,10 +608,23 @@ function R2RComparisonDiagram({
 }
 
 /**
- * 16:9 image-ready placeholder for each competency card.
- * Swap target: <Image src={`/images/engineering/${slug}.jpg`} alt="" fill className="object-cover" />
+ * 16:9 competency card image. Renders <Image> when src is provided,
+ * otherwise falls back to the dark schematic placeholder.
  */
-function CompetencyImagePlaceholder() {
+function CompetencyImagePlaceholder({ src, alt }: { src?: string; alt?: string }) {
+  if (src) {
+    return (
+      <div className="relative aspect-[16/9] overflow-hidden bg-[#0A0F1A] border-b border-slate-800">
+        <Image
+          src={src}
+          alt={alt ?? ""}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+    )
+  }
   return (
     <div className="relative aspect-[16/9] overflow-hidden bg-[#0A0F1A] border-b border-slate-800">
       <div
@@ -742,9 +756,11 @@ export default function EngineeringPage() {
                 key={idx}
                 className="group relative overflow-hidden border border-slate-800 bg-slate-950/40 transition-colors hover:border-slate-700"
               >
-                {/* Image-ready placeholder
-                    Swap target: /public/images/engineering/{pillar.slug}.jpg */}
-                <CompetencyImagePlaceholder />
+                {/* Card image — /images/eng-{number}-{slug}.jpg */}
+                <CompetencyImagePlaceholder
+                  src={`/images/eng-${pillar.number}-${pillar.slug}.jpg`}
+                  alt={pillar.title}
+                />
 
                 <div className="p-6">
                   <p

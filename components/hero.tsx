@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -97,10 +98,36 @@ interface HeroProps {
 }
 
 /**
- * Image-ready placeholder block for equipment cards.
- * Swap to <Image src="/images/equipment/{model}.jpg" ... /> when real photos are available.
+ * Equipment card image block. Renders <Image> when imageSrc is provided,
+ * otherwise falls back to the dark schematic placeholder.
  */
-function EquipmentImagePlaceholder({ model, index }: { model: string; index: string }) {
+function EquipmentImagePlaceholder({
+  model,
+  index,
+  imageSrc,
+  alt,
+}: {
+  model: string
+  index: string
+  imageSrc?: string
+  alt?: string
+}) {
+  if (imageSrc) {
+    return (
+      <div className="relative aspect-[16/9] bg-[#0A0F1A] overflow-hidden border-b border-slate-800/60">
+        <Image
+          src={imageSrc}
+          alt={alt ?? model}
+          fill
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover"
+        />
+        <div className="absolute top-3 left-3 pl-4 z-10">
+          <span className="text-[9px] font-mono text-white/60 tracking-wider">{index}</span>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="relative aspect-[16/9] bg-[#0A0F1A] overflow-hidden border-b border-slate-800/60">
       <div
@@ -174,7 +201,12 @@ export function Hero({ lang }: HeroProps) {
           <div className="grid gap-5 lg:grid-cols-2">
             {/* Laminator */}
             <div className="group relative overflow-hidden border border-slate-800 bg-slate-900/40 transition-colors hover:border-slate-700">
-              <EquipmentImagePlaceholder model={t.laminator.model} index="01" />
+              <EquipmentImagePlaceholder
+                model={t.laminator.model}
+                index="01"
+                imageSrc="/images/product-laminator.jpg"
+                alt={t.laminator.name}
+              />
 
               <div className="border-t border-slate-700/50 p-6">
                 <div className="mb-2 flex items-center gap-2">
@@ -225,7 +257,12 @@ export function Hero({ lang }: HeroProps) {
 
             {/* Exposure */}
             <div className="group relative overflow-hidden border border-slate-800 bg-slate-900/40 transition-colors hover:border-slate-700">
-              <EquipmentImagePlaceholder model={t.exposure.model} index="02" />
+              <EquipmentImagePlaceholder
+                model={t.exposure.model}
+                index="02"
+                imageSrc="/images/product-exposure.jpg"
+                alt={t.exposure.name}
+              />
 
               <div className="border-t border-slate-700/50 p-6">
                 <div className="mb-2 flex items-center gap-2">
