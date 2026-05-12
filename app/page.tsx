@@ -20,6 +20,8 @@ export default function Page() {
       <div id="section-equipment" className="snap-start bg-[#0A0A0A]">
         <EquipmentCards lang={lang} />
         <ApplicationsSection lang={lang} />
+      </div>
+      <div id="section-news" className="snap-start bg-[#0A0A0A]">
         <NewsTeaser lang={lang} />
         <Footer lang={lang} />
       </div>
