@@ -41,7 +41,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#07090F]">
+    <section className="relative h-[62vh] min-h-[480px] max-h-[700px] w-full overflow-hidden bg-[#07090F]">
       {/* ── Slide layers ─────────────────────────────────────── */}
       {/* Slide 1: still image */}
       <div
@@ -80,29 +80,48 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         </video>
       </div>
 
-      {/* ── Dark overlay — left-strong gradient for bottom-left text legibility ─ */}
+      {/* ── Vignette stack: radial center + left-strong gradient + corner darken ─ */}
+      {/* Layer 1: radial vignette — darkens all edges from center */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to right, rgba(7,9,15,0.82) 0%, rgba(7,9,15,0.55) 45%, rgba(7,9,15,0.15) 100%), linear-gradient(to bottom, rgba(7,9,15,0.4) 0%, rgba(7,9,15,0) 30%, rgba(7,9,15,0.65) 100%)",
+            "radial-gradient(ellipse 95% 85% at 50% 50%, transparent 35%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.9) 100%)",
+        }}
+      />
+      {/* Layer 2: top corners — extra strong darkening on upper-left & upper-right */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0,0,0,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,0,0,0.7) 0%, transparent 60%)",
+        }}
+      />
+      {/* Layer 3: left-strong tint for bottom-left text legibility */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(7,9,15,0.75) 0%, rgba(7,9,15,0.4) 40%, rgba(7,9,15,0) 80%)",
         }}
       />
 
       {/* ── Bottom-left text block ───────────────────────────── */}
-      <div className="relative z-20 flex h-full items-end pb-28 sm:pb-32 px-6 sm:px-10 lg:px-16">
+      <div className="relative z-20 flex h-full items-end pb-16 sm:pb-20 pt-24 px-6 sm:px-10 lg:px-16">
         <div className="max-w-3xl">
           <p
-            className="mb-5 text-[11px] font-bold uppercase tracking-[0.32em]"
+            className="mb-4 text-[11px] font-bold uppercase tracking-[0.32em]"
             style={{ color: "#C7A86D" }}
           >
             {t.caption}
           </p>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[68px] leading-[1.05]">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[56px] leading-[1.05]">
             {t.headline}
           </h1>
-          <p className="mb-10 max-w-xl text-base sm:text-lg leading-relaxed text-white/80">
+          <p className="mb-7 max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
             {t.sub}
           </p>
           <div className="flex flex-wrap gap-3">
@@ -125,7 +144,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
       </div>
 
       {/* ── Slide dots — click only, no autoplay ─────────────── */}
-      <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2 flex items-center gap-3">
+      <div className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 flex items-center gap-3">
         {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
           <button
             key={i}
