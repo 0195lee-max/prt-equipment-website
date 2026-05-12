@@ -119,8 +119,8 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
-          <div className="flex items-center gap-3 mb-5">
+        <div className="relative mx-auto max-w-7xl px-6 py-5 lg:px-8 lg:py-6">
+          <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.whyLabel}
@@ -131,7 +131,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
             {t.whyPoints.map((point, idx) => (
               <div
                 key={idx}
-                className="border-r border-b border-slate-800 bg-slate-950/30 px-5 py-5 flex flex-col items-center justify-center text-center gap-2"
+                className="border-r border-b border-slate-800 bg-slate-950/30 px-4 py-3 flex flex-col items-center justify-center text-center gap-1.5"
               >
                 <CheckCircle2
                   className="h-4 w-4 flex-shrink-0"
@@ -160,7 +160,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
               return (
                 <div
                   key={idx}
-                  className={`flex items-center gap-5 py-8 lg:py-10 px-6 ${
+                  className={`flex items-center gap-4 py-5 lg:py-6 px-5 ${
                     idx > 0 ? "lg:border-l border-slate-800/80" : ""
                   } ${idx === 2 ? "lg:border-l border-slate-800/80" : ""} ${
                     idx === 1 || idx === 3 ? "sm:border-l border-slate-800/80 lg:border-l" : ""
@@ -191,7 +191,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           </div>
 
           {/* ── Installed Base CTA ───────────────────────────── */}
-          <div className="flex justify-center border-t border-slate-800/80 py-10">
+          <div className="flex justify-center border-t border-slate-800/80 py-5">
             <a
               href="/installed-base"
               className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"

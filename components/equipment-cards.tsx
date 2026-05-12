@@ -36,7 +36,7 @@ interface EquipmentCardsProps {
 export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
   return (
     <section className="relative bg-[#0A0A0A]">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 pt-10 pb-4 lg:px-8 lg:pt-12 lg:pb-6">
         <div className="grid gap-6 md:gap-6 md:grid-cols-3 md:items-start">
           {cards.map((card, idx) => (
             <a
