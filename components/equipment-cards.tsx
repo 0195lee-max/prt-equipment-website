@@ -35,49 +35,53 @@ interface EquipmentCardsProps {
 
 export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
   return (
-    <section className="relative bg-[#0A0A0A] snap-start">
-      {/* Full-bleed — no max-width, no horizontal padding */}
-      <div className="grid grid-cols-1 md:grid-cols-3">
-        {cards.map((card, idx) => (
-          <a key={idx} href={card.href} className="group flex flex-col">
-            {/* Square image, no border, blends to page bg */}
-            <div className="relative aspect-square w-full overflow-hidden bg-[#0A0A0A]">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                style={{
-                  objectPosition: "center",
-                  filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
-                }}
-              />
-            </div>
-            {/* Text below image */}
-            <div className="px-6 py-7 lg:px-10 lg:py-9">
-              <p
-                className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em]"
-                style={{ color: "#C7A86D" }}
-              >
-                {card.tag}
-              </p>
-              <h3 className="mb-3 text-xl lg:text-2xl font-semibold text-white leading-snug">
-                {card.title}
-              </h3>
-              <p className="mb-5 text-sm leading-relaxed text-slate-400">
-                {card.desc}
-              </p>
-              <span
-                className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] transition-all"
-                style={{ color: "#C7A86D" }}
-              >
-                VIEW MORE
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
-          </a>
-        ))}
+    <section className="relative bg-[#0A0A0A]">
+      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
+        <div className="grid gap-6 md:grid-cols-3 md:items-start">
+          {cards.map((card, idx) => (
+            <a
+              key={idx}
+              href={card.href}
+              className="group grid grid-cols-[45%_1fr] gap-5 items-center"
+            >
+              {/* Image area — no border, no gold/amber edge, blends into page bg */}
+              <div className="relative h-[260px] lg:h-[280px] overflow-hidden bg-[#0A0A0A]">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(min-width: 1024px) 16vw, (min-width: 768px) 22vw, 45vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  style={{
+                    objectPosition: "center",
+                    filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
+                  }}
+                />
+              </div>
+              <div className="min-w-0">
+                <p
+                  className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.28em]"
+                  style={{ color: "#C7A86D" }}
+                >
+                  {card.tag}
+                </p>
+                <h3 className="mb-2 text-base lg:text-lg font-semibold text-white leading-snug">
+                  {card.title}
+                </h3>
+                <p className="mb-3 text-xs lg:text-[13px] leading-relaxed text-slate-400">
+                  {card.desc}
+                </p>
+                <span
+                  className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all"
+                  style={{ color: "#C7A86D" }}
+                >
+                  VIEW MORE
+                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   )

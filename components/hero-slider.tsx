@@ -9,21 +9,21 @@ type Language = "ko" | "en" | "zh"
 const translations = {
   ko: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll\nTechnology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   en: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll\nTechnology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   zh: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll\nTechnology",
+    headline: "Roll-to-Roll Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
@@ -41,7 +41,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-[78vh] min-h-[600px] max-h-[900px] w-full overflow-hidden bg-[#07090F] snap-start">
+    <section className="relative h-[62vh] min-h-[480px] max-h-[700px] w-full overflow-hidden bg-[#07090F]">
       {/* ── Slide layers ─────────────────────────────────────── */}
       {/* Slide 1: still image */}
       <div
@@ -51,14 +51,14 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         aria-hidden={slide !== 0}
       >
         <Image
-          src="/images/corrected_facility_v4.png"
+          src="/images/ba5b421e-9218-450c-bec4-1d0cde317c6a.png"
           alt=""
           fill
           priority
           sizes="100vw"
           className="object-cover"
           style={{
-            objectPosition: "center",
+            objectPosition: "center right",
             filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
           }}
         />
@@ -80,7 +80,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           aria-hidden="true"
           className="h-full w-full object-cover"
           style={{
-            objectPosition: "center",
+            objectPosition: "center right",
             filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
           }}
         >
@@ -107,29 +107,29 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0,0,0,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,0,0,0.7) 0%, transparent 60%)",
         }}
       />
-      {/* Layer 3: left-strong tint — much stronger black starting point */}
+      {/* Layer 3: left-strong tint for bottom-left text legibility */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 60%, transparent 90%)",
+            "linear-gradient(to right, rgba(7,9,15,0.75) 0%, rgba(7,9,15,0.4) 40%, rgba(7,9,15,0) 80%)",
         }}
       />
 
-      {/* ── Bottom-left text block — shifted right ──────────── */}
-      <div className="relative z-20 flex h-full items-end pb-20 sm:pb-24 pt-24 px-6 sm:px-10 lg:pl-32 xl:pl-40 lg:pr-16">
+      {/* ── Bottom-left text block ───────────────────────────── */}
+      <div className="relative z-20 flex h-full items-end pb-16 sm:pb-20 pt-24 px-6 sm:px-10 lg:px-16">
         <div className="max-w-3xl">
           <p
-            className="mb-5 text-[11px] font-bold uppercase tracking-[0.32em]"
+            className="mb-4 text-[11px] font-bold uppercase tracking-[0.32em]"
             style={{ color: "#C7A86D" }}
           >
             {t.caption}
           </p>
-          <h1 className="mb-5 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[72px] leading-[1.02] whitespace-pre-line">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[56px] leading-[1.05]">
             {t.headline}
           </h1>
-          <p className="mb-8 max-w-xl text-base sm:text-lg leading-relaxed text-white/80">
+          <p className="mb-7 max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
             {t.sub}
           </p>
           <div className="flex flex-wrap gap-3">
