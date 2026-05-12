@@ -11,7 +11,8 @@ const translations = {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
-    sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
+    subLine1: "Advanced Laminator & Exposure Systems for",
+    subLine2: "Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
@@ -19,7 +20,8 @@ const translations = {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
-    sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
+    subLine1: "Advanced Laminator & Exposure Systems for",
+    subLine2: "Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
@@ -27,7 +29,8 @@ const translations = {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
-    sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
+    subLine1: "Advanced Laminator & Exposure Systems for",
+    subLine2: "Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
@@ -134,7 +137,9 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             <span>{t.headlineLine2}</span>
           </h1>
           <p className="mb-9 max-w-xl text-lg md:text-xl leading-relaxed text-white/85">
-            {t.sub}
+            {t.subLine1}
+            <br />
+            {t.subLine2}
           </p>
           <div className="flex flex-wrap gap-3">
             <a
