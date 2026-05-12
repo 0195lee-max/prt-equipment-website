@@ -72,8 +72,11 @@ export function Navbar({ lang, setLang }: NavbarProps) {
   }, [])
 
   useEffect(() => {
+    const scrollEl = document.getElementById("home-scroll")
+    const target: HTMLElement | Window = scrollEl ?? window
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      const currentScrollY = scrollEl ? scrollEl.scrollTop : window.scrollY
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false)
@@ -86,8 +89,9 @@ export function Navbar({ lang, setLang }: NavbarProps) {
       setLastScrollY(currentScrollY)
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    target.addEventListener("scroll", handleScroll, { passive: true } as AddEventListenerOptions)
+    return () =>
+      target.removeEventListener("scroll", handleScroll as EventListener)
   }, [lastScrollY])
 
   // Lock body scroll while mobile menu is open

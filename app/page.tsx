@@ -14,14 +14,17 @@ export default function Page() {
   const [lang, setLang] = useState<Language>("en")
 
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#0A0A0A]">
+    <main
+      id="home-scroll"
+      className="h-screen overflow-y-scroll snap-y snap-proximity scroll-smooth bg-[#0A0A0A]"
+    >
       <Navbar lang={lang} setLang={setLang} />
       <HeroSlider lang={lang} />
       <div id="section-equipment" className="snap-start bg-[#0A0A0A]">
-        <EquipmentCards lang={lang} />
-        <ApplicationsSection lang={lang} />
-      </div>
-      <div id="section-news" className="snap-start bg-[#0A0A0A]">
+        <div className="min-h-screen flex flex-col">
+          <EquipmentCards lang={lang} />
+          <ApplicationsSection lang={lang} />
+        </div>
         <NewsTeaser lang={lang} />
         <Footer lang={lang} />
       </div>
