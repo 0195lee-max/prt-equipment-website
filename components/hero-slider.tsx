@@ -9,21 +9,24 @@ type Language = "ko" | "en" | "zh"
 const translations = {
   ko: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll Technology",
+    headlineLine1: "Roll-to-Roll",
+    headlineLine2: "Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   en: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll Technology",
+    headlineLine1: "Roll-to-Roll",
+    headlineLine2: "Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
   },
   zh: {
     caption: "PRECISION. STABILITY. PERFORMANCE.",
-    headline: "Roll-to-Roll Technology",
+    headlineLine1: "Roll-to-Roll",
+    headlineLine2: "Technology",
     sub: "Advanced Laminator & Exposure Systems for Lead Frame Manufacturing",
     ctaPrimary: "EXPLORE SYSTEMS",
     ctaSecondary: "CONTACT SALES",
@@ -107,18 +110,18 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0,0,0,0.85) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0,0,0,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,0,0,0.7) 0%, transparent 60%)",
         }}
       />
-      {/* Layer 3: center tint for centered text legibility */}
+      {/* Layer 3: bottom-left tint for text legibility */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(7,9,15,0.55) 0%, rgba(7,9,15,0) 80%)",
+            "linear-gradient(to top right, rgba(7,9,15,0.85) 0%, rgba(7,9,15,0.5) 35%, rgba(7,9,15,0) 70%)",
         }}
       />
 
-      {/* ── Center text block ───────────────────────────── */}
-      <div className="relative z-20 flex h-full flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
+      {/* ── Bottom-left text block (overlay across both slides) ─ */}
+      <div className="relative z-20 flex h-full items-end pb-24 sm:pb-28 pt-24 px-6 sm:px-10 lg:px-16">
         <div className="max-w-3xl">
           <p
             className="mb-4 text-[11px] font-bold uppercase tracking-[0.32em]"
@@ -126,13 +129,14 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           >
             {t.caption}
           </p>
-          <h1 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[56px] leading-[1.05]">
-            {t.headline}
+          <h1 className="mb-4 flex flex-col text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[56px] leading-[1.05]">
+            <span>{t.headlineLine1}</span>
+            <span>{t.headlineLine2}</span>
           </h1>
           <p className="mb-7 max-w-xl text-sm sm:text-base leading-relaxed text-white/80">
             {t.sub}
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-3">
             <a
               href="/products"
               className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"
