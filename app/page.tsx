@@ -17,18 +17,9 @@ export default function Page() {
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#0A0A0A]">
       <Navbar lang={lang} setLang={setLang} />
       <HeroSlider lang={lang} />
-      <div
-        id="section-equipment"
-        className="snap-start min-h-screen flex items-center bg-[#0A0A0A]"
-      >
-        <div className="w-full">
-          <EquipmentCards lang={lang} />
-        </div>
-      </div>
-      <div id="section-applications" className="snap-start">
+      <div id="section-equipment" className="snap-start bg-[#0A0A0A]">
+        <EquipmentCards lang={lang} />
         <ApplicationsSection lang={lang} />
-      </div>
-      <div id="section-news" className="snap-start">
         <NewsTeaser lang={lang} />
         <Footer lang={lang} />
       </div>

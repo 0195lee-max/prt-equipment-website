@@ -36,22 +36,22 @@ interface EquipmentCardsProps {
 export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
   return (
     <section className="relative bg-[#0A0A0A]">
-      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10">
-        <div className="grid gap-6 md:grid-cols-3 md:items-start">
+      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
+        <div className="grid gap-10 md:grid-cols-3 md:items-start">
           {cards.map((card, idx) => (
             <a
               key={idx}
               href={card.href}
-              className="group grid grid-cols-[45%_1fr] gap-5 items-center"
+              className="group flex flex-col"
             >
-              {/* Image area — no border, no gold/amber edge, blends into page bg */}
-              <div className="relative h-[260px] lg:h-[280px] overflow-hidden bg-[#0A0A0A]">
+              {/* Image area — full-width on top, taller, no crop */}
+              <div className="relative w-full h-[320px] lg:h-[380px] overflow-hidden bg-[#0A0A0A] mb-5">
                 <Image
                   src={card.image}
                   alt={card.title}
                   fill
-                  sizes="(min-width: 1024px) 16vw, (min-width: 768px) 22vw, 45vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 768px) 32vw, 90vw"
+                  className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{
                     objectPosition: "center",
                     filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
