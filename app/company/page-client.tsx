@@ -13,17 +13,17 @@ const translations = {
     positioning: "We do not build generic equipment.",
     positioningSub: "Leadframe · Semiconductor Packaging 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
     positioningBody:
-      "PRT는 Leadframe 및 반도체 패키징 생산을 위한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 50기 이상의 Installed Systems를 납품해왔습니다.",
+      "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 50기 이상의 장비를 납품해왔습니다.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "50+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Focused", label: "Lamination + Exposure", sub: "" },
+      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
     timeline: [
       { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll Laminator 개발 착수. Leadframe 공정 응용에 집중." },
-      { year: "2011", title: "First Laminator Delivery", desc: "Leadframe 양산 라인용 PRETECH Roll-to-Roll 드라이필름 Lamination 시스템 첫 납품." },
-      { year: "2014", title: "Exposure System Development", desc: "Roll-to-Roll Leadframe 패턴 형성용 LED UV Exposure 기술 개발." },
+      { year: "2011", title: "First Laminator Delivery", desc: "Leadframe 양산 라인에 PRETECH Roll-to-Roll Dry Film Lamination 시스템을 처음 납품." },
+      { year: "2014", title: "Exposure System Development", desc: "Roll-to-Roll Leadframe 패턴 형성을 위한 LED UV Exposure 기술 개발." },
       { year: "2018", title: "PRT Brand Established", desc: "Roll-to-Roll 기술 브랜드와 장비 사업 확장을 위해 PRT Co., Ltd. 설립." },
       { year: "2020", title: "Asia Expansion", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 확대." },
       { year: "2024", title: "Present", desc: "아시아 50기 이상 설치. 기존 양산 고객사로부터 반복 발주 지속." },
@@ -31,7 +31,7 @@ const translations = {
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe과 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 요구되는 Lamination과 UV Exposure 두 가지 공정에 집중합니다. 이러한 집중된 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
+      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe 및 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 필요한 Lamination과 UV Exposure 공정에 집중합니다. 이러한 집중 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
     specializationCards: [
       {
         title: "Roll-to-Roll Lamination",
@@ -48,7 +48,7 @@ const translations = {
     whyPoints: [
       {
         title: "Production-Proven, Not Spec Sheet Claims",
-        desc: "사양서에 적힌 수치가 아니라, 실제 양산 라인에서 수년간 연속 가동 중인 장비로 증명합니다.",
+        desc: "사양서의 수치가 아니라, 실제 양산 라인에서 검증된 장비로 증명합니다.",
       },
       {
         title: "Direct Engineering Support",
@@ -78,13 +78,13 @@ const translations = {
   en: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "We are a specialized engineering company\nfocused on stable RTR semiconductor process systems.",
+    positioningSub: "We are a specialized engineering company\nfocused on stable Roll-to-Roll semiconductor process systems.",
     positioningBody:
       "Since 2010, our engineering team has focused on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 50+ installed systems across Asia and a significant share of repeat orders from existing customers.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "50+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Focused", label: "Lamination + Exposure", sub: "" },
+      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
     timeline: [
@@ -151,7 +151,7 @@ const translations = {
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "50+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Focused", label: "Lamination + Exposure", sub: "" },
+      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
     timeline: [
