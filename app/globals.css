@@ -230,6 +230,24 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Anchor / section jump offset
+   The header is sticky (and re-appears on scroll-up), so anchor
+   jumps and scrollIntoView() calls would otherwise place the
+   target's top edge underneath the bar. scroll-margin-top reserves
+   a buffer matching the nav height across breakpoints.
+   ───────────────────────────────────────────────────────────── */
+section[id],
+[data-anchor] {
+  scroll-margin-top: 5rem;
+}
+@media (min-width: 768px) {
+  section[id],
+  [data-anchor] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
    Korean typography
    Activated only when the document language is Korean
    (html lang="ko"). word-break / overflow-wrap inherit through

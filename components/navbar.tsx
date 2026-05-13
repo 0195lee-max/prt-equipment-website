@@ -106,13 +106,16 @@ export function Navbar({ lang, setLang }: NavbarProps) {
     }
   }, [isMenuOpen])
 
-  // Always transparent — only solid when mobile menu is open for legibility
-  const isTransparent = !isMenuOpen
-  void isScrolled
+  // At top of page: fully transparent for the clean industrial look.
+  // Once scrolled past the hero zone, switch to a semi-solid dark glass
+  // so the bar reads as a proper nav when it slides back down over
+  // product cards or content sections. Mobile menu also forces solid
+  // for legibility of the drawer below.
+  const isTransparent = !isScrolled && !isMenuOpen
 
   const navBgClass = isTransparent
-    ? "bg-transparent border-b border-transparent"
-    : "bg-slate-950/80 border-b border-slate-700/30 backdrop-blur-xl"
+    ? "bg-transparent border-b border-transparent shadow-none"
+    : "bg-[rgba(5,10,25,0.94)] border-b border-slate-800/50 backdrop-blur-[12px] shadow-md shadow-black/20"
 
   const textColor = isTransparent
     ? "text-white/85 hover:text-white"

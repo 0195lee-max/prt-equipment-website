@@ -529,7 +529,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Laminators */}
-          <div className="mb-20">
+          <div className="mb-20" data-anchor>
             <SectionDivider label={t.laminatorSection} />
             <div className="grid gap-6 lg:grid-cols-2">
               {t.laminators.map((product, idx) => (
@@ -546,7 +546,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Exposure Systems */}
-          <div className="mb-20">
+          <div className="mb-20" data-anchor>
             <SectionDivider label={t.exposureSection} />
             <div className="grid gap-6 lg:grid-cols-2">
               {t.exposures.map((product, idx) => (
@@ -563,7 +563,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Line modules */}
-          <div className="mb-16">
+          <div className="mb-16" data-anchor>
             <SectionDivider label={t.modulesSection} />
             <p className="mb-10 text-center text-sm text-slate-400">{t.modulesDesc}</p>
             <div className="grid gap-5 sm:grid-cols-3">
