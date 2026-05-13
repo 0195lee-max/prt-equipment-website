@@ -1,20 +1,19 @@
-"use client"
+import type { Metadata } from 'next'
+import InstalledBasePageClient from './page-client'
 
-import { useState } from "react"
-import { Navbar } from "@/components/navbar"
-import { InstalledBase } from "@/components/installed-base"
-import { Footer } from "@/components/footer"
-
-type Language = "ko" | "en" | "zh"
+export const metadata: Metadata = {
+  title: 'Installed Base',
+  description:
+    '50+ PRT Roll-to-Roll systems running in production environments across Asia. Repeat orders from Leadframe and Semiconductor Packaging customers.',
+  alternates: { canonical: '/installed-base' },
+  openGraph: {
+    title: 'Installed Base | PRT Co., Ltd.',
+    description:
+      '50+ PRT systems in production across Asia. Repeat orders validate field performance.',
+    url: '/installed-base',
+  },
+}
 
 export default function InstalledBasePage() {
-  const [lang, setLang] = useState<Language>("en")
-  
-  return (
-    <main className="min-h-screen bg-[#07090F]">
-      <Navbar lang={lang} setLang={setLang} />
-      <InstalledBase lang={lang} />
-      <Footer lang={lang} />
-    </main>
-  )
+  return <InstalledBasePageClient />
 }

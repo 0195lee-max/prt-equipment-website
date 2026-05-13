@@ -31,15 +31,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
+    alternateLocale: ['ko_KR', 'zh_CN'],
     url: 'https://prt-kr.com',
     siteName: 'PRT Co., Ltd.',
     title: 'PRT Co., Ltd. | Roll-to-Roll Equipment for Leadframe & Semiconductor Packaging',
     description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing. 50+ installed systems across Asia.',
+    images: [
+      {
+        url: '/images/installed-base-hero.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'PRT Roll-to-Roll equipment in production',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PRT Co., Ltd. | Roll-to-Roll Equipment',
     description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing.',
+    images: ['/images/installed-base-hero.jpg'],
   },
   alternates: {
     canonical: 'https://prt-kr.com',
