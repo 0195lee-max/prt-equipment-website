@@ -6,9 +6,9 @@ import { Globe, Menu, X } from "lucide-react"
 type Language = "ko" | "en" | "zh"
 
 const languageNames: Record<Language, string> = {
-  ko: "한국어",
-  en: "English",
+  en: "EN",
   zh: "中文",
+  ko: "KR",
 }
 
 const translations = {
@@ -179,7 +179,7 @@ export function Navbar({ lang, setLang }: NavbarProps) {
 
             {isLangOpen && (
               <div className="absolute right-0 md:left-0 md:right-auto top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl z-50">
-                {(["en", "ko", "zh"] as Language[]).map((l) => (
+                {(["en", "zh", "ko"] as Language[]).map((l) => (
                   <button
                     key={l}
                     onClick={() => {
