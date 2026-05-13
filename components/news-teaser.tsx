@@ -6,20 +6,20 @@ type Language = "ko" | "en" | "zh"
 
 const translations = {
   ko: {
-    label: "최신 소식",
-    viewAll: "전체 뉴스 보기",
+    label: "Latest News",
+    viewAll: "View All News",
     items: [
       {
-        type: "전시회",
+        type: "Exhibition",
         date: "2026년 10월",
         title: "산업 전시회 출전 예정",
-        status: "예정",
+        status: "Upcoming",
       },
       {
-        type: "납품",
+        type: "Shipment",
         date: "2026년",
-        title: "롤투롤 노광 시스템 출하 예정",
-        status: "예정",
+        title: "Roll-to-Roll Exposure 시스템 출하 예정",
+        status: "Scheduled",
       },
     ],
   },
@@ -42,20 +42,20 @@ const translations = {
     ],
   },
   zh: {
-    label: "最新动态",
-    viewAll: "查看全部新闻",
+    label: "Latest News",
+    viewAll: "View All News",
     items: [
       {
-        type: "展会",
+        type: "Exhibition",
         date: "2026年10月",
         title: "即将参加行业展会",
-        status: "即将举行",
+        status: "Upcoming",
       },
       {
-        type: "出货",
+        type: "Shipment",
         date: "2026年",
-        title: "卷对卷曝光系统交付",
-        status: "计划中",
+        title: "Roll-to-Roll Exposure 系统交付",
+        status: "Scheduled",
       },
     ],
   },

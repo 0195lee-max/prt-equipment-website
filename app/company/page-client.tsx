@@ -9,71 +9,71 @@ type Language = "ko" | "en" | "zh"
 
 const translations = {
   ko: {
-    meta: "회사 소개",
-    positioning: "범용 장비는 만들지 않습니다.",
-    positioningSub: "리드프레임 · 반도체 패키징 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
+    meta: "Company",
+    positioning: "We do not build generic equipment.",
+    positioningSub: "Leadframe · Semiconductor Packaging 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
     positioningBody:
-      "2010년부터 당사 엔지니어링 팀은 리드프레임 및 반도체 패키징 양산을 위한 Roll-to-Roll 공정 장비에 집중해왔습니다. 양산 검증된 라미네이션·노광 시스템을 설계·납품하며, 아시아 전역 50기 이상의 설치 실적과 기존 고객사의 반복 발주가 매출의 상당 부분을 차지합니다.",
+      "PRT는 Leadframe 및 반도체 패키징 생산을 위한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 50기 이상의 Installed Systems를 납품해왔습니다.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "50+", label: "Installed Systems", sub: "Across Asia" },
       { value: "Focused", label: "Lamination + Exposure", sub: "" },
     ],
-    timelineLabel: "회사 연혁",
+    timelineLabel: "Company History",
     timeline: [
-      { year: "2010", title: "PRETECH 설립", desc: "Roll-to-Roll 라미네이터 개발 착수. 리드프레임 공정 응용에 집중." },
-      { year: "2011", title: "첫 라미네이터 납품", desc: "리드프레임 양산 라인용 PRETECH Roll-to-Roll 드라이필름 라미네이션 시스템 첫 납품." },
-      { year: "2014", title: "노광 시스템 개발", desc: "Roll-to-Roll 리드프레임 패턴 형성용 LED UV 노광 기술 개발." },
-      { year: "2018", title: "PRT 브랜드 설립", desc: "Roll-to-Roll 기술 브랜드와 장비 사업 확장을 위해 ㈜피알티 설립." },
-      { year: "2020", title: "아시아 납품 확대", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 확대." },
-      { year: "2024", title: "현재", desc: "아시아 50기 이상 설치. 기존 양산 고객사로부터 반복 발주 지속." },
+      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll Laminator 개발 착수. Leadframe 공정 응용에 집중." },
+      { year: "2011", title: "First Laminator Delivery", desc: "Leadframe 양산 라인용 PRETECH Roll-to-Roll 드라이필름 Lamination 시스템 첫 납품." },
+      { year: "2014", title: "Exposure System Development", desc: "Roll-to-Roll Leadframe 패턴 형성용 LED UV Exposure 기술 개발." },
+      { year: "2018", title: "PRT Brand Established", desc: "Roll-to-Roll 기술 브랜드와 장비 사업 확장을 위해 PRT Co., Ltd. 설립." },
+      { year: "2020", title: "Asia Expansion", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 확대." },
+      { year: "2024", title: "Present", desc: "아시아 50기 이상 설치. 기존 양산 고객사로부터 반복 발주 지속." },
     ],
-    specializationLabel: "전문화 영역",
-    specializationTitle: "우리가 집중하는 것",
+    specializationLabel: "Area of Specialization",
+    specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. 리드프레임과 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 요구되는 라미네이션과 UV 노광 두 가지 공정에 집중합니다. 이러한 집중된 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
+      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe과 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 요구되는 Lamination과 UV Exposure 두 가지 공정에 집중합니다. 이러한 집중된 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
     specializationCards: [
       {
-        title: "Roll-to-Roll 라미네이션",
-        desc: "드라이필름 포토레지스트의 연속 라미네이션. 장력 제어, 온도 균일성, 기포 없는 접합이 핵심입니다.",
+        title: "Roll-to-Roll Lamination",
+        desc: "드라이필름 포토레지스트의 연속 Lamination. 장력 제어, 온도 균일성, 기포 없는 접합이 핵심입니다.",
         specs: ["Web Width: 최대 350mm", "Speed: 0.1~5.0 m/min", "Temp Accuracy: ±3°C"],
       },
       {
-        title: "Roll-to-Roll 노광",
-        desc: "리드프레임 패턴 형성을 위한 연속 LED UV 노광. 정렬 정밀도와 반복 재현성이 핵심입니다.",
+        title: "Roll-to-Roll Exposure",
+        desc: "Leadframe 패턴 형성을 위한 연속 LED UV Exposure. 정렬 정밀도와 반복 재현성이 핵심입니다.",
         specs: ["Resolution: 20μm ±2μm", "Alignment: ±5μm", "8CCD Vision System"],
       },
     ],
-    whyLabel: "PRT가 선택받는 이유",
+    whyLabel: "Why Customers Choose PRT",
     whyPoints: [
       {
-        title: "이론이 아닌 현장 검증",
+        title: "Production-Proven, Not Spec Sheet Claims",
         desc: "사양서에 적힌 수치가 아니라, 실제 양산 라인에서 수년간 연속 가동 중인 장비로 증명합니다.",
       },
       {
-        title: "엔지니어 직접 지원",
+        title: "Direct Engineering Support",
         desc: "PRT 장비는 현장 엔지니어가 핵심 기계 구조를 직접 진단·정비할 수 있도록 설계되어, 불필요한 다운타임과 커뮤니케이션 지연을 줄입니다.",
       },
       {
-        title: "고객별 맞춤 엔지니어링",
+        title: "Engineered to Your Line Conditions",
         desc: "Web Width, 이송 속도, 공정 구성을 고객의 라인 조건에 맞게 설계합니다. 표준 장비 + 선택 옵션 방식이 아닙니다.",
       },
       {
-        title: "장기 관계 기반 납품",
+        title: "Long-Term Customer Relationships",
         desc: "다수의 고객사가 첫 도입 이후 반복 발주를 하고 있습니다. 장비뿐 아니라 공정 운용까지 함께 합니다.",
       },
     ],
-    infoLabel: "회사 정보",
+    infoLabel: "Company Information",
     infoItems: [
-      { label: "법인명", value: "㈜피알티" },
-      { label: "설립", value: "2018년 (전신 PRETECH 2010년 창업)" },
-      { label: "대표 제품", value: "Roll-to-Roll 라미네이터, Roll-to-Roll 노광 시스템" },
-      { label: "주요 응용", value: "리드프레임, 반도체 패키징" },
-      { label: "본사", value: "경기도 안양시 동안구 LS로 76, 더오밸리 425호" },
-      { label: "공장", value: "경기도 시흥시 다지골길 15-3" },
+      { label: "Legal Name", value: "PRT Co., Ltd. (㈜피알티)" },
+      { label: "Established", value: "2018 (전신 PRETECH 2010년 창업)" },
+      { label: "Core Products", value: "Roll-to-Roll Laminator, Roll-to-Roll Exposure System" },
+      { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
+      { label: "Headquarters", value: "경기도 안양시 동안구 LS로 76, 더오밸리 425호" },
+      { label: "Factory", value: "경기도 시흥시 다지골길 15-3" },
     ],
     contactCta: "Contact Sales",
-    productsCta: "장비 보기",
+    productsCta: "View Equipment",
   },
   en: {
     meta: "Company",
@@ -143,71 +143,71 @@ const translations = {
     productsCta: "View Equipment",
   },
   zh: {
-    meta: "公司介绍",
-    positioning: "我们不做通用设备。",
-    positioningSub: "我们是专注于稳定RTR半导体工艺系统的\n专业化工程公司。",
+    meta: "Company",
+    positioning: "We do not build generic equipment.",
+    positioningSub: "我们是专注于 Leadframe 与半导体封装工艺的\nRoll-to-Roll 工程公司。",
     positioningBody:
-      "自2010年起，我们的工程团队专注于面向引线框架与半导体封装生产的卷对卷工艺设备。我们设计并交付经过量产验证的层压与曝光系统，已在亚洲交付50套以上设备，相当大比例的订单来自现有客户的重复采购。",
+      "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 50 台以上 Installed Systems。",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "50+", label: "Installed Systems", sub: "Across Asia" },
       { value: "Focused", label: "Lamination + Exposure", sub: "" },
     ],
-    timelineLabel: "公司历程",
+    timelineLabel: "Company History",
     timeline: [
-      { year: "2010", title: "PRETECH成立", desc: "卷对卷层压机研发启动，聚焦引线框架工艺应用。" },
-      { year: "2011", title: "首台层压机交付", desc: "首套PRETECH卷对卷干膜层压系统交付至引线框架生产线。" },
-      { year: "2014", title: "曝光系统研发", desc: "面向卷对卷引线框架图案形成应用的LED UV曝光技术开发完成。" },
-      { year: "2018", title: "PRT品牌成立", desc: "PRT Co., Ltd.成立，扩展卷对卷技术品牌及设备业务。" },
-      { year: "2020", title: "亚洲市场扩展", desc: "向中国与马来西亚的半导体封装制造商扩展交付范围。" },
-      { year: "2024", title: "现状", desc: "亚洲累计交付50套以上系统，现有量产客户重复下单持续进行。" },
+      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll Laminator 研发启动，聚焦 Leadframe 工艺应用。" },
+      { year: "2011", title: "First Laminator Delivery", desc: "首套 PRETECH Roll-to-Roll 干膜 Lamination 系统交付至 Leadframe 生产线。" },
+      { year: "2014", title: "Exposure System Development", desc: "面向 Roll-to-Roll Leadframe 图案形成应用的 LED UV Exposure 技术开发完成。" },
+      { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. 成立，扩展 Roll-to-Roll 技术品牌及设备业务。" },
+      { year: "2020", title: "Asia Expansion", desc: "向中国与马来西亚的半导体封装制造商扩展交付范围。" },
+      { year: "2024", title: "Present", desc: "亚洲累计交付 50 套以上系统，现有量产客户重复下单持续进行。" },
     ],
-    specializationLabel: "专业化领域",
-    specializationTitle: "我们专注的方向",
+    specializationLabel: "Area of Specialization",
+    specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT不试图覆盖半导体设备的全领域。我们专注于引线框架与半导体封装制造中需要卷对卷连续传输的两个特定工艺步骤——层压与UV曝光。这种集中积累的经验使我们能够制造在真实量产现场可靠运行的系统。",
+      "PRT 不试图覆盖半导体设备的全领域。我们专注于 Leadframe 与半导体封装制造中需要 Roll-to-Roll 连续传输的两个工艺步骤 — Lamination 与 UV Exposure。这种集中积累的经验使我们能够制造在真实量产现场可靠运行的系统。",
     specializationCards: [
       {
-        title: "卷对卷层压",
-        desc: "干膜光刻胶的连续层压。张力控制、温度均匀性和无气泡粘合是关键参数。",
-        specs: ["卷材宽度：最大350mm", "速度：0.1~5.0 m/min", "温度精度：±3°C"],
+        title: "Roll-to-Roll Lamination",
+        desc: "干膜光刻胶的连续 Lamination。张力控制、温度均匀性和无气泡粘合是关键参数。",
+        specs: ["Web Width: 最大 350mm", "Speed: 0.1~5.0 m/min", "Temp Accuracy: ±3°C"],
       },
       {
-        title: "卷对卷曝光",
-        desc: "用于引线框架图案形成的连续LED UV曝光。对准精度和逐次重复性是关键参数。",
-        specs: ["分辨率：20μm ±2μm", "对准精度：±5μm", "8CCD视觉系统"],
+        title: "Roll-to-Roll Exposure",
+        desc: "用于 Leadframe 图案形成的连续 LED UV Exposure。对准精度和逐次重复性是关键参数。",
+        specs: ["Resolution: 20μm ±2μm", "Alignment: ±5μm", "8CCD Vision System"],
       },
     ],
-    whyLabel: "客户选择PRT的原因",
+    whyLabel: "Why Customers Choose PRT",
     whyPoints: [
       {
-        title: "量产验证，而非规格表承诺",
+        title: "Production-Proven, Not Spec Sheet Claims",
         desc: "我们通过在真实量产线上连续运行多年的系统来证明能力，而不是通过数据表上的数字。",
       },
       {
-        title: "工程师直接技术支持",
-        desc: "PRT设备的设计使现场工程师可直接诊断与维护关键机械结构，减少不必要的停机与沟通延迟。",
+        title: "Direct Engineering Support",
+        desc: "PRT 设备的设计使现场工程师可直接诊断与维护关键机械结构，减少不必要的停机与沟通延迟。",
       },
       {
-        title: "针对您的生产线定制工程",
-        desc: "卷材宽度、传输速度和工艺配置均按照您的具体生产线条件设计，而非标准产品加选配模式。",
+        title: "Engineered to Your Line Conditions",
+        desc: "Web Width、传输速度和工艺配置均按照您的具体生产线条件设计，而非标准产品加选配模式。",
       },
       {
-        title: "基于长期关系的交付",
-        desc: "我们相当大比例的订单来自已安装PRT设备的客户。我们在交付后持续保持参与。",
+        title: "Long-Term Customer Relationships",
+        desc: "我们相当大比例的订单来自已安装 PRT 设备的客户。我们在交付后持续保持参与。",
       },
     ],
-    infoLabel: "公司信息",
+    infoLabel: "Company Information",
     infoItems: [
-      { label: "法人名称", value: "PRT Co., Ltd. (㈜피알티)" },
-      { label: "成立时间", value: "2018年（前身PRETECH创立于2010年）" },
-      { label: "核心产品", value: "卷对卷层压机、卷对卷曝光系统" },
-      { label: "主要应用", value: "引线框架、半导体封装" },
-      { label: "总部地址", value: "韩国京畿道安养市东安区LS路76号 The O Valley 425室" },
-      { label: "工厂地址", value: "韩国京畿道始兴市다지골길15-3" },
+      { label: "Legal Name", value: "PRT Co., Ltd. (㈜피알티)" },
+      { label: "Established", value: "2018 (前身 PRETECH 创立于 2010 年)" },
+      { label: "Core Products", value: "Roll-to-Roll Laminator, Roll-to-Roll Exposure System" },
+      { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
+      { label: "Headquarters", value: "韩国京畿道安养市东安区 LS 路 76 号 The O Valley 425 室" },
+      { label: "Factory", value: "韩国京畿道始兴市 다지골길 15-3" },
     ],
     contactCta: "Contact Sales",
-    productsCta: "查看设备",
+    productsCta: "View Equipment",
   },
 }
 
@@ -235,10 +235,10 @@ export default function CompanyPage() {
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight mb-6">
             {t.positioning}
           </h1>
-          <p className="text-xl font-light whitespace-pre-line leading-relaxed mb-8 sm:text-2xl" style={{ color: "#C7A86D" }}>
+          <p className="text-xl font-light whitespace-pre-line leading-relaxed mb-8 sm:text-2xl min-h-[5rem] sm:min-h-[6rem]" style={{ color: "#C7A86D" }}>
             {t.positioningSub}
           </p>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400">
+          <p className="max-w-2xl text-base leading-relaxed text-slate-400 min-h-[7rem]">
             {t.positioningBody}
           </p>
 

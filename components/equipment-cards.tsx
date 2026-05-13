@@ -13,22 +13,22 @@ const CARD_META = [
 
 const translations = {
   ko: {
-    viewMore: "자세히 보기",
+    viewMore: "VIEW MORE",
     cards: [
       {
         tag: "LAMINATOR",
-        title: "고정밀 라미네이팅",
+        title: "High Precision Laminating",
         desc: "정밀 장력 제어와 정렬 기술 기반의 안정적 공정.",
       },
       {
         tag: "EXPOSURE",
-        title: "고정밀 노광",
-        desc: "정밀 정렬과 미세 패턴의 균일 노광.",
+        title: "Advanced Exposure",
+        desc: "정밀 정렬과 미세 패턴의 균일 Exposure.",
       },
       {
         tag: "LINE INTEGRATION",
-        title: "공정 라인 통합",
-        desc: "언와인더부터 리와인더까지 전공정 라인 공급 및 통합.",
+        title: "Full Line Integration",
+        desc: "Unwinder부터 Rewinder까지 전공정 라인 공급 및 통합.",
       },
     ],
   },
@@ -53,22 +53,22 @@ const translations = {
     ],
   },
   zh: {
-    viewMore: "查看更多",
+    viewMore: "VIEW MORE",
     cards: [
       {
         tag: "LAMINATOR",
-        title: "高精度层压",
+        title: "High Precision Laminating",
         desc: "采用先进的张力控制与对位技术,确保工艺稳定。",
       },
       {
         tag: "EXPOSURE",
-        title: "高精度曝光",
-        desc: "高精度对位与均匀曝光,适用于精细图案。",
+        title: "Advanced Exposure",
+        desc: "高精度对位与均匀 Exposure,适用于精细图案。",
       },
       {
         tag: "LINE INTEGRATION",
-        title: "整线集成",
-        desc: "从放卷机到收卷机的完整工艺线供应与集成。",
+        title: "Full Line Integration",
+        desc: "从 Unwinder 到 Rewinder 的完整工艺线供应与集成。",
       },
     ],
   },

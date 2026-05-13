@@ -15,12 +15,12 @@ const translations = {
   ko: {
     tagline: "Precision Roll-to-Roll Technology",
     nav: {
-      company: "회사 소개",
-      equipment: "장비",
-      engineering: "엔지니어링",
-      installedBase: "납품 실적",
-      news: "뉴스",
-      contact: "문의",
+      company: "Company",
+      equipment: "Equipment",
+      engineering: "Engineering",
+      installedBase: "Installed Base",
+      news: "News",
+      contact: "Contact",
     },
   },
   en: {
@@ -37,12 +37,12 @@ const translations = {
   zh: {
     tagline: "Precision Roll-to-Roll Technology",
     nav: {
-      company: "公司介绍",
-      equipment: "设备",
-      engineering: "工程技术",
-      installedBase: "交付业绩",
-      news: "新闻",
-      contact: "联系我们",
+      company: "Company",
+      equipment: "Equipment",
+      engineering: "Engineering",
+      installedBase: "Installed Base",
+      news: "News",
+      contact: "Contact",
     },
   },
 }
