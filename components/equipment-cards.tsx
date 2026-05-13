@@ -5,35 +5,82 @@ import { ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
-const cards = [
-  {
-    tag: "LAMINATOR",
-    title: "High Precision Laminating",
-    desc: "Stable process with advanced tension control and alignment technology.",
-    image: "/images/laminator_card.png",
-    href: "/products",
+const CARD_META = [
+  { image: "/images/laminator_card.png", href: "/products" },
+  { image: "/images/exposure_card.png", href: "/products" },
+  { image: "/images/automation_card.png", href: "/engineering" },
+] as const
+
+const translations = {
+  ko: {
+    viewMore: "자세히 보기",
+    cards: [
+      {
+        tag: "LAMINATOR",
+        title: "고정밀 라미네이팅",
+        desc: "정밀 장력 제어와 정렬 기술 기반의 안정적 공정.",
+      },
+      {
+        tag: "EXPOSURE",
+        title: "고정밀 노광",
+        desc: "정밀 정렬과 미세 패턴의 균일 노광.",
+      },
+      {
+        tag: "LINE INTEGRATION",
+        title: "공정 라인 통합",
+        desc: "언와인더부터 리와인더까지 전공정 라인 공급 및 통합.",
+      },
+    ],
   },
-  {
-    tag: "EXPOSURE",
-    title: "Advanced Exposure",
-    desc: "High accuracy alignment and uniform exposure for fine patterns.",
-    image: "/images/exposure_card.png",
-    href: "/products",
+  en: {
+    viewMore: "VIEW MORE",
+    cards: [
+      {
+        tag: "LAMINATOR",
+        title: "High Precision Laminating",
+        desc: "Stable process with advanced tension control and alignment technology.",
+      },
+      {
+        tag: "EXPOSURE",
+        title: "Advanced Exposure",
+        desc: "High accuracy alignment and uniform exposure for fine patterns.",
+      },
+      {
+        tag: "LINE INTEGRATION",
+        title: "Full Line Integration",
+        desc: "Unwinder to rewinder — complete process line supply and integration.",
+      },
+    ],
   },
-  {
-    tag: "LINE INTEGRATION",
-    title: "Full Line Integration",
-    desc: "Unwinder to rewinder — complete process line supply and integration.",
-    image: "/images/automation_card.png",
-    href: "/engineering",
+  zh: {
+    viewMore: "查看更多",
+    cards: [
+      {
+        tag: "LAMINATOR",
+        title: "高精度层压",
+        desc: "采用先进的张力控制与对位技术,确保工艺稳定。",
+      },
+      {
+        tag: "EXPOSURE",
+        title: "高精度曝光",
+        desc: "高精度对位与均匀曝光,适用于精细图案。",
+      },
+      {
+        tag: "LINE INTEGRATION",
+        title: "整线集成",
+        desc: "从放卷机到收卷机的完整工艺线供应与集成。",
+      },
+    ],
   },
-]
+}
 
 interface EquipmentCardsProps {
   lang: Language
 }
 
-export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
+export function EquipmentCards({ lang }: EquipmentCardsProps) {
+  const t = translations[lang]
+  const cards = t.cards.map((c, i) => ({ ...c, ...CARD_META[i] }))
   return (
     <section className="relative bg-[#0A0A0A]">
       <div className="mx-auto max-w-7xl px-6 pt-10 pb-4 lg:px-8 lg:pt-12 lg:pb-6">
@@ -75,7 +122,7 @@ export function EquipmentCards({ lang: _lang }: EquipmentCardsProps) {
                   className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all"
                   style={{ color: "#C7A86D" }}
                 >
-                  VIEW MORE
+                  {t.viewMore}
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>

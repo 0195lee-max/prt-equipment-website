@@ -6,33 +6,60 @@ type Language = "ko" | "en" | "zh"
 
 const translations = {
   ko: {
-    label: "Latest News",
-    viewAll: "View All News",
+    label: "최신 소식",
+    viewAll: "전체 뉴스 보기",
+    items: [
+      {
+        type: "전시회",
+        date: "2026년 10월",
+        title: "산업 전시회 출전 예정",
+        status: "예정",
+      },
+      {
+        type: "납품",
+        date: "2026년",
+        title: "롤투롤 노광 시스템 출하 예정",
+        status: "예정",
+      },
+    ],
   },
   en: {
     label: "Latest News",
     viewAll: "View All News",
+    items: [
+      {
+        type: "Exhibition",
+        date: "October 2026",
+        title: "Upcoming Industry Exhibition",
+        status: "Upcoming",
+      },
+      {
+        type: "Shipment",
+        date: "2026",
+        title: "Roll-to-Roll Exposure System Delivery",
+        status: "Scheduled",
+      },
+    ],
   },
   zh: {
-    label: "Latest News",
-    viewAll: "View All News",
+    label: "最新动态",
+    viewAll: "查看全部新闻",
+    items: [
+      {
+        type: "展会",
+        date: "2026年10月",
+        title: "即将参加行业展会",
+        status: "即将举行",
+      },
+      {
+        type: "出货",
+        date: "2026年",
+        title: "卷对卷曝光系统交付",
+        status: "计划中",
+      },
+    ],
   },
 }
-
-const teaserItems = [
-  {
-    type: "Exhibition",
-    date: "October 2026",
-    title: "Upcoming Industry Exhibition",
-    status: "Upcoming",
-  },
-  {
-    type: "Shipment",
-    date: "2026",
-    title: "Roll-to-Roll Exposure System Delivery",
-    status: "Scheduled",
-  },
-]
 
 interface NewsTeaserProps {
   lang: Language
@@ -71,7 +98,7 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
 
         {/* Compact news list — minimal placeholder */}
         <div className="grid gap-0 sm:grid-cols-2 border-t border-l border-slate-800">
-          {teaserItems.map((item, idx) => (
+          {t.items.map((item, idx) => (
             <a
               key={idx}
               href="/news"

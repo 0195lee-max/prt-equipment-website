@@ -9,29 +9,30 @@ const translations = {
     whyLabel: "Why PRT",
     whyPoints: [
       {
-        title: "Production-Proven Systems",
-        sub: "50+ systems in continuous production operation",
+        title: "현장 검증된 시스템",
+        sub: "50대 이상 양산 라인 가동 중",
       },
       {
-        title: "Stable Web Handling",
-        sub: "±0.3N tension variation under continuous runs",
+        title: "안정적인 웹 핸들링",
+        sub: "연속 가동 시 장력 변동 ±0.3N",
       },
       {
-        title: "Fast Field Support",
-        sub: "Direct-access mechanical structure for faster troubleshooting and maintenance.",
+        title: "빠른 현장 대응",
+        sub: "직접 접근 가능한 기계 구조로 신속한 진단 및 정비",
       },
       {
-        title: "Repeat Orders from Existing Customers",
-        sub: "Majority of orders from returning production accounts",
+        title: "기존 고객사 재주문",
+        sub: "재주문이 전체 수주의 다수를 차지",
       },
     ],
     kpiLabel: "Installed Base",
     kpis: [
-      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
-      { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
-      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
-      { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "납품 시스템" },
+      { icon: "users", top: "ENGINEERING", value: "2010년부터", sub: "축적된 경험" },
+      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "국가" },
+      { icon: "shield", top: "PRODUCTION LINES", value: "아시아 전역", sub: "현재 가동 중" },
     ],
+    ctaInstalledBase: "납품 실적 보기",
   },
   en: {
     whyLabel: "Why PRT",
@@ -60,34 +61,36 @@ const translations = {
       { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
       { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
     ],
+    ctaInstalledBase: "View Installed Base",
   },
   zh: {
     whyLabel: "Why PRT",
     whyPoints: [
       {
-        title: "Production-Proven Systems",
-        sub: "50+ systems in continuous production operation",
+        title: "量产验证系统",
+        sub: "50+ 套系统持续投产运行",
       },
       {
-        title: "Stable Web Handling",
-        sub: "±0.3N tension variation under continuous runs",
+        title: "稳定的卷材处理",
+        sub: "连续运行下张力波动 ±0.3N",
       },
       {
-        title: "Fast Field Support",
-        sub: "Direct-access mechanical structure for faster troubleshooting and maintenance.",
+        title: "快速现场支持",
+        sub: "直接接近式机械结构,便于快速诊断与维护。",
       },
       {
-        title: "Repeat Orders from Existing Customers",
-        sub: "Majority of orders from returning production accounts",
+        title: "老客户重复订单",
+        sub: "回头客户订单占主要比例",
       },
     ],
     kpiLabel: "Installed Base",
     kpis: [
-      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
-      { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
-      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
-      { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "已安装系统" },
+      { icon: "users", top: "ENGINEERING", value: "自 2010 年", sub: "工程经验" },
+      { icon: "settings", top: "SYSTEMS", value: "5+", sub: "国家/地区" },
+      { icon: "shield", top: "PRODUCTION LINES", value: "覆盖亚洲", sub: "当前运行中" },
     ],
+    ctaInstalledBase: "查看装机记录",
   },
 }
 
@@ -197,7 +200,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
               className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"
               style={{ backgroundColor: "#C7A86D" }}
             >
-              View Installed Base
+              {t.ctaInstalledBase}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
