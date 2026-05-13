@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
+import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
 
 type Language = "ko" | "en" | "zh"
 
@@ -658,6 +659,7 @@ function CompetencyImagePlaceholder({ src, alt }: { src?: string; alt?: string }
 
 export default function EngineeringPage() {
   const [lang, setLang] = useState<Language>("en")
+  useSyncHtmlLang(lang)
   const t = translations[lang]
 
   return (

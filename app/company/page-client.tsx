@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
+import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
 
 type Language = "ko" | "en" | "zh"
 
@@ -213,6 +214,7 @@ const translations = {
 
 export default function CompanyPage() {
   const [lang, setLang] = useState<Language>("en")
+  useSyncHtmlLang(lang)
   const t = translations[lang]
 
   return (

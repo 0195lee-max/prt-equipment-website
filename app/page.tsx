@@ -7,11 +7,13 @@ import { EquipmentCards } from "@/components/equipment-cards"
 import { ApplicationsSection } from "@/components/applications-section"
 import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
+import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
 
 type Language = "ko" | "en" | "zh"
 
 export default function Page() {
   const [lang, setLang] = useState<Language>("en")
+  useSyncHtmlLang(lang)
 
   // Dynamic scroll-snap: mandatory between hero and equipment for one-tick
   // navigation; release to "none" once the user is past the equipment page

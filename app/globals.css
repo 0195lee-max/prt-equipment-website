@@ -228,3 +228,24 @@
     opacity: 1 !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Korean typography
+   Activated only when the document language is Korean
+   (html lang="ko"). word-break / overflow-wrap inherit through
+   the cascade, so a single root rule covers paragraphs, headings,
+   buttons, captions, KPI labels — everything.
+
+   - word-break: keep-all  → never break inside a Korean word
+                             (e.g. avoids "엔지니어링 회 / 사입니다")
+   - overflow-wrap: break-word → if a single token would overflow
+                                  (e.g. a long URL or English word),
+                                  allow a fallback character break
+                                  so mobile layouts don't horizontally
+                                  scroll.
+   English/Chinese modes use html lang="en"/"zh" and are unaffected.
+   ───────────────────────────────────────────────────────────── */
+:lang(ko) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
