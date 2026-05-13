@@ -69,12 +69,12 @@ export default function Page() {
   return (
     <main
       id="home-scroll"
-      className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#0A0A0A]"
+      className="h-svh overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#0A0A0A]"
     >
       <Navbar lang={lang} setLang={setLang} />
       <HeroSlider lang={lang} />
       <div id="section-equipment" className="snap-start bg-[#0A0A0A]">
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-svh flex flex-col">
           <EquipmentCards lang={lang} />
           <ApplicationsSection lang={lang} />
         </div>

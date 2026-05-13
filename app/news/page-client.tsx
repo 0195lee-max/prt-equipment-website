@@ -123,7 +123,7 @@ export default function NewsPage() {
   const t = translations[lang]
 
   return (
-    <main className="min-h-screen bg-[#07090F]">
+    <main className="min-h-svh bg-[#07090F]">
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero ─────────────────────────────────────────── */}

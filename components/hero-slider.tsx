@@ -47,7 +47,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#07090F] snap-start -mt-[120px]">
+    <section className="relative h-svh w-full overflow-hidden bg-[#07090F] snap-start -mt-[120px]">
       {/* ── Slide layers ─────────────────────────────────────── */}
       {/* Slide 1: still image (equipment shot first) */}
       <div
@@ -82,7 +82,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           className="h-full w-full object-cover"
           style={{

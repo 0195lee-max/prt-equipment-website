@@ -232,7 +232,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
   const t = translations[lang]
 
   return (
-    <div className="min-h-screen bg-[#07090F]">
+    <div className="min-h-svh bg-[#07090F]">
       {/* ── Hero ─────────────────────────────────────────── */}
       <div className="relative bg-[#07090F] border-b border-slate-800/60 overflow-hidden">
         {/* Background photo */}
@@ -393,7 +393,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                     </span>
                   ))}
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">{r.desc}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{r.desc}</p>
               </div>
             ))}
           </div>
@@ -440,7 +440,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                     <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
                       {row.type}
                     </td>
-                    <td className="py-4 px-4 text-xs text-slate-500 leading-relaxed">
+                    <td className="py-4 px-4 text-xs text-slate-400 leading-relaxed">
                       {row.notes}
                     </td>
                   </tr>
@@ -470,7 +470,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 {c}
               </span>
             ))}
-            <span className="inline-flex items-center border border-slate-800 bg-slate-950/50 px-4 py-2 text-xs text-slate-500 italic">
+            <span className="inline-flex items-center border border-slate-800 bg-slate-950/50 px-4 py-2 text-xs text-slate-400 italic">
               {t.customersNote}
             </span>
           </div>

@@ -216,7 +216,7 @@ export default function CompanyPage() {
   const t = translations[lang]
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero / Positioning ─────────────────────────────── */}
@@ -248,7 +248,7 @@ export default function CompanyPage() {
               <div key={idx}>
                 <div className="text-4xl font-semibold" style={{ color: "#C7A86D" }}>{p.value}</div>
                 <p className="mt-1 text-sm font-medium text-slate-300">{p.label}</p>
-                {p.sub && <p className="text-xs text-slate-500">{p.sub}</p>}
+                {p.sub && <p className="text-xs text-slate-400">{p.sub}</p>}
               </div>
             ))}
           </div>

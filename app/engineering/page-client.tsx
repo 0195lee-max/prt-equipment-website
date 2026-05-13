@@ -661,7 +661,7 @@ export default function EngineeringPage() {
   const t = translations[lang]
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero ────────────────────────────────────────────── */}
@@ -734,7 +734,7 @@ export default function EngineeringPage() {
                   </span>
                   <p className="text-sm font-semibold text-slate-200">{pt.label}</p>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">{pt.desc}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{pt.desc}</p>
               </div>
             ))}
           </div>
@@ -784,7 +784,7 @@ export default function EngineeringPage() {
                     {pillar.specs.map((spec, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-start gap-2 text-xs font-mono text-slate-500"
+                        className="flex items-start gap-2 text-xs font-mono text-slate-400"
                       >
                         <span
                           className="h-px w-3 flex-shrink-0 mt-[7px]"

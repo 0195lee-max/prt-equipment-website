@@ -135,10 +135,10 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
-      <div className="relative min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-6 py-24 lg:px-8">
+      <div className="relative min-h-svh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-6 py-24 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.4)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
         <div className="relative mx-auto max-w-6xl">

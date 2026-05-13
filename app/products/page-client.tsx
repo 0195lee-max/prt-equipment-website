@@ -439,7 +439,7 @@ function ProductCard({
         <div className="mb-5 divide-y divide-slate-800">
           {specs.map((spec, idx) => (
             <div key={idx} className="flex items-center justify-between py-2">
-              <span className="text-xs text-slate-500">{spec.label}</span>
+              <span className="text-xs text-slate-400">{spec.label}</span>
               <span className="text-xs font-mono text-slate-300">{spec.value}</span>
             </div>
           ))}
@@ -485,10 +485,10 @@ export default function ProductsPage() {
   const t = translations[lang]
 
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
-      <div className="relative min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20">
+      <div className="relative min-h-svh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.4)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
@@ -519,7 +519,7 @@ export default function ProductsPage() {
                 {t.whyPoints.map((pt, idx) => (
                   <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "rgba(199,168,109,0.25)" }}>
                     <h3 className="text-sm font-semibold text-slate-200 mb-2">{pt.title}</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">{pt.desc}</p>
+                    <p className="text-xs text-slate-400 leading-relaxed">{pt.desc}</p>
                   </div>
                 ))}
               </div>
@@ -563,7 +563,7 @@ export default function ProductsPage() {
           {/* Line modules */}
           <div className="mb-16">
             <SectionDivider label={t.modulesSection} />
-            <p className="mb-10 text-center text-sm text-slate-500">{t.modulesDesc}</p>
+            <p className="mb-10 text-center text-sm text-slate-400">{t.modulesDesc}</p>
             <div className="grid gap-5 sm:grid-cols-3">
               {t.modules.map((mod, idx) => (
                 <div
@@ -575,7 +575,7 @@ export default function ProductsPage() {
                     style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.2), transparent)" }}
                   />
                   <h4 className="mb-2 text-sm font-semibold text-slate-200">{mod.title}</h4>
-                  <p className="text-xs leading-relaxed text-slate-500">{mod.desc}</p>
+                  <p className="text-xs leading-relaxed text-slate-400">{mod.desc}</p>
                 </div>
               ))}
             </div>

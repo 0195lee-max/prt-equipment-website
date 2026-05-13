@@ -144,7 +144,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                   <p className="text-sm font-semibold text-slate-200 leading-snug mb-1">
                     {point.title}
                   </p>
-                  <p className="text-xs text-slate-500 leading-snug">
+                  <p className="text-xs text-slate-400 leading-snug">
                     {point.sub}
                   </p>
                 </div>
