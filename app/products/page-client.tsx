@@ -11,21 +11,21 @@ const translations = {
   ko: {
     pageLabel: "Equipment Lineup",
     title: "Roll-to-Roll Equipment",
-    subtitle: "Leadframe 및 반도체 패키징 양산 라인을 위한 Roll-to-Roll Laminator · Exposure 시스템",
+    subtitle: "Leadframe 및 반도체 패키징 양산 공정을 위한 Roll-to-Roll Lamination · Exposure 장비",
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
-    modulesDesc: "메인 장비와 통합되는 라인 구성 시스템. Web Width · 소재 · 공정 요구사항에 따라 설계됩니다.",
-    configNote: "모든 시스템은 Web Width · Material Spec · Throughput · Automation Level · Line Integration 요구사항에 따라 맞춤 설계됩니다.",
-    contactCta: "Contact Sales",
-    specsLabel: "Specifications",
-    materialsLabel: "Compatible Materials",
-    applicationLabel: "Application",
+    modulesDesc: "메인 장비와 연동되는 라인 구성 모듈은 Web Width, 소재, 공정 조건에 따라 맞춤 설계됩니다.",
+    configNote: "모든 시스템은 Web Width, 소재 사양, 처리 속도, 자동화 수준, 라인 연동 조건에 따라 맞춤 설계됩니다.",
+    contactCta: "장비 상담 문의",
+    specsLabel: "주요 사양",
+    materialsLabel: "대응 소재",
+    applicationLabel: "적용 공정",
     laminators: [
       {
         model: "PRTLA-350A-PT",
         type: "Roll-to-Roll Hot Laminator",
-        desc: "Leadframe 양산용 Roll-to-Roll 드라이필름 Lamination 시스템. 서보 기반 장력 제어와 정밀 온도 제어로 연속 양산 환경에 최적화.",
+        desc: "Leadframe 양산용 Roll-to-Roll 드라이필름 Lamination 시스템입니다. 정밀 장력 제어와 온도 제어를 기반으로 연속 생산 환경에 최적화되어 있습니다.",
         specs: [
           { label: "Max Web Width", value: "350 mm" },
           { label: "Speed", value: "0.1 ~ 5.0 m/min" },
@@ -42,7 +42,7 @@ const translations = {
       {
         model: "PRTLA-300A-SA2",
         type: "Stand-alone Roll-to-Roll Laminator",
-        desc: "독립형 Roll-to-Roll Laminator. 좁은 Web Width와 유연한 공정 환경에 대응하는 컴팩트 Lamination 시스템.",
+        desc: "좁은 Web Width와 유연한 공정 조건에 대응하는 독립형 Roll-to-Roll Laminator입니다. 제한된 생산 공간이나 소규모 라인 구성에 적합합니다.",
         specs: [
           { label: "Web Width Range", value: "150 ~ 330 mm" },
           { label: "Speed", value: "0.05 ~ 5.0 m/min" },
@@ -61,7 +61,7 @@ const translations = {
       {
         model: "PRTEX-380VAN-LF-LED",
         type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: "Leadframe 패턴 형성을 위한 Vertical Roll-to-Roll LED Exposure 시스템. 8CCD Vision 자동 정렬과 12초 Tact Time으로 고처리량 양산 환경에 대응.",
+        desc: "Leadframe 패터닝 공정을 위한 Vertical Roll-to-Roll LED Exposure 시스템입니다. Vision 자동 정렬과 안정적인 UV 노광으로 고처리량 양산 환경에 대응합니다.",
         specs: [
           { label: "Resolution", value: "20μm ±2μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5μm" },
@@ -78,7 +78,7 @@ const translations = {
       {
         model: "PRTEX-380AN-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
-        desc: "Horizontal 형 Roll-to-Roll LED Exposure 시스템. Vertical 방식과 동일한 광학·정렬 성능을 수평 레이아웃으로 제공.",
+        desc: "Horizontal 구조의 Roll-to-Roll LED Exposure 시스템입니다. Vertical 방식과 동일한 광학·정렬 성능을 수평 레이아웃으로 제공합니다.",
         specs: [
           { label: "Resolution", value: "20μm ±2μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5μm" },
@@ -94,27 +94,27 @@ const translations = {
       },
     ],
     modules: [
-      { title: "Unwinder / Rewinder", desc: "소재 공급 및 수취를 위한 고정밀 릴 시스템. 일정 장력 제어." },
-      { title: "Pre-Heater", desc: "최적 Lamination을 위한 소재 예열 시스템." },
-      { title: "Cleaning Unit", desc: "Lamination · Exposure 전 표면 이물질 제거를 위한 웹 클리닝 시스템." },
+      { title: "Unwinder / Rewinder", desc: "소재 공급과 권취를 위한 정밀 릴 시스템입니다. 안정적인 장력 제어로 연속 공정을 지원합니다." },
+      { title: "Pre-Heater", desc: "Lamination 전 소재 조건을 안정화하기 위한 예열 모듈입니다." },
+      { title: "Cleaning Unit", desc: "Lamination 및 Exposure 전 표면 이물 제거를 위한 웹 클리닝 모듈입니다." },
     ],
-    whyLabel: "Why PRT Equipment?",
+    whyLabel: "PRT 장비의 강점",
     whyPoints: [
       {
-        title: "Production-Proven Design",
-        desc: "PRT 장비는 Leadframe 양산 라인에서 수년간 연속 가동된 이력을 가지고 있습니다. 사양서의 이론값이 아닌, 실제 현장 가동 실적으로 증명합니다.",
+        title: "양산 검증된 설계",
+        desc: "PRT 장비는 아시아 주요 고객사의 Leadframe 양산 라인에서 장기간 운용되며 생산 안정성을 검증해왔습니다.",
       },
       {
-        title: "Stability-First Engineering",
-        desc: "최고 성능 수치를 내세우기보다, 양산 환경의 온도 변화·소재 편차·장시간 가동에서도 일관되게 작동하는 장비를 목표로 설계합니다.",
+        title: "안정성 중심 엔지니어링",
+        desc: "최고 속도보다 장시간 연속 운전의 안정성을 우선합니다. 온도, 장력, 이송 조건을 실제 양산 환경에 맞춰 설계합니다.",
       },
       {
-        title: "Engineered to Your Line",
-        desc: "Web Width, 이송 속도, 공정 구성은 고객의 라인 조건에 맞게 설계됩니다. 표준 장비에 옵션을 끼워 맞추는 방식이 아닙니다.",
+        title: "라인 맞춤 설계",
+        desc: "Web Width, 이송 속도, 소재, 공정 조건에 따라 장비 구성을 조정하여 고객 라인에 맞는 시스템을 제공합니다.",
       },
       {
-        title: "Easy Field Maintenance",
-        desc: "글로벌 공급 가능한 표준 산업용 부품과 직관적인 구조 설계로, 현장 엔지니어가 특수 공구 없이 점검·교체할 수 있습니다.",
+        title: "현장 유지보수성",
+        desc: "표준 산업 부품과 접근성 높은 구조를 적용해 현장 점검, 부품 교체, 유지보수가 쉽도록 설계합니다.",
       },
     ],
   },
@@ -364,7 +364,7 @@ function ProductCard({
   contactCta: string
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-lg border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/60 transition-all hover:border-slate-600">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/60 transition-all hover:border-slate-600">
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)" }}
@@ -421,7 +421,7 @@ function ProductCard({
       </div>
 
       {/* Info */}
-      <div className="p-7">
+      <div className="flex flex-1 flex-col p-7">
         <div className="mb-1 flex items-center gap-2">
           <span
             className="text-[10px] font-bold uppercase tracking-widest"
@@ -431,37 +431,37 @@ function ProductCard({
           </span>
         </div>
         <h3 className="mb-3 text-lg font-semibold text-white">{type}</h3>
-        <p className="mb-6 text-sm leading-relaxed text-slate-400">{desc}</p>
+        <p className="mb-6 text-sm leading-relaxed text-slate-300">{desc}</p>
 
         {/* Spec table */}
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
           {specsLabel}
         </p>
-        <div className="mb-5 divide-y divide-slate-800">
+        <div className="mb-5 divide-y divide-slate-700/60">
           {specs.map((spec, idx) => (
-            <div key={idx} className="flex items-center justify-between py-2">
-              <span className="text-xs text-slate-400">{spec.label}</span>
-              <span className="text-xs font-mono text-slate-300">{spec.value}</span>
+            <div key={idx} className="flex items-center justify-between gap-3 py-2.5">
+              <span className="text-xs text-slate-300">{spec.label}</span>
+              <span className="text-xs font-mono font-medium text-slate-100 text-right">{spec.value}</span>
             </div>
           ))}
         </div>
 
         {/* Materials & Application */}
-        <div className="mb-5 space-y-2">
+        <div className="mb-6 space-y-2">
           <div className="flex items-start gap-2">
-            <span className="text-xs text-slate-600 min-w-[110px]">{materialsLabel}</span>
-            <span className="text-xs text-slate-400">{materials}</span>
+            <span className="text-xs text-slate-400 min-w-[110px]">{materialsLabel}</span>
+            <span className="text-xs text-slate-200">{materials}</span>
           </div>
           <div className="flex items-start gap-2">
-            <span className="text-xs text-slate-600 min-w-[110px]">{applicationLabel}</span>
-            <span className="text-xs text-slate-400">{application}</span>
+            <span className="text-xs text-slate-400 min-w-[110px]">{applicationLabel}</span>
+            <span className="text-xs text-slate-200">{application}</span>
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA — pinned to bottom of card so siblings align across the grid row */}
         <a
           href="/contact"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-900 px-5 py-2.5 rounded transition-opacity hover:opacity-90"
+          className="mt-auto inline-flex w-fit items-center gap-2 text-xs font-semibold text-slate-900 px-5 py-2.5 rounded transition-opacity hover:opacity-90"
           style={{ backgroundColor: "#C7A86D" }}
         >
           {contactCta}
