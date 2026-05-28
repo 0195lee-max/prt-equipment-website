@@ -349,7 +349,7 @@ function R2RComparisonDiagram({
   horizontalLabels: string[]
   verticalLabels: string[]
 }) {
-  const GOLD = "#C7A86D"
+  const GOLD = "#1976D2"
   const GREY = "#64748b" // slate-500
   const GREY_DIM = "#475569" // slate-600
 
@@ -592,11 +592,11 @@ function R2RComparisonDiagram({
               <li
                 key={idx}
                 className="flex items-center gap-2 text-[11px]"
-                style={{ color: "#C7A86D" }}
+                style={{ color: "#1976D2" }}
               >
                 <span
                   className="h-px w-3"
-                  style={{ backgroundColor: "rgba(199,168,109,0.7)" }}
+                  style={{ backgroundColor: "rgba(25,118,210,0.7)" }}
                 />
                 {label}
               </li>
@@ -639,19 +639,19 @@ function CompetencyImagePlaceholder({ src, alt }: { src?: string; alt?: string }
       />
       <div
         className="absolute top-3 left-3 h-2 w-2 border-l border-t"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute top-3 right-3 h-2 w-2 border-r border-t"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
     </div>
   )
@@ -673,13 +673,13 @@ export default function EngineeringPage() {
           className="absolute inset-0 opacity-5 pointer-events-none"
           style={{
             background:
-              "linear-gradient(105deg, transparent 42%, rgba(199,168,109,0.8) 42.5%, transparent 43%)",
+              "linear-gradient(105deg, transparent 42%, rgba(25,118,210,0.8) 42.5%, transparent 43%)",
           }}
         />
 
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:px-8">
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
               {t.titleSub}
             </p>
@@ -727,9 +727,9 @@ export default function EngineeringPage() {
                   <span
                     className="flex h-6 w-6 items-center justify-center text-[10px] font-bold"
                     style={{
-                      backgroundColor: "rgba(199,168,109,0.12)",
-                      color: "#C7A86D",
-                      border: "1px solid rgba(199,168,109,0.3)",
+                      backgroundColor: "rgba(25,118,210,0.12)",
+                      color: "#1976D2",
+                      border: "1px solid rgba(25,118,210,0.3)",
                     }}
                   >
                     {String(idx + 1).padStart(2, "0")}
@@ -767,7 +767,7 @@ export default function EngineeringPage() {
                 <div className="p-6">
                   <p
                     className="text-[10px] font-bold tracking-[0.25em] mb-3 font-mono"
-                    style={{ color: "rgba(199,168,109,0.7)" }}
+                    style={{ color: "rgba(25,118,210,0.7)" }}
                   >
                     {pillar.number}
                   </p>
@@ -790,7 +790,7 @@ export default function EngineeringPage() {
                       >
                         <span
                           className="h-px w-3 flex-shrink-0 mt-[7px]"
-                          style={{ backgroundColor: "#C7A86D", opacity: 0.4 }}
+                          style={{ backgroundColor: "#1976D2", opacity: 0.4 }}
                         />
                         <span>{spec}</span>
                       </div>
@@ -829,7 +829,7 @@ export default function EngineeringPage() {
             <a
               href="/products"
               className="inline-flex items-center gap-2 rounded px-6 py-3 text-sm font-semibold text-slate-900 transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#C7A86D" }}
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.productsCta}
               <ArrowRight className="h-4 w-4" />

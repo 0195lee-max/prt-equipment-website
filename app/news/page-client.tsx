@@ -96,19 +96,19 @@ function NewsImagePlaceholder({ label }: { label: string }) {
       />
       <div
         className="absolute top-3 left-3 h-2 w-2 border-l border-t"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute top-3 right-3 h-2 w-2 border-r border-t"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div
         className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
-        style={{ borderColor: "rgba(199,168,109,0.4)" }}
+        style={{ borderColor: "rgba(25,118,210,0.4)" }}
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-600">
@@ -142,7 +142,7 @@ export default function NewsPage() {
 
         <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8 w-full">
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.meta}
             </p>
@@ -152,7 +152,7 @@ export default function NewsPage() {
           </h1>
           <p
             className="text-xl font-light leading-relaxed mb-6 sm:text-2xl max-w-3xl"
-            style={{ color: "#C7A86D" }}
+            style={{ color: "#1976D2" }}
           >
             {t.headline}
           </p>
@@ -163,8 +163,8 @@ export default function NewsPage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#B89757]"
-              style={{ backgroundColor: "#C7A86D" }}
+              className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaPrimary}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -183,7 +183,7 @@ export default function NewsPage() {
       <section className="relative bg-[#07090F] py-20">
         <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-10">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.latestLabel}
             </p>
@@ -202,7 +202,7 @@ export default function NewsPage() {
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <span
                       className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
-                      style={{ color: "#C7A86D" }}
+                      style={{ color: "#1976D2" }}
                     >
                       <Tag className="h-3 w-3" />
                       {item.type}

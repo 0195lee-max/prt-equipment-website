@@ -144,19 +144,18 @@ export function Navbar({ lang, setLang }: NavbarProps) {
         } ${navBgClass}`}
       >
         {/* Logo */}
-        <div className="flex justify-start md:justify-end md:w-[22vw] flex-1 md:flex-none">
+        <div className="flex justify-start md:w-[22vw] flex-1 md:flex-none">
           <a href="/" className="flex items-center transition-opacity hover:opacity-80">
-            <span
-              className="text-4xl font-bold tracking-tight leading-none"
-              style={{ color: "#C7A86D" }}
-            >
-              PRT
-            </span>
+            <img
+              src="/images/PRT_logo.svg"
+              alt="PRT"
+              className="h-10 w-auto"
+            />
           </a>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden flex-1 items-center justify-center gap-14 md:flex lg:gap-20">
+        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -194,7 +193,7 @@ export function Navbar({ lang, setLang }: NavbarProps) {
                         ? "text-white font-medium"
                         : "text-slate-300 hover:bg-white/10 hover:text-white"
                     }`}
-                    style={lang === l ? { backgroundColor: "rgba(199,168,109,0.15)" } : {}}
+                    style={lang === l ? { backgroundColor: "rgba(25,118,210,0.15)" } : {}}
                   >
                     {languageNames[l]}
                   </button>

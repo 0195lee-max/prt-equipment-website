@@ -128,7 +128,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         <div className="max-w-2xl">
           <p
             className="mb-5 text-sm font-bold uppercase tracking-[0.32em]"
-            style={{ color: "#C7A86D" }}
+            style={{ color: "#1976D2" }}
           >
             {t.caption}
           </p>
@@ -143,8 +143,8 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           <div className="flex flex-wrap gap-3">
             <a
               href="/products"
-              className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"
-              style={{ backgroundColor: "#C7A86D" }}
+              className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaPrimary}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -165,7 +165,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         aria-label="Scroll to next section"
         onClick={() => {
           const next = document.getElementById("section-equipment")
-          next?.scrollIntoView({ behavior: "smooth" })
+          next?.scrollIntoView({ behavior: "smooth", block: "start" })
         }}
         className="absolute bottom-16 left-1/2 z-20 -translate-x-1/2 flex h-12 w-12 items-center justify-center rounded-full border border-white/40 text-white/80 transition-all hover:border-white/80 hover:text-white animate-bounce"
       >
@@ -184,7 +184,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             className="h-2.5 rounded-full transition-all"
             style={{
               width: slide === i ? "32px" : "10px",
-              backgroundColor: slide === i ? "#C7A86D" : "rgba(255,255,255,0.45)",
+              backgroundColor: slide === i ? "#1976D2" : "rgba(255,255,255,0.45)",
             }}
           />
         ))}

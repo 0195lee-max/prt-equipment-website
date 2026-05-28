@@ -108,7 +108,7 @@ export function EquipmentCards({ lang }: EquipmentCardsProps) {
               <div className="min-w-0">
                 <p
                   className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.28em]"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 >
                   {card.tag}
                 </p>
@@ -120,7 +120,7 @@ export function EquipmentCards({ lang }: EquipmentCardsProps) {
                 </p>
                 <span
                   className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 >
                   {t.viewMore}
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />

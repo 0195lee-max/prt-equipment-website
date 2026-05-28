@@ -83,7 +83,7 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
       <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.label}
             </p>
@@ -107,7 +107,7 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span
                   className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 >
                   <Tag className="h-3 w-3" />
                   {item.type}

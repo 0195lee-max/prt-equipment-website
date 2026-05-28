@@ -369,7 +369,7 @@ export default function ContactPage() {
                   size="lg"
                   disabled={isSubmitting}
                   className="w-full sm:w-auto font-semibold text-slate-900 hover:opacity-90"
-                  style={{ backgroundColor: "#C7A86D" }}
+                  style={{ backgroundColor: "#1976D2" }}
                 >
                   {isSubmitting ? t.sending : t.send}
                   <Send className="ml-2 h-4 w-4" />

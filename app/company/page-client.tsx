@@ -227,7 +227,7 @@ export default function CompanyPage() {
         {/* Gold diagonal accent */}
         <div
           className="absolute inset-0 opacity-5 pointer-events-none"
-          style={{ background: "linear-gradient(105deg, transparent 45%, rgba(199,168,109,0.6) 45.5%, transparent 46%)" }}
+          style={{ background: "linear-gradient(105deg, transparent 45%, rgba(25,118,210,0.6) 45.5%, transparent 46%)" }}
         />
 
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:px-8">
@@ -237,7 +237,7 @@ export default function CompanyPage() {
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight mb-6">
             {t.positioning}
           </h1>
-          <p className="text-xl font-light whitespace-pre-line leading-relaxed mb-8 sm:text-2xl min-h-[5rem] sm:min-h-[6rem]" style={{ color: "#C7A86D" }}>
+          <p className="text-xl font-light whitespace-pre-line leading-relaxed mb-8 sm:text-2xl min-h-[5rem] sm:min-h-[6rem]" style={{ color: "#1976D2" }}>
             {t.positioningSub}
           </p>
           <p className="max-w-2xl text-base leading-relaxed text-slate-400 min-h-[7rem]">
@@ -248,7 +248,7 @@ export default function CompanyPage() {
           <div className="mt-14 flex flex-wrap gap-10 sm:gap-16">
             {t.pillars.map((p, idx) => (
               <div key={idx}>
-                <div className="text-4xl font-semibold" style={{ color: "#C7A86D" }}>{p.value}</div>
+                <div className="text-4xl font-semibold" style={{ color: "#1976D2" }}>{p.value}</div>
                 <p className="mt-1 text-sm font-medium text-slate-300">{p.label}</p>
                 {p.sub && <p className="text-xs text-slate-400">{p.sub}</p>}
               </div>
@@ -278,8 +278,8 @@ export default function CompanyPage() {
                     <div
                       className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-[10px] font-bold"
                       style={{
-                        borderColor: "#C7A86D",
-                        color: "#C7A86D",
+                        borderColor: "#1976D2",
+                        color: "#1976D2",
                         backgroundColor: "rgb(15, 23, 42)",
                       }}
                     >
@@ -292,7 +292,7 @@ export default function CompanyPage() {
                     <div className="flex items-baseline gap-3 mb-2">
                       <span
                         className="text-xs font-bold tracking-widest font-mono"
-                        style={{ color: "#C7A86D" }}
+                        style={{ color: "#1976D2" }}
                       >
                         {item.year}
                       </span>
@@ -331,14 +331,14 @@ export default function CompanyPage() {
               >
                 <div
                   className="absolute top-0 left-0 right-0 h-px"
-                  style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)" }}
+                  style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.5), transparent)" }}
                 />
                 <h3 className="text-base font-semibold text-white mb-3">{card.title}</h3>
                 <p className="text-sm text-slate-300 leading-relaxed mb-6">{card.desc}</p>
                 <div className="space-y-2 border-t border-slate-700/60 pt-4">
                   {card.specs.map((spec, sIdx) => (
                     <div key={sIdx} className="flex items-center gap-3 text-sm font-mono text-slate-200">
-                      <span className="h-px w-4 flex-shrink-0" style={{ backgroundColor: "#C7A86D" }} />
+                      <span className="h-px w-4 flex-shrink-0" style={{ backgroundColor: "#1976D2" }} />
                       {spec}
                     </div>
                   ))}
@@ -360,7 +360,7 @@ export default function CompanyPage() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             {t.whyPoints.map((point, idx) => (
-              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(199,168,109,0.3)" }}>
+              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.3)" }}>
                 <h3 className="text-sm font-semibold text-slate-200 mb-2">{point.title}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">{point.desc}</p>
               </div>
@@ -388,15 +388,15 @@ export default function CompanyPage() {
           {/* Contact info row */}
           <div className="flex flex-wrap gap-6 mb-12 text-sm">
             <div className="flex items-center gap-2 text-slate-400">
-              <Phone className="h-4 w-4 flex-shrink-0" style={{ color: "#C7A86D" }} />
+              <Phone className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
               <a href="tel:+82314691103" className="hover:text-white transition-colors">+82-31-469-1103</a>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
-              <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "#C7A86D" }} />
+              <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
               <a href="mailto:sales@prt-kr.com" className="hover:text-white transition-colors">sales@prt-kr.com</a>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
-              <MapPin className="h-4 w-4 flex-shrink-0" style={{ color: "#C7A86D" }} />
+              <MapPin className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
               <span>Anyang-si, Gyeonggi-do, Republic of Korea</span>
             </div>
           </div>
@@ -406,7 +406,7 @@ export default function CompanyPage() {
             <a
               href="/products"
               className="inline-flex items-center gap-2 rounded px-6 py-3 text-sm font-semibold text-slate-900 transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#C7A86D" }}
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.productsCta}
               <ArrowRight className="h-4 w-4" />

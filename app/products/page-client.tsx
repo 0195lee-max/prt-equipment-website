@@ -367,7 +367,7 @@ function ProductCard({
     <div className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/60 transition-all hover:border-slate-600">
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.5), transparent)" }}
+        style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.5), transparent)" }}
       />
       <div className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-slate-600/40" />
       <div className="absolute -right-px -top-px h-6 w-6 border-r-2 border-t-2 border-slate-600/40" />
@@ -381,7 +381,7 @@ function ProductCard({
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(199,168,109,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,168,109,0.04) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(25,118,210,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(25,118,210,0.04) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -390,25 +390,25 @@ function ProductCard({
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(199,168,109,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(25,118,210,0.06) 0%, transparent 70%)",
           }}
         />
         {/* Corner brackets */}
         <div
           className="absolute top-4 left-4 h-3 w-3 border-l border-t"
-          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+          style={{ borderColor: "rgba(25,118,210,0.35)" }}
         />
         <div
           className="absolute top-4 right-4 h-3 w-3 border-r border-t"
-          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+          style={{ borderColor: "rgba(25,118,210,0.35)" }}
         />
         <div
           className="absolute bottom-4 left-4 h-3 w-3 border-l border-b"
-          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+          style={{ borderColor: "rgba(25,118,210,0.35)" }}
         />
         <div
           className="absolute bottom-4 right-4 h-3 w-3 border-r border-b"
-          style={{ borderColor: "rgba(199,168,109,0.35)" }}
+          style={{ borderColor: "rgba(25,118,210,0.35)" }}
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-8">
@@ -425,7 +425,7 @@ function ProductCard({
         <div className="mb-1 flex items-center gap-2">
           <span
             className="text-[10px] font-bold uppercase tracking-widest"
-            style={{ color: "#C7A86D" }}
+            style={{ color: "#1976D2" }}
           >
             {model}
           </span>
@@ -462,7 +462,7 @@ function ProductCard({
         <a
           href="/contact"
           className="mt-auto inline-flex w-fit items-center gap-2 text-xs font-semibold text-slate-900 px-5 py-2.5 rounded transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "#C7A86D" }}
+          style={{ backgroundColor: "#1976D2" }}
         >
           {contactCta}
         </a>
@@ -511,7 +511,7 @@ export default function ProductsPage() {
           <div className="mb-20 relative overflow-hidden rounded-lg border border-slate-800 bg-slate-900/40">
             <div
               className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.4), transparent)" }}
+              style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.4), transparent)" }}
             />
             <div className="px-8 py-10">
               <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -519,7 +519,7 @@ export default function ProductsPage() {
               </p>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {t.whyPoints.map((pt, idx) => (
-                  <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "rgba(199,168,109,0.25)" }}>
+                  <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "rgba(25,118,210,0.25)" }}>
                     <h3 className="text-sm font-semibold text-slate-200 mb-2">{pt.title}</h3>
                     <p className="text-xs text-slate-400 leading-relaxed">{pt.desc}</p>
                   </div>
@@ -574,7 +574,7 @@ export default function ProductsPage() {
                 >
                   <div
                     className="absolute top-0 left-0 right-0 h-px"
-                    style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.2), transparent)" }}
+                    style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.2), transparent)" }}
                   />
                   <h4 className="mb-2 text-sm font-semibold text-slate-200">{mod.title}</h4>
                   <p className="text-xs leading-relaxed text-slate-400">{mod.desc}</p>
@@ -587,13 +587,13 @@ export default function ProductsPage() {
           <div className="relative overflow-hidden rounded-lg border border-slate-800 bg-slate-900/30 p-8 text-center">
             <div
               className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(to right, transparent, rgba(199,168,109,0.3), transparent)" }}
+              style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.3), transparent)" }}
             />
             <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto">{t.configNote}</p>
             <a
               href="/contact"
               className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 px-6 py-3 rounded transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#C7A86D" }}
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.contactCta}
             </a>

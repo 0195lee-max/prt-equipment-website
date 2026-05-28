@@ -32,7 +32,7 @@ export default function Page() {
       if (main.scrollTop > releaseThreshold()) {
         main.style.scrollSnapType = "none"
       } else {
-        main.style.scrollSnapType = "y mandatory"
+        main.style.scrollSnapType = "y proximity"
       }
     }
     updateSnap()
@@ -152,7 +152,7 @@ export default function Page() {
   return (
     <main
       id="home-scroll"
-      className="h-svh overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#0A0A0A]"
+      className="h-svh overflow-y-scroll snap-y snap-proximity scroll-smooth bg-[#0A0A0A]"
     >
       <Navbar lang={lang} setLang={setLang} />
       <HeroSlider lang={lang} />

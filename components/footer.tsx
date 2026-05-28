@@ -91,7 +91,7 @@ export function Footer({ lang = "en" }: FooterProps) {
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(199,168,109,0.4), transparent)",
+            "linear-gradient(to right, transparent, rgba(25,118,210,0.4), transparent)",
         }}
       />
 
@@ -102,7 +102,7 @@ export function Footer({ lang = "en" }: FooterProps) {
             <div className="mb-5">
               <span
                 className="block text-2xl font-bold tracking-tight leading-none"
-                style={{ color: "#C7A86D" }}
+                style={{ color: "#1976D2" }}
               >
                 PRT
               </span>
@@ -117,14 +117,14 @@ export function Footer({ lang = "en" }: FooterProps) {
               <li className="flex items-start gap-2.5">
                 <MapPin
                   className="h-3.5 w-3.5 mt-0.5 flex-shrink-0"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 />
                 <span className="leading-relaxed">{t.address}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone
                   className="h-3.5 w-3.5 flex-shrink-0"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 />
                 <a
                   href={`tel:${t.phone.replace(/[^+0-9]/g, "")}`}
@@ -136,7 +136,7 @@ export function Footer({ lang = "en" }: FooterProps) {
               <li className="flex items-center gap-2.5">
                 <Mail
                   className="h-3.5 w-3.5 flex-shrink-0"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 />
                 <a
                   href={`mailto:${t.email}`}
@@ -215,7 +215,7 @@ export function Footer({ lang = "en" }: FooterProps) {
                 <li key={idx} className="flex items-start gap-2.5">
                   <span
                     className="h-1.5 w-1.5 rounded-full mt-2 flex-shrink-0"
-                    style={{ backgroundColor: "#C7A86D" }}
+                    style={{ backgroundColor: "#1976D2" }}
                   />
                   <span className="leading-relaxed">{item}</span>
                 </li>

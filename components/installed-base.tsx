@@ -266,14 +266,14 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
 
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
           <div className="flex items-center gap-3 mb-5">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.meta}
             </p>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[56px] leading-[1.05] mb-6 max-w-3xl">
             {t.title}{" "}
-            <span style={{ color: "#C7A86D" }}>{t.titleAccent}</span>.
+            <span style={{ color: "#1976D2" }}>{t.titleAccent}</span>.
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-slate-400">
             {t.description}
@@ -285,7 +285,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#07090F] border-b border-slate-800/60">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="py-5 flex items-center gap-3 border-b border-slate-900">
-            <div className="h-px w-6" style={{ backgroundColor: "rgba(199,168,109,0.5)" }} />
+            <div className="h-px w-6" style={{ backgroundColor: "rgba(25,118,210,0.5)" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.kpiHeading}
             </p>
@@ -300,7 +300,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
               >
                 <div
                   className="text-3xl lg:text-4xl font-bold leading-tight tracking-tight"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 >
                   {kpi.value}
                 </div>
@@ -324,14 +324,14 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
               <div
                 className="flex items-center gap-2 px-3 py-1.5 border"
                 style={{
-                  borderColor: "rgba(199,168,109,0.35)",
-                  backgroundColor: "rgba(199,168,109,0.08)",
+                  borderColor: "rgba(25,118,210,0.35)",
+                  backgroundColor: "rgba(25,118,210,0.08)",
                 }}
               >
-                <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#C7A86D" }} />
+                <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#1976D2" }} />
                 <span
                   className="text-[10px] font-bold uppercase tracking-[0.2em]"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 >
                   {t.repeatBadge}
                 </span>
@@ -353,7 +353,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#07090F] border-b border-slate-800/60">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-10">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.regionsLabel}
             </p>
@@ -369,13 +369,13 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 <div
                   className="inline-flex items-center justify-center mb-4 px-2.5 py-1 border"
                   style={{
-                    borderColor: "rgba(199,168,109,0.45)",
-                    backgroundColor: "rgba(199,168,109,0.08)",
+                    borderColor: "rgba(25,118,210,0.45)",
+                    backgroundColor: "rgba(25,118,210,0.08)",
                   }}
                 >
                   <span
                     className="text-sm font-bold font-mono tracking-[0.15em]"
-                    style={{ color: "#C7A86D" }}
+                    style={{ color: "#1976D2" }}
                   >
                     {r.code}
                   </span>
@@ -404,7 +404,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#0A0F1A] border-b border-slate-800/60">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.recordsLabel}
             </p>
@@ -455,7 +455,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#07090F]">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.customersLabel}
             </p>
@@ -479,8 +479,8 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           <div className="flex flex-wrap gap-3 pt-8 border-t border-slate-800">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#B89757]"
-              style={{ backgroundColor: "#C7A86D" }}
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.contactCta}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

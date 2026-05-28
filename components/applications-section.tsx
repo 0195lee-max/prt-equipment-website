@@ -124,7 +124,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
 
         <div className="relative mx-auto max-w-7xl px-6 py-5 lg:px-8 lg:py-6">
           <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8" style={{ backgroundColor: "#C7A86D" }} />
+            <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.whyLabel}
             </p>
@@ -138,7 +138,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
               >
                 <CheckCircle2
                   className="h-4 w-4 flex-shrink-0"
-                  style={{ color: "#C7A86D" }}
+                  style={{ color: "#1976D2" }}
                 />
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-slate-200 leading-snug mb-1">
@@ -171,7 +171,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                 >
                   <Icon
                     className="h-10 w-10 lg:h-11 lg:w-11 flex-shrink-0"
-                    style={{ color: "#C7A86D" }}
+                    style={{ color: "#1976D2" }}
                     strokeWidth={1.2}
                   />
                   <div className="min-w-0">
@@ -180,7 +180,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                     </p>
                     <p
                       className="text-xl lg:text-2xl font-bold tracking-tight leading-tight"
-                      style={{ color: "#C7A86D" }}
+                      style={{ color: "#1976D2" }}
                     >
                       {kpi.value}
                     </p>
@@ -197,8 +197,8 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           <div className="flex justify-center border-t border-slate-800/80 py-5">
             <a
               href="/installed-base"
-              className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#B89757]"
-              style={{ backgroundColor: "#C7A86D" }}
+              className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaInstalledBase}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
