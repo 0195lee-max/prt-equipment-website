@@ -1,10 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Calendar, ArrowRight, Tag } from "lucide-react"
-import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
+import { useLanguage } from "@/hooks/use-language"
 
 type Language = "ko" | "en" | "zh"
 
@@ -120,8 +119,7 @@ function NewsImagePlaceholder({ label }: { label: string }) {
 }
 
 export default function NewsPage() {
-  const [lang, setLang] = useState<Language>("en")
-  useSyncHtmlLang(lang)
+  const [lang, setLang] = useLanguage()
   const t = translations[lang]
 
   return (

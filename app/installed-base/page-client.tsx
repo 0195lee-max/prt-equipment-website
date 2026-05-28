@@ -1,16 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { InstalledBase } from "@/components/installed-base"
 import { Footer } from "@/components/footer"
-import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
+import { useLanguage } from "@/hooks/use-language"
 
 type Language = "ko" | "en" | "zh"
 
 export default function InstalledBasePage() {
-  const [lang, setLang] = useState<Language>("en")
-  useSyncHtmlLang(lang)
+  const [lang, setLang] = useLanguage()
 
 
   return (

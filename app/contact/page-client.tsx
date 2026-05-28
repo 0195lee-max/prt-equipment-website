@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Mail, Phone, MapPin, Clock, Printer } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
+import { useLanguage } from "@/hooks/use-language"
 
 type Language = "ko" | "en" | "zh"
 
@@ -87,8 +87,7 @@ const translations = {
 }
 
 export default function ContactPage() {
-  const [lang, setLang] = useState<Language>("en")
-  useSyncHtmlLang(lang)
+  const [lang, setLang] = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [formData, setFormData] = useState({

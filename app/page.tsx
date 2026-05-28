@@ -1,19 +1,17 @@
 "use client"
 
-import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { HeroSlider } from "@/components/hero-slider"
 import { EquipmentCards } from "@/components/equipment-cards"
 import { ApplicationsSection } from "@/components/applications-section"
 import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
-import { useSyncHtmlLang } from "@/hooks/use-sync-html-lang"
+import { useLanguage } from "@/hooks/use-language"
 
 type Language = "ko" | "en" | "zh"
 
 export default function Page() {
-  const [lang, setLang] = useState<Language>("en")
-  useSyncHtmlLang(lang)
+  const [lang, setLang] = useLanguage()
 
   return (
     <main className="bg-[#0A0A0A]">
