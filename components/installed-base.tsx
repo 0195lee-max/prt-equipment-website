@@ -479,7 +479,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           <div className="flex flex-wrap gap-3 pt-8 border-t border-slate-800">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.contactCta}

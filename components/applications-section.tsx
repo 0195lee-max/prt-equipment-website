@@ -197,7 +197,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           <div className="flex justify-center border-t border-slate-800/80 py-5">
             <a
               href="/installed-base"
-              className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              className="group inline-flex items-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaInstalledBase}

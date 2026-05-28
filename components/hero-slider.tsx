@@ -143,7 +143,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           <div className="flex flex-wrap gap-3">
             <a
               href="/products"
-              className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaPrimary}

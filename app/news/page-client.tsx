@@ -163,7 +163,7 @@ export default function NewsPage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#1565C0]"
+              className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaPrimary}
