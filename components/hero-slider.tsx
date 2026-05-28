@@ -47,7 +47,10 @@ export function HeroSlider({ lang }: HeroSliderProps) {
   const t = translations[lang]
 
   return (
-    <section className="relative h-svh w-full overflow-hidden bg-[#07090F] -mt-[120px]">
+    <section
+      className="relative h-svh w-full overflow-hidden bg-[#07090F]"
+      style={{ marginTop: "calc(var(--header-height) * -1)" }}
+    >
       {/* ── Slide layers ─────────────────────────────────────── */}
       {/* Slide 1: still image (equipment shot first) */}
       <div

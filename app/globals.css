@@ -12,6 +12,12 @@
   --prt-blue-dark: #0D47A1;
   --prt-blue-light: #42A5F5;
 
+  /* Navbar height — used by the hero negative-margin overlap so the
+     hero fills the viewport without leaving a strip at the bottom.
+     Must match navbar.tsx padding (py-7 mobile, py-8 desktop) +
+     tallest control (Globe button = 36px). */
+  --header-height: 92px;
+
   --background: oklch(0.98 0.002 240);
   --foreground: oklch(0.15 0.01 240);
   --card: oklch(1 0 0);
@@ -129,6 +135,13 @@
   }
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* Desktop has slightly more vertical padding on the navbar */
+@media (min-width: 768px) {
+  :root {
+    --header-height: 100px;
   }
 }
 
@@ -260,13 +273,14 @@
    ───────────────────────────────────────────────────────────── */
 section[id],
 [data-anchor] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: var(--header-height);
 }
-@media (min-width: 768px) {
-  section[id],
-  [data-anchor] {
-    scroll-margin-top: 6rem;
-  }
+/* The equipment section follows the hero directly. The navbar
+   auto-hides during the downward smooth-scroll, so reserving header
+   height would leave a visible strip of hero at the top. Land the
+   section flush with the viewport. */
+#section-equipment {
+  scroll-margin-top: 0;
 }
 
 /* ─────────────────────────────────────────────────────────────
