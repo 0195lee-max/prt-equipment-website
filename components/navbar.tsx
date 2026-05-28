@@ -144,12 +144,12 @@ export function Navbar({ lang, setLang }: NavbarProps) {
         } ${navBgClass}`}
       >
         {/* Logo */}
-        <div className="flex justify-start md:w-[22vw] flex-1 md:flex-none">
+        <div className="flex justify-start md:justify-center md:w-[22vw] flex-1 md:flex-none">
           <a href="/" className="flex items-center transition-opacity hover:opacity-80">
             <img
               src="/images/PRT_logo.svg"
               alt="PRT"
-              className="h-10 w-auto"
+              className="h-8 w-auto"
             />
           </a>
         </div>
