@@ -1,6 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { CheckCircle2, Globe, Users, Settings, ShieldCheck, ArrowRight } from "lucide-react"
+import { useInView } from "@/hooks/use-in-view"
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion"
 
 type Language = "ko" | "en" | "zh"
 
@@ -101,24 +104,75 @@ const ICON_MAP = {
   shield: ShieldCheck,
 } as const
 
-interface ApplicationsSectionProps {
-  lang: Language
-  // null/undefined = baseline. "a" | "b" | "c" select design variants.
-  variant?: "a" | "b" | "c" | null
+/**
+ * Metric value with a restrained count-up. Only animates values that
+ * START with a number (e.g. "50+", "5+"); text values ("Since 2010",
+ * "Across Asia") render verbatim. The count starts NEAR the final
+ * figure and eases up a few digits — never a loud 0→N climb. Plays
+ * once when `active`, and is skipped entirely under reduced motion.
+ */
+function MetricValue({
+  value,
+  active,
+  reduced,
+}: {
+  value: string
+  active: boolean
+  reduced: boolean
+}) {
+  const match = value.match(/^(\d+)(.*)$/)
+  const target = match ? parseInt(match[1], 10) : 0
+  const suffix = match ? match[2] : ""
+  // start a few digits below the target (min 2, ~12% of the value)
+  const from = match ? Math.max(0, target - Math.max(2, Math.round(target * 0.12))) : 0
+  const [n, setN] = useState(from)
+
+  useEffect(() => {
+    if (!match || reduced || !active) return
+    let raf = 0
+    let t0: number | null = null
+    const duration = 900
+    const tick = (ts: number) => {
+      if (t0 === null) t0 = ts
+      const p = Math.min(1, (ts - t0) / duration)
+      const eased = 1 - Math.pow(1 - p, 3) // easeOutCubic
+      setN(Math.round(from + (target - from) * eased))
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [active, reduced, match, from, target])
+
+  if (!match || reduced) return <>{value}</>
+  return (
+    <>
+      {n}
+      {suffix}
+    </>
+  )
 }
 
-export function ApplicationsSection({ lang, variant = null }: ApplicationsSectionProps) {
+interface ApplicationsSectionProps {
+  lang: Language
+}
+
+export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
   const t = translations[lang]
-  // Variant C ("Premium Equipment Showcase") refines the KPI strip.
-  const isPremium = variant === "c"
+  // Reveal + count-up the KPI strip once it scrolls into view.
+  const [kpiRef, kpiInView] = useInView<HTMLDivElement>({ threshold: 0.3 })
+  const reduced = usePrefersReducedMotion()
+  // Reduced motion → show the strip immediately (no fade, no count-up,
+  // no dependency on the observer). Otherwise reveal on scroll-in.
+  const revealKpi = reduced || kpiInView
 
   return (
     <section className="relative">
       {/* ── Why PRT — 4-bullet grid, dark solid bg ─────────── */}
       <div className="relative bg-[#0A0A0A] border-t border-slate-800/60">
+        {/* faint background grid (very low opacity) */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
               "linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px)",
@@ -138,17 +192,23 @@ export function ApplicationsSection({ lang, variant = null }: ApplicationsSectio
             {t.whyPoints.map((point, idx) => (
               <div
                 key={idx}
-                className="border-r border-b border-slate-800 bg-slate-950/30 px-4 py-3 flex flex-col items-center justify-center text-center gap-1.5"
+                className="group relative border-r border-b border-slate-800 bg-slate-950/30 px-4 py-3 flex flex-col items-center justify-center text-center gap-1.5 transition-colors duration-300 hover:bg-[#1976D2]/[0.07]"
               >
+                {/* hover accent — blue underline grows along the bottom */}
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                  style={{ backgroundColor: "#1976D2" }}
+                />
                 <CheckCircle2
-                  className="h-4 w-4 flex-shrink-0"
+                  className="h-4 w-4 flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
                   style={{ color: "#1976D2" }}
                 />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-slate-200 leading-snug mb-1">
+                  <p className="text-sm font-semibold text-slate-200 leading-snug mb-1 transition-colors duration-300 group-hover:text-white">
                     {point.title}
                   </p>
-                  <p className="text-xs text-slate-400 leading-snug">
+                  <p className="text-xs text-slate-400 leading-snug transition-colors duration-300 group-hover:text-slate-300">
                     {point.sub}
                   </p>
                 </div>
@@ -160,41 +220,23 @@ export function ApplicationsSection({ lang, variant = null }: ApplicationsSectio
 
       {/* ── Installed Base — Icon KPI Bar ───────────────────── */}
       <div className="relative bg-[#0A0A0A] border-t border-b border-slate-800/60">
-        {/* VARIANT C: thin blue accent rule above the metric strip */}
-        {isPremium && (
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-px"
-            style={{
-              background:
-                "linear-gradient(to right, transparent, rgba(25,118,210,0.6), transparent)",
-            }}
-          />
-        )}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div ref={kpiRef} className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {t.kpis.map((kpi, idx) => {
               const Icon = ICON_MAP[kpi.icon as keyof typeof ICON_MAP]
               return (
                 <div
                   key={idx}
-                  className={`relative flex items-center gap-4 py-5 lg:py-6 px-5 ${
+                  className={`flex items-center gap-4 py-5 lg:py-6 px-5 transition-all duration-700 ease-out ${
                     idx > 0 ? "lg:border-l border-slate-800/80" : ""
                   } ${idx === 2 ? "lg:border-l border-slate-800/80" : ""} ${
                     idx === 1 || idx === 3 ? "sm:border-l border-slate-800/80 lg:border-l" : ""
                   } ${
-                    /* VARIANT C: subtle hover lift on each metric cell */
-                    isPremium ? "group transition-colors duration-300 hover:bg-slate-900/40" : ""
+                    /* entrance: fade up into place when the strip enters view */
+                    revealKpi ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   }`}
+                  style={{ transitionDelay: `${idx * 90}ms` }}
                 >
-                  {/* VARIANT C: blue top hairline that reveals on hover */}
-                  {isPremium && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 top-0 h-0.5 w-0 transition-all duration-500 ease-out group-hover:w-full"
-                      style={{ backgroundColor: "#1976D2" }}
-                    />
-                  )}
                   <Icon
                     className="h-10 w-10 lg:h-11 lg:w-11 flex-shrink-0"
                     style={{ color: "#1976D2" }}
@@ -205,12 +247,10 @@ export function ApplicationsSection({ lang, variant = null }: ApplicationsSectio
                       {kpi.top}
                     </p>
                     <p
-                      className={`font-bold tracking-tight leading-tight ${
-                        isPremium ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"
-                      }`}
+                      className="text-xl lg:text-2xl font-bold tracking-tight leading-tight"
                       style={{ color: "#1976D2" }}
                     >
-                      {kpi.value}
+                      <MetricValue value={kpi.value} active={kpiInView} reduced={reduced} />
                     </p>
                     <p className="mt-0.5 text-xs text-slate-400 leading-relaxed">
                       {kpi.sub}
