@@ -12,10 +12,10 @@ const translations = {
     title: "Production-Proven",
     titleAccent: "in Asia",
     description:
-      "PRT 시스템은 아시아 전역의 양산 현장에서 가동 중입니다. 50대 이상의 Installed Systems와 재주문이 현장 성능을 입증합니다.",
+      "PRT 시스템은 아시아 전역의 양산 현장에서 가동 중입니다. 100대 이상의 Installed Systems와 재주문이 현장 성능을 입증합니다.",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "5+", label: "Countries", sub: "Asia Production Sites" },
       { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },
@@ -83,10 +83,10 @@ const translations = {
     title: "Production-Proven",
     titleAccent: "in Asia",
     description:
-      "PRT systems are already running in production environments across Asia. 50+ systems installed. Repeat orders validate field performance.",
+      "PRT systems are already running in production environments across Asia. 100+ systems installed. Repeat orders validate field performance.",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "5+", label: "Countries", sub: "Asia Production Sites" },
       { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },
@@ -157,7 +157,7 @@ const translations = {
       "PRT 系统已在亚洲各地的量产现场投入运行。50 套以上的 Installed Systems 与重复订单印证现场性能。",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "50+", label: "Installed Systems", sub: "Cumulative" },
+      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
       { value: "Since 2010", label: "Engineering", sub: "" },
       { value: "5+", label: "Countries", sub: "Asia Production Sites" },
       { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },

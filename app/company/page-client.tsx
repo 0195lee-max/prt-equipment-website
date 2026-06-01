@@ -16,7 +16,7 @@ const translations = {
       "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 50기 이상의 장비를 납품해왔습니다.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
       { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
@@ -80,10 +80,10 @@ const translations = {
     positioning: "We do not build generic equipment.",
     positioningSub: "We are a specialized engineering company\nfocused on stable Roll-to-Roll semiconductor process systems.",
     positioningBody:
-      "Since 2010, our engineering team has focused on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 50+ installed systems across Asia and a significant share of repeat orders from existing customers.",
+      "Since 2010, our engineering team has focused on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and a significant share of repeat orders from existing customers.",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
       { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",
@@ -93,7 +93,7 @@ const translations = {
       { year: "2014", title: "Exposure System Development", desc: "LED UV exposure technology developed for Roll-to-Roll Leadframe patterning applications." },
       { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. established to expand the Roll-to-Roll technology brand and equipment business." },
       { year: "2020", title: "Asia Expansion", desc: "Deliveries expanded to semiconductor packaging manufacturers in China and Malaysia." },
-      { year: "2024", title: "Present", desc: "50+ systems installed across Asia, with repeat orders continuing from existing production customers." },
+      { year: "2024", title: "Present", desc: "100+ systems installed across Asia, with repeat orders continuing from existing production customers." },
     ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
@@ -150,7 +150,7 @@ const translations = {
       "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 50 台以上 Installed Systems。",
     pillars: [
       { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "50+", label: "Installed Systems", sub: "Across Asia" },
+      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
       { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
     ],
     timelineLabel: "Company History",

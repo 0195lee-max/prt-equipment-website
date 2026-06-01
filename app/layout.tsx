@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: 'PRT Co., Ltd. | Roll-to-Roll Equipment for Leadframe & Semiconductor Packaging',
     template: '%s | PRT Co., Ltd.',
   },
-  description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing. 50+ installed systems across Asia. Engineering-driven manufacturing partner.',
+  description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing. 100+ installed systems across Asia. Engineering-driven manufacturing partner.',
   keywords: [
     'Roll-to-Roll equipment',
     'Leadframe manufacturing',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: 'https://prt-kr.com',
     siteName: 'PRT Co., Ltd.',
     title: 'PRT Co., Ltd. | Roll-to-Roll Equipment for Leadframe & Semiconductor Packaging',
-    description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing. 50+ installed systems across Asia.',
+    description: 'Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing. 100+ installed systems across Asia.',
     images: [
       {
         url: '/images/installed-base-hero.jpg',

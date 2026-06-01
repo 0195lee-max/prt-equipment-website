@@ -4,12 +4,12 @@ import InstalledBasePageClient from './page-client'
 export const metadata: Metadata = {
   title: 'Installed Base',
   description:
-    '50+ PRT Roll-to-Roll systems running in production environments across Asia. Repeat orders from Leadframe and Semiconductor Packaging customers.',
+    '100+ PRT Roll-to-Roll systems running in production environments across Asia. Repeat orders from Leadframe and Semiconductor Packaging customers.',
   alternates: { canonical: '/installed-base' },
   openGraph: {
     title: 'Installed Base | PRT Co., Ltd.',
     description:
-      '50+ PRT systems in production across Asia. Repeat orders validate field performance.',
+      '100+ PRT systems in production across Asia. Repeat orders validate field performance.',
     url: '/installed-base',
   },
 }
