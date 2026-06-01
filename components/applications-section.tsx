@@ -103,10 +103,14 @@ const ICON_MAP = {
 
 interface ApplicationsSectionProps {
   lang: Language
+  // null/undefined = baseline. "a" | "b" | "c" select design variants.
+  variant?: "a" | "b" | "c" | null
 }
 
-export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
+export function ApplicationsSection({ lang, variant = null }: ApplicationsSectionProps) {
   const t = translations[lang]
+  // Variant C ("Premium Equipment Showcase") refines the KPI strip.
+  const isPremium = variant === "c"
 
   return (
     <section className="relative">
@@ -156,6 +160,17 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
 
       {/* ── Installed Base — Icon KPI Bar ───────────────────── */}
       <div className="relative bg-[#0A0A0A] border-t border-b border-slate-800/60">
+        {/* VARIANT C: thin blue accent rule above the metric strip */}
+        {isPremium && (
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px"
+            style={{
+              background:
+                "linear-gradient(to right, transparent, rgba(25,118,210,0.6), transparent)",
+            }}
+          />
+        )}
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {t.kpis.map((kpi, idx) => {
@@ -163,12 +178,23 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
               return (
                 <div
                   key={idx}
-                  className={`flex items-center gap-4 py-5 lg:py-6 px-5 ${
+                  className={`relative flex items-center gap-4 py-5 lg:py-6 px-5 ${
                     idx > 0 ? "lg:border-l border-slate-800/80" : ""
                   } ${idx === 2 ? "lg:border-l border-slate-800/80" : ""} ${
                     idx === 1 || idx === 3 ? "sm:border-l border-slate-800/80 lg:border-l" : ""
+                  } ${
+                    /* VARIANT C: subtle hover lift on each metric cell */
+                    isPremium ? "group transition-colors duration-300 hover:bg-slate-900/40" : ""
                   }`}
                 >
+                  {/* VARIANT C: blue top hairline that reveals on hover */}
+                  {isPremium && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-0 top-0 h-0.5 w-0 transition-all duration-500 ease-out group-hover:w-full"
+                      style={{ backgroundColor: "#1976D2" }}
+                    />
+                  )}
                   <Icon
                     className="h-10 w-10 lg:h-11 lg:w-11 flex-shrink-0"
                     style={{ color: "#1976D2" }}
@@ -179,7 +205,9 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                       {kpi.top}
                     </p>
                     <p
-                      className="text-xl lg:text-2xl font-bold tracking-tight leading-tight"
+                      className={`font-bold tracking-tight leading-tight ${
+                        isPremium ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"
+                      }`}
                       style={{ color: "#1976D2" }}
                     >
                       {kpi.value}
