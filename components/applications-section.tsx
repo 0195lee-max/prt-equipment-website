@@ -13,7 +13,7 @@ const translations = {
     whyPoints: [
       {
         title: "Production-Proven Systems",
-        sub: "50대 이상의 시스템이 양산 라인에서 연속 가동 중",
+        sub: "100대 이상의 시스템이 양산 라인에서 연속 가동 중",
       },
       {
         title: "Stable Web Handling",
@@ -30,7 +30,7 @@ const translations = {
     ],
     kpiLabel: "Installed Base",
     kpis: [
-      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "100+", sub: "Installed Systems" },
       { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
       { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
       { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
@@ -42,7 +42,7 @@ const translations = {
     whyPoints: [
       {
         title: "Production-Proven Systems",
-        sub: "50+ systems in continuous production operation",
+        sub: "100+ systems in continuous production operation",
       },
       {
         title: "Stable Web Handling",
@@ -59,7 +59,7 @@ const translations = {
     ],
     kpiLabel: "Installed Base",
     kpis: [
-      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "100+", sub: "Installed Systems" },
       { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
       { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
       { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
@@ -71,7 +71,7 @@ const translations = {
     whyPoints: [
       {
         title: "Production-Proven Systems",
-        sub: "50+ 套系统持续投产运行",
+        sub: "100+ 套系统持续投产运行",
       },
       {
         title: "Stable Web Handling",
@@ -88,7 +88,7 @@ const translations = {
     ],
     kpiLabel: "Installed Base",
     kpis: [
-      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "50+", sub: "Installed Systems" },
+      { icon: "globe", top: "GLOBAL EXPERIENCE", value: "100+", sub: "Installed Systems" },
       { icon: "users", top: "ENGINEERING", value: "Since 2010", sub: "Experience" },
       { icon: "settings", top: "SYSTEMS", value: "5+", sub: "Countries" },
       { icon: "shield", top: "PRODUCTION LINES", value: "Across Asia", sub: "Active Today" },
@@ -106,7 +106,7 @@ const ICON_MAP = {
 
 /**
  * Metric value with a restrained count-up. Only animates values that
- * START with a number (e.g. "50+", "5+"); text values ("Since 2010",
+ * START with a number (e.g. "100+", "5+"); text values ("Since 2010",
  * "Across Asia") render verbatim. The count starts NEAR the final
  * figure and eases up a few digits — never a loud 0→N climb. Plays
  * once when `active`, and is skipped entirely under reduced motion.
@@ -121,17 +121,22 @@ function MetricValue({
   reduced: boolean
 }) {
   const match = value.match(/^(\d+)(.*)$/)
+  const isNumeric = match !== null
   const target = match ? parseInt(match[1], 10) : 0
   const suffix = match ? match[2] : ""
-  // start a few digits below the target (min 2, ~12% of the value)
-  const from = match ? Math.max(0, target - Math.max(2, Math.round(target * 0.12))) : 0
+  // start a few digits below the target (min 2, ~15% of the value)
+  const from = isNumeric ? Math.max(0, target - Math.max(2, Math.round(target * 0.15))) : 0
   const [n, setN] = useState(from)
 
+  // NOTE: deps are PRIMITIVES only. Putting the `match` array here would
+  // give it a new identity every render, re-running the effect on each
+  // setN and resetting t0 — which freezes the count at the start value.
   useEffect(() => {
-    if (!match || reduced || !active) return
+    if (!isNumeric || reduced || !active) return
+    setN(from) // (re)start from the low anchor when activated
     let raf = 0
     let t0: number | null = null
-    const duration = 900
+    const duration = 1100
     const tick = (ts: number) => {
       if (t0 === null) t0 = ts
       const p = Math.min(1, (ts - t0) / duration)
@@ -141,9 +146,9 @@ function MetricValue({
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [active, reduced, match, from, target])
+  }, [active, reduced, isNumeric, from, target])
 
-  if (!match || reduced) return <>{value}</>
+  if (!isNumeric || reduced) return <>{value}</>
   return (
     <>
       {n}
@@ -159,7 +164,10 @@ interface ApplicationsSectionProps {
 export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
   const t = translations[lang]
   // Reveal + count-up the KPI strip once it scrolls into view.
-  const [kpiRef, kpiInView] = useInView<HTMLDivElement>({ threshold: 0.3 })
+  const [kpiRef, kpiInView] = useInView<HTMLDivElement>({
+    threshold: 0.15,
+    rootMargin: "0px 0px -10% 0px",
+  })
   const reduced = usePrefersReducedMotion()
   // Reduced motion → show the strip immediately (no fade, no count-up,
   // no dependency on the observer). Otherwise reveal on scroll-in.
