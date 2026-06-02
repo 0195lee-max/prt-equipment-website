@@ -3,14 +3,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* PRT Brand Colors */
-  --prt-navy-dark: #0B1F3A;
-  --prt-navy: #163D6B;
-  /* PRT Blue — matches the SVG logo fill (#1976D2). Do not change
-     unless an official brand/CAD guideline color is confirmed. */
+  /* ── PRT Official Color System (final) ──────────────────────
+     PRT Blue is the SVG logo fill (#1976D2) — the single accent.
+     Do NOT use #0072CE; do NOT reintroduce gold/bronze. */
   --prt-blue: #1976D2;
   --prt-blue-dark: #0D47A1;
   --prt-blue-light: #42A5F5;
+  --prt-navy: #050A16;
+  --prt-steel: #AEB7C2;
 
   /* Navbar height — used by the hero negative-margin overlap so the
      hero fills the viewport without leaving a strip at the bottom.
