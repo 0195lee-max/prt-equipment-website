@@ -5,8 +5,6 @@ import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
-type Language = "ko" | "en" | "zh"
-
 const translations = {
   ko: {
     meta: "Company",

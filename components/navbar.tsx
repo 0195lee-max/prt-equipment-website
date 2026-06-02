@@ -121,8 +121,6 @@ export function Navbar({ lang, setLang }: NavbarProps) {
     ? "text-white/85 hover:text-white"
     : "text-slate-200 hover:text-white"
 
-  const logoTextColor = isTransparent ? "text-white/45" : "text-slate-400"
-
   const langBgColor = isTransparent
     ? "bg-white/5 border-white/15 hover:bg-white/10 text-white/85"
     : "bg-slate-800/50 border-slate-600/50 hover:bg-slate-700/50 text-slate-300"

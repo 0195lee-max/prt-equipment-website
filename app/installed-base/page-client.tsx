@@ -5,8 +5,6 @@ import { InstalledBase } from "@/components/installed-base"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
-type Language = "ko" | "en" | "zh"
-
 export default function InstalledBasePage() {
   const [lang, setLang] = useLanguage()
 

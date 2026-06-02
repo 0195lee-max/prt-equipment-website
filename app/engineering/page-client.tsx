@@ -6,8 +6,6 @@ import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
-type Language = "ko" | "en" | "zh"
-
 const translations = {
   ko: {
     meta: "Engineering",

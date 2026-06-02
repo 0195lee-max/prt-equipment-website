@@ -5,8 +5,6 @@ import { Footer } from "@/components/footer"
 import { Calendar, ArrowRight, Tag } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
 
-type Language = "ko" | "en" | "zh"
-
 type NewsType =
   | "Exhibition"
   | "Shipment"

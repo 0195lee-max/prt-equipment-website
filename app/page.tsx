@@ -8,8 +8,6 @@ import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
-type Language = "ko" | "en" | "zh"
-
 export default function Page() {
   const [lang, setLang] = useLanguage()
 
