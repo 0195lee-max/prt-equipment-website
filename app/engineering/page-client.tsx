@@ -29,18 +29,19 @@ const translations = {
       { label: "Process Precision", desc: "안정적 이송으로 정렬 반복 정밀도 향상." },
     ],
     pillarsLabel: "6 Core Engineering Competencies",
+    specDisclaimer: "사양은 모델, 구성 및 공정 요구사항에 따라 달라질 수 있습니다.",
     pillars: [
       {
         number: "01",
         slug: "web-handling",
         title: "Web Handling Stability",
         tagline: "Web Handling Stability",
-        body: "Roll-to-Roll 공정에서 웹 장력의 흔들림은 직접적인 품질 불량으로 이어집니다. PRT 장비는 서보 기반 Unwinder/Rewinder와 댄서 롤러 시스템으로 ±0.3N 이내의 장력 변동을 유지합니다.",
+        body: "Roll-to-Roll 공정에서 웹 장력의 흔들림은 직접적인 품질 불량으로 이어집니다. PRT 장비는 서보 기반 Unwinder/Rewinder와 댄서 롤러 시스템으로 ±0.3 N 이내의 장력 변동을 유지합니다.",
         specs: [
           "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3N",
-          "Web width: Up to 380mm",
-          "Speed range: 0.1~5.0 m/min",
+          "Tension variation: ±0.3 N",
+          "Web width: Up to 380 mm",
+          "Speed range: 0.1–5.0 m/min",
         ],
       },
       {
@@ -48,9 +49,9 @@ const translations = {
         slug: "alignment",
         title: "Alignment Consistency",
         tagline: "Alignment Consistency",
-        body: "Exposure 공정에서 정렬은 한 번의 기준값이 아닙니다. PRT의 8CCD Vision System은 매 쇼트마다 실시간으로 보정하여, 수천 쇼트 이후에도 ±5μm 이내의 정렬 정밀도를 유지합니다.",
+        body: "Exposure 공정에서 정렬은 한 번의 기준값이 아닙니다. PRT의 8CCD Vision System은 매 쇼트마다 실시간으로 보정하여, 수천 쇼트 이후에도 ±5 μm 이내의 정렬 정밀도를 유지합니다.",
         specs: [
-          "Alignment accuracy: ±5μm",
+          "Alignment accuracy: ±5 μm",
           "Vision system: 8CCD cameras",
           "Tact time: 12 sec",
           "Auto-correction: Per-shot real-time",
@@ -61,10 +62,10 @@ const translations = {
         slug: "thermal",
         title: "Thermal & Process Stability",
         tagline: "Thermal & Process Stability",
-        body: "Lamination 롤의 온도 균일성은 드라이필름 접착력과 직결됩니다. PRT 히팅 롤 시스템은 롤 전면에 걸쳐 ±3°C 이내의 온도 균일성을 확보하며, 가압 제어는 ±0.1kg/㎠ 정밀도를 유지합니다.",
+        body: "Lamination 롤의 온도 균일성은 드라이필름 접착력과 직결됩니다. PRT 히팅 롤 시스템은 롤 전면에 걸쳐 ±3°C 이내의 온도 균일성을 확보하며, 가압 제어는 ±0.1 kg/cm² 정밀도를 유지합니다.",
         specs: [
           "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1kg/㎠",
+          "Pressure control: ±0.1 kg/cm²",
           "Heating: Internal oil circulation",
           "Materials: C7025 / CDA194 / AL42",
         ],
@@ -136,18 +137,19 @@ const translations = {
       { label: "Process Precision", desc: "Stable transport improves alignment repeatability." },
     ],
     pillarsLabel: "6 Core Engineering Competencies",
+    specDisclaimer: "Specifications may vary by model, configuration, and process requirements.",
     pillars: [
       {
         number: "01",
         slug: "web-handling",
         title: "Web Handling Stability",
         tagline: "Web Handling Stability",
-        body: "In Roll-to-Roll processes, web tension instability translates directly into yield loss. PRT equipment uses servo-based unwinder/rewinder systems with dancer roller control to maintain tension variation within ±0.3N under continuous production conditions.",
+        body: "In Roll-to-Roll processes, web tension instability translates directly into yield loss. PRT equipment uses servo-based unwinder/rewinder systems with dancer roller control to maintain tension variation within ±0.3 N under continuous production conditions.",
         specs: [
           "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3N",
-          "Web width: Up to 380mm",
-          "Speed range: 0.1~5.0 m/min",
+          "Tension variation: ±0.3 N",
+          "Web width: Up to 380 mm",
+          "Speed range: 0.1–5.0 m/min",
         ],
       },
       {
@@ -155,9 +157,9 @@ const translations = {
         slug: "alignment",
         title: "Alignment Consistency",
         tagline: "Alignment Consistency",
-        body: "In the exposure process, alignment is not a one-time calibration. PRT's 8CCD Vision System applies real-time per-shot correction, maintaining ±5μm alignment accuracy across thousands of consecutive shots — not just on the first few after setup.",
+        body: "In the exposure process, alignment is not a one-time calibration. PRT's 8CCD Vision System applies real-time per-shot correction, maintaining ±5 μm alignment accuracy across thousands of consecutive shots — not just on the first few after setup.",
         specs: [
-          "Alignment accuracy: ±5μm",
+          "Alignment accuracy: ±5 μm",
           "Vision system: 8CCD cameras",
           "Tact time: 12 sec",
           "Auto-correction: Per-shot real-time",
@@ -168,10 +170,10 @@ const translations = {
         slug: "thermal",
         title: "Thermal & Process Stability",
         tagline: "Thermal & Process Stability",
-        body: "Temperature uniformity of the lamination roll is directly correlated with dry film adhesion quality. PRT heating roll systems maintain temperature uniformity within ±3°C across the full roll width, with pressure control to ±0.1kg/㎠ precision.",
+        body: "Temperature uniformity of the lamination roll is directly correlated with dry film adhesion quality. PRT heating roll systems maintain temperature uniformity within ±3°C across the full roll width, with pressure control to ±0.1 kg/cm² precision.",
         specs: [
           "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1kg/㎠",
+          "Pressure control: ±0.1 kg/cm²",
           "Heating: Internal oil circulation",
           "Materials: C7025 / CDA194 / AL42",
         ],
@@ -243,18 +245,19 @@ const translations = {
       { label: "Process Precision", desc: "稳定传输提高对准重复精度。" },
     ],
     pillarsLabel: "6 Core Engineering Competencies",
+    specDisclaimer: "规格可能因型号、配置和工艺要求而异。",
     pillars: [
       {
         number: "01",
         slug: "web-handling",
         title: "Web Handling Stability",
         tagline: "Web Handling Stability",
-        body: "在 Roll-to-Roll 工艺中，卷材张力不稳定直接导致良率下降。PRT 设备采用基于伺服的 Unwinder/Rewinder 系统和舞辊控制，在连续量产条件下将张力变化维持在 ±0.3N 以内。",
+        body: "在 Roll-to-Roll 工艺中，卷材张力不稳定直接导致良率下降。PRT 设备采用基于伺服的 Unwinder/Rewinder 系统和舞辊控制，在连续量产条件下将张力变化维持在 ±0.3 N 以内。",
         specs: [
           "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3N",
-          "Web width: Up to 380mm",
-          "Speed range: 0.1~5.0 m/min",
+          "Tension variation: ±0.3 N",
+          "Web width: Up to 380 mm",
+          "Speed range: 0.1–5.0 m/min",
         ],
       },
       {
@@ -262,9 +265,9 @@ const translations = {
         slug: "alignment",
         title: "Alignment Consistency",
         tagline: "Alignment Consistency",
-        body: "在 Exposure 工艺中，对准不是一次性校准。PRT 的 8CCD Vision System 对每次曝光进行实时校正，在连续数千次曝光后将对准精度保持在 ±5μm 以内。",
+        body: "在 Exposure 工艺中，对准不是一次性校准。PRT 的 8CCD Vision System 对每次曝光进行实时校正，在连续数千次曝光后将对准精度保持在 ±5 μm 以内。",
         specs: [
-          "Alignment accuracy: ±5μm",
+          "Alignment accuracy: ±5 μm",
           "Vision system: 8CCD cameras",
           "Tact time: 12 sec",
           "Auto-correction: Per-shot real-time",
@@ -275,10 +278,10 @@ const translations = {
         slug: "thermal",
         title: "Thermal & Process Stability",
         tagline: "Thermal & Process Stability",
-        body: "Lamination 辊的温度均匀性与干膜粘合质量直接相关。PRT 加热辊系统在整个辊宽范围内将温度均匀性保持在 ±3°C 以内，压力控制精度达 ±0.1kg/㎠。",
+        body: "Lamination 辊的温度均匀性与干膜粘合质量直接相关。PRT 加热辊系统在整个辊宽范围内将温度均匀性保持在 ±3°C 以内，压力控制精度达 ±0.1 kg/cm²。",
         specs: [
           "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1kg/㎠",
+          "Pressure control: ±0.1 kg/cm²",
           "Heating: Internal oil circulation",
           "Materials: C7025 / CDA194 / AL42",
         ],
@@ -784,7 +787,7 @@ export default function EngineeringPage() {
                     {pillar.specs.map((spec, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-start gap-2 text-xs font-mono text-slate-400"
+                        className="flex items-start gap-2 text-xs leading-relaxed tabular-nums text-slate-300"
                       >
                         <span
                           className="h-px w-3 flex-shrink-0 mt-[7px]"
@@ -798,6 +801,11 @@ export default function EngineeringPage() {
               </article>
             ))}
           </div>
+
+          {/* Spec disclaimer — standard equipment-documentation note */}
+          <p className="mt-12 max-w-2xl text-xs leading-relaxed text-slate-500">
+            {t.specDisclaimer}
+          </p>
         </div>
       </section>
 

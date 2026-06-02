@@ -13,7 +13,7 @@ const languageNames: Record<Language, string> = {
 
 const translations = {
   ko: {
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
     nav: {
       company: "Company",
       equipment: "Equipment",
@@ -24,7 +24,7 @@ const translations = {
     },
   },
   en: {
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
     nav: {
       company: "Company",
       equipment: "Equipment",
@@ -35,7 +35,7 @@ const translations = {
     },
   },
   zh: {
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
     nav: {
       company: "Company",
       equipment: "Equipment",

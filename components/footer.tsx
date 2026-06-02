@@ -25,12 +25,12 @@ const translations = {
       contact: "Contact",
     },
     focus: [
-      "Precision Roll-to-Roll Technology",
+      "Roll-to-Roll Technology",
       "Leadframe & Semiconductor Packaging",
       "Production-Proven Systems",
     ],
     rights: "© 2026 PRT Co., Ltd. All rights reserved.",
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
   },
   en: {
     companyHeader: "Company",
@@ -48,12 +48,12 @@ const translations = {
       contact: "Contact",
     },
     focus: [
-      "Precision Roll-to-Roll Technology",
+      "Roll-to-Roll Technology",
       "Leadframe & Semiconductor Packaging",
       "Production-Proven Systems",
     ],
     rights: "© 2026 PRT Co., Ltd. All rights reserved.",
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
   },
   zh: {
     companyHeader: "Company",
@@ -71,12 +71,12 @@ const translations = {
       contact: "Contact",
     },
     focus: [
-      "Precision Roll-to-Roll Technology",
+      "Roll-to-Roll Technology",
       "Leadframe & Semiconductor Packaging",
       "Production-Proven Systems",
     ],
     rights: "© 2026 PRT Co., Ltd. All rights reserved.",
-    tagline: "Precision Roll-to-Roll Technology",
+    tagline: "Roll-to-Roll Technology",
   },
 }
 

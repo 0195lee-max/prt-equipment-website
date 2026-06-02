@@ -5,10 +5,38 @@ import { ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
+// Card image/href + compact mini-specs. Specs are language-neutral
+// technical data, so they live here rather than in the translations.
+// Items with a `value` render as "Label: value"; value-less items
+// render as a blue-dot capability bullet.
 const CARD_META = [
-  { image: "/images/laminator_card.png", href: "/products" },
-  { image: "/images/exposure_card.png", href: "/products" },
-  { image: "/images/automation_card.png", href: "/engineering" },
+  {
+    image: "/images/laminator_card.png",
+    href: "/products",
+    specs: [
+      { label: "Web Width", value: "Up to 350 mm" },
+      { label: "Speed", value: "0.1–5.0 m/min" },
+      { label: "Temp Accuracy", value: "±3°C" },
+    ],
+  },
+  {
+    image: "/images/exposure_card.png",
+    href: "/products",
+    specs: [
+      { label: "Resolution", value: "20 μm ±2 μm" },
+      { label: "Alignment", value: "±5 μm" },
+      { label: "Vision", value: "8CCD" },
+    ],
+  },
+  {
+    image: "/images/automation_card.png",
+    href: "/engineering",
+    specs: [
+      { label: "Unwinder to Rewinder" },
+      { label: "Tension Control" },
+      { label: "Process Customization" },
+    ],
+  },
 ] as const
 
 const translations = {
@@ -127,6 +155,34 @@ export function EquipmentCards({ lang }: EquipmentCardsProps) {
                 <p className="mb-3 text-xs lg:text-[13px] leading-relaxed text-slate-400">
                   {card.desc}
                 </p>
+                {/* compact mini-specs */}
+                <div className="mb-4 space-y-1.5 border-t border-slate-800/60 pt-3">
+                  {card.specs.map((spec, sIdx) => {
+                    const value = "value" in spec ? spec.value : undefined
+                    return value ? (
+                      <div
+                        key={sIdx}
+                        className="flex items-baseline justify-between gap-3 text-[11px] leading-relaxed"
+                      >
+                        <span className="font-medium text-slate-500">{spec.label}:</span>
+                        <span className="font-semibold tabular-nums text-slate-200 text-right">
+                          {value}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        key={sIdx}
+                        className="flex items-center gap-2 text-[11px] leading-relaxed"
+                      >
+                        <span
+                          className="h-1 w-1 flex-shrink-0 rounded-full"
+                          style={{ backgroundColor: "#1976D2" }}
+                        />
+                        <span className="font-medium text-slate-300">{spec.label}</span>
+                      </div>
+                    )
+                  })}
+                </div>
                 <span
                   className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all"
                   style={{ color: "#1976D2" }}

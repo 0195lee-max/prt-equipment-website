@@ -17,7 +17,7 @@ const translations = {
       },
       {
         title: "Stable Web Handling",
-        sub: "연속 가동 시 장력 변동 ±0.3N",
+        sub: "연속 가동 시 장력 변동 ±0.3 N",
       },
       {
         title: "Fast Field Support",
@@ -46,7 +46,7 @@ const translations = {
       },
       {
         title: "Stable Web Handling",
-        sub: "±0.3N tension variation under continuous runs",
+        sub: "±0.3 N tension variation under continuous runs",
       },
       {
         title: "Fast Field Support",
@@ -75,7 +75,7 @@ const translations = {
       },
       {
         title: "Stable Web Handling",
-        sub: "连续运行下张力波动 ±0.3N",
+        sub: "连续运行下张力波动 ±0.3 N",
       },
       {
         title: "Fast Field Support",

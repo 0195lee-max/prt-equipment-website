@@ -8,7 +8,7 @@ type Language = "ko" | "en" | "zh"
 
 const translations = {
   ko: {
-    caption: "PRECISION. STABILITY. PERFORMANCE.",
+    caption: "WEB HANDLING. LAMINATION. EXPOSURE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
     subLine1: "Advanced Laminator & Exposure Systems for",
@@ -17,7 +17,7 @@ const translations = {
     ctaSecondary: "CONTACT SALES",
   },
   en: {
-    caption: "PRECISION. STABILITY. PERFORMANCE.",
+    caption: "WEB HANDLING. LAMINATION. EXPOSURE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
     subLine1: "Advanced Laminator & Exposure Systems for",
@@ -26,7 +26,7 @@ const translations = {
     ctaSecondary: "CONTACT SALES",
   },
   zh: {
-    caption: "PRECISION. STABILITY. PERFORMANCE.",
+    caption: "WEB HANDLING. LAMINATION. EXPOSURE.",
     headlineLine1: "Roll-to-Roll",
     headlineLine2: "Technology",
     subLine1: "Advanced Laminator & Exposure Systems for",
@@ -37,9 +37,6 @@ const translations = {
 }
 
 const SLIDE_COUNT = 2
-
-// Spec ticker labels (decorative engineering caption, not page copy).
-const SPEC_TICKER = ["Web Handling", "Lamination", "Exposure"] as const
 
 interface HeroSliderProps {
   lang: Language
@@ -207,26 +204,6 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             </a>
           </div>
         </div>
-      </div>
-
-      {/* ── Spec ticker — bottom-right engineering caption ────── */}
-      <div className="absolute bottom-7 right-6 z-20 hidden items-center gap-2.5 sm:flex sm:right-10 lg:right-16">
-        <span
-          className="h-1.5 w-1.5 rounded-full"
-          style={{ backgroundColor: "#1976D2" }}
-        />
-        {SPEC_TICKER.map((label, i) => (
-          <span key={label} className="flex items-center gap-2.5">
-            <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/55">
-              {label}
-            </span>
-            {i < SPEC_TICKER.length - 1 && (
-              <span className="text-[10px]" style={{ color: "#1976D2" }}>
-                ·
-              </span>
-            )}
-          </span>
-        ))}
       </div>
 
       {/* ── Scroll-down arrow ────────────────────────────────── */}

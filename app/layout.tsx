@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     'RTR Exposure System',
     'Dry film lamination',
     'PRT',
-    'Precision Roll Technology',
+    'Roll-to-Roll Process Technology',
   ],
   authors: [{ name: 'PRT Co., Ltd.', url: 'https://prt-kr.com' }],
   openGraph: {
