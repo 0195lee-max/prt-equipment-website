@@ -188,8 +188,8 @@ export function EquipmentCards({ lang }: EquipmentCardsProps) {
                   style={{ color: "#1976D2" }}
                 >
                   {t.viewMore}
-                  {/* arrow only — slides 4px right smoothly on card hover */}
-                  <ArrowRight className="h-3 w-3 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                  {/* arrow only — slides 4px right smoothly on card hover (0.25s) */}
+                  <ArrowRight className="h-3 w-3 transition-transform duration-[250ms] ease-out group-hover:translate-x-1" />
                 </span>
               </div>
             </a>
