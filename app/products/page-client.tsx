@@ -438,9 +438,9 @@ function ProductCard({
         </p>
         <div className="mb-5 divide-y divide-slate-700/60">
           {specs.map((spec, idx) => (
-            <div key={idx} className="flex items-center justify-between gap-3 py-2.5">
-              <span className="text-xs text-slate-300">{spec.label}</span>
-              <span className="text-xs font-mono font-medium text-slate-100 text-right">{spec.value}</span>
+            <div key={idx} className="flex items-baseline justify-between gap-4 py-2.5">
+              <span className="text-xs leading-relaxed text-slate-400">{spec.label}</span>
+              <span className="text-sm font-semibold leading-relaxed tabular-nums text-slate-100 text-right">{spec.value}</span>
             </div>
           ))}
         </div>
