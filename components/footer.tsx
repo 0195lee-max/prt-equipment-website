@@ -100,13 +100,12 @@ export function Footer({ lang = "en" }: FooterProps) {
           {/* ── Left: Company Info ───────────────────────── */}
           <div>
             <div className="mb-5">
-              <span
-                className="block text-2xl font-bold tracking-tight leading-none"
-                style={{ color: "#1976D2" }}
-              >
-                PRT
-              </span>
-              <span className="mt-1 block text-[10px] font-medium tracking-[0.18em] uppercase text-white/40">
+              <img
+                src="/images/PRT_logo.svg"
+                alt="PRT"
+                className="block h-8 w-auto"
+              />
+              <span className="mt-2 block text-[10px] font-medium tracking-[0.18em] uppercase text-white/40">
                 {t.tagline}
               </span>
             </div>
