@@ -4,7 +4,10 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
-    unoptimized: true,
+    // Vercel-native optimization (AVIF/WebP, responsive sizing, lazy
+    // loading). Source assets are untouched. 90 is allowed so the
+    // upscaled hero stays sharp; everything else uses the default 75.
+    qualities: [75, 90],
   },
 }
 
