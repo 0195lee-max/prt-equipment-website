@@ -177,12 +177,12 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 flex items-center px-6 py-7 md:px-10 lg:px-16 md:py-8 transition-all duration-300 ${
+        className={`sticky top-0 z-50 flex items-center px-6 py-7 md:px-10 lg:px-16 2xl:px-[10%] md:py-8 transition-all duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${navBgClass}`}
       >
         {/* Logo */}
-        <div className="flex justify-start md:justify-center md:w-[22vw] 2xl:w-[10vw] flex-1 md:flex-none">
+        <div className="flex justify-start md:justify-center 2xl:justify-start md:w-[22vw] 2xl:w-auto flex-1 md:flex-none">
           <a href="/" className="flex items-center transition-opacity hover:opacity-80">
             <img
               src="/images/PRT_logo.svg"
@@ -193,7 +193,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24 2xl:gap-32">
+        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24 2xl:absolute 2xl:left-1/2 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2">
           {navLinks.map((link) =>
             link.href === "/products" ? (
               // Equipment item + hover/focus dropdown of categories
@@ -233,7 +233,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         </div>
 
         {/* Right cluster: Lang + Mobile Hamburger */}
-        <div className="flex items-center gap-2 md:w-[22vw] 2xl:w-[10vw] md:justify-start 2xl:justify-end">
+        <div className="flex items-center gap-2 md:w-[22vw] 2xl:w-auto md:justify-start 2xl:justify-end 2xl:ml-auto">
           {/* Language selector */}
           <div ref={langRef} className="relative">
             <button
