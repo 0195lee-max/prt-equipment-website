@@ -180,7 +180,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           >
             {t.caption}
           </p>
-          <h1 className="mb-6 flex flex-col text-6xl md:text-8xl font-bold tracking-tight text-white leading-[1.02]">
+          <h1 className="mb-6 flex flex-col text-6xl md:text-8xl 2xl:text-[clamp(4rem,2.5vw,6rem)]! font-bold tracking-tight text-white leading-[1.02]">
             <span>{t.headlineLine1}</span>
             <span>{t.headlineLine2}</span>
           </h1>
