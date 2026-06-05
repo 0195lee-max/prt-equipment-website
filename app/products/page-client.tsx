@@ -355,10 +355,15 @@ const CATEGORIES: { id: string; label: string; group: CategoryKey }[] = [
   { id: "cat-modules", label: "Line Configuration Modules", group: "modules" },
 ]
 
-// Existing repo images mapped by category (no new/unverified assets).
+// Existing repo images mapped by category (fallback).
 const CATEGORY_IMAGE: Record<string, string> = {
   exposures: "/images/product-exposure.jpg",
   laminators: "/images/product-laminator.jpg",
+}
+
+// Per-model real product images (override the category fallback).
+const MODEL_IMAGE: Record<string, string> = {
+  "PRTEX-380VAN-LF-LED": "/images/equipment_exposure111.png",
 }
 
 interface SpecRow {
@@ -377,46 +382,75 @@ interface Model {
 /* Wide product showcase: info on top, large full-width image below
    (object-contain preserves the full machine, square edges, solid dark
    surface — no card frame, no brackets, no glow). */
+/* Wide product showcase — LIGHT CATALOG (preview revision).
+   Order: (1) model intro, (2) large product image, (3) info/specs/CTA.
+   Square edges, thin dividers, no border-heavy/rounded image card,
+   no gradient/glow/HUD/brackets. #1976D2 used as restrained accent. */
 function ModelShowcase({
   model,
   categoryLabel,
   image,
   labels,
+  imageAspectClass = "aspect-[16/9]",
 }: {
   model: Model
   categoryLabel: string
   image?: string
   labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
+  imageAspectClass?: string
 }) {
   return (
-    <section id={`model-${slug(model.model)}`} data-anchor className="mb-16">
-      {/* Top information area */}
+    <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-200 py-12 first:border-t-0 first:pt-4">
+      {/* 1. Model intro */}
       <div className="max-w-3xl">
         <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
           {categoryLabel}
         </p>
-        <p className="text-sm font-semibold tracking-widest text-slate-400">{model.model}</p>
-        <h3 className="mt-1 mb-4 text-2xl font-bold tracking-tight text-white">{model.type}</h3>
-        <p className="mb-6 text-sm leading-relaxed text-slate-300">{model.desc}</p>
+        <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
+        <h3 className="mt-1 text-2xl font-bold tracking-tight text-neutral-900">{model.type}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-neutral-600">{model.desc}</p>
+      </div>
 
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">{labels.specsLabel}</p>
-        <div className="mb-6 divide-y divide-slate-800">
+      {/* 2. Large product image — main product visual, sits close to the
+          intro (small gap). Height-capped + object-contain so the whole
+          machine stays comfortably visible without bottom-of-viewport
+          cutoff. Borderless: no card/rounded/gradient/glow. */}
+      <div className={`relative mt-4 w-full ${imageAspectClass}`}>
+        {image ? (
+            <Image
+              src={image}
+              alt={`${model.model} — ${model.type}`}
+              fill
+              sizes="(min-width: 1024px) 80vw, 100vw"
+              className="object-contain"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-sm font-semibold text-neutral-400">{model.model}</span>
+            </div>
+          )}
+      </div>
+
+      {/* 3. Product information / key specifications / CTA */}
+      <div className="mt-8 max-w-3xl">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">{labels.specsLabel}</p>
+        <div className="mb-6 divide-y divide-neutral-200 border-t border-neutral-200">
           {model.specs.map((spec, i) => (
             <div key={i} className="flex items-baseline justify-between gap-4 py-2.5">
-              <span className="text-xs font-medium leading-relaxed text-slate-400">{spec.label}:</span>
-              <span className="text-sm font-semibold leading-relaxed tabular-nums text-slate-100 text-right">{spec.value}</span>
+              <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
+              <span className="text-sm font-semibold leading-relaxed tabular-nums text-neutral-900 text-right">{spec.value}</span>
             </div>
           ))}
         </div>
 
         <div className="mb-6 space-y-2">
           <div className="flex items-start gap-3">
-            <span className="min-w-[120px] text-xs text-slate-500">{labels.materialsLabel}</span>
-            <span className="text-xs text-slate-200">{model.materials}</span>
+            <span className="min-w-[120px] text-xs text-neutral-500">{labels.materialsLabel}</span>
+            <span className="text-xs text-neutral-800">{model.materials}</span>
           </div>
           <div className="flex items-start gap-3">
-            <span className="min-w-[120px] text-xs text-slate-500">{labels.applicationLabel}</span>
-            <span className="text-xs text-slate-200">{model.application}</span>
+            <span className="min-w-[120px] text-xs text-neutral-500">{labels.applicationLabel}</span>
+            <span className="text-xs text-neutral-800">{model.application}</span>
           </div>
         </div>
 
@@ -429,36 +463,16 @@ function ModelShowcase({
           <ArrowRight className="h-4 w-4" />
         </a>
       </div>
-
-      {/* Large full-width equipment image — object-contain, square edges,
-          solid dark surface, thin top divider only. */}
-      <div className="mt-8 w-full border-t border-slate-800 bg-[#0A0F1A]">
-        <div className="relative aspect-[16/9] w-full">
-          {image ? (
-            <Image
-              src={image}
-              alt={`${model.model} — ${model.type}`}
-              fill
-              sizes="(min-width: 1024px) 80vw, 100vw"
-              className="object-contain"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-semibold text-slate-500">{model.model}</span>
-            </div>
-          )}
-        </div>
-      </div>
     </section>
   )
 }
 
-/* Compact module entry (not a full equipment model). */
+/* Compact module entry — LIGHT (not a full equipment model). */
 function ModuleCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <div id={`module-${slug(title)}`} data-anchor className="border border-slate-800 bg-slate-900/40 p-5">
-      <h4 className="mb-2 text-sm font-semibold text-slate-200">{title}</h4>
-      <p className="text-xs leading-relaxed text-slate-400">{desc}</p>
+    <div id={`module-${slug(title)}`} data-anchor className="border border-neutral-200 bg-white p-5">
+      <h4 className="mb-2 text-sm font-semibold text-neutral-900">{title}</h4>
+      <p className="text-xs leading-relaxed text-neutral-600">{desc}</p>
     </div>
   )
 }
@@ -497,22 +511,22 @@ export default function ProductsPage() {
         }))
 
   return (
-    <main className="min-h-svh bg-slate-950">
-      <Navbar lang={lang} setLang={setLang} />
+    // Full light catalog page; the navbar uses its light theme so it no
+    // longer needs a dark band behind it.
+    <main className="min-h-svh bg-neutral-100">
+      <Navbar lang={lang} setLang={setLang} theme="light" />
 
-      <div className="relative min-h-svh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.4)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="bg-neutral-100 py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Page header */}
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-500">{t.pageLabel}</p>
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">{t.title}</h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">{t.subtitle}</p>
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{t.pageLabel}</p>
+            <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">{t.title}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-600">{t.subtitle}</p>
           </div>
 
           {/* Category tabs */}
-          <div role="tablist" aria-label="Equipment categories" className="mb-8 flex flex-wrap gap-1 border-b border-slate-800">
+          <div role="tablist" aria-label="Equipment categories" className="mb-8 flex flex-wrap gap-1 border-b border-neutral-200">
             {CATEGORIES.map((c) => {
               const isActive = c.id === active.id
               return (
@@ -525,7 +539,7 @@ export default function ProductsPage() {
                     if (typeof window !== "undefined") history.replaceState(null, "", `#${c.id}`)
                   }}
                   className={`-mb-px border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive ? "text-white" : "border-transparent text-slate-400 hover:text-slate-200"
+                    isActive ? "text-neutral-900" : "border-transparent text-neutral-500 hover:text-neutral-800"
                   }`}
                   style={isActive ? { borderColor: "#1976D2" } : undefined}
                 >
@@ -536,12 +550,12 @@ export default function ProductsPage() {
           </div>
 
           {/* Model jump buttons (active category) */}
-          <div className="mb-12 flex flex-wrap gap-2">
+          <div className="mb-4 flex flex-wrap gap-2">
             {jumpTargets.map((jt) => (
               <a
                 key={jt.id}
                 href={`#${jt.id}`}
-                className="border border-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 transition-colors hover:border-slate-600 hover:text-white"
+                className="border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-500 hover:text-neutral-900"
               >
                 {jt.label}
               </a>
@@ -551,21 +565,22 @@ export default function ProductsPage() {
           {/* Active category content */}
           <section id={active.id} data-anchor className="mb-20">
             {active.group === "modules" ? (
-              <>
-                <p className="mb-8 max-w-2xl text-sm text-slate-400">{t.modulesDesc}</p>
+              <div className="pt-8">
+                <p className="mb-8 max-w-2xl text-sm text-neutral-600">{t.modulesDesc}</p>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {t.modules.map((m, i) => (
                     <ModuleCard key={i} title={m.title} desc={m.desc} />
                   ))}
                 </div>
-              </>
+              </div>
             ) : (
               (active.group === "exposures" ? t.exposures : t.laminators).map((m, i) => (
                 <ModelShowcase
                   key={i}
                   model={m}
                   categoryLabel={active.label}
-                  image={CATEGORY_IMAGE[active.group]}
+                  image={MODEL_IMAGE[m.model] ?? CATEGORY_IMAGE[active.group]}
+                  imageAspectClass={MODEL_IMAGE[m.model] ? "aspect-[1648/667]" : "aspect-[16/9]"}
                   labels={labels}
                 />
               ))
@@ -573,15 +588,14 @@ export default function ProductsPage() {
           </section>
 
           {/* Why PRT Equipment (existing content, preserved) */}
-          <div className="relative mb-20 overflow-hidden border border-slate-800 bg-slate-900/40">
-            <div className="absolute left-0 right-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.4), transparent)" }} />
+          <div className="mb-20 border border-neutral-200 bg-white">
             <div className="px-8 py-10">
-              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{t.whyLabel}</p>
+              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">{t.whyLabel}</p>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {t.whyPoints.map((pt, idx) => (
-                  <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "rgba(25,118,210,0.25)" }}>
-                    <h3 className="mb-2 text-sm font-semibold text-slate-200">{pt.title}</h3>
-                    <p className="text-xs leading-relaxed text-slate-400">{pt.desc}</p>
+                  <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "#1976D2" }}>
+                    <h3 className="mb-2 text-sm font-semibold text-neutral-900">{pt.title}</h3>
+                    <p className="text-xs leading-relaxed text-neutral-600">{pt.desc}</p>
                   </div>
                 ))}
               </div>
@@ -589,9 +603,8 @@ export default function ProductsPage() {
           </div>
 
           {/* Config note (existing content, preserved) */}
-          <div className="relative overflow-hidden border border-slate-800 bg-slate-900/30 p-8 text-center">
-            <div className="absolute left-0 right-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.3), transparent)" }} />
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-400">{t.configNote}</p>
+          <div className="border border-neutral-200 bg-white p-8 text-center">
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
             <a href="/contact" className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]" style={{ backgroundColor: "#1976D2" }}>
               {t.contactCta}
             </a>

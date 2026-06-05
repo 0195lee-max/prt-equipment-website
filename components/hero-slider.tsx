@@ -60,7 +60,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         aria-hidden={slide !== 0}
       >
         <Image
-          src="/images/hero-facility.png"
+          src="/images/hero_main11.png"
           alt=""
           fill
           priority

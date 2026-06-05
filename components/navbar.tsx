@@ -58,9 +58,12 @@ const translations = {
 interface NavbarProps {
   lang: Language
   setLang: (lang: Language) => void
+  // "dark" (default) = original behavior on homepage and all dark pages.
+  // "light" = catalog-style light navbar (used on the Products page).
+  theme?: "dark" | "light"
 }
 
-export function Navbar({ lang, setLang }: NavbarProps) {
+export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
   const t = translations[lang]
   const [isVisible, setIsVisible] = useState(true)
   const lastScrollY = useRef(0)
@@ -119,19 +122,48 @@ export function Navbar({ lang, setLang }: NavbarProps) {
   // so the bar reads as a proper nav when it slides back down over
   // product cards or content sections. Mobile menu also forces solid
   // for legibility of the drawer below.
-  const isTransparent = !isScrolled && !isMenuOpen
+  // Light theme (catalog pages) is always solid; dark theme keeps the
+  // transparent-at-top → solid-dark-on-scroll behavior.
+  const isLight = theme === "light"
+  const isTransparent = !isLight && !isScrolled && !isMenuOpen
 
-  const navBgClass = isTransparent
+  const navBgClass = isLight
+    ? "bg-[#F5F5F3] border-b border-[#D9DDE3] shadow-sm"
+    : isTransparent
     ? "bg-transparent border-b border-transparent shadow-none"
     : "bg-[rgba(5,10,25,0.94)] border-b border-slate-800/50 backdrop-blur-[12px] shadow-md shadow-black/20"
 
-  const textColor = isTransparent
+  const textColor = isLight
+    ? "text-[#111827] hover:text-[#1976D2]"
+    : isTransparent
     ? "text-white/85 hover:text-white"
     : "text-slate-200 hover:text-white"
 
-  const langBgColor = isTransparent
+  const langBgColor = isLight
+    ? "bg-black/5 border-black/10 hover:bg-black/10 text-[#111827]"
+    : isTransparent
     ? "bg-white/5 border-white/15 hover:bg-white/10 text-white/85"
     : "bg-slate-800/50 border-slate-600/50 hover:bg-slate-700/50 text-slate-300"
+
+  // Equipment dropdown + language menu panels
+  const menuPanelClass = isLight
+    ? "border-[#D9DDE3] bg-white shadow-lg"
+    : "border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl"
+  const menuItemClass = isLight
+    ? "text-[#111827] hover:bg-[#1976D2]/10 hover:text-[#1976D2]"
+    : "text-slate-300 hover:bg-white/10 hover:text-white"
+
+  // Mobile drawer
+  const drawerClass = isLight
+    ? "bg-white/95 border-b border-[#D9DDE3]"
+    : "bg-slate-950/95 border-b border-slate-700/30"
+  const drawerItemClass = isLight
+    ? "text-[#111827] hover:text-[#1976D2] hover:bg-black/5 border-[#D9DDE3]"
+    : "text-slate-200 hover:text-white hover:bg-white/5 border-slate-800"
+  const drawerSubBorder = isLight ? "border-[#D9DDE3]" : "border-slate-800"
+  const drawerSubItemClass = isLight
+    ? "text-neutral-600 hover:text-[#1976D2] hover:bg-black/5"
+    : "text-slate-400 hover:text-white hover:bg-white/5"
 
   const navLinks: Array<{ href: string; label: string }> = [
     { href: "/company", label: t.nav.company },
@@ -175,12 +207,12 @@ export function Navbar({ lang, setLang }: NavbarProps) {
                 </a>
                 {/* pt-3 bridges the gap so the menu stays open on hover */}
                 <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <div className="min-w-[230px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl">
+                  <div className={`min-w-[230px] overflow-hidden rounded-lg border ${menuPanelClass}`}>
                     {EQUIPMENT_SUBMENU.map((sub) => (
                       <a
                         key={sub.href}
                         href={sub.href}
-                        className="block px-4 py-3 text-sm text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                        className={`block px-4 py-3 text-sm transition-colors ${menuItemClass}`}
                       >
                         {sub.label}
                       </a>
@@ -213,7 +245,7 @@ export function Navbar({ lang, setLang }: NavbarProps) {
             </button>
 
             {isLangOpen && (
-              <div className="absolute right-0 md:left-0 md:right-auto top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl z-50">
+              <div className={`absolute right-0 md:left-0 md:right-auto top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border z-50 ${menuPanelClass}`}>
                 {(["en", "zh", "ko"] as Language[]).map((l) => (
                   <button
                     key={l}
@@ -223,8 +255,10 @@ export function Navbar({ lang, setLang }: NavbarProps) {
                     }}
                     className={`flex w-full items-center gap-2 px-4 py-3 text-sm transition-colors ${
                       lang === l
-                        ? "text-white font-medium"
-                        : "text-slate-300 hover:bg-white/10 hover:text-white"
+                        ? isLight
+                          ? "text-[#1976D2] font-medium"
+                          : "text-white font-medium"
+                        : menuItemClass
                     }`}
                     style={lang === l ? { backgroundColor: "rgba(25,118,210,0.15)" } : {}}
                   >
@@ -249,7 +283,7 @@ export function Navbar({ lang, setLang }: NavbarProps) {
 
       {/* Mobile menu drawer */}
       <div
-        className={`fixed inset-x-0 top-[76px] z-40 md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-700/30 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-[76px] z-40 md:hidden backdrop-blur-xl transition-all duration-300 ${drawerClass} ${
           isMenuOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"
@@ -262,18 +296,18 @@ export function Navbar({ lang, setLang }: NavbarProps) {
                 <a
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/5 border-b border-slate-800 transition-colors"
+                  className={`block px-4 py-3 text-sm font-medium border-b transition-colors ${drawerItemClass}`}
                 >
                   {link.label}
                 </a>
                 {link.href === "/products" && (
-                  <ul className="ml-3 border-l border-slate-800">
+                  <ul className={`ml-3 border-l ${drawerSubBorder}`}>
                     {EQUIPMENT_SUBMENU.map((sub) => (
                       <li key={sub.href}>
                         <a
                           href={sub.href}
                           onClick={() => setIsMenuOpen(false)}
-                          className="block px-4 py-2.5 text-xs text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                          className={`block px-4 py-2.5 text-xs transition-colors ${drawerSubItemClass}`}
                         >
                           {sub.label}
                         </a>
