@@ -92,7 +92,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
           }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 pt-8 pb-12 lg:px-8 lg:pt-10 lg:pb-14">
+        <div className="relative mx-auto max-w-7xl px-6 pt-14 pb-12 lg:px-8 lg:pt-16 lg:pb-14">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
@@ -104,7 +104,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
             {t.whyPoints.map((point, idx) => (
               <div
                 key={idx}
-                className="group relative border-r border-b border-slate-800 bg-slate-950/30 px-5 py-11 flex flex-col items-center justify-center text-center gap-3 transition-colors duration-300 hover:bg-[#1976D2]/[0.07]"
+                className="group relative border-r border-b border-slate-800 bg-slate-950/30 px-5 py-12 flex flex-col items-center justify-center text-center gap-3 transition-colors duration-300 hover:bg-[#1976D2]/[0.07]"
               >
                 {/* hover accent — blue underline grows along the bottom */}
                 <span
@@ -120,7 +120,7 @@ export function ApplicationsSection({ lang }: ApplicationsSectionProps) {
                   <p className="text-sm font-semibold text-slate-200 leading-normal mb-2 transition-colors duration-300 group-hover:text-white">
                     {point.title}
                   </p>
-                  <p className="text-xs text-slate-400 leading-[1.7] transition-colors duration-300 group-hover:text-slate-300">
+                  <p className="text-xs text-slate-400 leading-[1.85] transition-colors duration-300 group-hover:text-slate-300">
                     {point.sub}
                   </p>
                 </div>
