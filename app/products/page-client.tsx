@@ -1,5 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
@@ -337,143 +340,125 @@ const translations = {
   },
 }
 
-function ProductCard({
-  model,
-  type,
-  desc,
-  specs,
-  materials,
-  application,
-  specsLabel,
-  materialsLabel,
-  applicationLabel,
-  contactCta,
-}: {
+/* ─────────────────────────────────────────────────────────────
+   Equipment categories + per-model anchors (UI STRUCTURE ONLY —
+   all product data/specs live untouched in `translations` above).
+   ───────────────────────────────────────────────────────────── */
+const slug = (str: string) =>
+  str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+
+type CategoryKey = "exposures" | "laminators" | "modules"
+
+const CATEGORIES: { id: string; label: string; group: CategoryKey }[] = [
+  { id: "cat-exposure", label: "Exposure Systems", group: "exposures" },
+  { id: "cat-laminators", label: "Laminators", group: "laminators" },
+  { id: "cat-modules", label: "Line Configuration Modules", group: "modules" },
+]
+
+// Existing repo images mapped by category (no new/unverified assets).
+const CATEGORY_IMAGE: Record<string, string> = {
+  exposures: "/images/product-exposure.jpg",
+  laminators: "/images/product-laminator.jpg",
+}
+
+interface SpecRow {
+  label: string
+  value: string
+}
+interface Model {
   model: string
   type: string
   desc: string
-  specs: { label: string; value: string }[]
+  specs: SpecRow[]
   materials: string
   application: string
-  specsLabel: string
-  materialsLabel: string
-  applicationLabel: string
-  contactCta: string
+}
+
+/* Wide product showcase: info on top, large full-width image below
+   (object-contain preserves the full machine, square edges, solid dark
+   surface — no card frame, no brackets, no glow). */
+function ModelShowcase({
+  model,
+  categoryLabel,
+  image,
+  labels,
+}: {
+  model: Model
+  categoryLabel: string
+  image?: string
+  labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
 }) {
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/60 transition-all hover:border-slate-600">
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.5), transparent)" }}
-      />
-      <div className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-slate-600/40" />
-      <div className="absolute -right-px -top-px h-6 w-6 border-r-2 border-t-2 border-slate-600/40" />
-      <div className="absolute -bottom-px -left-px h-6 w-6 border-b-2 border-l-2 border-slate-600/40" />
-      <div className="absolute -bottom-px -right-px h-6 w-6 border-b-2 border-r-2 border-slate-600/40" />
-
-      {/* Image-ready placeholder — swap to /public/images/equipment/{model}.jpg */}
-      <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0F1A2E] via-[#0B1220] to-[#060912] overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(25,118,210,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(25,118,210,0.04) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(25,118,210,0.06) 0%, transparent 70%)",
-          }}
-        />
-        {/* Corner brackets */}
-        <div
-          className="absolute top-4 left-4 h-3 w-3 border-l border-t"
-          style={{ borderColor: "rgba(25,118,210,0.35)" }}
-        />
-        <div
-          className="absolute top-4 right-4 h-3 w-3 border-r border-t"
-          style={{ borderColor: "rgba(25,118,210,0.35)" }}
-        />
-        <div
-          className="absolute bottom-4 left-4 h-3 w-3 border-l border-b"
-          style={{ borderColor: "rgba(25,118,210,0.35)" }}
-        />
-        <div
-          className="absolute bottom-4 right-4 h-3 w-3 border-r border-b"
-          style={{ borderColor: "rgba(25,118,210,0.35)" }}
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-8">
-            <p className="text-[9px] font-mono text-slate-600 mb-2 tracking-[0.3em]">
-              {type.toUpperCase()}
-            </p>
-            <p className="text-base font-semibold text-slate-400">{model}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="flex flex-1 flex-col p-7">
-        <div className="mb-1 flex items-center gap-2">
-          <span
-            className="text-[10px] font-bold uppercase tracking-widest"
-            style={{ color: "#1976D2" }}
-          >
-            {model}
-          </span>
-        </div>
-        <h3 className="mb-3 text-lg font-semibold text-white">{type}</h3>
-        <p className="mb-6 text-sm leading-relaxed text-slate-300">{desc}</p>
-
-        {/* Spec table */}
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
-          {specsLabel}
+    <section id={`model-${slug(model.model)}`} data-anchor className="mb-16">
+      {/* Top information area */}
+      <div className="max-w-3xl">
+        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
+          {categoryLabel}
         </p>
-        <div className="mb-5 divide-y divide-slate-700/60">
-          {specs.map((spec, idx) => (
-            <div key={idx} className="flex items-baseline justify-between gap-4 py-2.5">
+        <p className="text-sm font-semibold tracking-widest text-slate-400">{model.model}</p>
+        <h3 className="mt-1 mb-4 text-2xl font-bold tracking-tight text-white">{model.type}</h3>
+        <p className="mb-6 text-sm leading-relaxed text-slate-300">{model.desc}</p>
+
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">{labels.specsLabel}</p>
+        <div className="mb-6 divide-y divide-slate-800">
+          {model.specs.map((spec, i) => (
+            <div key={i} className="flex items-baseline justify-between gap-4 py-2.5">
               <span className="text-xs font-medium leading-relaxed text-slate-400">{spec.label}:</span>
               <span className="text-sm font-semibold leading-relaxed tabular-nums text-slate-100 text-right">{spec.value}</span>
             </div>
           ))}
         </div>
 
-        {/* Materials & Application */}
         <div className="mb-6 space-y-2">
-          <div className="flex items-start gap-2">
-            <span className="text-xs text-slate-400 min-w-[110px]">{materialsLabel}</span>
-            <span className="text-xs text-slate-200">{materials}</span>
+          <div className="flex items-start gap-3">
+            <span className="min-w-[120px] text-xs text-slate-500">{labels.materialsLabel}</span>
+            <span className="text-xs text-slate-200">{model.materials}</span>
           </div>
-          <div className="flex items-start gap-2">
-            <span className="text-xs text-slate-400 min-w-[110px]">{applicationLabel}</span>
-            <span className="text-xs text-slate-200">{application}</span>
+          <div className="flex items-start gap-3">
+            <span className="min-w-[120px] text-xs text-slate-500">{labels.applicationLabel}</span>
+            <span className="text-xs text-slate-200">{model.application}</span>
           </div>
         </div>
 
-        {/* CTA — pinned to bottom of card so siblings align across the grid row */}
         <a
           href="/contact"
-          className="mt-auto inline-flex w-fit items-center gap-2 text-xs font-semibold text-slate-900 px-5 py-2.5 rounded transition-opacity hover:opacity-90"
+          className="inline-flex w-fit items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#0D47A1]"
           style={{ backgroundColor: "#1976D2" }}
         >
-          {contactCta}
+          {labels.contactCta}
+          <ArrowRight className="h-4 w-4" />
         </a>
       </div>
-    </div>
+
+      {/* Large full-width equipment image — object-contain, square edges,
+          solid dark surface, thin top divider only. */}
+      <div className="mt-8 w-full border-t border-slate-800 bg-[#0A0F1A]">
+        <div className="relative aspect-[16/9] w-full">
+          {image ? (
+            <Image
+              src={image}
+              alt={`${model.model} — ${model.type}`}
+              fill
+              sizes="(min-width: 1024px) 80vw, 100vw"
+              className="object-contain"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-sm font-semibold text-slate-500">{model.model}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   )
 }
 
-function SectionDivider({ label }: { label: string }) {
+/* Compact module entry (not a full equipment model). */
+function ModuleCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="mb-10 flex items-center gap-4">
-      <div className="h-px flex-1 bg-slate-800" />
-      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</h2>
-      <div className="h-px flex-1 bg-slate-800" />
+    <div id={`module-${slug(title)}`} data-anchor className="border border-slate-800 bg-slate-900/40 p-5">
+      <h4 className="mb-2 text-sm font-semibold text-slate-200">{title}</h4>
+      <p className="text-xs leading-relaxed text-slate-400">{desc}</p>
     </div>
   )
 }
@@ -481,6 +466,35 @@ function SectionDivider({ label }: { label: string }) {
 export default function ProductsPage() {
   const [lang, setLang] = useLanguage()
   const t = translations[lang]
+  const [activeCat, setActiveCat] = useState("cat-exposure")
+
+  // Deep-link: open the category from the URL hash (the navbar submenu
+  // links to /products#cat-laminators) and react to in-page hash changes.
+  useEffect(() => {
+    const apply = () => {
+      const h = window.location.hash.replace("#", "")
+      if (CATEGORIES.some((c) => c.id === h)) setActiveCat(h)
+    }
+    apply()
+    window.addEventListener("hashchange", apply)
+    return () => window.removeEventListener("hashchange", apply)
+  }, [])
+
+  const active = CATEGORIES.find((c) => c.id === activeCat) ?? CATEGORIES[0]
+  const labels = {
+    specsLabel: t.specsLabel,
+    materialsLabel: t.materialsLabel,
+    applicationLabel: t.applicationLabel,
+    contactCta: t.contactCta,
+  }
+
+  const jumpTargets: { id: string; label: string }[] =
+    active.group === "modules"
+      ? t.modules.map((m) => ({ id: `module-${slug(m.title)}`, label: m.title }))
+      : (active.group === "exposures" ? t.exposures : t.laminators).map((m) => ({
+          id: `model-${slug(m.model)}`,
+          label: m.model,
+        }))
 
   return (
     <main className="min-h-svh bg-slate-950">
@@ -491,106 +505,94 @@ export default function ProductsPage() {
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           {/* Page header */}
-          <div className="mb-20 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-500">
-              {t.pageLabel}
-            </p>
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              {t.title}
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
-              {t.subtitle}
-            </p>
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-500">{t.pageLabel}</p>
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">{t.title}</h1>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400">{t.subtitle}</p>
           </div>
 
-          {/* Why PRT Equipment */}
-          <div className="mb-20 relative overflow-hidden rounded-lg border border-slate-800 bg-slate-900/40">
-            <div
-              className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.4), transparent)" }}
-            />
+          {/* Category tabs */}
+          <div role="tablist" aria-label="Equipment categories" className="mb-8 flex flex-wrap gap-1 border-b border-slate-800">
+            {CATEGORIES.map((c) => {
+              const isActive = c.id === active.id
+              return (
+                <button
+                  key={c.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => {
+                    setActiveCat(c.id)
+                    if (typeof window !== "undefined") history.replaceState(null, "", `#${c.id}`)
+                  }}
+                  className={`-mb-px border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive ? "text-white" : "border-transparent text-slate-400 hover:text-slate-200"
+                  }`}
+                  style={isActive ? { borderColor: "#1976D2" } : undefined}
+                >
+                  {c.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Model jump buttons (active category) */}
+          <div className="mb-12 flex flex-wrap gap-2">
+            {jumpTargets.map((jt) => (
+              <a
+                key={jt.id}
+                href={`#${jt.id}`}
+                className="border border-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 transition-colors hover:border-slate-600 hover:text-white"
+              >
+                {jt.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Active category content */}
+          <section id={active.id} data-anchor className="mb-20">
+            {active.group === "modules" ? (
+              <>
+                <p className="mb-8 max-w-2xl text-sm text-slate-400">{t.modulesDesc}</p>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {t.modules.map((m, i) => (
+                    <ModuleCard key={i} title={m.title} desc={m.desc} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              (active.group === "exposures" ? t.exposures : t.laminators).map((m, i) => (
+                <ModelShowcase
+                  key={i}
+                  model={m}
+                  categoryLabel={active.label}
+                  image={CATEGORY_IMAGE[active.group]}
+                  labels={labels}
+                />
+              ))
+            )}
+          </section>
+
+          {/* Why PRT Equipment (existing content, preserved) */}
+          <div className="relative mb-20 overflow-hidden border border-slate-800 bg-slate-900/40">
+            <div className="absolute left-0 right-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.4), transparent)" }} />
             <div className="px-8 py-10">
-              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                {t.whyLabel}
-              </p>
+              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{t.whyLabel}</p>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {t.whyPoints.map((pt, idx) => (
                   <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "rgba(25,118,210,0.25)" }}>
-                    <h3 className="text-sm font-semibold text-slate-200 mb-2">{pt.title}</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">{pt.desc}</p>
+                    <h3 className="mb-2 text-sm font-semibold text-slate-200">{pt.title}</h3>
+                    <p className="text-xs leading-relaxed text-slate-400">{pt.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Laminators */}
-          <div className="mb-20" data-anchor>
-            <SectionDivider label={t.laminatorSection} />
-            <div className="grid gap-6 lg:grid-cols-2">
-              {t.laminators.map((product, idx) => (
-                <ProductCard
-                  key={idx}
-                  {...product}
-                  specsLabel={t.specsLabel}
-                  materialsLabel={t.materialsLabel}
-                  applicationLabel={t.applicationLabel}
-                  contactCta={t.contactCta}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Exposure Systems */}
-          <div className="mb-20" data-anchor>
-            <SectionDivider label={t.exposureSection} />
-            <div className="grid gap-6 lg:grid-cols-2">
-              {t.exposures.map((product, idx) => (
-                <ProductCard
-                  key={idx}
-                  {...product}
-                  specsLabel={t.specsLabel}
-                  materialsLabel={t.materialsLabel}
-                  applicationLabel={t.applicationLabel}
-                  contactCta={t.contactCta}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Line modules */}
-          <div className="mb-16" data-anchor>
-            <SectionDivider label={t.modulesSection} />
-            <p className="mb-10 text-center text-sm text-slate-400">{t.modulesDesc}</p>
-            <div className="grid gap-5 sm:grid-cols-3">
-              {t.modules.map((mod, idx) => (
-                <div
-                  key={idx}
-                  className="relative rounded-lg border border-slate-800 bg-slate-900/50 p-6 transition-all hover:border-slate-700"
-                >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px"
-                    style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.2), transparent)" }}
-                  />
-                  <h4 className="mb-2 text-sm font-semibold text-slate-200">{mod.title}</h4>
-                  <p className="text-xs leading-relaxed text-slate-400">{mod.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Config note */}
-          <div className="relative overflow-hidden rounded-lg border border-slate-800 bg-slate-900/30 p-8 text-center">
-            <div
-              className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.3), transparent)" }}
-            />
-            <p className="text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto">{t.configNote}</p>
-            <a
-              href="/contact"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 px-6 py-3 rounded transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#1976D2" }}
-            >
+          {/* Config note (existing content, preserved) */}
+          <div className="relative overflow-hidden border border-slate-800 bg-slate-900/30 p-8 text-center">
+            <div className="absolute left-0 right-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.3), transparent)" }} />
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-slate-400">{t.configNote}</p>
+            <a href="/contact" className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]" style={{ backgroundColor: "#1976D2" }}>
               {t.contactCta}
             </a>
           </div>

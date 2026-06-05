@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Globe, Menu, X } from "lucide-react"
+import { Globe, Menu, X, ChevronDown } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
@@ -10,6 +10,14 @@ const languageNames: Record<Language, string> = {
   zh: "中文",
   ko: "KR",
 }
+
+// Equipment submenu — category deep-links into /products. Kept in
+// English in every language mode (navigation labels are not translated).
+const EQUIPMENT_SUBMENU: Array<{ href: string; label: string }> = [
+  { href: "/products#cat-exposure", label: "Exposure Systems" },
+  { href: "/products#cat-laminators", label: "Laminators" },
+  { href: "/products#cat-modules", label: "Line Configuration Modules" },
+]
 
 const translations = {
   ko: {
@@ -154,15 +162,42 @@ export function Navbar({ lang, setLang }: NavbarProps) {
 
         {/* Desktop Menu */}
         <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`text-base font-medium transition-colors ${textColor}`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href === "/products" ? (
+              // Equipment item + hover/focus dropdown of categories
+              <div key={link.href} className="group relative">
+                <a
+                  href={link.href}
+                  className={`inline-flex items-center gap-1 text-base font-medium transition-colors ${textColor}`}
+                >
+                  {link.label}
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                </a>
+                {/* pt-3 bridges the gap so the menu stays open on hover */}
+                <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="min-w-[230px] overflow-hidden rounded-lg border border-white/10 bg-slate-900/95 shadow-xl backdrop-blur-xl">
+                    {EQUIPMENT_SUBMENU.map((sub) => (
+                      <a
+                        key={sub.href}
+                        href={sub.href}
+                        className="block px-4 py-3 text-sm text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                      >
+                        {sub.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`text-base font-medium transition-colors ${textColor}`}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         {/* Right cluster: Lang + Mobile Hamburger */}
@@ -231,6 +266,21 @@ export function Navbar({ lang, setLang }: NavbarProps) {
                 >
                   {link.label}
                 </a>
+                {link.href === "/products" && (
+                  <ul className="ml-3 border-l border-slate-800">
+                    {EQUIPMENT_SUBMENU.map((sub) => (
+                      <li key={sub.href}>
+                        <a
+                          href={sub.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-4 py-2.5 text-xs text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                        >
+                          {sub.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
