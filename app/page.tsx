@@ -2,7 +2,7 @@
 
 import { Navbar } from "@/components/navbar"
 import { HeroSlider } from "@/components/hero-slider"
-import { EquipmentCards } from "@/components/equipment-cards"
+import { CompanyProof } from "@/components/company-proof"
 import { ApplicationsSection } from "@/components/applications-section"
 import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
@@ -17,7 +17,7 @@ export default function Page() {
       <HeroSlider lang={lang} />
       <section id="section-equipment" className="bg-[#0A0A0A]">
         <div className="min-h-svh flex flex-col">
-          <EquipmentCards lang={lang} />
+          <CompanyProof lang={lang} />
           <ApplicationsSection lang={lang} />
         </div>
         <NewsTeaser lang={lang} />
