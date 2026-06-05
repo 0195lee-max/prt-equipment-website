@@ -363,7 +363,7 @@ const CATEGORY_IMAGE: Record<string, string> = {
 
 // Per-model real product images (override the category fallback).
 const MODEL_IMAGE: Record<string, string> = {
-  "PRTEX-380VAN-LF-LED": "/images/equipment_exposure111.png",
+  "PRTEX-380VAN-LF-LED": "/images/equipment_exposure111-v2.png",
 }
 
 interface SpecRow {
