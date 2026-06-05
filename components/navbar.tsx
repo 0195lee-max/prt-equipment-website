@@ -182,7 +182,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         } ${navBgClass}`}
       >
         {/* Logo */}
-        <div className="flex justify-start md:justify-center md:w-[22vw] flex-1 md:flex-none">
+        <div className="flex justify-start md:justify-center md:w-[22vw] 2xl:w-[10vw] flex-1 md:flex-none">
           <a href="/" className="flex items-center transition-opacity hover:opacity-80">
             <img
               src="/images/PRT_logo.svg"
@@ -193,14 +193,14 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24">
+        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24 2xl:gap-32">
           {navLinks.map((link) =>
             link.href === "/products" ? (
               // Equipment item + hover/focus dropdown of categories
               <div key={link.href} className="group relative">
                 <a
                   href={link.href}
-                  className={`inline-flex items-center gap-1 text-base font-medium transition-colors ${textColor}`}
+                  className={`inline-flex items-center gap-1 text-base font-medium transition-colors 2xl:whitespace-nowrap ${textColor}`}
                 >
                   {link.label}
                   <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
@@ -224,7 +224,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-base font-medium transition-colors ${textColor}`}
+                className={`text-base font-medium transition-colors 2xl:whitespace-nowrap ${textColor}`}
               >
                 {link.label}
               </a>
@@ -233,7 +233,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         </div>
 
         {/* Right cluster: Lang + Mobile Hamburger */}
-        <div className="flex items-center gap-2 md:w-[22vw] md:justify-start">
+        <div className="flex items-center gap-2 md:w-[22vw] 2xl:w-[10vw] md:justify-start 2xl:justify-end">
           {/* Language selector */}
           <div ref={langRef} className="relative">
             <button
