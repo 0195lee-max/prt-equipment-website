@@ -362,8 +362,11 @@ const CATEGORY_IMAGE: Record<string, string> = {
 }
 
 // Per-model real product images (override the category fallback).
-const MODEL_IMAGE: Record<string, string> = {
-  "PRTEX-380VAN-LF-LED": "/images/equipment_exposure111-v2.png",
+// Each carries its own container aspect so object-contain fills with
+// no letterbox (aspect = the trimmed image's width/height).
+const MODEL_IMAGE: Record<string, { src: string; aspect: string }> = {
+  "PRTEX-380VAN-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
+  "PRTEX-380AN-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
 }
 
 interface SpecRow {
@@ -579,8 +582,8 @@ export default function ProductsPage() {
                   key={i}
                   model={m}
                   categoryLabel={active.label}
-                  image={MODEL_IMAGE[m.model] ?? CATEGORY_IMAGE[active.group]}
-                  imageAspectClass={MODEL_IMAGE[m.model] ? "aspect-[1648/667]" : "aspect-[16/9]"}
+                  image={MODEL_IMAGE[m.model]?.src ?? CATEGORY_IMAGE[active.group]}
+                  imageAspectClass={MODEL_IMAGE[m.model]?.aspect ?? "aspect-[16/9]"}
                   labels={labels}
                 />
               ))
