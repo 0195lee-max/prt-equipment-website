@@ -1,9 +1,34 @@
 "use client"
 
+import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
+
+// KPI labels stay English in every locale (per the site-wide KPI rule).
+// "Exposure + Lamination" is fixed in this order across all locales.
+const KPIS: Array<{ title: string; sub: string }> = [
+  { title: "100+ Installed Systems", sub: "Production-proven systems" },
+  { title: "Across Asia", sub: "Production references" },
+  { title: "Exposure + Lamination", sub: "Core processes" },
+  { title: "Repeat Orders", sub: "From existing customers" },
+]
+
+// Specification rows mirror the Equipment page formatting: clean
+// "Label: Value" pairs, English in every locale, tabular values.
+const FOCUS_SPECS = {
+  lamination: [
+    { label: "Web Width", value: "Up to 350 mm" },
+    { label: "Speed", value: "0.1–5.0 m/min" },
+    { label: "Temp Accuracy", value: "±3°C" },
+  ],
+  exposure: [
+    { label: "Resolution", value: "20 μm ±2 μm" },
+    { label: "Alignment Accuracy", value: "±5 μm" },
+    { label: "Vision System", value: "8CCD Vision Alignment" },
+  ],
+}
 
 const translations = {
   ko: {
@@ -11,20 +36,28 @@ const translations = {
     positioning: "We do not build generic equipment.",
     positioningSub: "Leadframe · Semiconductor Packaging 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
     positioningBody:
-      "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 50기 이상의 장비를 납품해왔습니다.",
-    pillars: [
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
-    ],
-    timelineLabel: "Company History",
-    timeline: [
-      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll Laminator 개발 착수. Leadframe 공정 응용에 집중." },
-      { year: "2011", title: "First Laminator Delivery", desc: "Leadframe 양산 라인에 PRETECH Roll-to-Roll Dry Film Lamination 시스템을 처음 납품." },
-      { year: "2014", title: "Exposure System Development", desc: "Roll-to-Roll Leadframe 패턴 형성을 위한 LED UV Exposure 기술 개발." },
-      { year: "2018", title: "PRT Brand Established", desc: "Roll-to-Roll 기술 브랜드와 장비 사업 확장을 위해 PRT Co., Ltd. 설립." },
-      { year: "2020", title: "Asia Expansion", desc: "중국·말레이시아 반도체 패키징 제조사로 납품 확대." },
-      { year: "2024", title: "Present", desc: "아시아 50기 이상 설치. 기존 양산 고객사로부터 반복 발주 지속." },
+      "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 100기 이상의 장비를 납품해왔습니다.",
+    factoryLabel: "Production Environment",
+    factoryCaption: "Roll-to-Roll 생산 시스템을 위한 실제 조립 및 장비 준비 환경.",
+    engLabel: "Engineering Detail",
+    engCopy: "기계 조립과 제어 통합을 직접 엔지니어링 접근 방식으로 처리하여, 신속한 문제 해결과 장기 지원을 가능하게 합니다.",
+    historyLabel: "Company History",
+    stages: [
+      {
+        no: "01",
+        title: "Foundation",
+        desc: "PRETECH 기반 Roll-to-Roll 라미네이터 개발 및 엔지니어링 경험.",
+      },
+      {
+        no: "02",
+        title: "Technology Expansion",
+        desc: "Leadframe 및 반도체 패키징 응용을 위한 LED UV 노광 시스템 개발.",
+      },
+      {
+        no: "03",
+        title: "Production References",
+        desc: "아시아 전역 100기 이상 설치, 반복 발주 및 장기 기술 지원.",
+      },
     ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
@@ -34,12 +67,12 @@ const translations = {
       {
         title: "Roll-to-Roll Lamination",
         desc: "드라이필름 포토레지스트의 연속 Lamination. 장력 제어, 온도 균일성, 기포 없는 접합이 핵심입니다.",
-        specs: ["Web Width: 최대 350mm", "Speed: 0.1~5.0 m/min", "Temp Accuracy: ±3°C"],
+        specs: FOCUS_SPECS.lamination,
       },
       {
         title: "Roll-to-Roll Exposure",
         desc: "Leadframe 패턴 형성을 위한 연속 LED UV Exposure. 정렬 정밀도와 반복 재현성이 핵심입니다.",
-        specs: ["Resolution: 20μm ±2μm", "Alignment: ±5μm", "8CCD Vision System"],
+        specs: FOCUS_SPECS.exposure,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
@@ -78,20 +111,28 @@ const translations = {
     positioning: "We do not build generic equipment.",
     positioningSub: "We are a specialized engineering company\nfocused on stable Roll-to-Roll semiconductor process systems.",
     positioningBody:
-      "Since 2010, our engineering team has focused on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and a significant share of repeat orders from existing customers.",
-    pillars: [
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
-    ],
-    timelineLabel: "Company History",
-    timeline: [
-      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll laminator development begins, focused on Leadframe process applications." },
-      { year: "2011", title: "First Laminator Delivery", desc: "First PRETECH Roll-to-Roll dry film lamination system delivered for a Leadframe production line." },
-      { year: "2014", title: "Exposure System Development", desc: "LED UV exposure technology developed for Roll-to-Roll Leadframe patterning applications." },
-      { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. established to expand the Roll-to-Roll technology brand and equipment business." },
-      { year: "2020", title: "Asia Expansion", desc: "Deliveries expanded to semiconductor packaging manufacturers in China and Malaysia." },
-      { year: "2024", title: "Present", desc: "100+ systems installed across Asia, with repeat orders continuing from existing production customers." },
+      "Our engineering team focuses on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and a significant share of repeat orders from existing customers.",
+    factoryLabel: "Production Environment",
+    factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
+    engLabel: "Engineering Detail",
+    engCopy: "Mechanical assembly and control integration are handled with direct engineering access for faster troubleshooting and long-term support.",
+    historyLabel: "Company History",
+    stages: [
+      {
+        no: "01",
+        title: "Foundation",
+        desc: "PRETECH-based Roll-to-Roll laminator development and engineering experience.",
+      },
+      {
+        no: "02",
+        title: "Technology Expansion",
+        desc: "LED UV exposure system development for Leadframe and semiconductor packaging applications.",
+      },
+      {
+        no: "03",
+        title: "Production References",
+        desc: "100+ installed systems across Asia with repeat orders and long-term technical support.",
+      },
     ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
@@ -101,12 +142,12 @@ const translations = {
       {
         title: "Roll-to-Roll Lamination",
         desc: "Continuous lamination of dry film photoresist. Tension control, temperature uniformity, and void-free bonding are the critical parameters.",
-        specs: ["Web Width: Up to 350mm", "Speed: 0.1~5.0 m/min", "Temp Accuracy: ±3°C"],
+        specs: FOCUS_SPECS.lamination,
       },
       {
         title: "Roll-to-Roll Exposure",
         desc: "Continuous LED UV exposure for Leadframe patterning. Alignment precision and shot-to-shot repeatability are the critical parameters.",
-        specs: ["Resolution: 20μm ±2μm", "Alignment: ±5μm", "8CCD Vision System"],
+        specs: FOCUS_SPECS.exposure,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
@@ -145,20 +186,28 @@ const translations = {
     positioning: "We do not build generic equipment.",
     positioningSub: "我们是专注于 Leadframe 与半导体封装工艺的\nRoll-to-Roll 工程公司。",
     positioningBody:
-      "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 50 台以上 Installed Systems。",
-    pillars: [
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "100+", label: "Installed Systems", sub: "Across Asia" },
-      { value: "Core Focus", label: "Lamination + Exposure", sub: "" },
-    ],
-    timelineLabel: "Company History",
-    timeline: [
-      { year: "2010", title: "PRETECH Founded", desc: "Roll-to-Roll Laminator 研发启动，聚焦 Leadframe 工艺应用。" },
-      { year: "2011", title: "First Laminator Delivery", desc: "首套 PRETECH Roll-to-Roll 干膜 Lamination 系统交付至 Leadframe 生产线。" },
-      { year: "2014", title: "Exposure System Development", desc: "面向 Roll-to-Roll Leadframe 图案形成应用的 LED UV Exposure 技术开发完成。" },
-      { year: "2018", title: "PRT Brand Established", desc: "PRT Co., Ltd. 成立，扩展 Roll-to-Roll 技术品牌及设备业务。" },
-      { year: "2020", title: "Asia Expansion", desc: "向中国与马来西亚的半导体封装制造商扩展交付范围。" },
-      { year: "2024", title: "Present", desc: "亚洲累计交付 50 套以上系统，现有量产客户重复下单持续进行。" },
+      "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 100 台以上 Installed Systems。",
+    factoryLabel: "Production Environment",
+    factoryCaption: "面向 Roll-to-Roll 生产系统的真实组装与设备准备环境。",
+    engLabel: "Engineering Detail",
+    engCopy: "机械组装与控制集成均采用直接工程介入方式处理，实现更快的故障排查与长期支持。",
+    historyLabel: "Company History",
+    stages: [
+      {
+        no: "01",
+        title: "Foundation",
+        desc: "基于 PRETECH 的 Roll-to-Roll 层压机开发与工程经验。",
+      },
+      {
+        no: "02",
+        title: "Technology Expansion",
+        desc: "面向 Leadframe 与半导体封装应用的 LED UV 曝光系统开发。",
+      },
+      {
+        no: "03",
+        title: "Production References",
+        desc: "亚洲累计安装 100 套以上系统，重复订单与长期技术支持。",
+      },
     ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
@@ -168,12 +217,12 @@ const translations = {
       {
         title: "Roll-to-Roll Lamination",
         desc: "干膜光刻胶的连续 Lamination。张力控制、温度均匀性和无气泡粘合是关键参数。",
-        specs: ["Web Width: 最大 350mm", "Speed: 0.1~5.0 m/min", "Temp Accuracy: ±3°C"],
+        specs: FOCUS_SPECS.lamination,
       },
       {
         title: "Roll-to-Roll Exposure",
         desc: "用于 Leadframe 图案形成的连续 LED UV Exposure。对准精度和逐次重复性是关键参数。",
-        specs: ["Resolution: 20μm ±2μm", "Alignment: ±5μm", "8CCD Vision System"],
+        specs: FOCUS_SPECS.exposure,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
@@ -218,95 +267,136 @@ export default function CompanyPage() {
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero / Positioning ─────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
+      <section className="relative flex min-h-[70vh] items-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.5)_1px,transparent_1px)] bg-[size:40px_40px]" />
-        {/* Gold diagonal accent */}
+        {/* Blue diagonal accent */}
         <div
-          className="absolute inset-0 opacity-5 pointer-events-none"
+          className="pointer-events-none absolute inset-0 opacity-5"
           style={{ background: "linear-gradient(105deg, transparent 45%, rgba(25,118,210,0.6) 45.5%, transparent 46%)" }}
         />
 
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:px-8">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
             {t.meta}
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight mb-6">
+          <h1 className="mb-7 text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
             {t.positioning}
           </h1>
-          <p className="text-xl font-light whitespace-pre-line leading-relaxed mb-8 sm:text-2xl min-h-[5rem] sm:min-h-[6rem]" style={{ color: "#1976D2" }}>
+          <p
+            className="mb-8 min-h-[5.5rem] whitespace-pre-line text-2xl font-light leading-relaxed sm:min-h-[6.5rem] sm:text-3xl"
+            style={{ color: "#1976D2" }}
+          >
             {t.positioningSub}
           </p>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400 min-h-[7rem]">
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             {t.positioningBody}
           </p>
 
-          {/* Pillar stats */}
-          <div className="mt-14 flex flex-wrap gap-10 sm:gap-16">
-            {t.pillars.map((p, idx) => (
-              <div key={idx}>
-                <div className="text-4xl font-semibold" style={{ color: "#1976D2" }}>{p.value}</div>
-                <p className="mt-1 text-sm font-medium text-slate-300">{p.label}</p>
-                {p.sub && <p className="text-xs text-slate-400">{p.sub}</p>}
+          {/* KPI grid — substantial, square, thin dividers */}
+          <div className="mt-16 grid grid-cols-2 border-l border-t border-slate-800 lg:grid-cols-4">
+            {KPIS.map((k, idx) => (
+              <div
+                key={idx}
+                className="border-b border-r border-slate-800 bg-slate-900/30 p-6 lg:p-7"
+              >
+                <span
+                  aria-hidden="true"
+                  className="mb-4 block h-0.5 w-6"
+                  style={{ backgroundColor: "#1976D2" }}
+                />
+                <p className="text-lg font-bold leading-snug text-white lg:text-xl">{k.title}</p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400 lg:text-sm">{k.sub}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Timeline ───────────────────────────────────────── */}
+      {/* ── Production Environment — wide factory band ──────── */}
+      <section className="relative border-t border-slate-800/60 bg-slate-950">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            {t.factoryLabel}
+          </p>
+          <div className="relative h-[240px] w-full overflow-hidden bg-black sm:h-[340px] lg:h-[440px]">
+            <Image
+              src="/images/company_factory_overview.png"
+              alt="PRT production and assembly floor"
+              fill
+              sizes="100vw"
+              quality={90}
+              className="object-cover object-center"
+            />
+            {/* very subtle bottom gradient for integration — details stay visible */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "linear-gradient(to top, rgba(2,6,23,0.35) 0%, transparent 35%)" }}
+            />
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-500">
+            {t.factoryCaption}
+          </p>
+        </div>
+      </section>
+
+      {/* ── Company History — 3-stage structure ────────────── */}
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
-          <p className="mb-12 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            {t.timelineLabel}
+          <p className="mb-10 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            {t.historyLabel}
           </p>
 
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[3.25rem] top-0 bottom-0 w-px bg-slate-700 hidden sm:block" />
-
-            <div className="space-y-0">
-              {t.timeline.map((item, idx) => (
-                <div key={idx} className="relative flex gap-8 pb-10 last:pb-0">
-                  {/* Year node */}
-                  <div className="hidden sm:flex flex-col items-center flex-shrink-0 w-26">
-                    <div
-                      className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-[10px] font-bold"
-                      style={{
-                        borderColor: "#1976D2",
-                        color: "#1976D2",
-                        backgroundColor: "rgb(15, 23, 42)",
-                      }}
-                    >
-                      {idx + 1}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 pb-2">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span
-                        className="text-xs font-bold tracking-widest font-mono"
-                        style={{ color: "#1976D2" }}
-                      >
-                        {item.year}
-                      </span>
-                      <h3 className="text-sm font-semibold text-white">{item.title}</h3>
-                    </div>
-                    <p className="text-sm text-slate-400 leading-relaxed max-w-xl">{item.desc}</p>
-                    {idx < t.timeline.length - 1 && (
-                      <div className="mt-10 sm:hidden h-px w-full bg-slate-800" />
-                    )}
-                  </div>
+          <div className="grid border-l border-t border-slate-800 sm:grid-cols-3">
+            {t.stages.map((s, idx) => (
+              <div
+                key={idx}
+                className="border-b border-r border-slate-800 bg-slate-950/30 p-8 lg:p-10"
+              >
+                <div className="flex items-baseline gap-3">
+                  <span className="text-3xl font-bold tabular-nums" style={{ color: "#1976D2" }}>
+                    {s.no}
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
+                    Stage
+                  </span>
                 </div>
-              ))}
-            </div>
+                <div className="mt-5 h-px w-10" style={{ backgroundColor: "#1976D2" }} />
+                <h3 className="mt-5 text-xl font-bold text-white lg:text-2xl">{s.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-400 lg:text-base">{s.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Specialization ─────────────────────────────────── */}
+      {/* ── Engineering Detail — medium image + short copy ───── */}
+      <section className="relative border-t border-slate-800/60 bg-slate-950">
+        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-24">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            {t.engLabel}
+          </p>
+          <div className="grid gap-8 lg:grid-cols-5 lg:items-center lg:gap-12">
+            <div className="relative aspect-[1527/1030] w-full overflow-hidden bg-black lg:col-span-3">
+              <Image
+                src="/images/company_engineering_detail-v2.png"
+                alt="PRT control cabinet assembly and machine frame / cable routing detail"
+                fill
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                quality={90}
+                className="object-cover object-center"
+              />
+            </div>
+            <p className="text-base leading-relaxed text-slate-400 lg:col-span-2">
+              {t.engCopy}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Specialization / What We Focus On ──────────────── */}
       <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
@@ -314,8 +404,8 @@ export default function CompanyPage() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.specializationLabel}
           </p>
-          <h2 className="text-2xl font-bold text-white mb-6">{t.specializationTitle}</h2>
-          <p className="max-w-2xl text-base text-slate-400 leading-relaxed mb-12">
+          <h2 className="mb-6 text-3xl font-bold text-white lg:text-4xl">{t.specializationTitle}</h2>
+          <p className="mb-12 max-w-3xl text-lg leading-relaxed text-slate-300">
             {t.specializationBody}
           </p>
 
@@ -323,19 +413,25 @@ export default function CompanyPage() {
             {t.specializationCards.map((card, idx) => (
               <div
                 key={idx}
-                className="relative rounded-lg border border-slate-700 bg-slate-900/60 p-7 overflow-hidden"
+                className="relative overflow-hidden border border-slate-700 bg-slate-900/60 p-8"
               >
                 <div
-                  className="absolute top-0 left-0 right-0 h-px"
+                  className="absolute left-0 right-0 top-0 h-px"
                   style={{ background: "linear-gradient(to right, transparent, rgba(25,118,210,0.5), transparent)" }}
                 />
-                <h3 className="text-base font-semibold text-white mb-3">{card.title}</h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">{card.desc}</p>
-                <div className="space-y-2 border-t border-slate-700/60 pt-4">
+                <h3 className="mb-3 text-lg font-semibold text-white">{card.title}</h3>
+                <p className="mb-6 text-base leading-relaxed text-slate-300">{card.desc}</p>
+
+                {/* Specifications — same Label: Value formatting as the Equipment page */}
+                <div className="divide-y divide-slate-700/60 border-t border-slate-700">
                   {card.specs.map((spec, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-3 text-sm font-mono text-slate-200">
-                      <span className="h-px w-4 flex-shrink-0" style={{ backgroundColor: "#1976D2" }} />
-                      {spec}
+                    <div key={sIdx} className="flex items-baseline justify-between gap-4 py-2.5">
+                      <span className="text-xs font-medium leading-relaxed text-slate-400">
+                        {spec.label}:
+                      </span>
+                      <span className="text-right text-sm font-semibold leading-relaxed tabular-nums text-slate-100">
+                        {spec.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -345,7 +441,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* ── Why PRT ────────────────────────────────────────── */}
+      {/* ── Why Customers Choose PRT ───────────────────────── */}
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
@@ -354,42 +450,42 @@ export default function CompanyPage() {
             {t.whyLabel}
           </p>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {t.whyPoints.map((point, idx) => (
-              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.3)" }}>
-                <h3 className="text-sm font-semibold text-slate-200 mb-2">{point.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{point.desc}</p>
+              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.35)" }}>
+                <h3 className="mb-2.5 text-lg font-semibold text-white">{point.title}</h3>
+                <p className="text-base leading-relaxed text-slate-400">{point.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Company Info ───────────────────────────────────── */}
+      {/* ── Company Info — quiet, factual, data-sheet-like ─── */}
       <section className="relative bg-slate-950">
         <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.infoLabel}
           </p>
 
-          <div className="grid gap-x-12 gap-y-4 sm:grid-cols-2 mb-12">
+          <div className="mb-12 grid gap-x-12 gap-y-4 sm:grid-cols-2">
             {t.infoItems.map((item, idx) => (
               <div key={idx} className="border-b border-slate-800 pb-4">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">{item.label}</p>
-                <p className="text-sm text-slate-300 leading-relaxed">{item.value}</p>
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-500">{item.label}</p>
+                <p className="text-sm leading-relaxed text-slate-300">{item.value}</p>
               </div>
             ))}
           </div>
 
           {/* Contact info row */}
-          <div className="flex flex-wrap gap-6 mb-12 text-sm">
+          <div className="mb-12 flex flex-wrap gap-6 text-sm">
             <div className="flex items-center gap-2 text-slate-400">
               <Phone className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
-              <a href="tel:+82314691103" className="hover:text-white transition-colors">+82-31-469-1103</a>
+              <a href="tel:+82314691103" className="transition-colors hover:text-white">+82-31-469-1103</a>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
               <Mail className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
-              <a href="mailto:sales@prt-kr.com" className="hover:text-white transition-colors">sales@prt-kr.com</a>
+              <a href="mailto:sales@prt-kr.com" className="transition-colors hover:text-white">sales@prt-kr.com</a>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
               <MapPin className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
@@ -401,7 +497,7 @@ export default function CompanyPage() {
           <div className="flex flex-wrap gap-4">
             <a
               href="/products"
-              className="inline-flex items-center gap-2 rounded px-6 py-3 text-sm font-semibold text-slate-900 transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.productsCta}
@@ -409,7 +505,7 @@ export default function CompanyPage() {
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3.5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white"
             >
               {t.contactCta}
             </a>
