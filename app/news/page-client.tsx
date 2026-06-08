@@ -20,6 +20,27 @@ interface NewsItem {
   title: string
   description: string
   status?: "Upcoming" | "Scheduled"
+  image?: string
+}
+
+// Shipment card content is identical across locales (kept English).
+const SHIPMENT_ITEM: NewsItem = {
+  type: "Shipment",
+  date: "2026",
+  title: "Equipment Delivery — Roll-to-Roll Exposure System",
+  description:
+    "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
+  status: "Scheduled",
+}
+
+// Exhibition card — type/date/title/status English in every locale;
+// only the body copy is localized.
+const EXHIBITION_BASE = {
+  type: "Exhibition" as NewsType,
+  date: "October 27–29, 2026",
+  title: "CPCA Show Plus 2026",
+  status: "Upcoming" as const,
+  image: "/images/cpca_show_plus_logo.jpg",
 }
 
 const translations = {
@@ -33,6 +54,14 @@ const translations = {
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
     emptyNote: "Additional updates will be published as production milestones occur.",
+    newsItems: [
+      {
+        ...EXHIBITION_BASE,
+        description:
+          "PRT는 2026년 10월 27일부터 29일까지 열리는 CPCA Show Plus 2026 전시회에 참가할 예정입니다. 부스 정보 및 미팅 관련 세부 내용은 추후 공지됩니다.",
+      },
+      SHIPMENT_ITEM,
+    ] as NewsItem[],
   },
   en: {
     meta: "News",
@@ -44,6 +73,14 @@ const translations = {
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
     emptyNote: "Additional updates will be published as production milestones occur.",
+    newsItems: [
+      {
+        ...EXHIBITION_BASE,
+        description:
+          "PRT will participate in CPCA Show Plus 2026, held from October 27 to 29, 2026. Booth details and meeting information will be announced.",
+      },
+      SHIPMENT_ITEM,
+    ] as NewsItem[],
   },
   zh: {
     meta: "News",
@@ -55,28 +92,16 @@ const translations = {
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
     emptyNote: "Additional updates will be published as production milestones occur.",
+    newsItems: [
+      {
+        ...EXHIBITION_BASE,
+        description:
+          "PRT 将参加于 2026 年 10 月 27 日至 29 日举办的 CPCA Show Plus 2026 展会。展位信息及会议安排将另行公布。",
+      },
+      SHIPMENT_ITEM,
+    ] as NewsItem[],
   },
 }
-
-// Minimal placeholder set — replace with real entries as they occur.
-const newsItems: NewsItem[] = [
-  {
-    type: "Exhibition",
-    date: "October 2026",
-    title: "Upcoming Industry Exhibition",
-    description:
-      "PRT engineering team participation. Event and booth details to be announced.",
-    status: "Upcoming",
-  },
-  {
-    type: "Shipment",
-    date: "2026",
-    title: "Equipment Delivery — Roll-to-Roll Exposure System",
-    description:
-      "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
-    status: "Scheduled",
-  },
-]
 
 function NewsImagePlaceholder({ label }: { label: string }) {
   return (
@@ -186,12 +211,25 @@ export default function NewsPage() {
           </div>
 
           <div className="grid gap-0 sm:grid-cols-2 border-t border-l border-slate-800">
-            {newsItems.map((item, idx) => (
+            {t.newsItems.map((item, idx) => (
               <article
                 key={idx}
                 className="group relative border-r border-b border-slate-800 bg-slate-950/50 transition-colors hover:bg-slate-950/80"
               >
-                <NewsImagePlaceholder label={item.type} />
+                {item.image ? (
+                  <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-slate-800/60 bg-[#0A0F1A] p-6">
+                    {/* corner ticks — consistent with the placeholder treatment */}
+                    <div className="absolute top-3 left-3 h-2 w-2 border-l border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
+                    <div className="absolute top-3 right-3 h-2 w-2 border-r border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
+                    <div className="absolute bottom-3 left-3 h-2 w-2 border-l border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
+                    <div className="absolute bottom-3 right-3 h-2 w-2 border-r border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
+                    <div className="w-[72%] max-w-[260px] border border-slate-300 bg-white px-6 py-4">
+                      <img src={item.image} alt={item.title} className="h-auto w-full object-contain" />
+                    </div>
+                  </div>
+                ) : (
+                  <NewsImagePlaceholder label={item.type} />
+                )}
 
                 <div className="p-6 lg:p-7">
                   {/* Type + Date */}
