@@ -11,8 +11,8 @@ const translations = {
     items: [
       {
         type: "Exhibition",
-        date: "2026년 10월",
-        title: "산업 전시회 출전 예정",
+        date: "October 27–29, 2026",
+        title: "CPCA Show Plus 2026",
         status: "Upcoming",
       },
       {
@@ -29,8 +29,8 @@ const translations = {
     items: [
       {
         type: "Exhibition",
-        date: "October 2026",
-        title: "Upcoming Industry Exhibition",
+        date: "October 27–29, 2026",
+        title: "CPCA Show Plus 2026",
         status: "Upcoming",
       },
       {
@@ -47,8 +47,8 @@ const translations = {
     items: [
       {
         type: "Exhibition",
-        date: "2026年10月",
-        title: "即将参加行业展会",
+        date: "October 27–29, 2026",
+        title: "CPCA Show Plus 2026",
         status: "Upcoming",
       },
       {

@@ -13,7 +13,7 @@ const translations = {
     companyHeader: "Company",
     sitemapHeader: "Sitemap",
     focusHeader: "Business Focus",
-    address: "대한민국 경기도 안양시",
+    address: "경기도 안양시 동안구 엘에스로 76, 디오밸리 425호",
     phone: "+82-31-469-1103",
     email: "sales@prt-kr.com",
     nav: {
@@ -36,7 +36,7 @@ const translations = {
     companyHeader: "Company",
     sitemapHeader: "Sitemap",
     focusHeader: "Business Focus",
-    address: "Anyang-si, Gyeonggi-do, Republic of Korea",
+    address: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117",
     phone: "+82-31-469-1103",
     email: "sales@prt-kr.com",
     nav: {
@@ -59,7 +59,7 @@ const translations = {
     companyHeader: "Company",
     sitemapHeader: "Sitemap",
     focusHeader: "Business Focus",
-    address: "韩国京畿道安养市",
+    address: "韩国京畿道安养市东安区 LS 路 76 号 The O Valley 425 室",
     phone: "+82-31-469-1103",
     email: "sales@prt-kr.com",
     nav: {
