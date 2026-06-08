@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
 
@@ -46,14 +46,6 @@ const METRICS: Array<{ title: string; sub: string }> = [
   { title: "Repeat Orders", sub: "From existing customers" },
 ]
 
-// Equipment quick-navigation — lightweight deep-links into /products.
-// Kept in English in every locale (navigation labels are not translated).
-// Exposure must come first.
-const QUICK_LINKS: Array<{ href: string; label: string }> = [
-  { href: "/products#cat-exposure", label: "Exposure Systems" },
-  { href: "/products#cat-laminators", label: "Laminators" },
-]
-
 interface CompanyProofProps {
   lang: Language
 }
@@ -84,16 +76,16 @@ export function CompanyProof({ lang }: CompanyProofProps) {
         className="pointer-events-none absolute inset-0 hidden lg:block"
         style={{
           WebkitMaskImage:
-            "radial-gradient(135% 135% at 72% 70%, #000 0%, #000 42%, transparent 80%)",
+            "radial-gradient(145% 145% at 55% 54%, #000 0%, #000 45%, transparent 83%)",
           maskImage:
-            "radial-gradient(135% 135% at 72% 70%, #000 0%, #000 42%, transparent 80%)",
+            "radial-gradient(145% 145% at 55% 54%, #000 0%, #000 45%, transparent 83%)",
         }}
       >
         <svg
           viewBox="0 0 1000 1000"
           preserveAspectRatio="xMidYMid meet"
-          className="absolute right-[7%] top-1/2 h-[168%] w-auto -translate-y-1/2"
-          style={{ opacity: 0.14 }}
+          className="absolute right-[20%] top-1/2 h-[172%] w-auto -translate-y-1/2"
+          style={{ opacity: 0.2 }}
         >
           <defs>
             <pattern
@@ -123,7 +115,7 @@ export function CompanyProof({ lang }: CompanyProofProps) {
         </svg>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-16 lg:px-8 lg:pt-20 lg:pb-24">
+      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
           {/* Left: company preview copy */}
           <div>
@@ -179,40 +171,6 @@ export function CompanyProof({ lang }: CompanyProofProps) {
                 <p className="mt-2 text-xs leading-relaxed text-slate-400">{m.sub}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* ── Equipment quick navigation — lightweight deep-links ───
-            Not product cards, no images. Square accents, thin divider. */}
-        <div className="mt-14 border-t border-slate-800 pt-7 lg:mt-16">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
-              {t.quickLabel}
-            </p>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-              {QUICK_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="group inline-flex items-center gap-2 py-1 text-sm font-medium text-slate-200 transition-colors hover:text-white"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="h-1 w-1 flex-shrink-0"
-                    style={{ backgroundColor: "#1976D2" }}
-                  />
-                  {link.label}
-                  <ArrowUpRight className="h-3.5 w-3.5 text-slate-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#1976D2]" />
-                </a>
-              ))}
-              <a
-                href="/products"
-                className="group inline-flex items-center gap-1.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400 transition-colors hover:text-white sm:ml-auto"
-              >
-                View All Equipment
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
           </div>
         </div>
       </div>

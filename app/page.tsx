@@ -3,7 +3,8 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSlider } from "@/components/hero-slider"
 import { CompanyProof } from "@/components/company-proof"
-import { ApplicationsSection } from "@/components/applications-section"
+import { PostHeroVideoBand } from "@/components/post-hero-video-band"
+import { EquipmentQuickNav } from "@/components/equipment-quick-nav"
 import { NewsTeaser } from "@/components/news-teaser"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
@@ -16,9 +17,10 @@ export default function Page() {
       <Navbar lang={lang} setLang={setLang} />
       <HeroSlider lang={lang} />
       <section id="section-equipment" className="bg-[#0A0A0A]">
-        <div className="min-h-svh flex flex-col">
+        <div className="flex flex-col">
           <CompanyProof lang={lang} />
-          <ApplicationsSection lang={lang} />
+          <PostHeroVideoBand />
+          <EquipmentQuickNav />
         </div>
         <NewsTeaser lang={lang} />
         <Footer lang={lang} />
