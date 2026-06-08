@@ -30,8 +30,9 @@ const translations = {
       "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 100기 이상의 장비를 납품해왔습니다.",
     factoryLabel: "Production Environment",
     factoryCaption: "Roll-to-Roll 생산 시스템을 위한 실제 조립 및 장비 준비 환경.",
-    engLabel: "Engineering Detail",
-    engCopy: "기계 조립과 제어 통합을 직접 엔지니어링 접근 방식으로 처리하여, 신속한 문제 해결과 장기 지원을 가능하게 합니다.",
+    engLabel: "Assembly & Control Detail",
+    engHeading: "제어 통합부터 기계 조립까지, 직접 엔지니어링 접근.",
+    engCopy: "PRT는 기계 조립·제어 통합·문제 해결을 엔지니어링 팀 가까이에서 직접 수행하여, 더 빠른 대응과 양산 장비에 대한 장기 지원을 제공합니다.",
     historyLabel: "Company History",
     stages: [
       {
@@ -91,7 +92,7 @@ const translations = {
       { label: "Established", value: "2018 (전신 PRETECH 2010년 창업)" },
       { label: "Core Products", value: "Roll-to-Roll Laminator, Roll-to-Roll Exposure System" },
       { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
-      { label: "Headquarters", value: "경기도 안양시 동안구 LS로 76, 더오밸리 425호" },
+      { label: "Headquarters", value: "경기도 안양시 동안구 엘에스로 76, 디오밸리 425호" },
       { label: "Factory", value: "경기도 시흥시 다지골길 15-3" },
     ],
     contactCta: "Contact Sales",
@@ -105,8 +106,9 @@ const translations = {
       "Our engineering team focuses on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and repeat orders from existing customers.",
     factoryLabel: "Production Environment",
     factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
-    engLabel: "Engineering Detail",
-    engCopy: "Mechanical assembly and control integration are handled with direct engineering access for faster troubleshooting and long-term support.",
+    engLabel: "Assembly & Control Detail",
+    engHeading: "Direct engineering access from control integration to machine assembly.",
+    engCopy: "PRT keeps mechanical assembly, control integration, and troubleshooting close to the engineering team, enabling faster issue response and long-term support for production equipment.",
     historyLabel: "Company History",
     stages: [
       {
@@ -166,7 +168,7 @@ const translations = {
       { label: "Established", value: "2018 (predecessor PRETECH founded 2010)" },
       { label: "Core Products", value: "Roll-to-Roll Laminators, Roll-to-Roll Exposure Systems" },
       { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
-      { label: "Headquarters", value: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117" },
+      { label: "Headquarters", value: "Room 425, DIO Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117" },
       { label: "Factory", value: "15-3 Dajigol-gil, Siheung-si, Gyeonggi-do 14957" },
     ],
     contactCta: "Contact Sales",
@@ -180,8 +182,9 @@ const translations = {
       "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 100 台以上 Installed Systems。",
     factoryLabel: "Production Environment",
     factoryCaption: "面向 Roll-to-Roll 生产系统的真实组装与设备准备环境。",
-    engLabel: "Engineering Detail",
-    engCopy: "机械组装与控制集成均采用直接工程介入方式处理，实现更快的故障排查与长期支持。",
+    engLabel: "Assembly & Control Detail",
+    engHeading: "从控制集成到机械组装，全程直接工程介入。",
+    engCopy: "PRT 将机械组装、控制集成与故障排查紧贴工程团队进行，从而实现更快的问题响应与对量产设备的长期支持。",
     historyLabel: "Company History",
     stages: [
       {
@@ -241,7 +244,7 @@ const translations = {
       { label: "Established", value: "2018 (前身 PRETECH 创立于 2010 年)" },
       { label: "Core Products", value: "Roll-to-Roll Laminator, Roll-to-Roll Exposure System" },
       { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
-      { label: "Headquarters", value: "韩国京畿道安养市东安区 LS 路 76 号 The O Valley 425 室" },
+      { label: "Headquarters", value: "韩国京畿道安养市东安区 LS 路 76 号 DIO Valley 425 室" },
       { label: "Factory", value: "韩国京畿道始兴市 다지골길 15-3" },
     ],
     contactCta: "Contact Sales",
@@ -340,58 +343,42 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* ── Company History — 3-stage structure ────────────── */}
-      <section className="relative bg-slate-900">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
-        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
-          <p className="mb-10 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            {t.historyLabel}
-          </p>
-
-          <div className="grid border-l border-t border-slate-800 sm:grid-cols-3">
-            {t.stages.map((s, idx) => (
-              <div
-                key={idx}
-                className="border-b border-r border-slate-800 bg-slate-950/30 p-8 lg:p-10"
-              >
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-bold tabular-nums" style={{ color: "#1976D2" }}>
-                    {s.no}
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-                    Stage
-                  </span>
-                </div>
-                <div className="mt-5 h-px w-10" style={{ backgroundColor: "#1976D2" }} />
-                <h3 className="mt-5 text-xl font-bold text-white lg:text-2xl">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400 lg:text-base">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Engineering Detail — medium image + short copy ───── */}
+      {/* ── Assembly & Control Detail — two-image proof section ─ */}
       <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-8 lg:py-24">
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
             {t.engLabel}
           </p>
-          <div className="grid gap-8 lg:grid-cols-5 lg:items-center lg:gap-12">
-            <div className="relative aspect-[1527/1030] w-full overflow-hidden bg-black lg:col-span-3">
+          <h2 className="mb-5 max-w-3xl text-2xl font-bold leading-snug text-white lg:text-3xl">
+            {t.engHeading}
+          </h2>
+          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-300 lg:text-lg">
+            {t.engCopy}
+          </p>
+
+          {/* Two images — landscape assembly view + portrait control cabinet.
+              Columns sized to each orientation; equal height on desktop, stacked on mobile. */}
+          <div className="grid gap-6 lg:grid-cols-[2.2fr_1fr]">
+            <div className="relative aspect-[3/2] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[500px]">
               <Image
-                src="/images/company_engineering_detail-v2.png"
+                src="/images/company_engineering_detail-v3.png"
                 alt="PRT control cabinet assembly and machine frame / cable routing detail"
                 fill
-                sizes="(min-width: 1024px) 60vw, 100vw"
+                sizes="(min-width: 1024px) 62vw, 100vw"
                 quality={90}
                 className="object-cover object-center"
               />
             </div>
-            <p className="text-base leading-relaxed text-slate-400 lg:col-span-2">
-              {t.engCopy}
-            </p>
+            <div className="relative aspect-[2/3] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[500px]">
+              <Image
+                src="/images/company_engineering_detail2.png"
+                alt="PRT electrical and pneumatic control cabinet with cable routing"
+                fill
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                quality={90}
+                className="object-cover object-center"
+              />
+            </div>
           </div>
         </div>
       </section>

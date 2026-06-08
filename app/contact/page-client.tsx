@@ -31,7 +31,7 @@ const translations = {
     factory: "공장 주소",
     hours: "영업 시간",
     hoursValue: "월 – 금  09:00 – 18:00 (KST)",
-    hqAddress: "경기도 안양시 동안구 LS로 76\n더오밸리 425호",
+    hqAddress: "경기도 안양시 동안구 엘에스로 76\n디오밸리 425호",
     factoryAddress: "경기도 시흥시 다지골길 15-3",
   },
   en: {
@@ -55,7 +55,7 @@ const translations = {
     factory: "Factory",
     hours: "Business Hours",
     hoursValue: "Mon – Fri  09:00 – 18:00 (KST)",
-    hqAddress: "Room 425, The O Valley\n76, LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\nRepublic of Korea",
+    hqAddress: "Room 425, DIO Valley\n76, LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\nRepublic of Korea",
     factoryAddress: "15-3, Dajigol-gil\nSiheung-si, Gyeonggi-do 14957\nRepublic of Korea",
   },
   zh: {
@@ -79,7 +79,7 @@ const translations = {
     factory: "工厂地址",
     hours: "营业时间",
     hoursValue: "周一 – 周五  09:00 – 18:00 (KST)",
-    hqAddress: "Room 425, The O Valley\n76, LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\n大韩民国",
+    hqAddress: "Room 425, DIO Valley\n76, LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\n大韩民国",
     factoryAddress: "15-3, Dajigol-gil\nSiheung-si, Gyeonggi-do 14957\n大韩民国",
   },
 }

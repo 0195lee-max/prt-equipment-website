@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
@@ -365,8 +364,8 @@ const CATEGORY_IMAGE: Record<string, string> = {
 // Each carries its own container aspect so object-contain fills with
 // no letterbox (aspect = the trimmed image's width/height).
 const MODEL_IMAGE: Record<string, { src: string; aspect: string }> = {
-  "PRTEX-380VAN-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
-  "PRTEX-380AN-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
+  "PRTEX-380VAN-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
+  "PRTEX-380AN-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
 }
 
 interface SpecRow {
@@ -457,14 +456,6 @@ function ModelShowcase({
           </div>
         </div>
 
-        <a
-          href="/contact"
-          className="inline-flex w-fit items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#0D47A1]"
-          style={{ backgroundColor: "#1976D2" }}
-        >
-          {labels.contactCta}
-          <ArrowRight className="h-4 w-4" />
-        </a>
       </div>
     </section>
   )
