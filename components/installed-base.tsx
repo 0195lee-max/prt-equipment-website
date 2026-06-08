@@ -15,10 +15,10 @@ const translations = {
       "PRT 시스템은 아시아 전역의 양산 현장에서 가동 중입니다. 100대 이상의 Installed Systems와 재주문이 현장 성능을 입증합니다.",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
-      { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },
+      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
+      { title: "Asia Production Sites", sub: "Active customer production references" },
+      { title: "Exposure + Lamination", sub: "Core process coverage" },
+      { title: "Repeat Orders", sub: "From existing customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -86,10 +86,10 @@ const translations = {
       "PRT systems are already running in production environments across Asia. 100+ systems installed. Repeat orders validate field performance.",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
-      { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },
+      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
+      { title: "Asia Production Sites", sub: "Active customer production references" },
+      { title: "Exposure + Lamination", sub: "Core process coverage" },
+      { title: "Repeat Orders", sub: "From existing customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -157,10 +157,10 @@ const translations = {
       "PRT 系统已在亚洲各地的量产现场投入运行。50 套以上的 Installed Systems 与重复订单印证现场性能。",
     kpiHeading: "Field Record",
     kpis: [
-      { value: "100+", label: "Installed Systems", sub: "Cumulative" },
-      { value: "Since 2010", label: "Engineering", sub: "" },
-      { value: "5+", label: "Countries", sub: "Asia Production Sites" },
-      { value: "Multi-Year", label: "Operating Lines", sub: "Active Today" },
+      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
+      { title: "Asia Production Sites", sub: "Active customer production references" },
+      { title: "Exposure + Lamination", sub: "Core process coverage" },
+      { title: "Repeat Orders", sub: "From existing customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -298,17 +298,16 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                   idx > 0 ? "border-l border-slate-900" : ""
                 } ${idx === 2 ? "border-l-0 md:border-l" : ""}`}
               >
-                <div
-                  className="text-3xl lg:text-4xl font-bold leading-tight tracking-tight"
-                  style={{ color: "#1976D2" }}
-                >
-                  {kpi.value}
-                </div>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
-                  {kpi.label}
+                <span
+                  aria-hidden="true"
+                  className="mb-3 block h-0.5 w-6"
+                  style={{ backgroundColor: "#1976D2" }}
+                />
+                <p className="text-base lg:text-lg font-bold leading-snug text-white">
+                  {kpi.title}
                 </p>
                 {kpi.sub && (
-                  <p className="mt-0.5 text-[11px] text-slate-500">{kpi.sub}</p>
+                  <p className="mt-1.5 text-[11px] leading-relaxed text-slate-500">{kpi.sub}</p>
                 )}
               </div>
             ))}
@@ -431,7 +430,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                     key={idx}
                     className="border-b border-slate-900 hover:bg-slate-900/30 transition-colors"
                   >
-                    <td className="py-4 px-4 font-mono text-xs text-slate-400 whitespace-nowrap">
+                    <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
                       {row.period}
                     </td>
                     <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
