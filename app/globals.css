@@ -252,15 +252,23 @@
 .prt-grid-drift {
   animation: prt-grid-drift 40s linear infinite;
 }
+/* Sequential entrance — subtle fade + slight upward motion.
+   Stagger via inline animation-delay on each element. */
+.prt-enter {
+  opacity: 0;
+  animation: prt-fade-up 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
 
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .prt-fade-up,
   .prt-fade-in,
+  .prt-enter,
   .prt-glow,
   .prt-grid-drift {
     animation: none !important;
     opacity: 1 !important;
+    transform: none !important;
   }
 }
 

@@ -6,15 +6,6 @@ import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
-// KPI labels stay English in every locale (per the site-wide KPI rule).
-// "Exposure + Lamination" is fixed in this order across all locales.
-const KPIS: Array<{ title: string; sub: string }> = [
-  { title: "100+ Installed Systems", sub: "Production-proven systems" },
-  { title: "Across Asia", sub: "Production references" },
-  { title: "Exposure + Lamination", sub: "Core processes" },
-  { title: "Repeat Orders", sub: "From existing customers" },
-]
-
 // Specification rows mirror the Equipment page formatting: clean
 // "Label: Value" pairs, English in every locale, tabular values.
 const FOCUS_SPECS = {
@@ -34,7 +25,7 @@ const translations = {
   ko: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "Leadframe · Semiconductor Packaging 공정에 특화된\nRoll-to-Roll 엔지니어링 전문 기업입니다.",
+    positioningSub: "Leadframe 및 Semiconductor Packaging 공정에 특화된 Roll-to-Roll 엔지니어링 전문 기업입니다.",
     positioningBody:
       "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 100기 이상의 장비를 납품해왔습니다.",
     factoryLabel: "Production Environment",
@@ -109,9 +100,9 @@ const translations = {
   en: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "We are a specialized engineering company\nfocused on stable Roll-to-Roll semiconductor process systems.",
+    positioningSub: "We are a specialized engineering company focused on stable Roll-to-Roll semiconductor process systems.",
     positioningBody:
-      "Our engineering team focuses on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and a significant share of repeat orders from existing customers.",
+      "Our engineering team focuses on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and repeat orders from existing customers.",
     factoryLabel: "Production Environment",
     factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
     engLabel: "Engineering Detail",
@@ -184,7 +175,7 @@ const translations = {
   zh: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "我们是专注于 Leadframe 与半导体封装工艺的\nRoll-to-Roll 工程公司。",
+    positioningSub: "我们是专注于 Leadframe 与半导体封装工艺的 Roll-to-Roll 工程公司。",
     positioningBody:
       "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 100 台以上 Installed Systems。",
     factoryLabel: "Production Environment",
@@ -262,12 +253,19 @@ export default function CompanyPage() {
   const [lang, setLang] = useLanguage()
   const t = translations[lang]
 
+  // English copy is longer, so give the hero text a wider measure on desktop
+  // (blue statement → 1 line, body → ~3 lines). Korean/Chinese keep the
+  // tighter, already-stable width.
+  const isEn = lang === "en"
+  const heroBlockWidth = isEn ? "lg:max-w-[1120px]" : "lg:max-w-[960px]"
+  const heroBodyWidth = isEn ? "lg:max-w-[1040px]" : "lg:max-w-[800px]"
+
   return (
     <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
-      {/* ── Hero / Positioning ─────────────────────────────── */}
-      <section className="relative flex min-h-[70vh] items-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
+      {/* ── Hero (text + KPI) + Factory band — first viewport ─ */}
+      <section className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.5)_1px,transparent_1px)] bg-[size:40px_40px]" />
         {/* Blue diagonal accent */}
         <div
@@ -275,68 +273,70 @@ export default function CompanyPage() {
           style={{ background: "linear-gradient(105deg, transparent 45%, rgba(25,118,210,0.6) 45.5%, transparent 46%)" }}
         />
 
-        <div className="relative mx-auto max-w-5xl px-6 py-32 lg:px-8">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-            {t.meta}
-          </p>
-          <h1 className="mb-7 text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            {t.positioning}
-          </h1>
-          <p
-            className="mb-8 min-h-[5.5rem] whitespace-pre-line text-2xl font-light leading-relaxed sm:min-h-[6.5rem] sm:text-3xl"
-            style={{ color: "#1976D2" }}
-          >
-            {t.positioningSub}
-          </p>
-          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            {t.positioningBody}
-          </p>
-
-          {/* KPI grid — substantial, square, thin dividers */}
-          <div className="mt-16 grid grid-cols-2 border-l border-t border-slate-800 lg:grid-cols-4">
-            {KPIS.map((k, idx) => (
-              <div
-                key={idx}
-                className="border-b border-r border-slate-800 bg-slate-900/30 p-6 lg:p-7"
-              >
-                <span
-                  aria-hidden="true"
-                  className="mb-4 block h-0.5 w-6"
-                  style={{ backgroundColor: "#1976D2" }}
-                />
-                <p className="text-lg font-bold leading-snug text-white lg:text-xl">{k.title}</p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-400 lg:text-sm">{k.sub}</p>
-              </div>
-            ))}
+        <div className="relative mx-auto max-w-7xl px-6 pt-8 pb-10 lg:px-8 lg:pt-10 lg:pb-14">
+          {/* Hero text — left-aligned, text-led (KPI grid removed) */}
+          <div className={`max-w-[960px] ${heroBlockWidth}`}>
+            <p
+              className="prt-enter mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-slate-500"
+              style={{ animationDelay: "0ms" }}
+            >
+              {t.meta}
+            </p>
+            <h1
+              className="prt-enter mb-5 max-w-[880px] text-5xl font-bold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-7xl"
+              style={{ animationDelay: "100ms" }}
+            >
+              {t.positioning}
+            </h1>
+            <p
+              className="prt-enter mb-5 text-lg font-light leading-relaxed sm:text-xl"
+              style={{ color: "#1976D2", animationDelay: "200ms" }}
+            >
+              {t.positioningSub}
+            </p>
+            <p
+              className={`prt-enter max-w-[800px] ${heroBodyWidth} text-lg leading-[1.75] text-slate-300`}
+              style={{ animationDelay: "300ms" }}
+            >
+              {t.positioningBody}
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* ── Production Environment — wide factory band ──────── */}
-      <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            {t.factoryLabel}
-          </p>
-          <div className="relative h-[240px] w-full overflow-hidden bg-black sm:h-[340px] lg:h-[440px]">
-            <Image
-              src="/images/company_factory_overview.png"
-              alt="PRT production and assembly floor"
-              fill
-              sizes="100vw"
-              quality={90}
-              className="object-cover object-center"
-            />
-            {/* very subtle bottom gradient for integration — details stay visible */}
+          {/* Factory overview — wide horizontal band directly below */}
+          <div className="mt-8 lg:mt-10">
+            <p
+              className="prt-enter mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+              style={{ animationDelay: "400ms" }}
+            >
+              {t.factoryLabel}
+            </p>
             <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0"
-              style={{ background: "linear-gradient(to top, rgba(2,6,23,0.35) 0%, transparent 35%)" }}
-            />
+              className="prt-enter relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]"
+              style={{ animationDelay: "500ms" }}
+            >
+              <Image
+                src="/images/company_factory_overview.png"
+                alt="PRT production and assembly floor"
+                fill
+                sizes="100vw"
+                quality={90}
+                className="object-cover"
+                style={{ objectPosition: "center bottom" }}
+              />
+              {/* very subtle bottom gradient for integration — details stay visible */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(2,6,23,0.3) 0%, transparent 32%)" }}
+              />
+            </div>
+            <p
+              className="prt-enter mt-3 max-w-2xl text-sm leading-relaxed text-slate-500"
+              style={{ animationDelay: "560ms" }}
+            >
+              {t.factoryCaption}
+            </p>
           </div>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-500">
-            {t.factoryCaption}
-          </p>
         </div>
       </section>
 
