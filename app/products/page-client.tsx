@@ -6,6 +6,130 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { useLanguage } from "@/hooks/use-language"
 
+// Laminators — language-neutral spec data (model / type / specs / materials /
+// application are English in every locale, matching the Exposure entries).
+// Only the short description is localized. Source: PRT laminator spec sheets.
+const LAMINATOR_BASE = [
+  {
+    model: "PRTLA-350A-LF",
+    type: "Roll-to-Roll Laminator",
+    specs: [
+      { label: "Material Width", value: "350 mm" },
+      { label: "Material Thickness", value: "0.1 ~ 0.35 mm" },
+      { label: "Laminator Roller", value: "ø100, Silicon Rubber Coating (2EA × 2Set)" },
+      { label: "Heater", value: "Tube Heater (220V, 1.5kW)" },
+      { label: "Temperature", value: "130°C Max" },
+      { label: "Uniformity", value: "±2°C" },
+      { label: "Lamination Speed", value: "0.5 ~ 5.0 m/min" },
+      { label: "Temperature Range", value: "Ambient ~ 130°C" },
+      { label: "Anti-Particle", value: "Clean Booth + FFU" },
+      { label: "Power", value: "220V × 3P × 8kW" },
+      { label: "Pneumatic Air", value: "More Than 5 kg/cm²" },
+      { label: "Process", value: "Pre Treatment → Guide Roll → Clean Unit → Pre Heater → Wet Unit → DFR Chuck → Lamination → Buffer → Splice Unit → ReWinder (EPC)" },
+    ],
+    materials: "C7025 / CDA194 / AL42",
+    application: "Leadframe / Semiconductor Packaging / VCM Spring",
+  },
+  {
+    model: "PRTLA-500A-T",
+    type: "Roll-to-Roll Laminator",
+    specs: [
+      { label: "Material Width", value: "500 mm" },
+      { label: "Material Thickness", value: "0.05 ~ 0.3 mm" },
+      { label: "Laminator Roller", value: "ø80, Silicon Rubber Coating (2EA × 1Set)" },
+      { label: "Heater", value: "Tube Heater (220V, 1.5kW)" },
+      { label: "Temperature", value: "130°C Max" },
+      { label: "Uniformity", value: "±5°C (Option: ±2°C)" },
+      { label: "Lamination Speed", value: "0.5 ~ 5.0 m/min" },
+      { label: "Temperature Range", value: "Ambient ~ 130°C" },
+      { label: "Anti-Particle", value: "Clean Booth + FFU" },
+      { label: "Power", value: "220V × 3P × 8kW" },
+      { label: "Pneumatic Air", value: "More Than 5 kg/cm²" },
+      { label: "Process", value: "UnWinder → Splice Unit → Clean Unit → DFR Chuck → Lamination → Cooling Unit → ReWinder (EPC)" },
+    ],
+    materials: "FPCB / TSP process materials",
+    application: "FPCB / TSP",
+  },
+  {
+    model: "PRTLA-500A-F",
+    type: "Roll-to-Roll Laminator",
+    specs: [
+      { label: "Material Width", value: "500 mm" },
+      { label: "Material Thickness", value: "0.05 ~ 0.3 mm" },
+      { label: "Laminator Roller", value: "ø80, Silicon Rubber Coating (2EA × 1Set)" },
+      { label: "Heater", value: "Tube Heater (220V, 1.5kW)" },
+      { label: "Temperature", value: "130°C Max" },
+      { label: "Uniformity", value: "±5°C (Option: ±2°C)" },
+      { label: "Lamination Speed", value: "0.5 ~ 5.0 m/min" },
+      { label: "Temperature Range", value: "Ambient ~ 130°C" },
+      { label: "Power", value: "220V × 3P × 8kW" },
+      { label: "Pneumatic Air", value: "More Than 5 kg/cm²" },
+      { label: "Process", value: "UnWinder → Splice Unit → Clean Unit → DFR Chuck → Lamination → Cooling Unit → ReWinder (EPC)" },
+    ],
+    materials: "FPCB / Flexible Material",
+    application: "FPCB / Flexible Material",
+  },
+  {
+    model: "PRTLA-M610",
+    type: "Sheet Manual Laminator",
+    specs: [
+      { label: "Panel Size", value: "510 × 510 mm" },
+      { label: "Panel Thickness", value: "0.05 ~ 2.0 mm (User Spec.)" },
+      { label: "Laminator Roller", value: "ø80, Silicon Rubber Coating (2EA × 1Set)" },
+      { label: "Heater", value: "Tube Heater (220V, 1.5kW)" },
+      { label: "Temperature", value: "130°C Max" },
+      { label: "Uniformity", value: "±5°C" },
+      { label: "Lamination Speed", value: "0.5 ~ 5.0 m/min" },
+      { label: "Temperature Range", value: "Ambient ~ 130°C" },
+      { label: "Power", value: "220V × 3P × 5kW" },
+      { label: "Pneumatic Air", value: "More Than 5 kg/cm²" },
+      { label: "Process", value: "Guide Conveyor → DFR Chuck → Lamination → UnLoading Conveyor" },
+    ],
+    materials: "FPCB / PCB sheet materials",
+    application: "FPCB / PCB",
+  },
+  {
+    model: "PRTLA-PS63i-FPD",
+    type: "Sheet-to-Sheet Laminator",
+    specs: [
+      { label: "Panel Size", value: '32" ~ 50" × 2 Sheet / 63" × 1 Sheet' },
+      { label: "Panel Thickness", value: "0.5 ~ 5.0 mm (User Spec.)" },
+      { label: "Laminator Roller", value: "ø60, Silicon Rubber Coating (2EA × 1Set)" },
+      { label: "Lamination Speed", value: "1.0 m/sec" },
+      { label: "Temperature Range", value: "Ambient ~ 130°C" },
+      { label: "Power", value: "220V × 3P × 4kW" },
+      { label: "Pneumatic Air", value: "More Than 5 kg/cm²" },
+      { label: "Process", value: "Operator Manual Loading → Circulation (Folder Type) → Lamination → Circulation → Operator Manual UnLoading" },
+    ],
+    materials: "Glass / Board / FPD panel materials",
+    application: "FPD / Glass / Board",
+  },
+]
+
+const LAMINATOR_DESC = {
+  ko: [
+    "Lead Frame 및 VCM Spring 공정용 Roll-to-Roll Laminator입니다.",
+    "FPCB 및 TSP 공정용 Roll-to-Roll Laminator입니다.",
+    "FPCB 및 플렉시블 소재 공정용 Roll-to-Roll Laminator입니다.",
+    "FPCB 및 PCB 공정용 Sheet Manual Laminator입니다.",
+    "FPD · 유리 · 보드 공정용 Sheet-to-Sheet Laminator입니다.",
+  ],
+  en: [
+    "Roll-to-Roll Laminator for Lead Frame and VCM Spring applications.",
+    "Roll-to-Roll Laminator for FPCB and TSP applications.",
+    "Roll-to-Roll Laminator for FPCB and flexible material applications.",
+    "Sheet Manual Laminator for FPCB and PCB applications.",
+    "Sheet-to-Sheet Laminator for FPD, glass, and board applications.",
+  ],
+  zh: [
+    "用于 Lead Frame 与 VCM Spring 应用的 Roll-to-Roll Laminator。",
+    "用于 FPCB 与 TSP 应用的 Roll-to-Roll Laminator。",
+    "用于 FPCB 与柔性材料应用的 Roll-to-Roll Laminator。",
+    "用于 FPCB 与 PCB 应用的 Sheet Manual Laminator。",
+    "用于 FPD、玻璃与基板应用的 Sheet-to-Sheet Laminator。",
+  ],
+}
+
 const translations = {
   ko: {
     pageLabel: "Equipment Lineup",
@@ -20,42 +144,7 @@ const translations = {
     specsLabel: "주요 사양",
     materialsLabel: "대응 소재",
     applicationLabel: "적용 공정",
-    laminators: [
-      {
-        model: "PRTLA-350A-PT",
-        type: "Roll-to-Roll Hot Laminator",
-        desc: "Leadframe 양산용 Roll-to-Roll 드라이필름 Lamination 시스템입니다. 정밀 장력 제어와 온도 제어를 기반으로 연속 생산 환경에 최적화되어 있습니다.",
-        specs: [
-          { label: "Max Web Width", value: "350 mm" },
-          { label: "Speed", value: "0.1–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Roll-to-Roll Hot Lamination" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "3850(W) × 2150(D) × 2400(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-      {
-        model: "PRTLA-300A-SA2",
-        type: "Stand-alone Roll-to-Roll Laminator",
-        desc: "좁은 Web Width와 유연한 공정 조건에 대응하는 독립형 Roll-to-Roll Laminator입니다. 제한된 생산 공간이나 소규모 라인 구성에 적합합니다.",
-        specs: [
-          { label: "Web Width Range", value: "150–330 mm" },
-          { label: "Speed", value: "0.05–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Stand-alone R2R Laminator" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "4100(W) × 1700(D) × 2600(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-    ],
+    laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.ko[i] })),
     exposures: [
       {
         model: "PRTEX-380VAN-LF-LED",
@@ -130,42 +219,7 @@ const translations = {
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
     applicationLabel: "Application",
-    laminators: [
-      {
-        model: "PRTLA-350A-PT",
-        type: "Roll-to-Roll Hot Laminator",
-        desc: "Roll-to-Roll dry film lamination system for Leadframe mass production. Optimized for continuous production with servo-based tension control and precision temperature management.",
-        specs: [
-          { label: "Max Web Width", value: "350 mm" },
-          { label: "Speed", value: "0.1–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Roll-to-Roll Hot Lamination" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "3850(W) × 2150(D) × 2400(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-      {
-        model: "PRTLA-300A-SA2",
-        type: "Stand-alone Roll-to-Roll Laminator",
-        desc: "Compact stand-alone Roll-to-Roll laminator for narrower web widths and flexible process environments.",
-        specs: [
-          { label: "Web Width Range", value: "150–330 mm" },
-          { label: "Speed", value: "0.05–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Stand-alone R2R Laminator" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "4100(W) × 1700(D) × 2600(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-    ],
+    laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.en[i] })),
     exposures: [
       {
         model: "PRTEX-380VAN-LF-LED",
@@ -240,42 +294,7 @@ const translations = {
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
     applicationLabel: "Application",
-    laminators: [
-      {
-        model: "PRTLA-350A-PT",
-        type: "Roll-to-Roll Hot Laminator",
-        desc: "面向 Leadframe 量产的 Roll-to-Roll 干膜 Lamination 系统。基于伺服张力控制和精密温度管理，针对连续生产进行了优化。",
-        specs: [
-          { label: "Max Web Width", value: "350 mm" },
-          { label: "Speed", value: "0.1–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Roll-to-Roll Hot Lamination" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "3850(W) × 2150(D) × 2400(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-      {
-        model: "PRTLA-300A-SA2",
-        type: "Stand-alone Roll-to-Roll Laminator",
-        desc: "适用于较窄 Web Width 和灵活工艺环境的紧凑型独立式 Roll-to-Roll Laminator。",
-        specs: [
-          { label: "Web Width Range", value: "150–330 mm" },
-          { label: "Speed", value: "0.05–5.0 m/min" },
-          { label: "Temp Accuracy", value: "±3°C" },
-          { label: "Pressure", value: "±0.1 kg/cm²" },
-          { label: "Lamination Type", value: "Stand-alone R2R Laminator" },
-          { label: "Power", value: "Max. 20 kW (220 V, 60 Hz, 3Φ)" },
-          { label: "Machine Size", value: "4100(W) × 1700(D) × 2600(H) mm" },
-          { label: "Weight", value: "< 2,000 kg" },
-        ],
-        materials: "C7025 / CDA194 / AL42",
-        application: "Leadframe / Semiconductor Packaging",
-      },
-    ],
+    laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.zh[i] })),
     exposures: [
       {
         model: "PRTEX-380VAN-LF-LED",
@@ -366,6 +385,11 @@ const CATEGORY_IMAGE: Record<string, string> = {
 const MODEL_IMAGE: Record<string, { src: string; aspect: string }> = {
   "PRTEX-380VAN-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
   "PRTEX-380AN-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
+  "PRTLA-350A-LF": { src: "/images/equipment_lami1.png", aspect: "aspect-[1377/870]" },
+  "PRTLA-500A-T": { src: "/images/equipment_lami2.png", aspect: "aspect-[1325/1086]" },
+  "PRTLA-500A-F": { src: "/images/equipment_lami3-v2.png", aspect: "aspect-[1048/1078]" },
+  "PRTLA-M610": { src: "/images/equipment_lami4.png", aspect: "aspect-[894/1226]" },
+  "PRTLA-PS63i-FPD": { src: "/images/equipment_lami5.png", aspect: "aspect-[1551/852]" },
 }
 
 interface SpecRow {
@@ -394,12 +418,14 @@ function ModelShowcase({
   image,
   labels,
   imageAspectClass = "aspect-[16/9]",
+  imageShadow = false,
 }: {
   model: Model
   categoryLabel: string
   image?: string
   labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
   imageAspectClass?: string
+  imageShadow?: boolean
 }) {
   return (
     <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-200 py-12 first:border-t-0 first:pt-4">
@@ -425,6 +451,11 @@ function ModelShowcase({
               fill
               sizes="(min-width: 1024px) 80vw, 100vw"
               className="object-contain"
+              style={
+                imageShadow
+                  ? { filter: "drop-shadow(0 24px 20px rgba(15,23,42,0.22))" }
+                  : undefined
+              }
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -575,6 +606,7 @@ export default function ProductsPage() {
                   categoryLabel={active.label}
                   image={MODEL_IMAGE[m.model]?.src ?? CATEGORY_IMAGE[active.group]}
                   imageAspectClass={MODEL_IMAGE[m.model]?.aspect ?? "aspect-[16/9]"}
+                  imageShadow={active.group === "laminators"}
                   labels={labels}
                 />
               ))
