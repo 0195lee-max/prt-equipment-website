@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { CountryFlag } from "@/components/country-flag"
 
 type Language = "ko" | "en" | "zh"
 
@@ -235,23 +236,27 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
     <div className="min-h-svh bg-[#07090F]">
       {/* ── Hero ─────────────────────────────────────────── */}
       <div className="relative bg-[#07090F] border-b border-slate-800/60 overflow-hidden">
-        {/* Background photo */}
+        {/* Background photo — kept very subdued: strong blur + reduced
+            brightness/saturation so only the production-floor silhouette is
+            recognizable, never a featured photo. scale-105 hides blurred edges. */}
         <Image
-          src="/images/installed-base-hero.jpg"
+          src="/images/installed-base-bg.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-30"
+          className="scale-105 object-cover opacity-70"
+          style={{ filter: "blur(4px) brightness(0.7) saturate(0.8)" }}
           aria-hidden="true"
         />
-        {/* Dark overlay for legibility */}
+        {/* Strong dark navy overlay for legibility — keeps the image recessed
+            while leaving the production-floor silhouette faintly recognizable. */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(7,9,15,0.65) 0%, rgba(7,9,15,0.75) 60%, rgba(7,9,15,0.92) 100%)",
+              "linear-gradient(180deg, rgba(7,9,15,0.55) 0%, rgba(7,9,15,0.69) 55%, rgba(7,9,15,0.92) 100%)",
           }}
         />
         <div
@@ -364,21 +369,14 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 key={idx}
                 className="relative border-r border-b border-slate-800 bg-slate-950/30 p-6 hover:bg-slate-900/40 transition-colors"
               >
-                {/* Country code badge — high-contrast, designed (replaces unreliable flag emoji) */}
-                <div
-                  className="inline-flex items-center justify-center mb-4 px-2.5 py-1 border"
-                  style={{
-                    borderColor: "rgba(25,118,210,0.45)",
-                    backgroundColor: "rgba(25,118,210,0.08)",
-                  }}
+                {/* Subtle country flag marker (soft SVG, toned down + soft ring
+                    so it integrates with the dark navy design — not emoji). */}
+                <span
+                  className="mb-4 inline-flex h-5 w-7 overflow-hidden rounded-[3px] ring-1 ring-white/10"
+                  style={{ filter: "saturate(0.82) brightness(0.92)" }}
                 >
-                  <span
-                    className="text-sm font-bold font-mono tracking-[0.15em]"
-                    style={{ color: "#1976D2" }}
-                  >
-                    {r.code}
-                  </span>
-                </div>
+                  <CountryFlag code={r.code} />
+                </span>
                 <h3 className="text-base font-bold text-white mb-3 tracking-wide">
                   {r.country}
                 </h3>
@@ -386,7 +384,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                   {r.equipmentTypes.map((eq, eIdx) => (
                     <span
                       key={eIdx}
-                      className="inline-flex items-center px-2 py-0.5 text-[10px] font-mono border border-slate-700 text-slate-300"
+                      className="inline-flex items-center rounded-[3px] border border-slate-700/60 px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-400"
                     >
                       {eq}
                     </span>
