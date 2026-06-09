@@ -1,8 +1,10 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Calendar, ArrowRight, Tag } from "lucide-react"
+import { NewsCardVisual } from "@/components/news-card-visual"
+import { Calendar, ArrowRight, Tag, X } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
 
 type NewsType =
@@ -21,6 +23,7 @@ interface NewsItem {
   description: string
   status?: "Upcoming" | "Scheduled"
   image?: string
+  imageKind?: "logo" | "photo"
 }
 
 // Shipment card content is identical across locales (kept English).
@@ -31,6 +34,8 @@ const SHIPMENT_ITEM: NewsItem = {
   description:
     "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
   status: "Scheduled",
+  image: "/images/news_shipment_delivery_blue_wrapped.jpg",
+  imageKind: "photo",
 }
 
 // Exhibition card — type/date/title/status English in every locale;
@@ -41,6 +46,7 @@ const EXHIBITION_BASE = {
   title: "CPCA Show Plus 2026",
   status: "Upcoming" as const,
   image: "/images/cpca_show_plus_logo.jpg",
+  imageKind: "logo" as const,
 }
 
 const translations = {
@@ -144,6 +150,20 @@ function NewsImagePlaceholder({ label }: { label: string }) {
 export default function NewsPage() {
   const [lang, setLang] = useLanguage()
   const t = translations[lang]
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null)
+    }
+    document.addEventListener("keydown", onKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = ""
+    }
+  }, [lightbox])
 
   return (
     <main className="min-h-svh bg-[#07090F]">
@@ -216,17 +236,17 @@ export default function NewsPage() {
                 key={idx}
                 className="group relative border-r border-b border-slate-800 bg-slate-950/50 transition-colors hover:bg-slate-950/80"
               >
-                {item.image ? (
-                  <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-slate-800/60 bg-[#0A0F1A] p-6">
-                    {/* corner ticks — consistent with the placeholder treatment */}
-                    <div className="absolute top-3 left-3 h-2 w-2 border-l border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-                    <div className="absolute top-3 right-3 h-2 w-2 border-r border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-                    <div className="absolute bottom-3 left-3 h-2 w-2 border-l border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-                    <div className="absolute bottom-3 right-3 h-2 w-2 border-r border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-                    <div className="w-[72%] max-w-[260px] border border-slate-300 bg-white px-6 py-4">
-                      <img src={item.image} alt={item.title} className="h-auto w-full object-contain" />
-                    </div>
-                  </div>
+                {item.image && item.imageKind === "photo" ? (
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: item.image!, alt: item.title })}
+                    aria-label="Enlarge image"
+                    className="block w-full cursor-zoom-in"
+                  >
+                    <NewsCardVisual src={item.image} alt={item.title} kind="photo" />
+                  </button>
+                ) : item.image && item.imageKind === "logo" ? (
+                  <NewsCardVisual src={item.image} alt={item.title} kind="logo" />
                 ) : (
                   <NewsImagePlaceholder label={item.type} />
                 )}
@@ -272,6 +292,32 @@ export default function NewsPage() {
       </section>
 
       <Footer lang={lang} />
+
+      {/* ── Image lightbox (shipment photo) ──────────────── */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center border border-white/30 text-white/80 transition-colors hover:border-white/70 hover:text-white"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[88vh] max-w-[92vw] border border-white/10 object-contain"
+          />
+        </div>
+      )}
     </main>
   )
 }
