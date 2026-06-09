@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { EquipmentImageLightbox, type LightboxImage } from "@/components/equipment-image-lightbox"
 import { useLanguage } from "@/hooks/use-language"
 
 // Laminators — language-neutral spec data (model / type / specs / materials /
@@ -419,6 +420,7 @@ function ModelShowcase({
   labels,
   imageAspectClass = "aspect-[16/9]",
   imageShadow = false,
+  onOpenImage,
 }: {
   model: Model
   categoryLabel: string
@@ -426,6 +428,7 @@ function ModelShowcase({
   labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
   imageAspectClass?: string
   imageShadow?: boolean
+  onOpenImage?: (images: LightboxImage[], index: number) => void
 }) {
   return (
     <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-200 py-12 first:border-t-0 first:pt-4">
@@ -445,18 +448,25 @@ function ModelShowcase({
           cutoff. Borderless: no card/rounded/gradient/glow. */}
       <div className={`relative mt-4 w-full ${imageAspectClass}`}>
         {image ? (
-            <Image
-              src={image}
-              alt={`${model.model} — ${model.type}`}
-              fill
-              sizes="(min-width: 1024px) 80vw, 100vw"
-              className="object-contain"
-              style={
-                imageShadow
-                  ? { filter: "drop-shadow(0 24px 20px rgba(15,23,42,0.22))" }
-                  : undefined
-              }
-            />
+            <button
+              type="button"
+              onClick={onOpenImage ? () => onOpenImage([{ src: image, alt: `${model.model} — ${model.type}` }], 0) : undefined}
+              aria-label={`Enlarge ${model.model} image`}
+              className="group absolute inset-0 block w-full cursor-zoom-in"
+            >
+              <Image
+                src={image}
+                alt={`${model.model} — ${model.type}`}
+                fill
+                sizes="(min-width: 1024px) 80vw, 100vw"
+                className="object-contain transition-opacity group-hover:opacity-90"
+                style={
+                  imageShadow
+                    ? { filter: "drop-shadow(0 24px 20px rgba(15,23,42,0.22))" }
+                    : undefined
+                }
+              />
+            </button>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-sm font-semibold text-neutral-400">{model.model}</span>
@@ -492,6 +502,100 @@ function ModelShowcase({
   )
 }
 
+/* Compact laminator catalog card — LIGHT. Used ONLY for the Laminators
+   category so the 5 models read as a comparable product lineup (2 + 2 + 1)
+   instead of stacked full-width showcases. Image height is capped so the
+   equipment supports the spec data rather than dominating the page; the
+   transparent PNG is shown object-contain (full machine, no cropping) with
+   the same soft drop-shadow used elsewhere for laminators. */
+function LaminatorCard({
+  model,
+  categoryLabel,
+  image,
+  labels,
+  centered,
+  onOpenImage,
+}: {
+  model: Model
+  categoryLabel: string
+  image?: string
+  labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
+  centered?: boolean
+  onOpenImage?: (images: LightboxImage[], index: number) => void
+}) {
+  return (
+    <section
+      id={`model-${slug(model.model)}`}
+      data-anchor
+      className={`flex flex-col ${
+        centered ? "md:col-span-2 md:mx-auto md:w-[calc(50%-1.75rem)]" : ""
+      }`}
+    >
+      {/* Borderless image — blends into the page background (no white card box),
+          object-contain keeps the whole machine visible (no cropping). The
+          wrapper padding keeps the equipment off the column edges. Height is
+          ~15% taller than the previous boxed version; click to enlarge. */}
+      <div className="mb-8 px-2 sm:px-6">
+        <div className="relative h-[345px] w-full sm:h-[390px] lg:h-[437px]">
+          {image ? (
+            <button
+              type="button"
+              onClick={onOpenImage ? () => onOpenImage([{ src: image, alt: `${model.model} — ${model.type}` }], 0) : undefined}
+              aria-label={`Enlarge ${model.model} image`}
+              className="group absolute inset-0 block w-full cursor-zoom-in"
+            >
+              <Image
+                src={image}
+                alt={`${model.model} — ${model.type}`}
+                fill
+                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 90vw"
+                className="object-contain transition-opacity group-hover:opacity-90"
+                style={{ filter: "drop-shadow(0 16px 14px rgba(15,23,42,0.16))" }}
+              />
+            </button>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-sm font-semibold text-neutral-400">{model.model}</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
+        {categoryLabel}
+      </p>
+      <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
+      <h3 className="mt-1 text-xl font-bold tracking-tight text-neutral-900 lg:text-2xl">{model.type}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-neutral-600">{model.desc}</p>
+
+      <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+        {labels.specsLabel}
+      </p>
+      <div className="divide-y divide-neutral-200 border-t border-neutral-200">
+        {model.specs.map((spec, i) => (
+          <div key={i} className="flex items-baseline justify-between gap-4 py-2.5">
+            <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
+            <span className="text-right text-sm font-semibold leading-relaxed tabular-nums text-neutral-900">
+              {spec.value}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 space-y-2">
+        <div className="flex items-start gap-3">
+          <span className="min-w-[120px] text-xs text-neutral-500">{labels.materialsLabel}</span>
+          <span className="text-xs text-neutral-800">{model.materials}</span>
+        </div>
+        <div className="flex items-start gap-3">
+          <span className="min-w-[120px] text-xs text-neutral-500">{labels.applicationLabel}</span>
+          <span className="text-xs text-neutral-800">{model.application}</span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* Compact module entry — LIGHT (not a full equipment model). */
 function ModuleCard({ title, desc }: { title: string; desc: string }) {
   return (
@@ -506,6 +610,8 @@ export default function ProductsPage() {
   const [lang, setLang] = useLanguage()
   const t = translations[lang]
   const [activeCat, setActiveCat] = useState("cat-exposure")
+  const [lightbox, setLightbox] = useState<{ images: LightboxImage[]; index: number } | null>(null)
+  const openLightbox = (images: LightboxImage[], index: number) => setLightbox({ images, index })
 
   // Deep-link: open the category from the URL hash (the navbar submenu
   // links to /products#cat-laminators) and react to in-page hash changes.
@@ -598,16 +704,34 @@ export default function ProductsPage() {
                   ))}
                 </div>
               </div>
+            ) : active.group === "laminators" ? (
+              /* Laminators — compact 2 + 2 + 1 catalog grid (capped image
+                 height) so the 5 models compare easily. The final
+                 Sheet-to-Sheet model is centered on its own row at the same
+                 card width as the others. */
+              <div className="grid gap-y-16 pt-4 md:grid-cols-2 md:gap-x-14 md:gap-y-24">
+                {t.laminators.map((m, i) => (
+                  <LaminatorCard
+                    key={i}
+                    model={m}
+                    categoryLabel={active.label}
+                    image={MODEL_IMAGE[m.model]?.src ?? CATEGORY_IMAGE[active.group]}
+                    labels={labels}
+                    centered={i === t.laminators.length - 1 && t.laminators.length % 2 === 1}
+                    onOpenImage={openLightbox}
+                  />
+                ))}
+              </div>
             ) : (
-              (active.group === "exposures" ? t.exposures : t.laminators).map((m, i) => (
+              t.exposures.map((m, i) => (
                 <ModelShowcase
                   key={i}
                   model={m}
                   categoryLabel={active.label}
                   image={MODEL_IMAGE[m.model]?.src ?? CATEGORY_IMAGE[active.group]}
                   imageAspectClass={MODEL_IMAGE[m.model]?.aspect ?? "aspect-[16/9]"}
-                  imageShadow={active.group === "laminators"}
                   labels={labels}
+                  onOpenImage={openLightbox}
                 />
               ))
             )}
@@ -639,6 +763,16 @@ export default function ProductsPage() {
       </div>
 
       <Footer lang={lang} />
+
+      {/* Enlarge-on-click viewer — shared by Exposure + Laminators. */}
+      {lightbox && (
+        <EquipmentImageLightbox
+          images={lightbox.images}
+          index={lightbox.index}
+          onClose={() => setLightbox(null)}
+          onIndexChange={(i) => setLightbox((prev) => (prev ? { ...prev, index: i } : prev))}
+        />
+      )}
     </main>
   )
 }
