@@ -93,13 +93,15 @@ export function EquipmentImageLightbox({
         </>
       )}
 
-      {/* Aspect ratio preserved, never stretched, never larger than the viewport. */}
+      {/* Aspect ratio preserved, never stretched, never larger than the viewport.
+          Clicking the image itself also closes the viewer (same as the backdrop
+          / X button); cursor-zoom-out signals this. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={current.src}
         alt={current.alt}
-        onClick={(e) => e.stopPropagation()}
-        className="max-h-[88vh] max-w-[92vw] object-contain"
+        onClick={onClose}
+        className="max-h-[88vh] max-w-[92vw] cursor-zoom-out object-contain"
       />
 
       {multi && (
