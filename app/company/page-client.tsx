@@ -343,51 +343,11 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* ── Assembly & Control Detail — two-image proof section ─ */}
-      <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-            {t.engLabel}
-          </p>
-          <h2 className="mb-5 max-w-3xl text-2xl font-bold leading-snug text-white lg:text-3xl">
-            {t.engHeading}
-          </h2>
-          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-300 lg:text-lg">
-            {t.engCopy}
-          </p>
-
-          {/* Two images — landscape assembly view + portrait control cabinet.
-              Columns sized to each orientation; equal height on desktop, stacked on mobile. */}
-          <div className="grid gap-6 lg:grid-cols-[2.2fr_1fr]">
-            <div className="relative aspect-[3/2] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[500px]">
-              <Image
-                src="/images/company_engineering_detail-v3.png"
-                alt="PRT control cabinet assembly and machine frame / cable routing detail"
-                fill
-                sizes="(min-width: 1024px) 62vw, 100vw"
-                quality={90}
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="relative aspect-[2/3] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[500px]">
-              <Image
-                src="/images/company_engineering_detail2.png"
-                alt="PRT electrical and pneumatic control cabinet with cable routing"
-                fill
-                sizes="(min-width: 1024px) 30vw, 100vw"
-                quality={90}
-                className="object-cover object-center"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Specialization / What We Focus On ──────────────── */}
-      <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative">
+      <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative border-t border-slate-800/60">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
+        <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.specializationLabel}
           </p>
@@ -422,6 +382,48 @@ export default function CompanyPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Assembly & Control Detail — four-image proof section ─ */}
+      <section className="relative border-t border-slate-800/60 bg-slate-950">
+        <div className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+            {t.engLabel}
+          </p>
+          <h2 className="mb-5 max-w-3xl text-2xl font-bold leading-snug text-white lg:text-3xl">
+            {t.engHeading}
+          </h2>
+          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-300 lg:text-lg">
+            {t.engCopy}
+          </p>
+
+          {/* Four images — 1 & 2 wider, 3 & 4 narrower vertical detail cuts.
+              Same top baseline / equal height on desktop; 2x2 on mobile.
+              object-position tuned per image so the equipment core stays in frame. */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-[1.4fr_1.4fr_1fr_1fr]">
+            {[
+              { src: "/images/company_assembly_detail1.jpg", pos: "center 38%", alt: "Control cabinet assembly and wiring" },
+              { src: "/images/company_assembly_detail2.jpg", pos: "center 58%", alt: "Machine assembly with open control cabinet" },
+              { src: "/images/company_assembly_detail3.jpg", pos: "center 50%", alt: "Machine frame and cable routing" },
+              { src: "/images/company_assembly_detail4.jpg", pos: "center 45%", alt: "Electrical and pneumatic control cabinet detail" },
+            ].map((im, i) => (
+              <div
+                key={i}
+                className="relative aspect-[3/4] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[440px]"
+              >
+                <Image
+                  src={im.src}
+                  alt={im.alt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  quality={88}
+                  className="object-cover"
+                  style={{ objectPosition: im.pos }}
+                />
               </div>
             ))}
           </div>
