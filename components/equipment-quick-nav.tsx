@@ -14,7 +14,7 @@ const QUICK_LINKS: Array<{ href: string; label: string }> = [
 export function EquipmentQuickNav() {
   return (
     <div className="bg-[#0A0A0A]">
-      <div className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
+      <div data-reveal="ui" className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <div className="border-t border-slate-800 pt-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">

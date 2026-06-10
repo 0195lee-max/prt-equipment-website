@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EquipmentImageLightbox, type LightboxImage } from "@/components/equipment-image-lightbox"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
 // Laminators — language-neutral spec data (model / type / specs / materials /
 // application are English in every locale, matching the Exposure entries).
@@ -421,6 +421,7 @@ function ModelShowcase({
   imageAspectClass = "aspect-[16/9]",
   imageShadow = false,
   onOpenImage,
+  priority = false,
 }: {
   model: Model
   categoryLabel: string
@@ -429,6 +430,7 @@ function ModelShowcase({
   imageAspectClass?: string
   imageShadow?: boolean
   onOpenImage?: (images: LightboxImage[], index: number) => void
+  priority?: boolean
 }) {
   return (
     <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-200 py-12 first:border-t-0 first:pt-4">
@@ -458,8 +460,9 @@ function ModelShowcase({
                 src={image}
                 alt={`${model.model} — ${model.type}`}
                 fill
+                priority={priority}
                 sizes="(min-width: 1024px) 80vw, 100vw"
-                className="object-contain transition-opacity group-hover:opacity-90"
+                className="object-contain"
                 style={
                   imageShadow
                     ? { filter: "drop-shadow(0 24px 20px rgba(15,23,42,0.22))" }
@@ -515,6 +518,7 @@ function LaminatorCard({
   labels,
   centered,
   onOpenImage,
+  priority = false,
 }: {
   model: Model
   categoryLabel: string
@@ -522,6 +526,7 @@ function LaminatorCard({
   labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
   centered?: boolean
   onOpenImage?: (images: LightboxImage[], index: number) => void
+  priority?: boolean
 }) {
   return (
     <section
@@ -548,8 +553,9 @@ function LaminatorCard({
                 src={image}
                 alt={`${model.model} — ${model.type}`}
                 fill
+                priority={priority}
                 sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 90vw"
-                className="object-contain transition-opacity group-hover:opacity-90"
+                className="object-contain"
                 style={{ filter: "drop-shadow(0 16px 14px rgba(15,23,42,0.16))" }}
               />
             </button>
@@ -606,8 +612,8 @@ function ModuleCard({ title, desc }: { title: string; desc: string }) {
   )
 }
 
-export default function ProductsPage() {
-  const [lang, setLang] = useLanguage()
+export default function ProductsPage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
   const [activeCat, setActiveCat] = useState("cat-exposure")
   const [lightbox, setLightbox] = useState<{ images: LightboxImage[]; index: number } | null>(null)
@@ -719,6 +725,7 @@ export default function ProductsPage() {
                     labels={labels}
                     centered={i === t.laminators.length - 1 && t.laminators.length % 2 === 1}
                     onOpenImage={openLightbox}
+                    priority={i === 0}
                   />
                 ))}
               </div>
@@ -732,6 +739,7 @@ export default function ProductsPage() {
                   imageAspectClass={MODEL_IMAGE[m.model]?.aspect ?? "aspect-[16/9]"}
                   labels={labels}
                   onOpenImage={openLightbox}
+                  priority={i === 0}
                 />
               ))
             )}

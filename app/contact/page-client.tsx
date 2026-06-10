@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Mail, Phone, MapPin, Clock, Printer } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
 const translations = {
   ko: {
@@ -84,8 +84,8 @@ const translations = {
   },
 }
 
-export default function ContactPage() {
-  const [lang, setLang] = useLanguage()
+export default function ContactPage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [formData, setFormData] = useState({

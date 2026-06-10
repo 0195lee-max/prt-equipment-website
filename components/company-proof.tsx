@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import { ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
@@ -117,25 +118,45 @@ export function CompanyProof({ lang }: CompanyProofProps) {
 
       <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
-          {/* Left: company preview copy */}
+          {/* Left: company preview copy — staggered reveal (headline first,
+              then supporting copy, then CTAs). The video band below is the
+              visual anchor and is NOT revealed (visible from the start). */}
           <div>
-            <div className="mb-5 flex items-center gap-3">
+            <div
+              data-reveal="ui"
+              className="mb-5 flex items-center gap-3"
+            >
               <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
                 {t.eyebrow}
               </p>
             </div>
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
+            <h2
+              data-reveal="heading"
+              className="text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl"
+            >
               {t.headline}
             </h2>
-            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-slate-300">
+            <p
+              data-reveal
+              style={{ "--reveal-delay": "120ms" } as CSSProperties}
+              className="mt-4 max-w-xl text-base font-medium leading-relaxed text-slate-300"
+            >
               {t.subline}
             </p>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-slate-400">
+            <p
+              data-reveal
+              style={{ "--reveal-delay": "200ms" } as CSSProperties}
+              className="mt-5 max-w-xl text-sm leading-relaxed text-slate-400"
+            >
               {t.body}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div
+              data-reveal="ui"
+              style={{ "--reveal-delay": "380ms" } as CSSProperties}
+              className="mt-8 flex flex-wrap gap-3"
+            >
               <a
                 href="/company"
                 className="group inline-flex items-center gap-2 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#0D47A1]"
@@ -154,7 +175,11 @@ export function CompanyProof({ lang }: CompanyProofProps) {
           </div>
 
           {/* Right: KPI / proof grid (2×2, square, thin dividers) */}
-          <div className="grid grid-cols-1 border-l border-t border-slate-800 sm:grid-cols-2">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "300ms" } as CSSProperties}
+            className="grid grid-cols-1 border-l border-t border-slate-800 sm:grid-cols-2"
+          >
             {METRICS.map((m, i) => (
               <div
                 key={i}

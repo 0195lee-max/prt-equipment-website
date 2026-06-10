@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
 const translations = {
   ko: {
@@ -657,8 +657,8 @@ function CompetencyImagePlaceholder({ src, alt }: { src?: string; alt?: string }
   )
 }
 
-export default function EngineeringPage() {
-  const [lang, setLang] = useLanguage()
+export default function EngineeringPage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
 
   return (

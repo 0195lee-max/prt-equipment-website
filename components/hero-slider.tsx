@@ -158,7 +158,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
           }}
         >
-          <source src="/videos/hero_loop_v10.mp4" type="video/mp4" />
+          <source src="/videos/prt_home_hero_loop_enhanced_web_1600x900.mp4" type="video/mp4" />
         </video>
       </div>
 

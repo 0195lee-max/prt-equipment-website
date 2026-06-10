@@ -2,6 +2,8 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { RevealProvider } from '@/components/reveal-provider'
+import { getServerLanguage } from '@/lib/locale'
 import './globals.css'
 
 const inter = Inter({
@@ -73,15 +75,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const serverLang = await getServerLanguage()
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang={serverLang} className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* EXPERIMENTAL scroll-reveal (preview only): arm [data-reveal] hiding
+            before first paint, only when JS runs and motion is allowed — so
+            no-JS / reduced-motion users always get fully visible content. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('reveal-on')}}catch(e){}",
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         {children}
+        <RevealProvider />
         <Analytics />
       </body>
     </html>

@@ -3,10 +3,10 @@
 import { Navbar } from "@/components/navbar"
 import { InstalledBase } from "@/components/installed-base"
 import { Footer } from "@/components/footer"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
-export default function InstalledBasePage() {
-  const [lang, setLang] = useLanguage()
+export default function InstalledBasePage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
 
 
   return (

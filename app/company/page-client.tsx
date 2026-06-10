@@ -1,10 +1,11 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
 // Specification rows mirror the Equipment page formatting: clean
 // "Label: Value" pairs, English in every locale, tabular values.
@@ -252,8 +253,8 @@ const translations = {
   },
 }
 
-export default function CompanyPage() {
-  const [lang, setLang] = useLanguage()
+export default function CompanyPage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
 
   // English copy is longer, so give the hero text a wider measure on desktop
@@ -277,46 +278,49 @@ export default function CompanyPage() {
         />
 
         <div className="relative mx-auto max-w-7xl px-6 pt-8 pb-10 lg:px-8 lg:pt-10 lg:pb-14">
-          {/* Hero text — left-aligned, text-led (KPI grid removed) */}
+          {/* Hero text — left-aligned, text-led (KPI grid removed).
+              Soft scroll-reveal on the text only; the factory image below is
+              the stable visual anchor and is NOT animated. */}
           <div className={`max-w-[960px] ${heroBlockWidth}`}>
             <p
-              className="prt-enter mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-slate-500"
-              style={{ animationDelay: "0ms" }}
+              data-reveal="ui"
+              className="mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-slate-500"
             >
               {t.meta}
             </p>
             <h1
-              className="prt-enter mb-5 max-w-[880px] text-5xl font-bold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-7xl"
-              style={{ animationDelay: "100ms" }}
+              data-reveal="heading"
+              className="mb-5 max-w-[880px] text-5xl font-bold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-7xl"
             >
               {t.positioning}
             </h1>
             <p
-              className="prt-enter mb-5 text-lg font-light leading-relaxed sm:text-xl"
-              style={{ color: "#1976D2", animationDelay: "200ms" }}
+              data-reveal
+              style={{ color: "#1976D2", "--reveal-delay": "120ms" } as CSSProperties}
+              className="mb-5 text-lg font-light leading-relaxed sm:text-xl"
             >
               {t.positioningSub}
             </p>
             <p
-              className={`prt-enter max-w-[800px] ${heroBodyWidth} text-lg leading-[1.75] text-slate-300`}
-              style={{ animationDelay: "300ms" }}
+              data-reveal
+              style={{ "--reveal-delay": "200ms" } as CSSProperties}
+              className={`max-w-[800px] ${heroBodyWidth} text-lg leading-[1.75] text-slate-300`}
             >
               {t.positioningBody}
             </p>
           </div>
 
-          {/* Factory overview — wide horizontal band directly below */}
+          {/* Factory overview — wide horizontal band directly below.
+              The image is a stable anchor: visible immediately, no reveal.
+              Only its label / caption softly appear around it. */}
           <div className="mt-8 lg:mt-10">
             <p
-              className="prt-enter mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
-              style={{ animationDelay: "400ms" }}
+              data-reveal="ui"
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
             >
               {t.factoryLabel}
             </p>
-            <div
-              className="prt-enter relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]"
-              style={{ animationDelay: "500ms" }}
-            >
+            <div className="relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
               <Image
                 src="/images/company_factory_overview.png"
                 alt="PRT production and assembly floor"
@@ -334,8 +338,9 @@ export default function CompanyPage() {
               />
             </div>
             <p
-              className="prt-enter mt-3 max-w-2xl text-sm leading-relaxed text-slate-500"
-              style={{ animationDelay: "560ms" }}
+              data-reveal
+              style={{ "--reveal-delay": "120ms" } as CSSProperties}
+              className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500"
             >
               {t.factoryCaption}
             </p>
@@ -347,7 +352,7 @@ export default function CompanyPage() {
       <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative border-t border-slate-800/60">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.specializationLabel}
           </p>
@@ -390,7 +395,7 @@ export default function CompanyPage() {
 
       {/* ── Assembly & Control Detail — four-image proof section ─ */}
       <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
+        <div data-reveal className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
             {t.engLabel}
           </p>
@@ -434,7 +439,7 @@ export default function CompanyPage() {
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
           <p className="mb-12 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.whyLabel}
           </p>
@@ -452,7 +457,7 @@ export default function CompanyPage() {
 
       {/* ── Company Info — quiet, factual, data-sheet-like ─── */}
       <section className="relative bg-slate-950">
-        <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.infoLabel}
           </p>

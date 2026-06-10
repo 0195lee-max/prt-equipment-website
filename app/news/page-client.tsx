@@ -5,7 +5,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { NewsCardVisual } from "@/components/news-card-visual"
 import { Calendar, ArrowRight, Tag, X } from "lucide-react"
-import { useLanguage } from "@/hooks/use-language"
+import { useLanguage, type Language } from "@/hooks/use-language"
 
 type NewsType =
   | "Exhibition"
@@ -147,8 +147,8 @@ function NewsImagePlaceholder({ label }: { label: string }) {
   )
 }
 
-export default function NewsPage() {
-  const [lang, setLang] = useLanguage()
+export default function NewsPage({ initialLang }: { initialLang?: Language }) {
+  const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
@@ -181,7 +181,7 @@ export default function NewsPage() {
           }}
         />
 
-        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8 w-full">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8 w-full">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
@@ -222,7 +222,7 @@ export default function NewsPage() {
 
       {/* ── News Grid ────────────────────────────────────── */}
       <section className="relative bg-[#07090F] py-20">
-        <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-10">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">

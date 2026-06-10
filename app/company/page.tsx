@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getServerLanguage } from '@/lib/locale'
 import CompanyClient from './page-client'
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function CompanyPage() {
-  return <CompanyClient />
+export default async function CompanyPage() {
+  const initialLang = await getServerLanguage()
+  return <CompanyClient initialLang={initialLang} />
 }

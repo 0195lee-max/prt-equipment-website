@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getServerLanguage } from '@/lib/locale'
 import ContactClient from './page-client'
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ContactPage() {
-  return <ContactClient />
+export default async function ContactPage() {
+  const initialLang = await getServerLanguage()
+  return <ContactClient initialLang={initialLang} />
 }
