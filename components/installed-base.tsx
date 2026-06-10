@@ -270,7 +270,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
         />
 
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div data-reveal="ui" className="flex items-center gap-3 mb-5">
+          <div data-reveal="label" className="flex items-center gap-3 mb-5">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.meta}
@@ -294,7 +294,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#07090F] border-b border-slate-800/60">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div
-            data-reveal="ui"
+            data-reveal="label"
             style={{ "--reveal-delay": "200ms" } as CSSProperties}
             className="py-5 flex items-center gap-3 border-b border-slate-900"
           >

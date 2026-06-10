@@ -123,7 +123,7 @@ export function CompanyProof({ lang }: CompanyProofProps) {
               visual anchor and is NOT revealed (visible from the start). */}
           <div>
             <div
-              data-reveal="ui"
+              data-reveal="label"
               className="mb-5 flex items-center gap-3"
             >
               <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />

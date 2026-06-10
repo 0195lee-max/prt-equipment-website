@@ -238,7 +238,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
               the stable visual anchor and is NOT animated. */}
           <div className={`max-w-[960px] ${heroBlockWidth}`}>
             <p
-              data-reveal="ui"
+              data-reveal="label"
               className="mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-slate-500"
             >
               {t.meta}
