@@ -3,7 +3,6 @@
 import { useState, type CSSProperties } from "react"
 import Image from "next/image"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
-import { CountryFlag } from "@/components/country-flag"
 
 type Language = "ko" | "en" | "zh"
 
@@ -16,10 +15,10 @@ const translations = {
       "PRT 시스템은 아시아 전역의 양산 현장에서 가동 중입니다. 100대 이상의 Installed Systems와 재주문이 현장 성능을 입증합니다.",
     kpiHeading: "Field Record",
     kpis: [
-      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
-      { title: "Asia Production Sites", sub: "Active customer production references" },
-      { title: "Exposure + Lamination", sub: "Core process coverage" },
-      { title: "Repeat Orders", sub: "From existing customers" },
+      { title: "100+", sub: "Installed Systems" },
+      { title: "5", sub: "Asia Markets" },
+      { title: "2", sub: "Core Process Areas" },
+      { title: "Repeat", sub: "Customer Orders" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -60,7 +59,7 @@ const translations = {
     ],
     recordsLabel: "Delivery History",
     recordsNote:
-      "고객사명은 비공개. 구체적 레퍼런스는 요청 시 제공합니다.",
+      "고객사명은 보안상 비공개를 원칙으로 하며, 구체적인 레퍼런스는 요청 시 제공 가능합니다.",
     records: [
       { period: "2011–2013", region: "Korea", type: "Laminator", notes: "초도 양산 라인 도입. 국내 Leadframe 제조사." },
       { period: "2014–2016", region: "Korea / China", type: "Laminator + Exposure", notes: "Exposure 시스템 도입. 중국 최초 납품." },
@@ -73,9 +72,10 @@ const translations = {
     recordRegion: "Region",
     recordType: "Equipment",
     recordNotes: "Notes",
-    customersLabel: "Named Customers",
-    customersNote: "기타 Leadframe & Semiconductor Packaging 제조사 (비공개)",
-    customersList: ["Luxshare Precision", "Henghui Technology", "Jinchuan Group"],
+    customersLabel: "Selected Customer References",
+    customersBody:
+      "공개 가능한 고객사 레퍼런스는 요청 및 확인 절차 후 제공됩니다.",
+    customerTags: ["Leadframe 제조사", "Packaging 고객사", "재주문 이력"],
     contactCta: "Request References",
     productsCta: "View Equipment",
   },
@@ -87,10 +87,10 @@ const translations = {
       "PRT systems are already running in production environments across Asia. 100+ systems installed. Repeat orders validate field performance.",
     kpiHeading: "Field Record",
     kpis: [
-      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
-      { title: "Asia Production Sites", sub: "Active customer production references" },
-      { title: "Exposure + Lamination", sub: "Core process coverage" },
-      { title: "Repeat Orders", sub: "From existing customers" },
+      { title: "100+", sub: "Installed Systems" },
+      { title: "5", sub: "Asia Markets" },
+      { title: "2", sub: "Core Process Areas" },
+      { title: "Repeat", sub: "Customer Orders" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -131,7 +131,7 @@ const translations = {
     ],
     recordsLabel: "Delivery History",
     recordsNote:
-      "Customer names are withheld for confidentiality. Specific references available on request.",
+      "Customer names are generally withheld for confidentiality. Detailed references may be provided upon request.",
     records: [
       { period: "2011–2013", region: "Korea", type: "Laminator", notes: "Initial mass production line adoption. Domestic Leadframe manufacturer." },
       { period: "2014–2016", region: "Korea / China", type: "Laminator + Exposure", notes: "Exposure system introduced. First delivery to China." },
@@ -144,9 +144,10 @@ const translations = {
     recordRegion: "Region",
     recordType: "Equipment",
     recordNotes: "Notes",
-    customersLabel: "Named Customers",
-    customersNote: "Additional Leadframe & Semiconductor Packaging manufacturers (confidential)",
-    customersList: ["Luxshare Precision", "Henghui Technology", "Jinchuan Group"],
+    customersLabel: "Selected Customer References",
+    customersBody:
+      "Approved customer references may be shared after request and confirmation.",
+    customerTags: ["Leadframe Manufacturers", "Packaging Customers", "Repeat Orders"],
     contactCta: "Request References",
     productsCta: "View Equipment",
   },
@@ -158,10 +159,10 @@ const translations = {
       "PRT 系统已在亚洲各地的量产现场投入运行。50 套以上的 Installed Systems 与重复订单印证现场性能。",
     kpiHeading: "Field Record",
     kpis: [
-      { title: "100+ Installed Systems", sub: "Production-proven equipment" },
-      { title: "Asia Production Sites", sub: "Active customer production references" },
-      { title: "Exposure + Lamination", sub: "Core process coverage" },
-      { title: "Repeat Orders", sub: "From existing customers" },
+      { title: "100+", sub: "Installed Systems" },
+      { title: "5", sub: "Asia Markets" },
+      { title: "2", sub: "Core Process Areas" },
+      { title: "Repeat", sub: "Customer Orders" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -202,7 +203,7 @@ const translations = {
     ],
     recordsLabel: "Delivery History",
     recordsNote:
-      "客户名称出于保密考虑暂不公开。可应要求提供具体参考案例。",
+      "出于保密考虑，客户名称原则上不公开；可应要求提供具体参考案例。",
     records: [
       { period: "2011–2013", region: "Korea", type: "Laminator", notes: "初次大规模量产线导入。韩国 Leadframe 制造商。" },
       { period: "2014–2016", region: "Korea / China", type: "Laminator + Exposure", notes: "引入 Exposure 系统。首次交付中国。" },
@@ -215,9 +216,10 @@ const translations = {
     recordRegion: "Region",
     recordType: "Equipment",
     recordNotes: "Notes",
-    customersLabel: "Named Customers",
-    customersNote: "其他 Leadframe 与半导体封装制造商(保密)",
-    customersList: ["Luxshare Precision", "Henghui Technology", "Jinchuan Group"],
+    customersLabel: "Selected Customer References",
+    customersBody:
+      "可公开的客户参考案例将在申请与确认后提供。",
+    customerTags: ["Leadframe 制造商", "封装客户", "重复订单"],
     contactCta: "Request References",
     productsCta: "View Equipment",
   },
@@ -318,11 +320,11 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                   className="mb-3 block h-0.5 w-6"
                   style={{ backgroundColor: "#1976D2" }}
                 />
-                <p className="text-base lg:text-lg font-bold leading-snug text-white">
+                <p className="text-3xl lg:text-4xl font-bold leading-none tracking-tight text-white tabular-nums">
                   {kpi.title}
                 </p>
                 {kpi.sub && (
-                  <p className="mt-1.5 text-[11px] leading-relaxed text-slate-500">{kpi.sub}</p>
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-wider leading-relaxed text-slate-400">{kpi.sub}</p>
                 )}
               </div>
             ))}
@@ -379,13 +381,12 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 key={idx}
                 className="relative border-r border-b border-slate-800 bg-slate-950/30 p-6 hover:bg-slate-900/40 transition-colors"
               >
-                {/* Subtle country flag marker (soft SVG, toned down + soft ring
-                    so it integrates with the dark navy design — not emoji). */}
+                {/* Country code as a small technical label (no flag / emoji) —
+                    muted, PRT-blue accent, consistent with the premium B2B tone. */}
                 <span
-                  className="mb-4 inline-flex h-5 w-7 overflow-hidden rounded-[3px] ring-1 ring-white/10"
-                  style={{ filter: "saturate(0.82) brightness(0.92)" }}
+                  className="mb-4 inline-flex items-center border border-slate-700/70 px-2 py-0.5 text-[10px] font-semibold tracking-[0.2em] text-slate-400"
                 >
-                  <CountryFlag code={r.code} />
+                  {r.code}
                 </span>
                 <h3 className="text-base font-bold text-white mb-3 tracking-wide">
                   {r.country}
@@ -412,20 +413,20 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
               {t.recordsLabel}
             </p>
           </div>
-          <p className="text-xs text-slate-600 mb-10 italic">{t.recordsNote}</p>
+          <p className="mb-10 text-sm leading-relaxed text-slate-400">{t.recordsNote}</p>
 
           <div className="overflow-x-auto border border-slate-800">
             <table className="w-full text-sm">
-              <thead className="bg-slate-950/50">
-                <tr className="border-b border-slate-800">
+              <thead className="bg-slate-950/60">
+                <tr className="border-b border-slate-700/70">
                   {[t.recordPeriod, t.recordRegion, t.recordType, t.recordNotes].map((h, i) => (
                     <th
                       key={i}
-                      className="py-3 px-4 text-left text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500"
+                      className="py-3.5 px-4 text-left text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400"
                     >
                       {h}
                     </th>
@@ -436,18 +437,18 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 {t.records.map((row, idx) => (
                   <tr
                     key={idx}
-                    className="border-b border-slate-900 hover:bg-slate-900/30 transition-colors"
+                    className="border-b border-slate-800 hover:bg-slate-900/40 transition-colors"
                   >
-                    <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
+                    <td className="py-4 px-4 text-[13px] font-semibold text-slate-100 whitespace-nowrap">
                       {row.period}
                     </td>
-                    <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
+                    <td className="py-4 px-4 text-[13px] text-slate-300 whitespace-nowrap">
                       {row.region}
                     </td>
-                    <td className="py-4 px-4 text-xs text-slate-300 whitespace-nowrap">
+                    <td className="py-4 px-4 text-[13px] font-medium whitespace-nowrap" style={{ color: "#6ea8de" }}>
                       {row.type}
                     </td>
-                    <td className="py-4 px-4 text-xs text-slate-400 leading-relaxed">
+                    <td className="py-4 px-4 text-[13px] leading-relaxed text-slate-300">
                       {row.notes}
                     </td>
                   </tr>
@@ -468,18 +469,21 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
             </p>
           </div>
 
-          <div className="mb-12 flex flex-wrap items-center gap-2">
-            {t.customersList.map((c, idx) => (
+          {/* Conservative reference message (no public customer names for now) +
+              non-name category pills so the section is not empty. The Request
+              References CTA below is the action to obtain details. */}
+          <p className="mb-6 max-w-2xl text-sm leading-relaxed text-slate-400">
+            {t.customersBody}
+          </p>
+          <div className="mb-10 flex flex-wrap gap-2">
+            {t.customerTags.map((tag, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center border border-slate-700 bg-slate-900/50 px-4 py-2 text-sm font-semibold text-slate-200"
+                className="inline-flex items-center border border-slate-800 bg-slate-900/30 px-3 py-1.5 text-xs font-medium text-slate-400"
               >
-                {c}
+                {tag}
               </span>
             ))}
-            <span className="inline-flex items-center border border-slate-800 bg-slate-950/50 px-4 py-2 text-xs text-slate-400 italic">
-              {t.customersNote}
-            </span>
           </div>
 
           {/* CTAs */}
@@ -490,11 +494,11 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.contactCta}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
             </a>
             <a
               href="/products"
-              className="inline-flex items-center gap-2 border border-slate-600 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-600 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:bg-white/5 hover:text-white transition-colors"
             >
               {t.productsCta}
             </a>

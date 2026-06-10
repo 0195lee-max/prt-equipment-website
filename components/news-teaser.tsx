@@ -90,9 +90,9 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
           </div>
           <a
             href="/news"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 border-b border-slate-700 pb-1 hover:text-slate-200 hover:border-slate-500 transition-all"
+            className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 border-b border-slate-700 pb-1 hover:text-slate-200 hover:border-slate-500 transition-all"
           >
-            {t.viewAll} <ArrowRight className="h-3 w-3" />
+            {t.viewAll} <ArrowRight className="h-3 w-3 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
           </a>
         </div>
 

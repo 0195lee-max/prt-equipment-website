@@ -33,6 +33,17 @@ const translations = {
     hoursValue: "월 – 금  09:00 – 18:00 (KST)",
     hqAddress: "경기도 안양시 동안구 엘에스로 76\n디오밸리 425호",
     factoryAddress: "경기도 시흥시 다지골길 15-3",
+    consultTitle: "For Equipment Consultation",
+    consultIntro: "장비 상담을 위해 문의 시 아래 정보를 함께 전달해주시면 보다 정확한 검토가 가능합니다.",
+    consultItems: [
+      "Web width",
+      "Material type",
+      "Process type",
+      "Required throughput",
+      "Automation level",
+      "Existing line condition",
+      "Target application",
+    ],
   },
   en: {
     title: "Contact Sales",
@@ -57,6 +68,17 @@ const translations = {
     hoursValue: "Mon – Fri  09:00 – 18:00 (KST)",
     hqAddress: "Room 425, The O Valley\n76 LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\nRepublic of Korea",
     factoryAddress: "15-3, Dajigol-gil\nSiheung-si, Gyeonggi-do 14957\nRepublic of Korea",
+    consultTitle: "For Equipment Consultation",
+    consultIntro: "To help us review your equipment requirements more accurately, please share the following details when contacting us.",
+    consultItems: [
+      "Web width",
+      "Material type",
+      "Process type",
+      "Required throughput",
+      "Automation level",
+      "Existing line condition",
+      "Target application",
+    ],
   },
   zh: {
     title: "Contact Sales",
@@ -81,6 +103,17 @@ const translations = {
     hoursValue: "周一 – 周五  09:00 – 18:00 (KST)",
     hqAddress: "Room 425, The O Valley\n76 LS-ro, Dongan-gu\nAnyang-si, Gyeonggi-do 14117\n大韩民国",
     factoryAddress: "15-3, Dajigol-gil\nSiheung-si, Gyeonggi-do 14957\n大韩民国",
+    consultTitle: "For Equipment Consultation",
+    consultIntro: "为了更准确地评估您的设备需求，请在联系时一并提供以下信息。",
+    consultItems: [
+      "Web width",
+      "Material type",
+      "Process type",
+      "Required throughput",
+      "Automation level",
+      "Existing line condition",
+      "Target application",
+    ],
   },
 }
 
@@ -245,6 +278,22 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                   </p>
                   <p className="text-sm text-slate-300">{t.hoursValue}</p>
                 </div>
+              </div>
+
+              {/* Equipment consultation guidance — compact, practical B2B note */}
+              <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-5">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#1976D2" }}>
+                  {t.consultTitle}
+                </p>
+                <p className="mb-4 text-xs leading-relaxed text-slate-400">{t.consultIntro}</p>
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                  {t.consultItems.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                      <span aria-hidden="true" className="h-1 w-1 flex-shrink-0 rounded-full" style={{ backgroundColor: "#1976D2" }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 

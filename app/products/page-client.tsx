@@ -140,7 +140,8 @@ const translations = {
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
     modulesDesc: "메인 장비와 연동되는 라인 구성 모듈은 Web Width, 소재, 공정 조건에 따라 맞춤 설계됩니다.",
-    configNote: "모든 시스템은 Web Width, 소재 사양, 처리 속도, 자동화 수준, 라인 연동 조건에 따라 맞춤 설계됩니다.",
+    configCta: "라인 조건에 맞는 장비 구성이 필요하신가요?",
+    configNote: "Web width · 소재 사양 · 처리 속도 · 자동화 수준 · 기존 라인 조건을 기준으로 검토합니다.",
     contactCta: "장비 상담 문의",
     specsLabel: "주요 사양",
     materialsLabel: "대응 소재",
@@ -187,23 +188,23 @@ const translations = {
       { title: "Pre-Heater", desc: "Lamination 전 소재 조건을 안정화하기 위한 예열 모듈입니다." },
       { title: "Cleaning Unit", desc: "Lamination 및 Exposure 전 표면 이물 제거를 위한 웹 클리닝 모듈입니다." },
     ],
-    whyLabel: "PRT 장비의 강점",
+    whyLabel: "WHY PRT?",
     whyPoints: [
       {
         title: "양산 검증된 설계",
-        desc: "PRT 장비는 아시아 주요 고객사의 Leadframe 양산 라인에서 장기간 운용되며 생산 안정성을 검증해왔습니다.",
+        desc: "아시아 주요 고객사의 Leadframe 양산 라인에서 장기간 운용되며 생산 안정성을 검증해왔습니다.",
       },
       {
-        title: "안정성 중심 엔지니어링",
-        desc: "최고 속도보다 장시간 연속 운전의 안정성을 우선합니다. 온도, 장력, 이송 조건을 실제 양산 환경에 맞춰 설계합니다.",
+        title: "공정 안정성 중심 설계",
+        desc: "온도, 장력, 이송 조건을 실제 양산 환경에 맞춰 안정적으로 제어할 수 있도록 설계합니다.",
       },
       {
-        title: "라인 맞춤 설계",
-        desc: "Web Width, 이송 속도, 소재, 공정 조건에 따라 장비 구성을 조정하여 고객 라인에 맞는 시스템을 제공합니다.",
+        title: "라인 조건 맞춤 구성",
+        desc: "Web Width, 소재, 처리 속도, 자동화 수준에 따라 고객 라인에 맞는 장비 구성을 제안합니다.",
       },
       {
         title: "현장 유지보수성",
-        desc: "표준 산업 부품과 접근성 높은 구조를 적용해 현장 점검, 부품 교체, 유지보수가 쉽도록 설계합니다.",
+        desc: "표준 산업 부품과 접근성 높은 구조를 적용하여 점검, 부품 교체, 유지보수가 쉽도록 설계합니다.",
       },
     ],
   },
@@ -215,7 +216,8 @@ const translations = {
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
     modulesDesc: "Line configuration systems integrated with main production equipment. Engineered to match web width, material, and process requirements.",
-    configNote: "All systems are configured based on Web Width · Material Spec · Throughput · Automation Level · Line Integration requirements.",
+    configCta: "Need to configure equipment for your line conditions?",
+    configNote: "We review web width, material specifications, throughput, automation level, and existing line conditions.",
     contactCta: "Contact Sales",
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
@@ -262,23 +264,23 @@ const translations = {
       { title: "Pre-Heater", desc: "Material preheating system for optimal lamination process conditions." },
       { title: "Cleaning Unit", desc: "Web cleaning system for surface particle removal before lamination and exposure." },
     ],
-    whyLabel: "Why PRT Equipment?",
+    whyLabel: "WHY PRT?",
     whyPoints: [
       {
         title: "Production-Proven Design",
-        desc: "PRT equipment has a track record of continuous operation in Leadframe mass production lines over multiple years. Capability is demonstrated through operating history, not datasheet numbers.",
+        desc: "Proven over years of continuous operation on Leadframe mass-production lines at major Asian customers.",
       },
       {
-        title: "Stability-First Engineering",
-        desc: "Rather than maximizing peak performance figures, PRT designs for consistent operation under real production conditions — temperature variation, material variance, and extended continuous running.",
+        title: "Stable Process Engineering",
+        desc: "Temperature, tension, and transport conditions are engineered for stable control under real production environments.",
       },
       {
-        title: "Engineered to Your Line",
-        desc: "Web width, transport speed, and process configuration are designed to match your specific line requirements — not a standard product with optional add-ons forced to fit.",
+        title: "Line-Specific Configuration",
+        desc: "Equipment is configured to your line by web width, material, throughput, and automation level.",
       },
       {
-        title: "Maintainable by Design",
-        desc: "Globally available standard industrial components and straightforward mechanical design allow on-site engineers to inspect and replace parts without special tooling.",
+        title: "Serviceable Structure",
+        desc: "Standard industrial components and an accessible structure make inspection, part replacement, and maintenance straightforward.",
       },
     ],
   },
@@ -290,7 +292,8 @@ const translations = {
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
     modulesDesc: "与主生产设备集成的生产线配置系统。根据 Web Width、材料和工艺要求进行设计。",
-    configNote: "所有系统均根据 Web Width · Material Spec · Throughput · Automation Level · Line Integration 要求进行定制配置。",
+    configCta: "需要为您的产线配置设备吗？",
+    configNote: "我们依据 web width、材料规格、处理速度、自动化水平与现有产线条件进行评估。",
     contactCta: "Contact Sales",
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
@@ -337,23 +340,23 @@ const translations = {
       { title: "Pre-Heater", desc: "用于最佳 Lamination 工艺条件的材料预热系统。" },
       { title: "Cleaning Unit", desc: "Lamination 与 Exposure 前表面颗粒去除的卷材清洁系统。" },
     ],
-    whyLabel: "Why PRT Equipment?",
+    whyLabel: "WHY PRT?",
     whyPoints: [
       {
         title: "Production-Proven Design",
-        desc: "PRT 设备在 Leadframe 量产线上拥有多年连续运行的记录。能力通过运行历史来证明，而非数据表上的数字。",
+        desc: "在亚洲主要客户的 Leadframe 量产线上长期运行，验证了生产稳定性。",
       },
       {
-        title: "Stability-First Engineering",
-        desc: "PRT 的设计目标不是追求峰值性能数字，而是在真实量产条件下 — 温度变化、材料偏差、长时间连续运行 — 保持一致的运行。",
+        title: "Stable Process Engineering",
+        desc: "针对真实量产环境，对温度、张力与输送条件进行稳定可控的设计。",
       },
       {
-        title: "Engineered to Your Line",
-        desc: "Web Width、传输速度和工艺配置按照您的具体生产线条件设计，而非强行将选配件配合标准产品。",
+        title: "Line-Specific Configuration",
+        desc: "根据 Web Width、材料、处理速度与自动化水平，为客户产线提供匹配的设备配置。",
       },
       {
-        title: "Easy Field Maintenance",
-        desc: "全球可供应的标准工业部件和简洁的机械结构设计，使现场工程师无需专用工具即可检查和更换部件。",
+        title: "Serviceable Structure",
+        desc: "采用标准工业部件与高可达性结构，便于检查、更换部件与维护。",
       },
     ],
   },
@@ -760,14 +763,22 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
             </div>
           </div>
 
-          {/* Config note + closing CTA (existing content) — compact box:
-              tighter vertical padding and text→button gap so it reads as a
-              concise closing CTA rather than a large banner. */}
-          <div className="border border-neutral-200 bg-white px-6 py-6 text-center">
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
-            <a href="/contact" className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]" style={{ backgroundColor: "#1976D2" }}>
-              {t.contactCta}
-            </a>
+          {/* Closing CTA — compact consultation prompt: left text, right button
+              on desktop; stacks on mobile. Practical, not a marketing banner. */}
+          <div className="border border-neutral-200 bg-white px-6 py-5 lg:px-8">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-base font-semibold text-neutral-900">{t.configCta}</p>
+                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
+              </div>
+              <a
+                href="/contact"
+                className="inline-flex flex-shrink-0 items-center justify-center gap-2 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
+                style={{ backgroundColor: "#1976D2" }}
+              >
+                {t.contactCta}
+              </a>
+            </div>
           </div>
         </div>
       </div>

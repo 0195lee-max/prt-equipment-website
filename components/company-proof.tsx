@@ -163,11 +163,11 @@ export function CompanyProof({ lang }: CompanyProofProps) {
                 style={{ backgroundColor: "#1976D2" }}
               >
                 {t.ctaCompany}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
               </a>
               <a
                 href="/installed-base"
-                className="inline-flex items-center gap-2 border border-slate-700 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-slate-200 transition-colors hover:border-slate-500 hover:text-white"
+                className="inline-flex items-center gap-2 border border-slate-700 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-slate-200 transition-colors hover:border-slate-500 hover:bg-white/5 hover:text-white"
               >
                 {t.ctaInstalled}
               </a>

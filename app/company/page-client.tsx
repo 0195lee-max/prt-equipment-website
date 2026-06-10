@@ -439,15 +439,15 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
           <div className="flex flex-wrap gap-4">
             <a
               href="/products"
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.productsCta}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3.5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white"
+              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3.5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-white/5 hover:text-white"
             >
               {t.contactCta}
             </a>

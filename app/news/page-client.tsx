@@ -208,11 +208,11 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.ctaPrimary}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
             </a>
             <a
               href="/contact?subject=Meeting+Request"
-              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:bg-white/5 hover:text-white transition-colors"
             >
               {t.ctaSecondary}
             </a>
