@@ -34,24 +34,6 @@ const translations = {
     engLabel: "Assembly & Control Detail",
     engHeading: "제어 통합부터 기계 조립까지, 직접 엔지니어링 접근.",
     engCopy: "PRT는 기계 조립·제어 통합·문제 해결을 엔지니어링 팀 가까이에서 직접 수행하여, 더 빠른 대응과 양산 장비에 대한 장기 지원을 제공합니다.",
-    historyLabel: "Company History",
-    stages: [
-      {
-        no: "01",
-        title: "Foundation",
-        desc: "PRETECH 기반 Roll-to-Roll 라미네이터 개발 및 엔지니어링 경험.",
-      },
-      {
-        no: "02",
-        title: "Technology Expansion",
-        desc: "Leadframe 및 반도체 패키징 응용을 위한 LED UV 노광 시스템 개발.",
-      },
-      {
-        no: "03",
-        title: "Production References",
-        desc: "아시아 전역 100기 이상 설치, 반복 발주 및 장기 기술 지원.",
-      },
-    ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
@@ -98,6 +80,9 @@ const translations = {
     ],
     contactCta: "Contact Sales",
     productsCta: "View Equipment",
+    patentLabel: "Patent Background",
+    patentBody:
+      "PRT의 엔지니어링 역량은 양산 중심의 Roll-to-Roll 장비 개발에 뿌리를 두고 있으며, Exposure 및 Lamination 시스템과 관련된 특허 기반 기술 경험에 의해 뒷받침됩니다.",
   },
   en: {
     meta: "Company",
@@ -110,24 +95,6 @@ const translations = {
     engLabel: "Assembly & Control Detail",
     engHeading: "Direct engineering access from control integration to machine assembly.",
     engCopy: "PRT keeps mechanical assembly, control integration, and troubleshooting close to the engineering team, enabling faster issue response and long-term support for production equipment.",
-    historyLabel: "Company History",
-    stages: [
-      {
-        no: "01",
-        title: "Foundation",
-        desc: "PRETECH-based Roll-to-Roll laminator development and engineering experience.",
-      },
-      {
-        no: "02",
-        title: "Technology Expansion",
-        desc: "LED UV exposure system development for Leadframe and semiconductor packaging applications.",
-      },
-      {
-        no: "03",
-        title: "Production References",
-        desc: "100+ installed systems across Asia with repeat orders and long-term technical support.",
-      },
-    ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
@@ -169,11 +136,14 @@ const translations = {
       { label: "Established", value: "2018 (predecessor PRETECH founded 2010)" },
       { label: "Core Products", value: "Roll-to-Roll Laminators, Roll-to-Roll Exposure Systems" },
       { label: "Applications", value: "Leadframe, Semiconductor Packaging" },
-      { label: "Headquarters", value: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117" },
+      { label: "Headquarters", value: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117, Republic of Korea" },
       { label: "Factory", value: "15-3 Dajigol-gil, Siheung-si, Gyeonggi-do 14957" },
     ],
     contactCta: "Contact Sales",
     productsCta: "View Equipment",
+    patentLabel: "Patent Background",
+    patentBody:
+      "PRT's engineering background is rooted in production-focused roll-to-roll equipment development, supported by prior patent-related technical experience in exposure and lamination systems.",
   },
   zh: {
     meta: "Company",
@@ -186,24 +156,6 @@ const translations = {
     engLabel: "Assembly & Control Detail",
     engHeading: "从控制集成到机械组装，全程直接工程介入。",
     engCopy: "PRT 将机械组装、控制集成与故障排查紧贴工程团队进行，从而实现更快的问题响应与对量产设备的长期支持。",
-    historyLabel: "Company History",
-    stages: [
-      {
-        no: "01",
-        title: "Foundation",
-        desc: "基于 PRETECH 的 Roll-to-Roll 层压机开发与工程经验。",
-      },
-      {
-        no: "02",
-        title: "Technology Expansion",
-        desc: "面向 Leadframe 与半导体封装应用的 LED UV 曝光系统开发。",
-      },
-      {
-        no: "03",
-        title: "Production References",
-        desc: "亚洲累计安装 100 套以上系统，重复订单与长期技术支持。",
-      },
-    ],
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
@@ -250,6 +202,9 @@ const translations = {
     ],
     contactCta: "Contact Sales",
     productsCta: "View Equipment",
+    patentLabel: "Patent Background",
+    patentBody:
+      "PRT 的工程积累根植于以量产为核心的 Roll-to-Roll 设备开发，并以与曝光及层压系统相关的专利技术经验为支撑。",
   },
 }
 
@@ -496,6 +451,33 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             >
               {t.contactCta}
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Patent Background — quiet credibility layer (gold seal emblem) ─── */}
+      <section className="relative border-t border-slate-800/60 bg-slate-950">
+        <div className="relative mx-auto max-w-5xl px-6 py-16 lg:px-8">
+          <div className="flex items-center gap-6 sm:gap-8">
+            <div className="relative h-12 w-12 flex-shrink-0 sm:h-16 sm:w-16">
+              <Image
+                src="/images/company_patent_seal.png"
+                alt=""
+                fill
+                sizes="64px"
+                className="object-contain transition-transform duration-300 ease-out hover:scale-[1.18]"
+                style={{ opacity: 0.9, transformOrigin: "center" }}
+                aria-hidden="true"
+              />
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                {t.patentLabel}
+              </p>
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-400">
+                {t.patentBody}
+              </p>
+            </div>
           </div>
         </div>
       </section>

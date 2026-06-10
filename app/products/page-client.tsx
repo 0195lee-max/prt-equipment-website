@@ -760,10 +760,12 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
             </div>
           </div>
 
-          {/* Config note (existing content, preserved) */}
-          <div className="border border-neutral-200 bg-white p-8 text-center">
+          {/* Config note + closing CTA (existing content) — compact box:
+              tighter vertical padding and text→button gap so it reads as a
+              concise closing CTA rather than a large banner. */}
+          <div className="border border-neutral-200 bg-white px-6 py-6 text-center">
             <p className="mx-auto max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
-            <a href="/contact" className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]" style={{ backgroundColor: "#1976D2" }}>
+            <a href="/contact" className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]" style={{ backgroundColor: "#1976D2" }}>
               {t.contactCta}
             </a>
           </div>

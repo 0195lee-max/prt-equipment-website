@@ -36,7 +36,7 @@ const translations = {
     companyHeader: "Company",
     sitemapHeader: "Sitemap",
     focusHeader: "Business Focus",
-    address: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117",
+    address: "Room 425, The O Valley, 76 LS-ro, Dongan-gu, Anyang-si, Gyeonggi-do 14117, Republic of Korea",
     phone: "+82-31-469-1103",
     email: "sales@prt-kr.com",
     nav: {

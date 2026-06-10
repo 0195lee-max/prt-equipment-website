@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import Image from "next/image"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { CountryFlag } from "@/components/country-flag"
@@ -270,17 +270,21 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
         />
 
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div className="flex items-center gap-3 mb-5">
+          <div data-reveal="ui" className="flex items-center gap-3 mb-5">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.meta}
             </p>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[56px] leading-[1.05] mb-6 max-w-3xl">
+          <h1 data-reveal="heading" className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[56px] leading-[1.05] mb-6 max-w-3xl">
             {t.title}{" "}
             <span style={{ color: "#1976D2" }}>{t.titleAccent}</span>.
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="max-w-2xl text-base leading-relaxed text-slate-400"
+          >
             {t.description}
           </p>
         </div>
@@ -289,7 +293,11 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       {/* ── KPI Strip ────────────────────────────────────── */}
       <div className="relative bg-[#07090F] border-b border-slate-800/60">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="py-5 flex items-center gap-3 border-b border-slate-900">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "200ms" } as CSSProperties}
+            className="py-5 flex items-center gap-3 border-b border-slate-900"
+          >
             <div className="h-px w-6" style={{ backgroundColor: "rgba(25,118,210,0.5)" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.kpiHeading}
@@ -299,6 +307,8 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
             {t.kpis.map((kpi, idx) => (
               <div
                 key={idx}
+                data-reveal="ui"
+                style={{ "--reveal-delay": `${260 + idx * 60}ms` } as CSSProperties}
                 className={`py-10 px-2 sm:px-6 ${
                   idx > 0 ? "border-l border-slate-900" : ""
                 } ${idx === 2 ? "border-l-0 md:border-l" : ""}`}

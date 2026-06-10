@@ -350,7 +350,7 @@ html.reveal-on [data-reveal="ui"] {
 }
 
 html.reveal-on [data-reveal].is-revealed {
-  animation: prt-reveal-body 700ms linear var(--reveal-delay, 0ms) both;
+  animation: prt-reveal-body 600ms linear var(--reveal-delay, 0ms) both;
 }
 html.reveal-on [data-reveal="heading"].is-revealed {
   animation-name: prt-reveal-heading;
