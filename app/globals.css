@@ -350,7 +350,7 @@ html.reveal-on [data-reveal="ui"] {
 }
 
 html.reveal-on [data-reveal].is-revealed {
-  animation: prt-reveal-body 800ms linear var(--reveal-delay, 0ms) both;
+  animation: prt-reveal-body 700ms linear var(--reveal-delay, 0ms) both;
 }
 html.reveal-on [data-reveal="heading"].is-revealed {
   animation-name: prt-reveal-heading;
@@ -361,23 +361,30 @@ html.reveal-on [data-reveal="ui"].is-revealed {
 
 @keyframes prt-reveal-heading {
   0%   { opacity: 0.05; filter: blur(6px);   transform: translateY(16px); }
-  25%  { opacity: 0.18; filter: blur(5px);   transform: translateY(12px); }
-  45%  { opacity: 0.34; filter: blur(4px);   transform: translateY(8px); }
-  60%  { opacity: 0.46; filter: blur(3px);   transform: translateY(5px); }
+  8%   { opacity: 0.07; filter: blur(6px);   transform: translateY(15px); }
+  18%  { opacity: 0.12; filter: blur(5px);   transform: translateY(13px); }
+  30%  { opacity: 0.20; filter: blur(4px);   transform: translateY(10px); }
+  44%  { opacity: 0.33; filter: blur(3px);   transform: translateY(7px); }
+  58%  { opacity: 0.45; filter: blur(2.5px); transform: translateY(5px); }
+  75%  { opacity: 0.74; filter: blur(1.2px); transform: translateY(2px); }
   100% { opacity: 1;    filter: blur(0);     transform: translateY(0); }
 }
 @keyframes prt-reveal-body {
   0%   { opacity: 0.14; filter: blur(2.5px); transform: translateY(12px); }
-  25%  { opacity: 0.24; filter: blur(2px);   transform: translateY(9px); }
-  45%  { opacity: 0.40; filter: blur(1.5px); transform: translateY(6px); }
-  60%  { opacity: 0.52; filter: blur(1.2px); transform: translateY(4px); }
+  8%   { opacity: 0.16; filter: blur(2.5px); transform: translateY(11px); }
+  18%  { opacity: 0.21; filter: blur(2px);   transform: translateY(10px); }
+  30%  { opacity: 0.29; filter: blur(2px);   transform: translateY(8px); }
+  44%  { opacity: 0.40; filter: blur(1.5px); transform: translateY(6px); }
+  58%  { opacity: 0.51; filter: blur(1.2px); transform: translateY(4px); }
+  75%  { opacity: 0.75; filter: blur(0.6px); transform: translateY(2px); }
   100% { opacity: 1;    filter: blur(0);     transform: translateY(0); }
 }
 @keyframes prt-reveal-ui {
   0%   { opacity: 0.06; transform: translateY(10px); }
-  25%  { opacity: 0.18; transform: translateY(8px); }
-  45%  { opacity: 0.38; transform: translateY(5px); }
-  60%  { opacity: 0.50; transform: translateY(3px); }
+  18%  { opacity: 0.16; transform: translateY(8px); }
+  36%  { opacity: 0.32; transform: translateY(6px); }
+  58%  { opacity: 0.52; transform: translateY(3px); }
+  78%  { opacity: 0.78; transform: translateY(1px); }
   100% { opacity: 1;    transform: translateY(0); }
 }
 

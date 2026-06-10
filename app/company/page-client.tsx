@@ -310,14 +310,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             </p>
           </div>
 
-          {/* Factory overview — wide horizontal band directly below.
-              The image is a stable anchor: visible immediately, no reveal.
-              Only its label / caption softly appear around it. */}
+          {/* Factory overview — wide horizontal band directly below. Image,
+              label and caption are all stable content: visible immediately, no
+              reveal (reveal is reserved for the hero text above). */}
           <div className="mt-8 lg:mt-10">
-            <p
-              data-reveal="ui"
-              className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
-            >
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               {t.factoryLabel}
             </p>
             <div className="relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
@@ -337,11 +334,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
                 style={{ background: "linear-gradient(to top, rgba(2,6,23,0.3) 0%, transparent 32%)" }}
               />
             </div>
-            <p
-              data-reveal
-              style={{ "--reveal-delay": "120ms" } as CSSProperties}
-              className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500"
-            >
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500">
               {t.factoryCaption}
             </p>
           </div>
@@ -352,7 +345,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
       <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative border-t border-slate-800/60">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div data-reveal className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
+        <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.specializationLabel}
           </p>
@@ -395,7 +388,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
 
       {/* ── Assembly & Control Detail — four-image proof section ─ */}
       <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div data-reveal className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
+        <div className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
             {t.engLabel}
           </p>
@@ -439,7 +432,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
+        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
           <p className="mb-12 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.whyLabel}
           </p>
@@ -457,7 +450,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
 
       {/* ── Company Info — quiet, factual, data-sheet-like ─── */}
       <section className="relative bg-slate-950">
-        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
+        <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.infoLabel}
           </p>

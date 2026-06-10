@@ -80,7 +80,7 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
         }}
       />
 
-      <div data-reveal className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
+      <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
