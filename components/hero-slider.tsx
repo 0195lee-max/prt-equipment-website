@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { ArrowRight, ChevronDown } from "lucide-react"
 
@@ -44,10 +44,74 @@ interface HeroSliderProps {
 
 export function HeroSlider({ lang }: HeroSliderProps) {
   const [slide, setSlide] = useState(0)
+  // PREVIEW-ONLY: subtle cursor glow on the hero grid (desktop pointers only).
+  const sectionRef = useRef<HTMLElement>(null)
+  const [glowOn, setGlowOn] = useState(false)
   const t = translations[lang]
+
+  // Cursor-tracked grid glow. Desktop fine-pointer only; disabled on touch and
+  // when prefers-reduced-motion is set. Updates CSS variables (no re-render per
+  // frame), eased via rAF for a slow, premium feel. Pointer listeners are
+  // passive reads only, so clicks / selection / navigation are unaffected.
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)")
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+    if (!fine.matches || reduced.matches) return
+
+    let raf = 0
+    let running = false
+    let inited = false
+    const target = { x: 0, y: 0 }
+    const cur = { x: 0, y: 0 }
+
+    const tick = () => {
+      cur.x += (target.x - cur.x) * 0.12
+      cur.y += (target.y - cur.y) * 0.12
+      el.style.setProperty("--mx", `${cur.x}px`)
+      el.style.setProperty("--my", `${cur.y}px`)
+      if (Math.abs(target.x - cur.x) > 0.5 || Math.abs(target.y - cur.y) > 0.5) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        running = false
+      }
+    }
+    const start = () => {
+      if (!running) {
+        running = true
+        raf = requestAnimationFrame(tick)
+      }
+    }
+
+    const onMove = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect()
+      target.x = e.clientX - r.left
+      target.y = e.clientY - r.top
+      if (!inited) {
+        cur.x = target.x
+        cur.y = target.y
+        inited = true
+      }
+      start()
+    }
+    const onEnter = () => setGlowOn(true)
+    const onLeave = () => setGlowOn(false)
+
+    el.addEventListener("pointermove", onMove, { passive: true })
+    el.addEventListener("pointerenter", onEnter)
+    el.addEventListener("pointerleave", onLeave)
+    return () => {
+      el.removeEventListener("pointermove", onMove)
+      el.removeEventListener("pointerenter", onEnter)
+      el.removeEventListener("pointerleave", onLeave)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
 
   return (
     <section
+      ref={sectionRef}
       className="relative h-svh w-full overflow-hidden bg-[#07090F]"
       style={{ marginTop: "calc(var(--header-height) * -1)" }}
     >
@@ -134,14 +198,31 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           over the machinery. Static (no animation), pointer-safe.
           ════════════════════════════════════════════════════════ */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[15]">
-        {/* fine coordinate grid */}
+        {/* fine coordinate grid — kept very subtle (low default opacity) */}
         <div
           className="absolute inset-0"
           style={{
-            opacity: 0.1,
+            opacity: 0.05,
             backgroundImage:
               "linear-gradient(to right, #1976D2 1px, transparent 1px), linear-gradient(to bottom, #1976D2 1px, transparent 1px)",
             backgroundSize: "84px 84px",
+          }}
+        />
+        {/* PREVIEW-ONLY: cursor glow — the SAME grid in soft PRT blue, revealed
+            only in a soft radius around the cursor via a radial mask, so nearby
+            grid lines lightly brighten. Aligned to the base grid (same 84px) so
+            it brightens the same lines. Fades in/out smoothly; desktop only. */}
+        <div
+          className="absolute inset-0 transition-opacity duration-500 ease-out"
+          style={{
+            opacity: glowOn ? 1 : 0,
+            backgroundImage:
+              "linear-gradient(to right, rgba(25,118,210,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(25,118,210,0.5) 1px, transparent 1px)",
+            backgroundSize: "84px 84px",
+            WebkitMaskImage:
+              "radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.5) 0%, transparent 70%)",
+            maskImage:
+              "radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.5) 0%, transparent 70%)",
           }}
         />
         {/* horizontal scan lines */}
