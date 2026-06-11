@@ -36,14 +36,11 @@ const translations = {
   },
 }
 
-const SLIDE_COUNT = 2
-
 interface HeroSliderProps {
   lang: Language
 }
 
 export function HeroSlider({ lang }: HeroSliderProps) {
-  const [slide, setSlide] = useState(0)
   // PREVIEW-ONLY: subtle cursor glow on the hero grid (desktop pointers only).
   const sectionRef = useRef<HTMLElement>(null)
   const [glowOn, setGlowOn] = useState(false)
@@ -115,14 +112,8 @@ export function HeroSlider({ lang }: HeroSliderProps) {
       className="relative h-svh w-full overflow-hidden bg-[#07090F]"
       style={{ marginTop: "calc(var(--header-height) * -1)" }}
     >
-      {/* ── Slide layers ─────────────────────────────────────── */}
-      {/* Slide 1: still image (equipment shot first) */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-          slide === 0 ? "opacity-100" : "opacity-0"
-        }`}
-        aria-hidden={slide !== 0}
-      >
+      {/* ── Background image (single static hero — no carousel) ─── */}
+      <div className="absolute inset-0">
         <Image
           src="/images/hero_main11-v2.png"
           alt=""
@@ -136,30 +127,6 @@ export function HeroSlider({ lang }: HeroSliderProps) {
             filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
           }}
         />
-      </div>
-
-      {/* Slide 2: video */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-          slide === 1 ? "opacity-100" : "opacity-0"
-        }`}
-        aria-hidden={slide !== 1}
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          className="h-full w-full object-cover"
-          style={{
-            objectPosition: "center right",
-            filter: "saturate(0.75) brightness(1.15) contrast(1.05)",
-          }}
-        >
-          <source src="/videos/prt_home_hero_loop_enhanced_web_1600x900.mp4" type="video/mp4" />
-        </video>
       </div>
 
       {/* ── Vignette stack: radial center + left-strong gradient + corner darken ─ */}
@@ -252,7 +219,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         </svg>
       </div>
 
-      {/* ── Left-aligned text block (overlay across both slides) ─ */}
+      {/* ── Left-aligned text block (over the hero image) ─────── */}
       <div className="relative z-20 flex h-full flex-col items-start justify-center pl-[10%] pr-6 sm:pr-10 lg:pr-16 -mt-[5vh]">
         <div className="max-w-2xl">
           <p
@@ -300,24 +267,6 @@ export function HeroSlider({ lang }: HeroSliderProps) {
       >
         <ChevronDown className="h-6 w-6" />
       </button>
-
-      {/* ── Slide dots — click only, no autoplay ─────────────── */}
-      <div className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 flex items-center gap-3">
-        {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setSlide(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={slide === i ? "true" : "false"}
-            className="h-2.5 rounded-full transition-all"
-            style={{
-              width: slide === i ? "32px" : "10px",
-              backgroundColor: slide === i ? "#1976D2" : "rgba(255,255,255,0.45)",
-            }}
-          />
-        ))}
-      </div>
     </section>
   )
 }

@@ -274,13 +274,13 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             </p>
             <div className="relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
               <Image
-                src="/images/company_factory_overview.png"
+                src="/images/company_factory_overview-v2.png"
                 alt="PRT production and assembly floor"
                 fill
                 sizes="100vw"
                 quality={90}
                 className="object-cover"
-                style={{ objectPosition: "center bottom" }}
+                style={{ objectPosition: "center 75%" }}
               />
               {/* very subtle bottom gradient for integration — details stay visible */}
               <div
