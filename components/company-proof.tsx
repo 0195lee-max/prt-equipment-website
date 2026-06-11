@@ -36,7 +36,13 @@ const translations = {
   },
   en: {
     eyebrow: "PRT AT A GLANCE",
-    headline: "Not Generic Equipment. Process-Built Systems.",
+    headline: (
+      <>
+        Not Generic Equipment.
+        <br className="hidden md:block" />{" "}
+        <span className="whitespace-nowrap">Process-Built</span> Systems.
+      </>
+    ),
     subline:
       "Production-proven Roll-to-Roll exposure and lamination systems for Leadframe and semiconductor packaging.",
     body: "PRT designs stable Roll-to-Roll process equipment for repeatable production performance, web handling stability, and long-term engineering support across Asia.",
@@ -103,7 +109,7 @@ export function CompanyProof({ lang }: CompanyProofProps) {
         <svg
           viewBox="0 0 1000 1000"
           preserveAspectRatio="xMidYMid meet"
-          className="absolute right-[20%] top-1/2 h-[172%] w-auto -translate-y-1/2"
+          className="absolute right-[20%] top-1/2 h-[172%] w-auto -translate-x-4 -translate-y-1/2"
           style={{ opacity: 0.2 }}
         >
           <defs>
