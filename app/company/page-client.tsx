@@ -105,7 +105,7 @@ const translations = {
       },
       {
         title: "Direct Engineering Support",
-        desc: "PRT 장비는 현장 엔지니어가 핵심 기계 구조를 직접 진단·정비할 수 있도록 설계되어, 불필요한 다운타임과 커뮤니케이션 지연을 줄입니다.",
+        desc: "PRT 장비는 현장 엔지니어가 핵심 기계 구조를 직접 진단·점검하기 쉽도록 설계되어, 문제 확인과 대응에 필요한 시간을 줄입니다.",
       },
       {
         title: "Engineered to Your Line Conditions",
@@ -113,7 +113,7 @@ const translations = {
       },
       {
         title: "Long-Term Customer Relationships",
-        desc: "다수의 고객사가 첫 도입 이후 반복 발주를 하고 있습니다. 장비뿐 아니라 공정 운용까지 함께 합니다.",
+        desc: "다수의 고객사가 첫 도입 이후 추가 라인 구축 시 PRT 장비를 다시 선택하고 있습니다. 반복 발주는 장비 성능과 대응 경험에 대한 신뢰를 보여줍니다.",
       },
     ],
     infoLabel: "Company Information",
@@ -192,7 +192,7 @@ const translations = {
       },
       {
         title: "Direct Engineering Support",
-        desc: "PRT equipment is designed so on-site engineers can diagnose and maintain key mechanical structures directly, reducing unnecessary downtime and communication delays.",
+        desc: "PRT equipment is designed for easier inspection and diagnosis of key mechanical structures, reducing the time required for issue identification and response.",
       },
       {
         title: "Engineered to Your Line Conditions",
@@ -200,7 +200,7 @@ const translations = {
       },
       {
         title: "Long-Term Customer Relationships",
-        desc: "A significant share of our orders come from customers who have already installed PRT equipment. We stay involved beyond delivery.",
+        desc: "Multiple customers have selected PRT equipment again when expanding or building additional lines. Repeat orders reflect trust in equipment performance and response experience.",
       },
     ],
     infoLabel: "Company Information",
