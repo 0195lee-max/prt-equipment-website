@@ -26,16 +26,28 @@ interface NewsItem {
   imageKind?: "logo" | "photo"
 }
 
-// Shipment card content is identical across locales (kept English).
-const SHIPMENT_ITEM: NewsItem = {
-  type: "Shipment",
+// Shipment card — type/date/title/status/image identical across locales;
+// only the body copy is localized (title stays English as a product name).
+const SHIPMENT_BASE = {
+  type: "Shipment" as NewsType,
   date: "2026",
   title: "Equipment Delivery — Roll-to-Roll Exposure System",
-  description:
-    "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
-  status: "Scheduled",
+  status: "Scheduled" as const,
   image: "/images/news_shipment_delivery_blue_wrapped.jpg",
-  imageKind: "photo",
+  imageKind: "photo" as const,
+}
+
+// Localized display labels for the card type + status pills. Section/proper
+// nouns stay English; en/zh fall back to the English NewsType/status keys.
+const TYPE_LABELS: Record<Language, Partial<Record<NewsType, string>>> = {
+  ko: { Exhibition: "전시", Shipment: "출하" },
+  en: {},
+  zh: {},
+}
+const STATUS_LABELS: Record<Language, Partial<Record<NonNullable<NewsItem["status"]>, string>>> = {
+  ko: { Upcoming: "예정", Scheduled: "예정" },
+  en: {},
+  zh: {},
 }
 
 // Exhibition card — type/date/title/status English in every locale;
@@ -53,20 +65,24 @@ const translations = {
   ko: {
     meta: "News",
     title: "News & Updates",
-    headline: "PRT Engineering, Production & Field Activities",
+    headline: "PRT 엔지니어링, 생산 및 현장 활동",
     description:
-      "Equipment deliveries, engineering activities, production support, and industry participation.",
+      "장비 출하, 엔지니어링 활동, 생산 지원 및 산업 전시 소식을 전합니다.",
     ctaPrimary: "Contact Sales",
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
-    emptyNote: "Additional updates will be published as production milestones occur.",
+    emptyNote: "추가 소식은 생산 및 현장 일정에 따라 업데이트됩니다.",
     newsItems: [
       {
         ...EXHIBITION_BASE,
         description:
           "PRT는 2026년 10월 27일부터 29일까지 열리는 CPCA Show Plus 2026 전시회에 참가할 예정입니다. 부스 정보 및 미팅 관련 세부 내용은 추후 공지됩니다.",
       },
-      SHIPMENT_ITEM,
+      {
+        ...SHIPMENT_BASE,
+        description:
+          "아시아 양산 라인으로 납품 예정인 Roll-to-Roll Exposure System 출하 소식입니다.",
+      },
     ] as NewsItem[],
   },
   en: {
@@ -85,7 +101,11 @@ const translations = {
         description:
           "PRT will participate in CPCA Show Plus 2026, held from October 27 to 29, 2026. Booth details and meeting information will be announced.",
       },
-      SHIPMENT_ITEM,
+      {
+        ...SHIPMENT_BASE,
+        description:
+          "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
+      },
     ] as NewsItem[],
   },
   zh: {
@@ -104,7 +124,11 @@ const translations = {
         description:
           "PRT 将参加于 2026 年 10 月 27 日至 29 日举办的 CPCA Show Plus 2026 展会。展位信息及会议安排将另行公布。",
       },
-      SHIPMENT_ITEM,
+      {
+        ...SHIPMENT_BASE,
+        description:
+          "面向亚洲量产产线交付的 Roll-to-Roll Exposure System 出货信息。",
+      },
     ] as NewsItem[],
   },
 }
@@ -259,7 +283,7 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
                       style={{ color: "#1976D2" }}
                     >
                       <Tag className="h-3 w-3" />
-                      {item.type}
+                      {TYPE_LABELS[lang][item.type] ?? item.type}
                     </span>
                     <span className="h-3 w-px bg-slate-700" />
                     <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -270,7 +294,7 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
                       <>
                         <span className="h-3 w-px bg-slate-700" />
                         <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                          {item.status}
+                          {STATUS_LABELS[lang][item.status] ?? item.status}
                         </span>
                       </>
                     )}
