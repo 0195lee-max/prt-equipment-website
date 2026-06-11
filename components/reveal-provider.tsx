@@ -24,10 +24,12 @@ export function RevealProvider() {
     if (!root.classList.contains("reveal-on")) return
 
     const pending = new Set<Element>()
+    const revealed = new Set<Element>()
 
     const reveal = (el: Element) => {
       el.classList.add("is-revealed")
       pending.delete(el)
+      revealed.add(el)
       io?.unobserve(el)
     }
 
@@ -86,9 +88,34 @@ export function RevealProvider() {
     })
     mo.observe(document.body, { childList: true, subtree: true })
 
+    // Keep already-revealed elements revealed even if a re-render rewrites their
+    // className and strips the imperatively-added `.is-revealed` — e.g. when a
+    // reveal element's className is language-dependent and changes on language
+    // switch. Re-assert a static final-state class (no animation) before paint,
+    // so the content never snaps back to the initial blur and never replays the
+    // reveal. (Skip the moment of the first reveal, which keeps `.is-revealed`.)
+    const classMo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        const el = m.target as Element
+        if (
+          revealed.has(el) &&
+          !el.classList.contains("is-revealed") &&
+          !el.classList.contains("reveal-static")
+        ) {
+          el.classList.add("reveal-static")
+        }
+      }
+    })
+    classMo.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+      subtree: true,
+    })
+
     return () => {
       io?.disconnect()
       mo.disconnect()
+      classMo.disconnect()
       window.removeEventListener("scroll", onScrollOrResize)
       window.removeEventListener("resize", onScrollOrResize)
       window.clearTimeout(t)
