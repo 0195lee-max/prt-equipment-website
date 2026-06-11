@@ -42,35 +42,60 @@ const translations = {
   ko: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "Leadframe 및 반도체 패키징 공정을 위한 안정적인 Roll-to-Roll 공정 시스템에 집중하는 엔지니어링 전문 기업입니다.",
-    positioningBody:
-      "양산 검증된 Lamination 및 Exposure 장비를 기반으로, 아시아 주요 고객사에 100기 이상의 시스템을 납품하고 재주문 이력을 이어오고 있습니다.",
+    positioningSub: (
+      <>
+        Leadframe 및 반도체 패키징 공정을 위한 안정적인{" "}
+        <span className="whitespace-nowrap">Roll-to-Roll</span> 공정 시스템에 집중하는{" "}
+        <br className="hidden md:block" />
+        엔지니어링 전문 기업입니다.
+      </>
+    ),
+    positioningBody: (
+      <>
+        양산 검증된 <span className="whitespace-nowrap">Exposure 및 Lamination</span> 장비를
+        기반으로, 아시아 주요 고객사에{" "}
+        <br className="hidden md:block" />
+        100기 이상의 시스템을 납품하고 재주문 이력을 이어오고 있습니다.
+      </>
+    ),
     factoryLabel: "Production Environment",
     factoryCaption: "Roll-to-Roll 생산 시스템을 위한 실제 조립 및 장비 준비 환경.",
     engLabel: "Assembly & Control Detail",
     engHeading: "제어 통합부터 기계 조립까지, 직접 엔지니어링 접근.",
-    engCopy: "PRT는 기계 조립·제어 통합·문제 해결을 엔지니어링 팀 가까이에서 직접 수행하여, 더 빠른 대응과 양산 장비에 대한 장기 지원을 제공합니다.",
+    engCopy: (
+      <>
+        PRT는 기계 조립·제어 통합·문제 해결을 엔지니어링 팀 가까이에서 직접 수행하여,{" "}
+        <br className="hidden md:block" />
+        더 빠른 대응과 양산 장비에 대한 장기 지원을 제공합니다.
+      </>
+    ),
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe 및 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 필요한 Lamination과 UV Exposure 공정에 집중합니다. 이러한 집중 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
+      "PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe 및 반도체 패키징 제조에서 Roll-to-Roll 연속 이송이 필요한 UV Exposure와 Lamination 공정에 집중합니다. 이러한 집중 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.",
     specializationCards: [
-      {
-        title: "Roll-to-Roll Lamination",
-        desc: "드라이필름 포토레지스트의 연속 Lamination. 장력 제어, 온도 균일성, 기포 없는 접합이 핵심입니다.",
-        specs: FOCUS_SPECS.lamination,
-      },
       {
         title: "Roll-to-Roll Exposure",
         desc: "Leadframe 패턴 형성을 위한 연속 LED UV Exposure. 정렬 정밀도와 반복 재현성이 핵심입니다.",
         specs: FOCUS_SPECS.exposure,
+      },
+      {
+        title: "Roll-to-Roll Lamination",
+        desc: "드라이필름 포토레지스트의 연속 Lamination. 장력 제어, 온도 균일성, 기포 없는 접합이 핵심입니다.",
+        specs: FOCUS_SPECS.lamination,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
     whyPoints: [
       {
         title: "Production-Proven, Not Spec Sheet Claims",
-        desc: "사양서의 수치가 아니라, 실제 양산 라인에서 검증된 장비로 증명합니다.",
+        desc: (
+          <>
+            사양서의 수치가 아니라,{" "}
+            <br className="hidden md:block" />
+            실제 양산 라인에서 검증된 장비로 증명합니다.
+          </>
+        ),
       },
       {
         title: "Direct Engineering Support",
@@ -97,15 +122,34 @@ const translations = {
     contactCta: "Contact Sales",
     productsCta: "View Equipment",
     patentLabel: "Patent Background",
-    patentBody:
-      "PRT의 엔지니어링 역량은 양산 중심의 Roll-to-Roll 장비 개발에 뿌리를 두고 있으며, Exposure 및 Lamination 시스템과 관련된 특허 기반 기술 경험에 의해 뒷받침됩니다.",
+    patentBody: (
+      <>
+        PRT의 엔지니어링 역량은 양산 중심의 <span className="whitespace-nowrap">Roll-to-Roll</span> 장비
+        개발에 뿌리를 두고 있으며,{" "}
+        <br className="hidden md:block" />
+        <span className="whitespace-nowrap">Exposure 및 Lamination 시스템</span>과 관련된 특허 기반 기술
+        경험에 의해 뒷받침됩니다.
+      </>
+    ),
   },
   en: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "We are a specialized engineering company focused on stable Roll-to-Roll process systems for Leadframe and semiconductor packaging.",
-    positioningBody:
-      "Our production-proven lamination and exposure equipment is installed across Asia, with over 100 systems delivered and repeat orders from existing customers.",
+    positioningSub: (
+      <>
+        We are a specialized engineering company focused on stable{" "}
+        <span className="whitespace-nowrap">Roll-to-Roll</span> process systems{" "}
+        <br className="hidden md:block" />
+        for Leadframe and semiconductor packaging.
+      </>
+    ),
+    positioningBody: (
+      <>
+        Our production-proven exposure and lamination equipment is installed across Asia,{" "}
+        <br className="hidden md:block" />
+        with over 100 systems delivered and repeat orders from existing customers.
+      </>
+    ),
     factoryLabel: "Production Environment",
     factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
     engLabel: "Assembly & Control Detail",
@@ -114,17 +158,17 @@ const translations = {
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT does not try to cover the entire semiconductor equipment spectrum. We focus on two specific process steps — lamination and UV exposure — where Roll-to-Roll continuous transport is required in Leadframe and Semiconductor Packaging manufacturing. This focused experience allows us to build systems that perform reliably on real production floors.",
+      "PRT does not try to cover every category of semiconductor equipment. We focus on UV Exposure and Lamination processes that require continuous Roll-to-Roll web handling for Leadframe and semiconductor packaging production. This focus allows us to build systems that operate reliably in real production environments.",
     specializationCards: [
       {
-        title: "Roll-to-Roll Lamination",
-        desc: "Continuous lamination of dry film photoresist. Tension control, temperature uniformity, and void-free bonding are the critical parameters.",
-        specs: FOCUS_SPECS.lamination,
+        title: "Roll-to-Roll Exposure",
+        desc: "Continuous LED UV exposure for Leadframe pattern formation. Alignment accuracy and repeatability are key.",
+        specs: FOCUS_SPECS.exposure,
       },
       {
-        title: "Roll-to-Roll Exposure",
-        desc: "Continuous LED UV exposure for Leadframe patterning. Alignment precision and shot-to-shot repeatability are the critical parameters.",
-        specs: FOCUS_SPECS.exposure,
+        title: "Roll-to-Roll Lamination",
+        desc: "Continuous lamination of dry film photoresist. Tension control, temperature uniformity, and bubble-free bonding are key.",
+        specs: FOCUS_SPECS.lamination,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
@@ -158,15 +202,21 @@ const translations = {
     contactCta: "Contact Sales",
     productsCta: "View Equipment",
     patentLabel: "Patent Background",
-    patentBody:
-      "PRT's engineering background is rooted in production-focused roll-to-roll equipment development, supported by prior patent-related technical experience in exposure and lamination systems.",
+    patentBody: (
+      <>
+        PRT&apos;s engineering background is rooted in production-focused roll-to-roll equipment
+        development,{" "}
+        <br className="hidden md:block" />
+        supported by prior patent-related technical experience in exposure and lamination systems.
+      </>
+    ),
   },
   zh: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
     positioningSub: "我们是一家专注于 Leadframe 与半导体封装工艺的稳定 Roll-to-Roll 工程系统公司。",
     positioningBody:
-      "基于经过量产验证的 Lamination 与 Exposure 设备，我们已向亚洲主要客户交付 100 台以上系统，并持续获得既有客户的重复订单。",
+      "基于经过量产验证的 Exposure 与 Lamination 设备，我们已向亚洲主要客户交付 100 台以上系统，并持续获得既有客户的重复订单。",
     factoryLabel: "Production Environment",
     factoryCaption: "面向 Roll-to-Roll 生产系统的真实组装与设备准备环境。",
     engLabel: "Assembly & Control Detail",
@@ -175,17 +225,17 @@ const translations = {
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody:
-      "PRT 不试图覆盖半导体设备的全领域。我们专注于 Leadframe 与半导体封装制造中需要 Roll-to-Roll 连续传输的两个工艺步骤 — Lamination 与 UV Exposure。这种集中积累的经验使我们能够制造在真实量产现场可靠运行的系统。",
+      "PRT 并不试图覆盖所有半导体设备领域。我们专注于 Leadframe 与半导体封装制造中需要连续 Roll-to-Roll 输送的 UV Exposure 与 Lamination 工艺。基于这一专注经验，我们构建能够在实际量产环境中稳定运行的系统。",
     specializationCards: [
       {
-        title: "Roll-to-Roll Lamination",
-        desc: "干膜光刻胶的连续 Lamination。张力控制、温度均匀性和无气泡粘合是关键参数。",
-        specs: FOCUS_SPECS.lamination,
+        title: "Roll-to-Roll Exposure",
+        desc: "用于 Leadframe 图形形成的连续 LED UV Exposure。对位精度与重复再现性是核心。",
+        specs: FOCUS_SPECS.exposure,
       },
       {
-        title: "Roll-to-Roll Exposure",
-        desc: "用于 Leadframe 图案形成的连续 LED UV Exposure。对准精度和逐次重复性是关键参数。",
-        specs: FOCUS_SPECS.exposure,
+        title: "Roll-to-Roll Lamination",
+        desc: "用于干膜光刻胶的连续 Lamination。张力控制、温度均匀性与无气泡贴合是核心。",
+        specs: FOCUS_SPECS.lamination,
       },
     ],
     whyLabel: "Why Customers Choose PRT",
