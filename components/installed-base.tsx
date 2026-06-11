@@ -11,8 +11,14 @@ const translations = {
     meta: "Installed Base",
     title: "Production-Proven",
     titleAccent: "in Asia",
-    description:
-      "PRT 시스템은 아시아 전역의 양산 현장에서 가동 중입니다. 100대 이상의 Installed Systems와 재주문이 현장 성능을 입증합니다.",
+    description: (
+      <>
+        PRT 시스템은 이미 아시아 전역의 양산 현장에서 가동 중입니다.
+        <br className="hidden md:block" />{" "}
+        기존 고객사의 재주문은 <span className="whitespace-nowrap">현장 성능</span>을 검증하는 가장
+        직접적인 기준입니다.
+      </>
+    ),
     kpiHeading: "Field Record",
     kpis: [
       { title: "100+", sub: "Installed Systems" },
@@ -22,8 +28,13 @@ const translations = {
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
-    repeatText:
-      "다수의 PRT 고객사가 라인 증설 또는 신규 라인 구축 시 PRT 장비를 재선정해 왔습니다. 재주문은 현장 성능을 가장 직접적으로 입증합니다.",
+    repeatText: (
+      <>
+        다수의 PRT 고객사가 라인 증설 또는 신규 라인 구축 시 PRT 장비를 재선정해왔습니다.
+        <br className="hidden md:block" />{" "}
+        재주문은 현장 성능을 <span className="whitespace-nowrap">가장 직접적으로</span> 입증합니다.
+      </>
+    ),
     regionsLabel: "Deployment Regions",
     regions: [
       {
@@ -83,8 +94,14 @@ const translations = {
     meta: "Installed Base",
     title: "Production-Proven",
     titleAccent: "in Asia",
-    description:
-      "PRT systems are already running in production environments across Asia. 100+ systems installed. Repeat orders validate field performance.",
+    description: (
+      <>
+        PRT systems are already running in production environments across Asia.
+        <br className="hidden md:block" />{" "}
+        <span className="whitespace-nowrap">Repeat orders</span> from existing customers validate
+        field performance.
+      </>
+    ),
     kpiHeading: "Field Record",
     kpis: [
       { title: "100+", sub: "Installed Systems" },
@@ -94,8 +111,15 @@ const translations = {
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
-    repeatText:
-      "Multiple PRT customers have re-selected PRT equipment when expanding lines or building new ones. Repeat orders are the most direct validation of field performance.",
+    repeatText: (
+      <>
+        Multiple PRT customers have re-selected PRT equipment when expanding lines or building new
+        ones.
+        <br className="hidden md:block" />{" "}
+        <span className="whitespace-nowrap">Repeat orders</span> are the most direct validation of
+        field performance.
+      </>
+    ),
     regionsLabel: "Deployment Regions",
     regions: [
       {
@@ -155,8 +179,13 @@ const translations = {
     meta: "Installed Base",
     title: "Production-Proven",
     titleAccent: "in Asia",
-    description:
-      "PRT 系统已在亚洲各地的量产现场投入运行。50 套以上的 Installed Systems 与重复订单印证现场性能。",
+    description: (
+      <>
+        PRT 系统已在亚洲各地的量产环境中运行。
+        <br className="hidden md:block" />
+        来自既有客户的重复订单，是现场性能最直接的验证。
+      </>
+    ),
     kpiHeading: "Field Record",
     kpis: [
       { title: "100+", sub: "Installed Systems" },
@@ -166,8 +195,13 @@ const translations = {
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
-    repeatText:
-      "多家 PRT 客户在扩建或新建产线时再次选择 PRT 设备。重复订单是对现场性能最直接的印证。",
+    repeatText: (
+      <>
+        多家 PRT 客户在扩建产线或建设新产线时再次选择了 PRT 设备。
+        <br className="hidden md:block" />
+        重复订单是现场性能最直接的验证。
+      </>
+    ),
     regionsLabel: "Deployment Regions",
     regions: [
       {
