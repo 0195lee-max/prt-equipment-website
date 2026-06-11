@@ -109,7 +109,7 @@ export function CompanyProof({ lang }: CompanyProofProps) {
         <svg
           viewBox="0 0 1000 1000"
           preserveAspectRatio="xMidYMid meet"
-          className="absolute right-[20%] top-1/2 h-[172%] w-auto -translate-x-4 -translate-y-1/2"
+          className="absolute right-[20%] top-1/2 h-[172%] w-auto -translate-x-[26px] -translate-y-1/2"
           style={{ opacity: 0.2 }}
         >
           <defs>
