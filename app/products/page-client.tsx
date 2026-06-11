@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -135,7 +135,7 @@ const translations = {
   ko: {
     pageLabel: "Equipment Lineup",
     title: "Roll-to-Roll Equipment",
-    subtitle: "Leadframe 및 반도체 패키징 양산 공정을 위한 Roll-to-Roll Lamination · Exposure 장비",
+    subtitle: "Leadframe 및 반도체 패키징 양산 공정을 위한 Roll-to-Roll Exposure · Lamination 장비",
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
@@ -151,7 +151,15 @@ const translations = {
       {
         model: "PRTEX-380VAN-LF-LED",
         type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: "Leadframe 패터닝 공정을 위한 Vertical Roll-to-Roll LED Exposure 시스템입니다. Vision 자동 정렬과 안정적인 UV 노광으로 고처리량 양산 환경에 대응합니다.",
+        desc: (
+          <>
+            Leadframe 패터닝 공정을 위한 Vertical{" "}
+            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 시스템입니다.
+            <br className="hidden md:block" />{" "}
+            Vision 자동 정렬과 안정적인 <span className="whitespace-nowrap">UV 노광</span>을 통해
+            고처리량 양산 환경에 대응합니다.
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -168,7 +176,16 @@ const translations = {
       {
         model: "PRTEX-380AN-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
-        desc: "Horizontal 구조의 Roll-to-Roll LED Exposure 시스템입니다. Vertical 방식과 동일한 광학·정렬 성능을 수평 레이아웃으로 제공합니다.",
+        desc: (
+          <>
+            Horizontal 구조의 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure
+            시스템입니다.
+            <br className="hidden md:block" />{" "}
+            Vertical 방식과 동일한 광학·정렬 성능을
+            <br className="hidden md:block" />{" "}
+            수평 레이아웃으로 제공합니다.
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -211,7 +228,7 @@ const translations = {
   en: {
     pageLabel: "Equipment Lineup",
     title: "Roll-to-Roll Equipment",
-    subtitle: "Production-proven Roll-to-Roll laminator and exposure systems for Leadframe and Semiconductor Packaging manufacturing lines.",
+    subtitle: "Roll-to-Roll exposure and lamination systems configured for Leadframe and semiconductor packaging production.",
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
@@ -227,7 +244,15 @@ const translations = {
       {
         model: "PRTEX-380VAN-LF-LED",
         type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: "Vertical Roll-to-Roll LED exposure system for Leadframe patterning. 8CCD vision auto-alignment and 12-second tact time for high-throughput production environments.",
+        desc: (
+          <>
+            Vertical <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system for
+            Leadframe patterning.
+            <br className="hidden md:block" />{" "}
+            Vision auto-alignment and stable <span className="whitespace-nowrap">UV exposure</span>{" "}
+            support high-throughput production environments.
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -244,7 +269,15 @@ const translations = {
       {
         model: "PRTEX-380AN-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
-        desc: "Horizontal Roll-to-Roll LED exposure system. Delivers identical optical and alignment performance as the vertical configuration in a horizontal layout.",
+        desc: (
+          <>
+            Horizontal <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system.
+            <br className="hidden md:block" />{" "}
+            Provides the same optical and alignment performance
+            <br className="hidden md:block" />{" "}
+            as the vertical configuration in a horizontal layout.
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -287,7 +320,7 @@ const translations = {
   zh: {
     pageLabel: "Equipment Lineup",
     title: "Roll-to-Roll Equipment",
-    subtitle: "面向 Leadframe 及半导体封装量产线的 Roll-to-Roll Laminator 与 Exposure 系统。",
+    subtitle: "面向 Leadframe 及半导体封装量产线的 Roll-to-Roll Exposure 与 Lamination 系统。",
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
@@ -303,7 +336,14 @@ const translations = {
       {
         model: "PRTEX-380VAN-LF-LED",
         type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: "用于 Leadframe 图案形成的 Vertical Roll-to-Roll LED Exposure 系统。8CCD Vision 自动对准和 12 秒 Tact Time，适用于高产量生产环境。",
+        desc: (
+          <>
+            用于 Leadframe 图案形成的 Vertical{" "}
+            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
+            <br className="hidden md:block" />
+            Vision 自动对准与稳定的 <span className="whitespace-nowrap">UV 曝光</span>支持高产量生产环境。
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -320,7 +360,13 @@ const translations = {
       {
         model: "PRTEX-380AN-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
-        desc: "Horizontal 型 Roll-to-Roll LED Exposure 系统。以水平布局提供与 Vertical 型相同的光学和对准性能。",
+        desc: (
+          <>
+            Horizontal 型 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
+            <br className="hidden md:block" />
+            以水平布局提供与 Vertical 型相同的光学和对准性能。
+          </>
+        ),
         specs: [
           { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
           { label: "Alignment Accuracy", value: "±5 μm" },
@@ -403,7 +449,7 @@ interface SpecRow {
 interface Model {
   model: string
   type: string
-  desc: string
+  desc: ReactNode
   specs: SpecRow[]
   materials: string
   application: string
