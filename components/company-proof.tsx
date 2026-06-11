@@ -8,10 +8,28 @@ type Language = "ko" | "en" | "zh"
 const translations = {
   ko: {
     eyebrow: "PRT AT A GLANCE",
-    headline: "범용 장비가 아닌, 생산 공정 중심의 Roll-to-Roll 시스템",
-    subline:
-      "Leadframe 및 반도체 패키징 라인을 위한 양산 검증된 Roll-to-Roll Exposure · Lamination 시스템.",
-    body: "PRT는 안정적인 Roll-to-Roll 반도체 공정 시스템에 집중하는 엔지니어링 전문 기업입니다. 반복 가능한 공정 성능, 안정적인 웹 핸들링, 장기 엔지니어링 지원을 갖춘 장비로 아시아 전역의 생산 라인을 지원합니다.",
+    headline: (
+      <>
+        범용 장비가 아닌,
+        <br />
+        공정에 맞춘 <span className="whitespace-nowrap">Roll-to-Roll 시스템.</span>
+      </>
+    ),
+    subline: (
+      <>
+        Leadframe 및 반도체 패키징 라인을 위한
+        <br />
+        양산 검증 <span className="whitespace-nowrap">Roll-to-Roll</span> Exposure · Lamination
+        시스템.
+      </>
+    ),
+    body: (
+      <>
+        PRT는 반복 가능한 공정 성능, 안정적인 웹 핸들링, 장기 엔지니어링 지원을 고려한
+        <br />
+        <span className="whitespace-nowrap">Roll-to-Roll</span> 공정 장비를 설계합니다.
+      </>
+    ),
     ctaCompany: "View Company",
     ctaInstalled: "View Installed Base",
     quickLabel: "Explore Equipment",
@@ -20,18 +38,18 @@ const translations = {
     eyebrow: "PRT AT A GLANCE",
     headline: "Not Generic Equipment. Process-Built Systems.",
     subline:
-      "Production-proven Roll-to-Roll exposure and lamination systems for Leadframe and semiconductor packaging lines.",
-    body: "PRT is a specialized engineering company focused on stable Roll-to-Roll semiconductor process systems. We support production lines across Asia with equipment designed for repeatable process performance, stable web handling, and long-term engineering support.",
+      "Production-proven Roll-to-Roll exposure and lamination systems for Leadframe and semiconductor packaging.",
+    body: "PRT designs stable Roll-to-Roll process equipment for repeatable production performance, web handling stability, and long-term engineering support across Asia.",
     ctaCompany: "View Company",
     ctaInstalled: "View Installed Base",
     quickLabel: "Explore Equipment",
   },
   zh: {
     eyebrow: "PRT AT A GLANCE",
-    headline: "不是通用设备，而是面向生产工艺的 Roll-to-Roll 系统",
+    headline: "并非通用设备，而是面向工艺构建的 Roll-to-Roll 系统。",
     subline:
-      "面向 Leadframe 及半导体封装产线的量产验证 Roll-to-Roll Exposure · Lamination 系统。",
-    body: "PRT 是一家专注于稳定 Roll-to-Roll 半导体工艺系统的工程专业公司。凭借具备可重复工艺性能、稳定卷材输送与长期工程支持的设备，服务于亚洲各地的生产线。",
+      "面向 Leadframe 与半导体封装产线的量产验证 Roll-to-Roll Exposure · Lamination 系统。",
+    body: "PRT 设计稳定的 Roll-to-Roll 工艺设备，支持可重复的工艺性能、稳定的卷材传输，以及长期工程服务。",
     ctaCompany: "View Company",
     ctaInstalled: "View Installed Base",
     quickLabel: "Explore Equipment",
