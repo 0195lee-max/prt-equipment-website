@@ -169,7 +169,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
         <div
           className="absolute inset-0"
           style={{
-            opacity: 0.05,
+            opacity: 0.055,
             backgroundImage:
               "linear-gradient(to right, #1976D2 1px, transparent 1px), linear-gradient(to bottom, #1976D2 1px, transparent 1px)",
             backgroundSize: "84px 84px",
@@ -184,7 +184,7 @@ export function HeroSlider({ lang }: HeroSliderProps) {
           style={{
             opacity: glowOn ? 1 : 0,
             backgroundImage:
-              "linear-gradient(to right, rgba(25,118,210,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(25,118,210,0.5) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(20,112,214,0.56) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,112,214,0.56) 1px, transparent 1px)",
             backgroundSize: "84px 84px",
             WebkitMaskImage:
               "radial-gradient(170px circle at var(--mx, 50%) var(--my, 50%), rgba(0,0,0,0.5) 0%, transparent 70%)",
