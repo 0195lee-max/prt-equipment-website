@@ -1,11 +1,27 @@
 "use client"
 
-import type { CSSProperties } from "react"
+import { useState, type CSSProperties } from "react"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react"
 import { Footer } from "@/components/footer"
+import { EquipmentImageLightbox, type LightboxImage } from "@/components/equipment-image-lightbox"
 import { useLanguage, type Language } from "@/hooks/use-language"
+
+// Assembly & Control Detail — 7 real engineering/factory photos (static grid,
+// 3 larger on row 1 + 4 on row 2). Captions are short technical labels; click
+// opens the shared lightbox. object-cover with orientation-matched cells keeps
+// detail in frame. Production Environment uses a separate image (not here).
+const ASSEMBLY_IMAGES: { src: string; caption: string }[] = [
+  { src: "/images/company-assembly-control-integration.png", caption: "Control Integration" },
+  { src: "/images/company-assembly-machine-frame.png", caption: "Machine Assembly" },
+  { src: "/images/company-assembly-mechanical-fastening.png", caption: "Mechanical Fastening" },
+  { src: "/images/company-detail-control-cabinet-work.png", caption: "Control Cabinet Work" },
+  { src: "/images/company-detail-machine-interior-access.png", caption: "Machine Interior Access" },
+  { src: "/images/company-detail-pneumatic-panel.png", caption: "Pneumatic Detail" },
+  { src: "/images/company-detail-wiring-frame.png", caption: "Wiring Frame Detail" },
+]
+const ASSEMBLY_LIGHTBOX: LightboxImage[] = ASSEMBLY_IMAGES.map((im) => ({ src: im.src, alt: im.caption }))
 
 // Specification rows mirror the Equipment page formatting: clean
 // "Label: Value" pairs, English in every locale, tabular values.
@@ -26,9 +42,9 @@ const translations = {
   ko: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "Leadframe 및 Semiconductor Packaging 공정에 특화된 Roll-to-Roll 엔지니어링 전문 기업입니다.",
+    positioningSub: "Leadframe 및 반도체 패키징 공정을 위한 안정적인 Roll-to-Roll 공정 시스템에 집중하는 엔지니어링 전문 기업입니다.",
     positioningBody:
-      "PRT는 Leadframe 및 반도체 패키징 생산에 필요한 Roll-to-Roll 공정 장비에 집중해온 엔지니어링 회사입니다. 양산 검증된 Lamination 및 Exposure 시스템을 기반으로, 아시아 주요 고객사에 100기 이상의 장비를 납품해왔습니다.",
+      "양산 검증된 Lamination 및 Exposure 장비를 기반으로, 아시아 주요 고객사에 100기 이상의 시스템을 납품하고 재주문 이력을 이어오고 있습니다.",
     factoryLabel: "Production Environment",
     factoryCaption: "Roll-to-Roll 생산 시스템을 위한 실제 조립 및 장비 준비 환경.",
     engLabel: "Assembly & Control Detail",
@@ -87,9 +103,9 @@ const translations = {
   en: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "We are a specialized engineering company focused on stable Roll-to-Roll semiconductor process systems.",
+    positioningSub: "We are a specialized engineering company focused on stable Roll-to-Roll process systems for Leadframe and semiconductor packaging.",
     positioningBody:
-      "Our engineering team focuses on Roll-to-Roll process equipment for Leadframe and semiconductor packaging production. We design and deliver production-proven lamination and exposure systems, with 100+ installed systems across Asia and repeat orders from existing customers.",
+      "Our production-proven lamination and exposure equipment is installed across Asia, with over 100 systems delivered and repeat orders from existing customers.",
     factoryLabel: "Production Environment",
     factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
     engLabel: "Assembly & Control Detail",
@@ -148,9 +164,9 @@ const translations = {
   zh: {
     meta: "Company",
     positioning: "We do not build generic equipment.",
-    positioningSub: "我们是专注于 Leadframe 与半导体封装工艺的 Roll-to-Roll 工程公司。",
+    positioningSub: "我们是一家专注于 Leadframe 与半导体封装工艺的稳定 Roll-to-Roll 工程系统公司。",
     positioningBody:
-      "PRT 专注于面向 Leadframe 及半导体封装生产的 Roll-to-Roll 工艺设备。基于量产验证的 Lamination 与 Exposure 系统，我们已在亚洲主要客户现场交付 100 台以上 Installed Systems。",
+      "基于经过量产验证的 Lamination 与 Exposure 设备，我们已向亚洲主要客户交付 100 台以上系统，并持续获得既有客户的重复订单。",
     factoryLabel: "Production Environment",
     factoryCaption: "面向 Roll-to-Roll 生产系统的真实组装与设备准备环境。",
     engLabel: "Assembly & Control Detail",
@@ -211,6 +227,7 @@ const translations = {
 export default function CompanyPage({ initialLang }: { initialLang?: Language }) {
   const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
+  const [lightbox, setLightbox] = useState<{ index: number } | null>(null)
 
   // English copy is longer, so give the hero text a wider measure on desktop
   // (blue statement → 1 line, body → ~3 lines). Korean/Chinese keep the
@@ -251,8 +268,8 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             </h1>
             <p
               data-reveal
-              style={{ color: "#1976D2", "--reveal-delay": "120ms" } as CSSProperties}
-              className="mb-5 text-lg font-light leading-relaxed sm:text-xl"
+              style={{ color: "#5e9bd6", "--reveal-delay": "120ms" } as CSSProperties}
+              className="mb-5 max-w-[820px] text-base font-light leading-relaxed sm:text-lg"
             >
               {t.positioningSub}
             </p>
@@ -269,7 +286,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
               label and caption are all stable content: visible immediately, no
               reveal (reveal is reserved for the hero text above). */}
           <div className="mt-8 lg:mt-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
               {t.factoryLabel}
             </p>
             <div className="relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
@@ -354,30 +371,60 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             {t.engCopy}
           </p>
 
-          {/* Four images — 1 & 2 wider, 3 & 4 narrower vertical detail cuts.
-              Same top baseline / equal height on desktop; 2x2 on mobile.
-              object-position tuned per image so the equipment core stays in frame. */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-[1.4fr_1.4fr_1fr_1fr]">
-            {[
-              { src: "/images/company_assembly_detail1.jpg", pos: "center 38%", alt: "Control cabinet assembly and wiring" },
-              { src: "/images/company_assembly_detail2.jpg", pos: "center 58%", alt: "Machine assembly with open control cabinet" },
-              { src: "/images/company_assembly_detail3.jpg", pos: "center 50%", alt: "Machine frame and cable routing" },
-              { src: "/images/company_assembly_detail4.jpg", pos: "center 45%", alt: "Electrical and pneumatic control cabinet detail" },
-            ].map((im, i) => (
-              <div
-                key={i}
-                className="relative aspect-[3/4] w-full overflow-hidden bg-black lg:aspect-auto lg:h-[440px]"
+          {/* Static 3 + 4 grid of real assembly / control-detail photos.
+              Row 1: 3 larger landscape shots. Row 2: 4 portrait detail shots —
+              cells are orientation-matched so object-cover keeps the detail in
+              frame. Click opens the shared lightbox. Subtle hover only. */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+            {ASSEMBLY_IMAGES.slice(0, 3).map((im, i) => (
+              <button
+                key={im.src}
+                type="button"
+                onClick={() => setLightbox({ index: i })}
+                aria-label={`Enlarge: ${im.caption}`}
+                className="group relative aspect-[4/3] w-full cursor-zoom-in overflow-hidden bg-black"
               >
                 <Image
                   src={im.src}
-                  alt={im.alt}
+                  alt={im.caption}
+                  fill
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                  quality={88}
+                  className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/85"
+                >
+                  {im.caption}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-4 lg:grid-cols-4">
+            {ASSEMBLY_IMAGES.slice(3).map((im, i) => (
+              <button
+                key={im.src}
+                type="button"
+                onClick={() => setLightbox({ index: i + 3 })}
+                aria-label={`Enlarge: ${im.caption}`}
+                className="group relative aspect-[3/4] w-full cursor-zoom-in overflow-hidden bg-black"
+              >
+                <Image
+                  src={im.src}
+                  alt={im.caption}
                   fill
                   sizes="(min-width: 1024px) 25vw, 50vw"
                   quality={88}
-                  className="object-cover"
-                  style={{ objectPosition: im.pos }}
+                  className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
                 />
-              </div>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/85"
+                >
+                  {im.caption}
+                </span>
+              </button>
             ))}
           </div>
         </div>
@@ -483,6 +530,16 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
       </section>
 
       <Footer lang={lang} />
+
+      {/* Click-to-enlarge for the Assembly & Control Detail photos (shared viewer). */}
+      {lightbox && (
+        <EquipmentImageLightbox
+          images={ASSEMBLY_LIGHTBOX}
+          index={lightbox.index}
+          onClose={() => setLightbox(null)}
+          onIndexChange={(i) => setLightbox({ index: i })}
+        />
+      )}
     </main>
   )
 }
