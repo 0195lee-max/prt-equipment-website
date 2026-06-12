@@ -64,9 +64,9 @@ const translations = {
     engHeading: "제어 통합부터 기계 조립까지, 직접 엔지니어링 접근.",
     engCopy: (
       <>
-        PRT는 기계 조립·제어 통합·문제 해결을 엔지니어링 팀 가까이에서 직접 수행하여,{" "}
+        PRT는 기계 조립, 제어 통합, 문제 대응을 엔지니어링 중심으로 직접 관리합니다.{" "}
         <br className="hidden md:block" />
-        더 빠른 대응과 양산 장비에 대한 장기 지원을 제공합니다.
+        장비 상태를 빠르게 파악하고, 양산 장비에 필요한 지속적인 기술 지원을 제공합니다.
       </>
     ),
     specializationLabel: "Area of Specialization",
@@ -75,8 +75,8 @@ const translations = {
       <>
         PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe 및 반도체 패키징 제조에서{" "}
         <span className="whitespace-nowrap">Roll-to-Roll</span> 연속 이송이 필요한{" "}
-        <span className="whitespace-nowrap">UV Exposure</span>와 Lamination 공정에 집중합니다. 이러한
-        집중 경험을 바탕으로 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.
+        <span className="whitespace-nowrap">UV Exposure</span>와 Lamination 공정에 집중합니다. 축적된
+        공정 경험을 바탕으로, 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.
       </>
     ),
     specializationCards: [
@@ -160,16 +160,16 @@ const translations = {
     factoryCaption: "Real assembly and equipment preparation environment for Roll-to-Roll production systems.",
     engLabel: "Assembly & Control Detail",
     engHeading: "Direct engineering access from control integration to machine assembly.",
-    engCopy: "PRT keeps mechanical assembly, control integration, and troubleshooting close to the engineering team, enabling faster issue response and long-term support for production equipment.",
+    engCopy: "PRT manages mechanical assembly, control integration, and issue response within the engineering workflow. This helps identify equipment conditions faster and provide continuous technical support for production systems.",
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody: (
       <>
         PRT does not try to cover every category of semiconductor equipment. We focus on{" "}
-        <span className="whitespace-nowrap">UV Exposure</span> and Lamination processes for
-        Leadframe and semiconductor packaging production. These systems are built for continuous{" "}
-        <span className="whitespace-nowrap">Roll-to-Roll</span> web handling and reliable operation
-        in real production environments.
+        <span className="whitespace-nowrap">UV Exposure</span> and Lamination processes that require
+        continuous <span className="whitespace-nowrap">Roll-to-Roll</span> web handling in Leadframe
+        and semiconductor packaging production. Built on accumulated process experience, our systems
+        operate reliably on real production floors.
       </>
     ),
     specializationCards: [
@@ -234,7 +234,7 @@ const translations = {
     factoryCaption: "面向 Roll-to-Roll 生产系统的真实组装与设备准备环境。",
     engLabel: "Assembly & Control Detail",
     engHeading: "从控制集成到机械组装，全程直接工程介入。",
-    engCopy: "PRT 将机械组装、控制集成与故障排查紧贴工程团队进行，从而实现更快的问题响应与对量产设备的长期支持。",
+    engCopy: "PRT 以工程为核心，直接管理机械组装、控制集成与问题应对。由此可更快掌握设备状态，并为量产设备提供持续的技术支持。",
     specializationLabel: "Area of Specialization",
     specializationTitle: "What We Focus On",
     specializationBody: (
@@ -242,7 +242,7 @@ const translations = {
         PRT 并不试图覆盖所有半导体设备领域。我们专注于 Leadframe 与半导体封装制造中需要连续{" "}
         <span className="whitespace-nowrap">Roll-to-Roll</span> 输送的{" "}
         <span className="whitespace-nowrap">UV Exposure</span> 与 Lamination
-        工艺。基于这一专注经验，我们构建能够在实际量产环境中稳定运行的系统。
+        工艺。基于积累的工艺经验，我们构建能够在实际量产环境中稳定运行的系统。
       </>
     ),
     specializationCards: [

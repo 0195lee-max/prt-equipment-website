@@ -149,15 +149,15 @@ const translations = {
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.ko[i] })),
     exposures: [
       {
-        model: "PRTEX-380AN-LF-LED",
-        type: "Horizontal Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380VAN-LF-LED",
+        type: "Vertical Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            수평 레이아웃으로 구성된 <span className="whitespace-nowrap">Roll-to-Roll</span> LED
-            Exposure 시스템입니다.
+            Leadframe 패터닝 공정을 위한 Vertical{" "}
+            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 시스템입니다.
             <br className="hidden md:block" />{" "}
-            라인 배치 조건에 맞춰 적용할 수 있으며, 안정적인 정렬과{" "}
-            <span className="whitespace-nowrap">UV 노광</span> 성능을 제공합니다.
+            Vision 자동 정렬과 안정적인 <span className="whitespace-nowrap">UV 노광</span>으로 대량 양산
+            라인에 대응합니다.
           </>
         ),
         specs: [
@@ -174,15 +174,15 @@ const translations = {
         application: "Leadframe RTR Exposure Process",
       },
       {
-        model: "PRTEX-380VAN-LF-LED",
-        type: "Vertical Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380AN-LF-LED",
+        type: "Horizontal Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            Leadframe 패터닝 공정을 위한 Vertical{" "}
-            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 시스템입니다.
+            수평 레이아웃으로 구성된 <span className="whitespace-nowrap">Roll-to-Roll</span> LED
+            Exposure 시스템입니다.
             <br className="hidden md:block" />{" "}
-            Vision 자동 정렬과 안정적인 <span className="whitespace-nowrap">UV 노광</span>으로 대량 양산
-            라인에 대응합니다.
+            라인 배치 조건에 맞춰 적용할 수 있으며, 안정적인 정렬과{" "}
+            <span className="whitespace-nowrap">UV 노광</span> 성능을 제공합니다.
           </>
         ),
         specs: [
@@ -241,15 +241,15 @@ const translations = {
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.en[i] })),
     exposures: [
       {
-        model: "PRTEX-380AN-LF-LED",
-        type: "Horizontal Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380VAN-LF-LED",
+        type: "Vertical Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            Horizontal <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system
-            designed for line-layout flexibility.
+            Vertical <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system for
+            Leadframe patterning.
             <br className="hidden md:block" />{" "}
-            It provides stable alignment and <span className="whitespace-nowrap">UV exposure</span>{" "}
-            performance for production environments.
+            Vision auto-alignment and stable <span className="whitespace-nowrap">UV exposure</span>{" "}
+            support high-volume production lines.
           </>
         ),
         specs: [
@@ -266,15 +266,15 @@ const translations = {
         application: "Leadframe RTR Exposure Process",
       },
       {
-        model: "PRTEX-380VAN-LF-LED",
-        type: "Vertical Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380AN-LF-LED",
+        type: "Horizontal Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            Vertical <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system for
-            Leadframe patterning.
+            Horizontal <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system
+            designed for line-layout flexibility.
             <br className="hidden md:block" />{" "}
-            Vision auto-alignment and stable <span className="whitespace-nowrap">UV exposure</span>{" "}
-            support high-volume production lines.
+            It provides stable alignment and <span className="whitespace-nowrap">UV exposure</span>{" "}
+            performance for production environments.
           </>
         ),
         specs: [
@@ -333,13 +333,14 @@ const translations = {
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.zh[i] })),
     exposures: [
       {
-        model: "PRTEX-380AN-LF-LED",
-        type: "Horizontal Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380VAN-LF-LED",
+        type: "Vertical Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            采用水平布局的 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
+            用于 Leadframe 图案形成的 Vertical{" "}
+            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
             <br className="hidden md:block" />
-            可适配产线布局条件，提供稳定的对准与 <span className="whitespace-nowrap">UV 曝光</span>性能。
+            凭借 Vision 自动对准与稳定的 <span className="whitespace-nowrap">UV 曝光</span>，满足大批量量产线需求。
           </>
         ),
         specs: [
@@ -356,14 +357,13 @@ const translations = {
         application: "Leadframe RTR Exposure Process",
       },
       {
-        model: "PRTEX-380VAN-LF-LED",
-        type: "Vertical Roll-to-Roll LED Exposure System",
+        model: "PRTEX-380AN-LF-LED",
+        type: "Horizontal Roll-to-Roll LED Exposure System",
         desc: (
           <>
-            用于 Leadframe 图案形成的 Vertical{" "}
-            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
+            采用水平布局的 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
             <br className="hidden md:block" />
-            凭借 Vision 自动对准与稳定的 <span className="whitespace-nowrap">UV 曝光</span>，满足大批量量产线需求。
+            可适配产线布局条件，提供稳定的对准与 <span className="whitespace-nowrap">UV 曝光</span>性能。
           </>
         ),
         specs: [
