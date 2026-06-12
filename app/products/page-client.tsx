@@ -565,7 +565,7 @@ function LaminatorCard({
   categoryLabel,
   image,
   labels,
-  centered,
+  wide,
   onOpenImage,
   priority = false,
 }: {
@@ -573,83 +573,113 @@ function LaminatorCard({
   categoryLabel: string
   image?: string
   labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
-  centered?: boolean
+  wide?: boolean
   onOpenImage?: (images: LightboxImage[], index: number) => void
   priority?: boolean
 }) {
-  return (
-    <section
-      id={`model-${slug(model.model)}`}
-      data-anchor
-      className={`flex flex-col ${
-        centered ? "md:col-span-2 md:mx-auto md:w-[calc(50%-1.75rem)]" : ""
-      }`}
-    >
-      {/* 1. Model intro (label / model / title / description) — kept above the
-          image so the Laminators read in the same order as Exposure Systems. */}
+  // Model intro (label / model / title / description) — same order as Exposure.
+  const intro = (
+    <>
       <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
         {categoryLabel}
       </p>
       <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
       <h3 className="mt-1 text-xl font-bold tracking-tight text-neutral-900 lg:text-2xl">{model.type}</h3>
       <p className="mt-3 text-sm leading-relaxed text-neutral-600">{model.desc}</p>
+    </>
+  )
 
-      {/* 2. Borderless image — blends into the page background (no white card box),
-          object-contain keeps the whole machine visible (no cropping). The
-          wrapper padding keeps the equipment off the column edges. Height/ratio
-          unchanged; click to enlarge. */}
-      <div className="mt-6 px-2 sm:px-6">
-        <div className="relative h-[345px] w-full sm:h-[390px] lg:h-[437px]">
-          {image ? (
-            <button
-              type="button"
-              onClick={onOpenImage ? () => onOpenImage([{ src: image, alt: `${model.model} — ${model.type}` }], 0) : undefined}
-              aria-label={`Enlarge ${model.model} image`}
-              className="group absolute inset-0 block w-full cursor-zoom-in"
-            >
-              <Image
-                src={image}
-                alt={`${model.model} — ${model.type}`}
-                fill
-                priority={priority}
-                sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 90vw"
-                className="object-contain"
-                style={{ filter: "drop-shadow(0 16px 14px rgba(15,23,42,0.16))" }}
-              />
-            </button>
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-semibold text-neutral-400">{model.model}</span>
-            </div>
-          )}
-        </div>
+  // Borderless image (object-contain, no cropping; click to enlarge).
+  const imageInner = image ? (
+    <button
+      type="button"
+      onClick={onOpenImage ? () => onOpenImage([{ src: image, alt: `${model.model} — ${model.type}` }], 0) : undefined}
+      aria-label={`Enlarge ${model.model} image`}
+      className="group absolute inset-0 block w-full cursor-zoom-in"
+    >
+      <Image
+        src={image}
+        alt={`${model.model} — ${model.type}`}
+        fill
+        priority={priority}
+        sizes={wide ? "(min-width: 768px) 42vw, 90vw" : "(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 90vw"}
+        className="object-contain"
+        style={{ filter: "drop-shadow(0 16px 14px rgba(15,23,42,0.16))" }}
+      />
+    </button>
+  ) : (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <span className="text-sm font-semibold text-neutral-400">{model.model}</span>
+    </div>
+  )
+
+  const specRow = (spec: SpecRow, key: number) => (
+    <div key={key} className="flex items-baseline justify-between gap-4 py-2.5">
+      <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
+      <span className="text-right text-sm font-semibold leading-relaxed tabular-nums text-neutral-900">
+        {spec.value}
+      </span>
+    </div>
+  )
+
+  const materialsApp = (
+    <div className="mt-6 space-y-2">
+      <div className="flex items-start gap-3">
+        <span className="min-w-[120px] text-xs text-neutral-500">{labels.materialsLabel}</span>
+        <span className="text-xs text-neutral-800">{model.materials}</span>
       </div>
+      <div className="flex items-start gap-3">
+        <span className="min-w-[120px] text-xs text-neutral-500">{labels.applicationLabel}</span>
+        <span className="text-xs text-neutral-800">{model.application}</span>
+      </div>
+    </div>
+  )
 
-      {/* 3. Specifications */}
+  // ── Lone final model: an intentional product-detail block (not a leftover
+  //    card). Desktop = two columns: LEFT (≈42%) holds intro + product image,
+  //    RIGHT (≈58%) holds the spec table — wider so long spec values don't wrap
+  //    badly. Tops align (items-start). Mobile collapses to one column, giving
+  //    the natural intro → image → specs vertical stack. ──
+  if (wide) {
+    return (
+      <section id={`model-${slug(model.model)}`} data-anchor className="md:col-span-2">
+        <div className="grid gap-10 md:grid-cols-[42%_1fr] md:items-start lg:gap-14">
+          {/* Left: model name / description / image */}
+          <div>
+            {intro}
+            <div className="mt-6 px-2 sm:px-6 md:px-0">
+              <div className="relative h-[300px] w-full sm:h-[340px] lg:h-[380px]">{imageInner}</div>
+            </div>
+          </div>
+          {/* Right: specifications (kept wide so values read cleanly) */}
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+              {labels.specsLabel}
+            </p>
+            <div className="divide-y divide-neutral-200 border-t border-neutral-200">
+              {model.specs.map((spec, i) => specRow(spec, i))}
+            </div>
+            {materialsApp}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── Default 2-up catalog card: intro → image → specs (unchanged). ──
+  return (
+    <section id={`model-${slug(model.model)}`} data-anchor className="flex flex-col">
+      {intro}
+      <div className="mt-6 px-2 sm:px-6">
+        <div className="relative h-[345px] w-full sm:h-[390px] lg:h-[437px]">{imageInner}</div>
+      </div>
       <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
         {labels.specsLabel}
       </p>
       <div className="divide-y divide-neutral-200 border-t border-neutral-200">
-        {model.specs.map((spec, i) => (
-          <div key={i} className="flex items-baseline justify-between gap-4 py-2.5">
-            <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
-            <span className="text-right text-sm font-semibold leading-relaxed tabular-nums text-neutral-900">
-              {spec.value}
-            </span>
-          </div>
-        ))}
+        {model.specs.map((spec, i) => specRow(spec, i))}
       </div>
-
-      <div className="mt-6 space-y-2">
-        <div className="flex items-start gap-3">
-          <span className="min-w-[120px] text-xs text-neutral-500">{labels.materialsLabel}</span>
-          <span className="text-xs text-neutral-800">{model.materials}</span>
-        </div>
-        <div className="flex items-start gap-3">
-          <span className="min-w-[120px] text-xs text-neutral-500">{labels.applicationLabel}</span>
-          <span className="text-xs text-neutral-800">{model.application}</span>
-        </div>
-      </div>
+      {materialsApp}
     </section>
   )
 }
@@ -763,11 +793,12 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
                 </div>
               </div>
             ) : active.group === "laminators" ? (
-              /* Laminators — compact 2 + 2 + 1 catalog grid (capped image
-                 height) so the 5 models compare easily. The final
-                 Sheet-to-Sheet model is centered on its own row at the same
-                 card width as the others. */
-              <div className="grid gap-y-16 pt-4 md:grid-cols-2 md:gap-x-14 md:gap-y-24">
+              /* Laminators — compact 2-up catalog grid (capped image height) so the
+                 models compare easily. When the count is odd, the final model
+                 renders as a full-width side-by-side block (see LaminatorCard
+                 `wide`) instead of a lone half-card. Extra bottom padding sets a
+                 clear gap before the WHY PRT section. */
+              <div className="grid gap-y-20 pt-4 md:grid-cols-2 md:gap-x-14 md:gap-y-24 md:pb-12">
                 {t.laminators.map((m, i) => (
                   <LaminatorCard
                     key={i}
@@ -775,7 +806,7 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
                     categoryLabel={active.label}
                     image={MODEL_IMAGE[m.model]?.src ?? CATEGORY_IMAGE[active.group]}
                     labels={labels}
-                    centered={i === t.laminators.length - 1 && t.laminators.length % 2 === 1}
+                    wide={i === t.laminators.length - 1 && t.laminators.length % 2 === 1}
                     onOpenImage={openLightbox}
                     priority={i === 0}
                   />
@@ -797,39 +828,46 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
             )}
           </section>
 
-          {/* Why PRT Equipment (existing content, preserved) */}
-          <div className="mb-20 border border-neutral-200 bg-white">
-            <div className="px-8 py-10 lg:px-10">
-              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">{t.whyLabel}</p>
-              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-                {t.whyPoints.map((pt, idx) => (
-                  <div key={idx} className="relative pl-5">
-                    {/* uniform fixed-length accent — same length/thickness/offset on
-                        every item so the column reads like a tidy spec sheet */}
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 top-0.5 h-8 w-0.5"
-                      style={{ backgroundColor: "#1976D2" }}
-                    />
-                    <h3 className="mb-2 text-sm font-semibold leading-snug text-neutral-900">{pt.title}</h3>
-                    <p className="text-xs leading-relaxed text-neutral-600">{pt.desc}</p>
-                  </div>
-                ))}
-              </div>
+          {/* Why PRT Equipment — NO outer card. A borderless info section that sits
+              directly on the page so it reads as "four reasons", not a white panel.
+              Only a thin divider under the section label provides structure. */}
+          <div className="mb-20">
+            <div className="mb-9 flex items-center gap-3 border-b border-neutral-200 pb-5">
+              <span aria-hidden="true" className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-700">{t.whyLabel}</p>
+            </div>
+            <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+              {t.whyPoints.map((pt, idx) => (
+                <div key={idx} className="relative pl-5">
+                  {/* uniform accent — identical length / thickness / offset on every
+                      item so the four reasons share one visual rhythm */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-1 h-8 w-0.5"
+                    style={{ backgroundColor: "#1976D2" }}
+                  />
+                  <h3 className="mb-2.5 text-sm font-semibold leading-snug text-neutral-900">{pt.title}</h3>
+                  <p className="text-xs leading-relaxed text-neutral-600">{pt.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Closing CTA — compact consultation prompt: left text, right button
-              on desktop; stacks on mobile. Practical, not a marketing banner. */}
-          <div className="border border-neutral-200 bg-white px-6 py-6 lg:px-8 lg:py-7">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-base font-semibold text-neutral-900">{t.configCta}</p>
-                <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
+          {/* Closing CTA — action block, clearly distinct from the WHY info panel:
+              a faint blue surface + restrained blue left accent, with a clear
+              title → note → button hierarchy. Stacks on mobile. */}
+          <div
+            className="border border-neutral-200 border-l-2 bg-[#1976D2]/[0.045] px-6 py-7 lg:px-10 lg:py-8"
+            style={{ borderLeftColor: "#1976D2" }}
+          >
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-lg font-semibold leading-snug text-neutral-900">{t.configCta}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
               </div>
               <a
                 href="/contact"
-                className="group inline-flex flex-shrink-0 items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
+                className="group inline-flex flex-shrink-0 items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#0D47A1]"
                 style={{ backgroundColor: "#1976D2" }}
               >
                 {t.contactCta}
