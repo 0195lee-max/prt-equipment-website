@@ -102,8 +102,15 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
             <a
               key={idx}
               href="/news"
-              className="group relative border-r border-b border-slate-800 bg-slate-950/40 p-6 transition-colors hover:bg-slate-950/80"
+              className="group relative overflow-hidden border-r border-b border-slate-800 bg-slate-950/40 p-6 transition-colors hover:bg-slate-900/70"
             >
+              {/* quiet blue top accent that draws in on hover — subtle connection
+                  cue toward "View All News", no glow */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                style={{ backgroundColor: "rgba(25,118,210,0.6)" }}
+              />
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span
                   className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
@@ -118,12 +125,15 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
                   {item.date}
                 </span>
               </div>
-              <p className="text-base font-semibold text-white mb-1.5 leading-snug">
+              <p className="mb-2 text-base font-semibold leading-snug text-white">
                 {item.title}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                {item.status}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  {item.status}
+                </p>
+                <ArrowRight className="h-3.5 w-3.5 text-slate-600 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-[#1976D2]" />
+              </div>
             </a>
           ))}
         </div>

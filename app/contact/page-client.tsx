@@ -196,7 +196,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <Mail className="h-4 w-4 text-slate-400" />
                 </div>
                 <div>
@@ -212,7 +212,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <Phone className="h-4 w-4 text-slate-400" />
                 </div>
                 <div>
@@ -228,7 +228,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* Fax */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <Printer className="h-4 w-4 text-slate-400" />
                 </div>
                 <div>
@@ -239,7 +239,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* HQ Address */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <MapPin className="h-4 w-4 text-slate-400" />
                 </div>
                 <div>
@@ -254,7 +254,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* Factory Address */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <MapPin className="h-4 w-4 text-slate-600" />
                 </div>
                 <div>
@@ -269,7 +269,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
 
               {/* Business hours */}
               <div className="flex items-start gap-4">
-                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/50">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/40">
                   <Clock className="h-4 w-4 text-slate-400" />
                 </div>
                 <div>
@@ -313,7 +313,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       required
                       value={formData.name}
                       onChange={(e) => update("name", e.target.value)}
-                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -326,7 +326,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       required
                       value={formData.email}
                       onChange={(e) => update("email", e.target.value)}
-                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     />
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       id="company"
                       value={formData.company}
                       onChange={(e) => update("company", e.target.value)}
-                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -352,7 +352,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       placeholder="e.g. 350"
                       value={formData.webWidth}
                       onChange={(e) => update("webWidth", e.target.value)}
-                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     />
                   </div>
                 </div>
@@ -366,7 +366,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       id="processType"
                       value={formData.processType}
                       onChange={(e) => update("processType", e.target.value)}
-                      className="w-full rounded-md border border-slate-700 bg-slate-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-slate-600"
+                      className="w-full rounded-md border border-slate-700 bg-slate-800/50 px-3 py-2 text-sm text-white transition-colors focus:border-[#1976D2] focus:outline-none focus:ring-2 focus:ring-[#1976D2]/25"
                     >
                       {t.processTypes.map((opt, idx) => (
                         <option key={idx} value={idx === 0 ? "" : opt} className="bg-slate-900">
@@ -384,7 +384,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                       required
                       value={formData.subject}
                       onChange={(e) => update("subject", e.target.value)}
-                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                      className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     />
                   </div>
                 </div>
@@ -399,7 +399,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                     rows={6}
                     value={formData.message}
                     onChange={(e) => update("message", e.target.value)}
-                    className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600"
+                    className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                   />
                 </div>
 
@@ -414,7 +414,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto font-semibold text-slate-900 hover:opacity-90"
+                  className="w-full sm:w-auto font-semibold text-white transition-colors hover:bg-[#0D47A1]"
                   style={{ backgroundColor: "#1976D2" }}
                 >
                   {isSubmitting ? t.sending : t.send}

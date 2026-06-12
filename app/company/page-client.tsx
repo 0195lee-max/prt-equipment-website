@@ -374,7 +374,7 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
               {t.factoryLabel}
             </p>
-            <div className="relative h-[290px] w-full overflow-hidden bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
+            <div className="relative h-[290px] w-full overflow-hidden border border-slate-800/70 bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
               <Image
                 src="/images/company_factory_overview-v2.png"
                 alt="PRT production and assembly floor"
@@ -384,11 +384,21 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
                 className="object-cover"
                 style={{ objectPosition: "center 75%" }}
               />
-              {/* very subtle bottom gradient for integration — details stay visible */}
+              {/* Soft edge gradients seat the photo into the dark page (top + bottom
+                  only) without darkening the centre, plus a faint inset ring so the
+                  frame reads as deliberate rather than a pasted-on photo. */}
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(2,6,23,0.3) 0%, transparent 32%)" }}
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(2,6,23,0.5) 0%, transparent 30%), linear-gradient(to bottom, rgba(2,6,23,0.3) 0%, transparent 16%)",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{ boxShadow: "inset 0 0 0 1px rgba(148,163,184,0.06)" }}
               />
             </div>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500">

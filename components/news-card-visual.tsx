@@ -8,12 +8,11 @@ type Kind = "logo" | "photo"
 export function NewsCardVisual({ src, alt, kind }: { src: string; alt: string; kind: Kind }) {
   if (kind === "logo") {
     return (
-      <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-slate-800/60 bg-[#0A0F1A] p-6">
-        <span className="absolute top-3 left-3 h-2 w-2 border-l border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-        <span className="absolute top-3 right-3 h-2 w-2 border-r border-t" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-        <span className="absolute bottom-3 left-3 h-2 w-2 border-l border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-        <span className="absolute bottom-3 right-3 h-2 w-2 border-r border-b" style={{ borderColor: "rgba(25,118,210,0.4)" }} />
-        <div className="w-[72%] max-w-[260px] border border-slate-300 bg-white px-6 py-4">
+      <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-slate-800/60 bg-gradient-to-b from-[#0C1220] to-[#080B12] p-6">
+        {/* Logo lockup on a grounded white plate (soft shadow + thin ring) so it
+            reads as an intentional brand mark over the dark card, not a
+            placeholder. Logo is shown object-contain — never cropped/distorted. */}
+        <div className="w-[60%] max-w-[220px] rounded-sm bg-white px-7 py-5 shadow-[0_12px_30px_-10px_rgba(0,0,0,0.6)] ring-1 ring-slate-200/70">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={alt} className="h-auto w-full object-contain" />
         </div>

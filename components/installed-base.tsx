@@ -23,7 +23,7 @@ const translations = {
       { title: "100+", sub: "Installed Systems" },
       { title: "5", sub: "Asia Markets" },
       { title: "2", sub: "Core Process Areas" },
-      { title: "Repeat", sub: "Customer Orders" },
+      { title: "Re‑selected", sub: "By Customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -106,7 +106,7 @@ const translations = {
       { title: "100+", sub: "Installed Systems" },
       { title: "5", sub: "Asia Markets" },
       { title: "2", sub: "Core Process Areas" },
-      { title: "Repeat", sub: "Customer Orders" },
+      { title: "Re‑selected", sub: "By Customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -190,7 +190,7 @@ const translations = {
       { title: "100+", sub: "Installed Systems" },
       { title: "5", sub: "Asia Markets" },
       { title: "2", sub: "Core Process Areas" },
-      { title: "Repeat", sub: "Customer Orders" },
+      { title: "Re‑selected", sub: "By Customers" },
     ],
     repeatBadge: "Repeat Orders",
     repeatLabel: "Validated by Returning Customers",
@@ -353,7 +353,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                   className="mb-3 block h-0.5 w-6"
                   style={{ backgroundColor: "#1976D2" }}
                 />
-                <p className="text-3xl lg:text-4xl font-bold leading-none tracking-tight text-white tabular-nums">
+                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-none tracking-tight text-white tabular-nums">
                   {kpi.title}
                 </p>
                 {kpi.sub && (

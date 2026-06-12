@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react"
 import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { EquipmentImageLightbox, type LightboxImage } from "@/components/equipment-image-lightbox"
@@ -798,12 +799,19 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
 
           {/* Why PRT Equipment (existing content, preserved) */}
           <div className="mb-20 border border-neutral-200 bg-white">
-            <div className="px-8 py-10">
+            <div className="px-8 py-10 lg:px-10">
               <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">{t.whyLabel}</p>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
                 {t.whyPoints.map((pt, idx) => (
-                  <div key={idx} className="border-l-2 pl-5" style={{ borderColor: "#1976D2" }}>
-                    <h3 className="mb-2 text-sm font-semibold text-neutral-900">{pt.title}</h3>
+                  <div key={idx} className="relative pl-5">
+                    {/* uniform fixed-length accent — same length/thickness/offset on
+                        every item so the column reads like a tidy spec sheet */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-0 top-0.5 h-8 w-0.5"
+                      style={{ backgroundColor: "#1976D2" }}
+                    />
+                    <h3 className="mb-2 text-sm font-semibold leading-snug text-neutral-900">{pt.title}</h3>
                     <p className="text-xs leading-relaxed text-neutral-600">{pt.desc}</p>
                   </div>
                 ))}
@@ -813,18 +821,19 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
 
           {/* Closing CTA — compact consultation prompt: left text, right button
               on desktop; stacks on mobile. Practical, not a marketing banner. */}
-          <div className="border border-neutral-200 bg-white px-6 py-5 lg:px-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="border border-neutral-200 bg-white px-6 py-6 lg:px-8 lg:py-7">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-base font-semibold text-neutral-900">{t.configCta}</p>
                 <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-neutral-600">{t.configNote}</p>
               </div>
               <a
                 href="/contact"
-                className="inline-flex flex-shrink-0 items-center justify-center gap-2 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
+                className="group inline-flex flex-shrink-0 items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
                 style={{ backgroundColor: "#1976D2" }}
               >
                 {t.contactCta}
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
               </a>
             </div>
           </div>
