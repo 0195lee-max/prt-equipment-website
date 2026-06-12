@@ -15,8 +15,7 @@ const translations = {
       <>
         PRT 시스템은 이미 아시아 전역의 양산 현장에서 가동 중입니다.
         <br className="hidden md:block" />{" "}
-        기존 고객사의 재주문은 <span className="whitespace-nowrap">현장 성능</span>을 검증하는 가장
-        직접적인 기준입니다.
+        실제 양산 라인에서의 운영 이력은 장비의 안정성과 반복 성능을 보여줍니다.
       </>
     ),
     kpiHeading: "Field Record",
@@ -98,8 +97,8 @@ const translations = {
       <>
         PRT systems are already running in production environments across Asia.
         <br className="hidden md:block" />{" "}
-        <span className="whitespace-nowrap">Repeat orders</span> from existing customers validate
-        field performance.
+        Operating history in real production lines demonstrates equipment stability and repeatable
+        performance.
       </>
     ),
     kpiHeading: "Field Record",
@@ -183,7 +182,7 @@ const translations = {
       <>
         PRT 系统已在亚洲各地的量产环境中运行。
         <br className="hidden md:block" />
-        来自既有客户的重复订单，是现场性能最直接的验证。
+        实际量产线中的运行记录体现了设备的稳定性和重复性能。
       </>
     ),
     kpiHeading: "Field Record",

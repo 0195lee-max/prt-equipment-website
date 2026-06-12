@@ -73,10 +73,17 @@ const translations = {
     specializationTitle: "What We Focus On",
     specializationBody: (
       <>
-        PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다. Leadframe 및 반도체 패키징 제조에서{" "}
-        <span className="whitespace-nowrap">Roll-to-Roll</span> 연속 이송이 필요한{" "}
-        <span className="whitespace-nowrap">UV Exposure</span>와 Lamination 공정에 집중합니다. 축적된
-        공정 경험을 바탕으로, 실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.
+        PRT는 반도체 장비 전체 영역을 다루려 하지 않습니다.
+        <br className="hidden md:block" />{" "}
+        Leadframe 및 반도체 패키징 제조에서 <span className="whitespace-nowrap">Roll-to-Roll</span>{" "}
+        연속 이송이 필요한
+        <br className="hidden md:block" />{" "}
+        <span className="whitespace-nowrap">UV Exposure</span>와 Lamination 공정에 집중합니다.
+        <span className="mt-5 block">
+          축적된 공정 경험을 바탕으로,
+          <br className="hidden md:block" />{" "}
+          실제 양산 현장에서 신뢰성 있게 작동하는 시스템을 만듭니다.
+        </span>
       </>
     ),
     specializationCards: [
@@ -165,11 +172,16 @@ const translations = {
     specializationTitle: "What We Focus On",
     specializationBody: (
       <>
-        PRT does not try to cover every category of semiconductor equipment. We focus on{" "}
-        <span className="whitespace-nowrap">UV Exposure</span> and Lamination processes that require
-        continuous <span className="whitespace-nowrap">Roll-to-Roll</span> web handling in Leadframe
-        and semiconductor packaging production. Built on accumulated process experience, our systems
-        operate reliably on real production floors.
+        PRT does not try to cover every category of semiconductor equipment.
+        <br className="hidden md:block" />{" "}
+        We focus on <span className="whitespace-nowrap">UV Exposure</span> and Lamination processes
+        that require continuous <span className="whitespace-nowrap">Roll-to-Roll</span> web handling
+        in Leadframe and semiconductor packaging production.
+        <span className="mt-5 block">
+          Built on accumulated process experience,
+          <br className="hidden md:block" />{" "}
+          our systems operate reliably on real production floors.
+        </span>
       </>
     ),
     specializationCards: [
@@ -239,10 +251,14 @@ const translations = {
     specializationTitle: "What We Focus On",
     specializationBody: (
       <>
-        PRT 并不试图覆盖所有半导体设备领域。我们专注于 Leadframe 与半导体封装制造中需要连续{" "}
+        PRT 并不试图覆盖所有半导体设备领域。
+        <br className="hidden md:block" />
+        我们专注于 Leadframe 与半导体封装制造中需要连续{" "}
         <span className="whitespace-nowrap">Roll-to-Roll</span> 输送的{" "}
-        <span className="whitespace-nowrap">UV Exposure</span> 与 Lamination
-        工艺。基于积累的工艺经验，我们构建能够在实际量产环境中稳定运行的系统。
+        <span className="whitespace-nowrap">UV Exposure</span> 与 Lamination 工艺。
+        <span className="mt-5 block">
+          基于积累的工艺经验，我们构建能够在实际量产环境中稳定运行的系统。
+        </span>
       </>
     ),
     specializationCards: [

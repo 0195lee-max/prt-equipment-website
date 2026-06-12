@@ -584,11 +584,20 @@ function LaminatorCard({
         centered ? "md:col-span-2 md:mx-auto md:w-[calc(50%-1.75rem)]" : ""
       }`}
     >
-      {/* Borderless image — blends into the page background (no white card box),
+      {/* 1. Model intro (label / model / title / description) — kept above the
+          image so the Laminators read in the same order as Exposure Systems. */}
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
+        {categoryLabel}
+      </p>
+      <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
+      <h3 className="mt-1 text-xl font-bold tracking-tight text-neutral-900 lg:text-2xl">{model.type}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-neutral-600">{model.desc}</p>
+
+      {/* 2. Borderless image — blends into the page background (no white card box),
           object-contain keeps the whole machine visible (no cropping). The
-          wrapper padding keeps the equipment off the column edges. Height is
-          ~15% taller than the previous boxed version; click to enlarge. */}
-      <div className="mb-8 px-2 sm:px-6">
+          wrapper padding keeps the equipment off the column edges. Height/ratio
+          unchanged; click to enlarge. */}
+      <div className="mt-6 px-2 sm:px-6">
         <div className="relative h-[345px] w-full sm:h-[390px] lg:h-[437px]">
           {image ? (
             <button
@@ -615,13 +624,7 @@ function LaminatorCard({
         </div>
       </div>
 
-      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
-        {categoryLabel}
-      </p>
-      <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
-      <h3 className="mt-1 text-xl font-bold tracking-tight text-neutral-900 lg:text-2xl">{model.type}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-neutral-600">{model.desc}</p>
-
+      {/* 3. Specifications */}
       <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
         {labels.specsLabel}
       </p>
