@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
 import { Navbar } from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
 import { Footer } from "@/components/footer"
@@ -9,650 +9,494 @@ import { useLanguage, type Language } from "@/hooks/use-language"
 const translations = {
   ko: {
     meta: "Engineering",
-    title: "Stable operation matters\nmore than theoretical specs.",
-    titleSub: "PRT Core Competency",
-    description:
-      "사양서에 쓰인 수치는 최상의 조건에서의 이론값입니다. PRT 장비는 양산 현장의 실제 조건 — 온도 변화, 재료 편차, 장시간 연속 가동 — 에서 일관되게 작동하도록 설계됩니다.",
-    verticalTitle: "Why Vertical Roll-to-Roll?",
-    verticalDesc:
-      "Leadframe 패키징 공정에서 Vertical 이송 방식은 단순한 구조 차이가 아닙니다. 웹 표면의 파티클 낙하, 중력 보조 장력 제어, 수직 공간 활용 — 이 세 가지가 Horizontal 대비 실질적인 공정 이점을 만들어냅니다.",
-    diagramHorizontalTitle: "Horizontal R2R",
-    diagramVerticalTitle: "Vertical R2R (PRT)",
-    diagramHorizontalLabels: ["Particle Accumulation Risk", "Larger Footprint"],
-    diagramVerticalLabels: ["Particles Fall Away from Web", "Compact Footprint"],
-    verticalPoints: [
-      { label: "Particle Drop-Off", desc: "웹 표면에 파티클이 쌓이지 않습니다." },
-      { label: "Tension Stability", desc: "중력 보조로 일관된 웹 장력 유지." },
-      { label: "Space Efficiency", desc: "수직 구조로 라인 풋프린트 최소화." },
-      { label: "Process Precision", desc: "안정적 이송으로 정렬 반복 정밀도 향상." },
-    ],
-    pillarsLabel: "6 Core Engineering Competencies",
-    specDisclaimer: "사양은 모델, 구성 및 공정 요구사항에 따라 달라질 수 있습니다.",
-    pillars: [
+    eyebrow: "Alignment Stability Engineering",
+    heroTitle: "실제 양산 조건에서의 정렬 안정성.",
+    heroBody:
+      "PRT의 엔지니어링은 소재 변형, 장력 변화, 공정 이력, 이송 조건으로 인해 소재와 마스크의 정렬이 흔들릴 수 있는 실제 양산 환경에서의 정렬 안정성에 초점을 둡니다.",
+
+    alignLabel: "Alignment Engineering",
+    alignTitle: "Material Distortion & Alignment Correction",
+    alignBody:
+      "Leadframe 및 반도체 패키징 공정에서는 장력, 도금, 에칭, 열, 이송 조건에 따라 소재 위치가 미세하게 변할 수 있습니다. PRT 시스템은 Vision 기반 정렬과 전용 보정 방식을 통해 노광 전 소재와 마스크 간 정렬 편차를 줄이는 데 초점을 둡니다.",
+
+    diagramStatus: "Alignment Sequence",
+    diagramReplay: "다시 보기",
+    legendReference: "기준 위치",
+    legendMaterial: "소재 편차",
+    legendAligned: "정렬됨",
+    flowSteps: ["소재 변형", "정렬 편차", "Vision 감지", "위치 보정", "안정적인 노광 정렬"],
+    diagramNote: "개념 다이어그램 — 실제 정렬 편차는 도형으로 추상화하여 표현했습니다.",
+
+    cardsLabel: "Core Alignment Engineering",
+    cards: [
       {
-        number: "01",
-        slug: "web-handling",
-        title: "Web Handling Stability",
-        tagline: "Web Handling Stability",
-        body: "Roll-to-Roll 공정에서 웹 장력의 흔들림은 직접적인 품질 불량으로 이어집니다. PRT 장비는 서보 기반 Unwinder/Rewinder와 댄서 롤러 시스템으로 ±0.3 N 이내의 장력 변동을 유지합니다.",
-        specs: [
-          "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3 N",
-          "Web width: Up to 380 mm",
-          "Speed range: 0.1–5.0 m/min",
-        ],
+        title: "Vision-Based Alignment",
+        sub: "Vision 기반 정렬",
+        body: "노광 전 alignment mark를 확인하여 소재 위치와 정렬 편차를 파악합니다.",
       },
       {
-        number: "02",
-        slug: "alignment",
-        title: "Alignment Consistency",
-        tagline: "Alignment Consistency",
-        body: "Exposure 공정에서 정렬은 한 번의 기준값이 아닙니다. PRT의 8CCD Vision System은 매 쇼트마다 실시간으로 보정하여, 수천 쇼트 이후에도 ±5 μm 이내의 정렬 정밀도를 유지합니다.",
-        specs: [
-          "Alignment accuracy: ±5 μm",
-          "Vision system: 8CCD cameras",
-          "Tact time: 12 sec",
-          "Auto-correction: Per-shot real-time",
-        ],
+        title: "Material Deviation Compensation",
+        sub: "소재 편차 보정",
+        body: "장력, 공정 이력, 이송 조건 등으로 발생한 소재 위치 편차를 전용 보정 방식으로 줄입니다.",
       },
       {
-        number: "03",
-        slug: "thermal",
-        title: "Thermal & Process Stability",
-        tagline: "Thermal & Process Stability",
-        body: "Lamination 롤의 온도 균일성은 드라이필름 접착력과 직결됩니다. PRT 히팅 롤 시스템은 롤 전면에 걸쳐 ±3°C 이내의 온도 균일성을 확보하며, 가압 제어는 ±0.1 kg/cm² 정밀도를 유지합니다.",
-        specs: [
-          "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1 kg/cm²",
-          "Heating: Internal oil circulation",
-          "Materials: C7025 / CDA194 / AL42",
-        ],
+        title: "Production Condition Tuning",
+        sub: "양산 조건 기반 튜닝",
+        body: "소재 상태, 웹 이송 특성, 라인 속도, 생산 조건에 맞춰 장비 세팅을 조정합니다.",
       },
       {
-        number: "04",
-        slug: "troubleshooting",
-        title: "Fast Troubleshooting",
-        tagline: "Fast Troubleshooting",
-        body: "양산 라인에서 장비 다운타임은 곧 생산 손실입니다. PRT 장비는 주요 구동부와 센서에 직접 접근이 가능하며, 현장 엔지니어가 즉시 원인을 파악할 수 있는 진단 수준의 오류 메시지를 제공합니다.",
-        specs: [
-          "Modular drive unit design",
-          "Direct sensor access",
-          "Diagnostic-grade error messaging",
-          "Remote support capability",
-        ],
-      },
-      {
-        number: "05",
-        slug: "maintainability",
-        title: "Maintainability",
-        tagline: "Maintainability",
-        body: "장기 가동을 위한 설계로, 소모품 교체·롤 청소·정기 점검 등 모든 루틴 작업이 특수 공구 없이 가능합니다. 부품은 글로벌 공급 가능한 표준 산업용 컴포넌트 중심으로 선정합니다.",
-        specs: [
-          "Tool-free consumable replacement",
-          "Standard industrial components: THK, Rexroth, SMC, Omron, Mitsubishi",
-          "Global parts availability",
-          "PM interval: Documented schedule",
-        ],
-      },
-      {
-        number: "06",
-        slug: "operator",
-        title: "Operator-Friendly Engineering",
-        tagline: "Operator-Friendly Engineering",
-        body: "PRT는 조작 시퀀스, HMI 레이아웃, 롤 교체 프로세스를 현장 운영자 관점에서 설계합니다. 복잡한 교육 없이도 안전하고 일관되게 운용할 수 있어야 합니다.",
-        specs: [
-          "Intuitive HMI: Step-by-step operation",
-          "Roll change: Single-operator capable",
-          "Safety interlocks: Full coverage",
-          "Language support: Korean / English / Chinese",
-        ],
+        title: "Repeatable Exposure Setup",
+        sub: "반복 가능한 노광 세팅",
+        body: "반복 생산에서도 정렬과 노광 조건이 안정적으로 유지되도록 세팅을 관리합니다.",
       },
     ],
-    componentLabel: "Component Standards",
-    componentBody:
-      "PRT 장비에 사용되는 모든 핵심 구동 부품은 글로벌 공급 가능한 표준 산업용 부품으로 구성됩니다. 제조사 단종이나 현지 공급망 단절에 의한 유지보수 불가 상황을 최소화합니다.",
+
+    tuningLabel: "Internal Tuning Note",
+    tuningNote:
+      "PRT 노광 시스템은 소재 변형으로 인한 정렬 편차를 줄이도록 설계되었습니다. 소재 상태, 공정 조건, 라인 구성에 따라 다르지만, 내부 튜닝 사례에서는 20–30µm 수준의 편차를 10µm 미만으로 줄인 경험이 있습니다.",
+    tuningContext:
+      "이 수치는 변형된 양산 소재 기준의 보정 후 편차이며, 장비 자체의 공칭 정렬 정밀도 사양과는 구분됩니다.",
+
+    confidentialLabel: "Technical Confidentiality",
+    confidentialNote:
+      "세부 보정 구조와 공정 레시피는 고객 라인 조건에 맞춰 구성되며, 공개하지 않습니다.",
+
+    componentsLabel: "Standard Components for Long-Term Serviceability",
+    componentsBody:
+      "PRT 장비는 장기 운용, 부품 교체성, 생산 환경에서의 안정성을 고려하여 표준 산업 부품을 적용합니다.",
     componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
-    contactCta: "Engineering Inquiry",
+    componentNote: "적용 부품 브랜드는 장비 모델, 구성, 고객 요구 조건에 따라 달라질 수 있습니다.",
+
+    ctaLine: "양산 라인의 정렬 안정성 검토가 필요하신가요?",
     productsCta: "View Equipment",
+    contactCta: "Engineering Inquiry",
   },
   en: {
     meta: "Engineering",
-    title: "Stable operation matters\nmore than theoretical specs.",
-    titleSub: "PRT Core Competency",
-    description:
-      "Specification numbers reflect ideal conditions. PRT equipment is designed to operate consistently under real production conditions — temperature variation, material variance, extended continuous running — not just within a controlled test environment.",
-    verticalTitle: "Why Vertical Roll-to-Roll?",
-    verticalDesc:
-      "In Leadframe packaging processes, the vertical transport architecture is not just a structural choice. Particle falloff from the web surface, gravity-assisted tension control, and vertical space utilization create tangible process advantages over horizontal configurations.",
-    diagramHorizontalTitle: "Horizontal R2R",
-    diagramVerticalTitle: "Vertical R2R (PRT)",
-    diagramHorizontalLabels: ["Particle Accumulation Risk", "Larger Footprint"],
-    diagramVerticalLabels: ["Particles Fall Away from Web", "Compact Footprint"],
-    verticalPoints: [
-      { label: "Particle Falloff", desc: "Particles do not accumulate on the web surface." },
-      { label: "Tension Stability", desc: "Gravity-assisted consistent web tension." },
-      { label: "Space Efficiency", desc: "Vertical structure minimizes line footprint." },
-      { label: "Process Precision", desc: "Stable transport improves alignment repeatability." },
-    ],
-    pillarsLabel: "6 Core Engineering Competencies",
-    specDisclaimer: "Specifications may vary by model, configuration, and process requirements.",
-    pillars: [
+    eyebrow: "Alignment Stability Engineering",
+    heroTitle: "Stable alignment under real production conditions.",
+    heroBody:
+      "PRT engineering focuses on substrate-to-mask alignment stability in real production environments, where material deformation, tension variation, process history, and handling conditions can affect exposure accuracy.",
+
+    alignLabel: "Alignment Engineering",
+    alignTitle: "Material Distortion & Alignment Correction",
+    alignBody:
+      "In leadframe and semiconductor packaging processes, material position can shift due to tension, plating, etching, heat, and transport conditions. PRT systems use vision-based alignment and a dedicated correction approach to help reduce substrate-to-mask deviation before exposure.",
+
+    diagramStatus: "Alignment Sequence",
+    diagramReplay: "Replay",
+    legendReference: "Reference position",
+    legendMaterial: "Material offset",
+    legendAligned: "Aligned",
+    flowSteps: ["Material variation", "Alignment offset", "Vision detection", "Correction", "Stable exposure alignment"],
+    diagramNote: "Concept diagram — alignment offset is shown abstractly as shapes.",
+
+    cardsLabel: "Core Alignment Engineering",
+    cards: [
       {
-        number: "01",
-        slug: "web-handling",
-        title: "Web Handling Stability",
-        tagline: "Web Handling Stability",
-        body: "In Roll-to-Roll processes, web tension instability translates directly into yield loss. PRT equipment uses servo-based unwinder/rewinder systems with dancer roller control to maintain tension variation within ±0.3 N under continuous production conditions.",
-        specs: [
-          "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3 N",
-          "Web width: Up to 380 mm",
-          "Speed range: 0.1–5.0 m/min",
-        ],
+        title: "Vision-Based Alignment",
+        sub: "Vision-Based Alignment",
+        body: "Alignment marks are detected to identify substrate position and offset before exposure.",
       },
       {
-        number: "02",
-        slug: "alignment",
-        title: "Alignment Consistency",
-        tagline: "Alignment Consistency",
-        body: "In the exposure process, alignment is not a one-time calibration. PRT's 8CCD Vision System applies real-time per-shot correction, maintaining ±5 μm alignment accuracy across thousands of consecutive shots — not just on the first few after setup.",
-        specs: [
-          "Alignment accuracy: ±5 μm",
-          "Vision system: 8CCD cameras",
-          "Tact time: 12 sec",
-          "Auto-correction: Per-shot real-time",
-        ],
+        title: "Material Deviation Compensation",
+        sub: "Material Deviation Compensation",
+        body: "A dedicated correction approach helps compensate for material-related position deviation caused by tension, process history, or handling conditions.",
       },
       {
-        number: "03",
-        slug: "thermal",
-        title: "Thermal & Process Stability",
-        tagline: "Thermal & Process Stability",
-        body: "Temperature uniformity of the lamination roll is directly correlated with dry film adhesion quality. PRT heating roll systems maintain temperature uniformity within ±3°C across the full roll width, with pressure control to ±0.1 kg/cm² precision.",
-        specs: [
-          "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1 kg/cm²",
-          "Heating: Internal oil circulation",
-          "Materials: C7025 / CDA194 / AL42",
-        ],
+        title: "Production Condition Tuning",
+        sub: "Production Condition Tuning",
+        body: "Equipment setup is tuned according to material condition, web handling behavior, line speed, and production requirements.",
       },
       {
-        number: "04",
-        slug: "troubleshooting",
-        title: "Fast Troubleshooting",
-        tagline: "Fast Troubleshooting",
-        body: "Equipment downtime on a production line is production loss. PRT equipment provides direct access to key drive units and sensors, with diagnostic-grade error messages that let on-site engineers identify root causes without specialized tools.",
-        specs: [
-          "Modular drive unit design",
-          "Direct sensor access",
-          "Diagnostic-grade error messaging",
-          "Remote support capability",
-        ],
-      },
-      {
-        number: "05",
-        slug: "maintainability",
-        title: "Maintainability",
-        tagline: "Maintainability",
-        body: "Designed for long-term operation, all routine work — consumable replacement, roll cleaning, inspections — is achievable without special tooling. Components are selected from globally available standard industrial suppliers, not proprietary assemblies.",
-        specs: [
-          "Tool-free consumable replacement",
-          "Standard industrial components: THK, Rexroth, SMC, Omron, Mitsubishi",
-          "Global parts availability",
-          "PM interval: Documented schedule",
-        ],
-      },
-      {
-        number: "06",
-        slug: "operator",
-        title: "Operator-Friendly Engineering",
-        tagline: "Operator-Friendly Engineering",
-        body: "PRT designs operating sequences, HMI layout, and roll change procedures from the production operator's perspective. The system should be safe and consistent to operate without complex training.",
-        specs: [
-          "Intuitive HMI: Step-by-step operation",
-          "Roll change: Single-operator capable",
-          "Safety interlocks: Full coverage",
-          "Language support: Korean / English / Chinese",
-        ],
+        title: "Repeatable Exposure Setup",
+        sub: "Repeatable Exposure Setup",
+        body: "Alignment and exposure conditions are managed for repeatable operation across production runs.",
       },
     ],
-    componentLabel: "Component Standards",
-    componentBody:
-      "All critical drive components in PRT equipment are selected from globally available standard industrial suppliers. This minimizes risk of end-of-life supply disruptions and ensures parts availability throughout the equipment's service life.",
+
+    tuningLabel: "Internal Tuning Note",
+    tuningNote:
+      "PRT exposure systems are designed to reduce material-related alignment deviation. Depending on material condition, process setup, and line configuration, internal tuning cases have brought deviation in the 20–30 µm range below 10 µm.",
+    tuningContext:
+      "These figures refer to compensated deviation on deformed production material, and are distinct from the equipment's nominal alignment accuracy specification.",
+
+    confidentialLabel: "Technical Confidentiality",
+    confidentialNote:
+      "Detailed correction structures and process recipes are configured according to customer line conditions and are not publicly disclosed.",
+
+    componentsLabel: "Standard Components for Long-Term Serviceability",
+    componentsBody:
+      "PRT equipment uses standard industrial components selected for long-term serviceability, replacement availability, and stable operation in production environments.",
     componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
-    contactCta: "Engineering Inquiry",
+    componentNote: "Component brands may vary depending on model, configuration, and customer requirements.",
+
+    ctaLine: "Need to review alignment stability for your production line?",
     productsCta: "View Equipment",
+    contactCta: "Engineering Inquiry",
   },
   zh: {
     meta: "Engineering",
-    title: "Stable operation matters\nmore than theoretical specs.",
-    titleSub: "PRT Core Competency",
-    description:
-      "规格表上的数字反映的是理想条件下的值。PRT 设备的设计目标是在真实量产条件下 — 温度变化、材料偏差、长时间连续运行 — 保持一致的运行。",
-    verticalTitle: "Why Vertical Roll-to-Roll?",
-    verticalDesc:
-      "在 Leadframe 封装工艺中，Vertical 传输架构不仅仅是结构上的选择。卷材表面颗粒自然脱落、重力辅助张力控制和垂直空间利用，相比 Horizontal 配置创造了实质性的工艺优势。",
-    diagramHorizontalTitle: "Horizontal R2R",
-    diagramVerticalTitle: "Vertical R2R (PRT)",
-    diagramHorizontalLabels: ["Particle Accumulation Risk", "Larger Footprint"],
-    diagramVerticalLabels: ["Particles Fall Away from Web", "Compact Footprint"],
-    verticalPoints: [
-      { label: "Particle Drop-Off", desc: "颗粒不会在卷材表面积累。" },
-      { label: "Tension Stability", desc: "重力辅助保持一致的卷材张力。" },
-      { label: "Space Efficiency", desc: "垂直结构最小化生产线占地面积。" },
-      { label: "Process Precision", desc: "稳定传输提高对准重复精度。" },
-    ],
-    pillarsLabel: "6 Core Engineering Competencies",
-    specDisclaimer: "规格可能因型号、配置和工艺要求而异。",
-    pillars: [
+    eyebrow: "Alignment Stability Engineering",
+    heroTitle: "真实量产条件下的对准稳定性。",
+    heroBody:
+      "PRT 的工程聚焦于真实量产环境中的基板与掩膜对准稳定性——在这些环境中，材料变形、张力变化、工艺历程与搬运条件都可能影响曝光精度。",
+
+    alignLabel: "Alignment Engineering",
+    alignTitle: "Material Distortion & Alignment Correction",
+    alignBody:
+      "在 Leadframe 与半导体封装工艺中，材料位置可能因张力、电镀、蚀刻、热与传输条件而发生细微变化。PRT 系统通过基于 Vision 的对准与专用补正方式，致力于在曝光前减少基板与掩膜之间的对准偏差。",
+
+    diagramStatus: "Alignment Sequence",
+    diagramReplay: "重播",
+    legendReference: "基准位置",
+    legendMaterial: "材料偏差",
+    legendAligned: "对准完成",
+    flowSteps: ["材料变形", "对准偏差", "Vision 检测", "位置补正", "稳定的曝光对准"],
+    diagramNote: "概念示意图 — 对准偏差以抽象图形表示。",
+
+    cardsLabel: "Core Alignment Engineering",
+    cards: [
       {
-        number: "01",
-        slug: "web-handling",
-        title: "Web Handling Stability",
-        tagline: "Web Handling Stability",
-        body: "在 Roll-to-Roll 工艺中，卷材张力不稳定直接导致良率下降。PRT 设备采用基于伺服的 Unwinder/Rewinder 系统和舞辊控制，在连续量产条件下将张力变化维持在 ±0.3 N 以内。",
-        specs: [
-          "Tension control: Servo-based dancer roller",
-          "Tension variation: ±0.3 N",
-          "Web width: Up to 380 mm",
-          "Speed range: 0.1–5.0 m/min",
-        ],
+        title: "Vision-Based Alignment",
+        sub: "Vision-Based Alignment",
+        body: "在曝光前检测 alignment mark，以识别基板位置与对准偏差。",
       },
       {
-        number: "02",
-        slug: "alignment",
-        title: "Alignment Consistency",
-        tagline: "Alignment Consistency",
-        body: "在 Exposure 工艺中，对准不是一次性校准。PRT 的 8CCD Vision System 对每次曝光进行实时校正，在连续数千次曝光后将对准精度保持在 ±5 μm 以内。",
-        specs: [
-          "Alignment accuracy: ±5 μm",
-          "Vision system: 8CCD cameras",
-          "Tact time: 12 sec",
-          "Auto-correction: Per-shot real-time",
-        ],
+        title: "Material Deviation Compensation",
+        sub: "Material Deviation Compensation",
+        body: "通过专用补正方式，减少因张力、工艺历程或搬运条件而产生的材料位置偏差。",
       },
       {
-        number: "03",
-        slug: "thermal",
-        title: "Thermal & Process Stability",
-        tagline: "Thermal & Process Stability",
-        body: "Lamination 辊的温度均匀性与干膜粘合质量直接相关。PRT 加热辊系统在整个辊宽范围内将温度均匀性保持在 ±3°C 以内，压力控制精度达 ±0.1 kg/cm²。",
-        specs: [
-          "Temp uniformity: ±3°C across roll width",
-          "Pressure control: ±0.1 kg/cm²",
-          "Heating: Internal oil circulation",
-          "Materials: C7025 / CDA194 / AL42",
-        ],
+        title: "Production Condition Tuning",
+        sub: "Production Condition Tuning",
+        body: "根据材料状态、卷材传输特性、产线速度与生产条件调整设备设置。",
       },
       {
-        number: "04",
-        slug: "troubleshooting",
-        title: "Fast Troubleshooting",
-        tagline: "Fast Troubleshooting",
-        body: "量产线上的设备停机就是生产损失。PRT 设备的主要驱动单元和传感器可直接访问，并提供使现场工程师无需专业工具即可识别根本原因的诊断级错误信息。",
-        specs: [
-          "Modular drive unit design",
-          "Direct sensor access",
-          "Diagnostic-grade error messaging",
-          "Remote support capability",
-        ],
-      },
-      {
-        number: "05",
-        slug: "maintainability",
-        title: "Maintainability",
-        tagline: "Maintainability",
-        body: "为长期运行而设计，所有例行工作 — 消耗品更换、辊清洁、检查 — 均无需专用工具即可完成。零部件从全球可供应的标准工业供应商中选取，而非专有组件。",
-        specs: [
-          "Tool-free consumable replacement",
-          "Standard industrial components: THK, Rexroth, SMC, Omron, Mitsubishi",
-          "Global parts availability",
-          "PM interval: Documented schedule",
-        ],
-      },
-      {
-        number: "06",
-        slug: "operator",
-        title: "Operator-Friendly Engineering",
-        tagline: "Operator-Friendly Engineering",
-        body: "PRT 从生产操作员的视角设计操作流程、HMI 布局和换辊程序。无需复杂培训即可安全、一致地操作。",
-        specs: [
-          "Intuitive HMI: Step-by-step operation",
-          "Roll change: Single-operator capable",
-          "Safety interlocks: Full coverage",
-          "Language support: Korean / English / Chinese",
-        ],
+        title: "Repeatable Exposure Setup",
+        sub: "Repeatable Exposure Setup",
+        body: "管理对准与曝光条件，使其在重复生产中保持稳定。",
       },
     ],
-    componentLabel: "Component Standards",
-    componentBody:
-      "PRT 设备中所有关键驱动部件均从全球可供应的标准工业供应商处选取。这将产品停产风险降至最低，并确保整个设备服务周期内的零件可用性。",
+
+    tuningLabel: "Internal Tuning Note",
+    tuningNote:
+      "PRT 曝光系统旨在减少由材料变形引起的对准偏差。视材料状态、工艺条件与产线配置而定，在内部调试案例中，20–30µm 范围的偏差曾被降至 10µm 以下。",
+    tuningContext:
+      "该数值为基于变形量产材料的补正后偏差，与设备本身的标称对准精度规格不同。",
+
+    confidentialLabel: "Technical Confidentiality",
+    confidentialNote:
+      "详细的补正结构与工艺配方根据客户产线条件进行配置，不对外公开。",
+
+    componentsLabel: "Standard Components for Long-Term Serviceability",
+    componentsBody:
+      "PRT 设备采用标准工业部件，以兼顾长期运维、部件更换可得性与量产环境下的稳定运行。",
     componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
-    contactCta: "Engineering Inquiry",
+    componentNote: "所采用的部件品牌可能因设备型号、配置与客户需求而异。",
+
+    ctaLine: "需要评估您产线的对准稳定性吗？",
     productsCta: "View Equipment",
+    contactCta: "Engineering Inquiry",
   },
 }
 
 /**
- * Engineering-schematic SVG comparing Horizontal vs Vertical R2R architectures.
- * Line art only — no fills. Grey for horizontal, gold for vertical (PRT).
- * Particles shown falling onto web (horizontal) vs falling away from web (vertical).
+ * Abstract alignment-correction CONCEPT diagram (animated, restrained).
+ *
+ * Deliberately non-technical: shapes only. A fixed REFERENCE frame and an
+ * offset MATERIAL frame that is corrected onto the reference. No coordinates,
+ * numbers, deviation/correction values, camera/HMI screens, or any depiction
+ * of the real mechanism. Framing: "material position deviates from the
+ * reference → aligns to the reference" (the reference frame never moves).
+ * Plays once on mount; honours prefers-reduced-motion (renders aligned state).
  */
-function R2RComparisonDiagram({
-  horizontalTitle,
-  verticalTitle,
-  horizontalLabels,
-  verticalLabels,
+function AlignmentCorrectionDiagram({
+  statusLabel,
+  replayLabel,
+  legendReference,
+  legendMaterial,
+  legendAligned,
+  steps,
+  note,
 }: {
-  horizontalTitle: string
-  verticalTitle: string
-  horizontalLabels: string[]
-  verticalLabels: string[]
+  statusLabel: string
+  replayLabel: string
+  legendReference: string
+  legendMaterial: string
+  legendAligned: string
+  steps: string[]
+  note: string
 }) {
-  const GOLD = "#1976D2"
-  const GREY = "#64748b" // slate-500
-  const GREY_DIM = "#475569" // slate-600
+  const BLUE = "#1976D2"
+  const SLATE = "#64748b"
+  const RED = "#ef4444"
+  const W = 560
+  const H = 290
+  const SW = 184
+  const SH = 120
+  const CX = W / 2
+  const CY = H / 2
+  const SX = CX - SW / 2
+  const SY = CY - SH / 2
+  const OFFSET = { x: 30, y: -20 }
 
-  return (
-    <div className="relative border border-slate-800 bg-slate-950/40 p-6 lg:p-10">
-      {/* Schematic grid background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+  const [phase, setPhase] = useState(0)
+  const [aligned, setAligned] = useState(false)
+  const [scan, setScan] = useState(false)
+  const [scanKey, setScanKey] = useState(0)
+  const [markers, setMarkers] = useState(false)
+  const [tf, setTf] = useState(`translate(${OFFSET.x} ${OFFSET.y})`)
 
-      <div className="relative grid gap-6 sm:grid-cols-2">
-        {/* ── HORIZONTAL ─────────────────────────────────── */}
-        <div className="flex flex-col">
-          <div className="mb-4 flex items-center gap-2">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-500" />
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-400">
-              {horizontalTitle}
-            </p>
-          </div>
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+  const raf = useRef(0)
+  const pos = useRef({ ...OFFSET })
 
-          <svg
-            viewBox="0 0 320 200"
-            className="w-full h-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label={horizontalTitle}
-          >
-            <defs>
-              <marker
-                id="arrow-grey"
-                viewBox="0 0 10 10"
-                refX="9"
-                refY="5"
-                markerWidth="6"
-                markerHeight="6"
-                orient="auto-start-reverse"
-              >
-                <path d="M0,0 L10,5 L0,10 z" fill={GREY} />
-              </marker>
-            </defs>
-
-            {/* Unwind roll (left) */}
-            <circle cx="40" cy="110" r="22" fill="none" stroke={GREY_DIM} strokeWidth="1.2" />
-            <circle cx="40" cy="110" r="8" fill="none" stroke={GREY_DIM} strokeWidth="1" />
-            {/* Rewind roll (right) */}
-            <circle cx="280" cy="110" r="22" fill="none" stroke={GREY_DIM} strokeWidth="1.2" />
-            <circle cx="280" cy="110" r="8" fill="none" stroke={GREY_DIM} strokeWidth="1" />
-
-            {/* Horizontal web with arrow */}
-            <line
-              x1="62"
-              y1="110"
-              x2="258"
-              y2="110"
-              stroke={GREY}
-              strokeWidth="1.6"
-              markerEnd="url(#arrow-grey)"
-            />
-
-            {/* Particles falling DOWN onto web */}
-            {[100, 140, 180, 220].map((x, i) => (
-              <g key={i}>
-                <circle cx={x} cy="40" r="2.4" fill={GREY} opacity="0.85" />
-                <line
-                  x1={x}
-                  y1="48"
-                  x2={x}
-                  y2="98"
-                  stroke={GREY}
-                  strokeWidth="0.9"
-                  strokeDasharray="2 3"
-                  opacity="0.55"
-                />
-                {/* small arrowhead */}
-                <path
-                  d={`M${x - 2.5} 96 L${x} 102 L${x + 2.5} 96`}
-                  fill="none"
-                  stroke={GREY}
-                  strokeWidth="0.9"
-                  opacity="0.6"
-                />
-              </g>
-            ))}
-
-            {/* Web direction arrow text */}
-            <text
-              x="160"
-              y="128"
-              textAnchor="middle"
-              fontSize="9"
-              fill={GREY_DIM}
-              fontFamily="monospace"
-              letterSpacing="1"
-            >
-              WEB FLOW →
-            </text>
-
-            {/* Web particle accumulation indicators on the web line */}
-            {[100, 140, 180, 220].map((x, i) => (
-              <circle key={`acc-${i}`} cx={x} cy="108" r="1.6" fill={GREY} opacity="0.95" />
-            ))}
-          </svg>
-
-          {/* Labels */}
-          <ul className="mt-4 space-y-2">
-            {horizontalLabels.map((label, idx) => (
-              <li key={idx} className="flex items-center gap-2 text-[11px] text-slate-400">
-                <span className="h-px w-3 bg-slate-600" />
-                {label}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ── VERTICAL (PRT) ─────────────────────────────── */}
-        <div className="flex flex-col">
-          <div className="mb-4 flex items-center gap-2">
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: GOLD }}
-            />
-            <p
-              className="text-[10px] font-semibold uppercase tracking-[0.25em]"
-              style={{ color: GOLD }}
-            >
-              {verticalTitle}
-            </p>
-          </div>
-
-          <svg
-            viewBox="0 0 320 200"
-            className="w-full h-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label={verticalTitle}
-          >
-            <defs>
-              <marker
-                id="arrow-gold"
-                viewBox="0 0 10 10"
-                refX="9"
-                refY="5"
-                markerWidth="6"
-                markerHeight="6"
-                orient="auto-start-reverse"
-              >
-                <path d="M0,0 L10,5 L0,10 z" fill={GOLD} />
-              </marker>
-            </defs>
-
-            {/* Bottom roll */}
-            <circle cx="160" cy="170" r="22" fill="none" stroke={GOLD} strokeWidth="1.2" />
-            <circle cx="160" cy="170" r="8" fill="none" stroke={GOLD} strokeWidth="1" />
-            {/* Top roll */}
-            <circle cx="160" cy="30" r="22" fill="none" stroke={GOLD} strokeWidth="1.2" />
-            <circle cx="160" cy="30" r="8" fill="none" stroke={GOLD} strokeWidth="1" />
-
-            {/* Vertical web with upward arrow */}
-            <line
-              x1="160"
-              y1="148"
-              x2="160"
-              y2="52"
-              stroke={GOLD}
-              strokeWidth="1.6"
-              markerEnd="url(#arrow-gold)"
-            />
-
-            {/* Particles falling SIDEWAYS away from vertical web */}
-            {/* Left side particles */}
-            {[70, 110, 150].map((y, i) => (
-              <g key={`l-${i}`}>
-                <circle cx="150" cy={y} r="2.4" fill={GOLD} opacity="0.9" />
-                <line
-                  x1="146"
-                  y1={y}
-                  x2="100"
-                  y2={y + 18}
-                  stroke={GOLD}
-                  strokeWidth="0.9"
-                  strokeDasharray="2 3"
-                  opacity="0.55"
-                />
-                <path
-                  d={`M104 ${y + 17} L98 ${y + 18.5} L102 ${y + 14}`}
-                  fill="none"
-                  stroke={GOLD}
-                  strokeWidth="0.9"
-                  opacity="0.6"
-                />
-              </g>
-            ))}
-            {/* Right side particles */}
-            {[80, 120, 145].map((y, i) => (
-              <g key={`r-${i}`}>
-                <circle cx="170" cy={y} r="2.4" fill={GOLD} opacity="0.9" />
-                <line
-                  x1="174"
-                  y1={y}
-                  x2="220"
-                  y2={y + 18}
-                  stroke={GOLD}
-                  strokeWidth="0.9"
-                  strokeDasharray="2 3"
-                  opacity="0.55"
-                />
-                <path
-                  d={`M216 ${y + 17} L222 ${y + 18.5} L218 ${y + 14}`}
-                  fill="none"
-                  stroke={GOLD}
-                  strokeWidth="0.9"
-                  opacity="0.6"
-                />
-              </g>
-            ))}
-
-            {/* Web direction label */}
-            <text
-              x="178"
-              y="105"
-              fontSize="9"
-              fill={GOLD}
-              fontFamily="monospace"
-              letterSpacing="1"
-              opacity="0.85"
-            >
-              ↑ WEB
-            </text>
-          </svg>
-
-          {/* Labels */}
-          <ul className="mt-4 space-y-2">
-            {verticalLabels.map((label, idx) => (
-              <li
-                key={idx}
-                className="flex items-center gap-2 text-[11px]"
-                style={{ color: "#1976D2" }}
-              >
-                <span
-                  className="h-px w-3"
-                  style={{ backgroundColor: "rgba(25,118,210,0.7)" }}
-                />
-                {label}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/**
- * 16:9 competency card image. Renders <Image> when src is provided,
- * otherwise falls back to the dark schematic placeholder.
- */
-function CompetencyImagePlaceholder({ src, alt }: { src?: string; alt?: string }) {
-  if (src) {
-    return (
-      <div className="relative aspect-[16/9] overflow-hidden bg-[#0A0F1A] border-b border-slate-800">
-        <Image
-          src={src}
-          alt={alt ?? ""}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover"
-        />
-      </div>
-    )
+  const clearAll = () => {
+    timers.current.forEach((t) => clearTimeout(t))
+    timers.current = []
+    if (raf.current) cancelAnimationFrame(raf.current)
   }
+  const at = (fn: () => void, ms: number) => {
+    timers.current.push(setTimeout(fn, ms))
+  }
+  const ease = (p: number) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2)
+
+  const moveTo = (tx: number, ty: number, dur: number) => {
+    if (raf.current) cancelAnimationFrame(raf.current)
+    const start = performance.now()
+    const fx = pos.current.x
+    const fy = pos.current.y
+    const frame = (now: number) => {
+      const p = Math.min((now - start) / dur, 1)
+      const e = ease(p)
+      const x = fx + (tx - fx) * e
+      const y = fy + (ty - fy) * e
+      pos.current = { x, y }
+      setTf(`translate(${x.toFixed(2)} ${y.toFixed(2)})`)
+      if (p < 1) raf.current = requestAnimationFrame(frame)
+    }
+    raf.current = requestAnimationFrame(frame)
+  }
+
+  const showAligned = () => {
+    pos.current = { x: 0, y: 0 }
+    setTf("translate(0 0)")
+    setAligned(true)
+    setMarkers(true)
+    setScan(false)
+    setPhase(steps.length - 1)
+  }
+
+  const run = () => {
+    clearAll()
+    pos.current = { ...OFFSET }
+    setTf(`translate(${OFFSET.x} ${OFFSET.y})`)
+    setAligned(false)
+    setScan(false)
+    setMarkers(false)
+    setPhase(0)
+    at(() => setPhase(1), 1000)
+    at(() => {
+      setPhase(2)
+      setScanKey((k) => k + 1)
+      setScan(true)
+    }, 2400)
+    at(() => {
+      setScan(false)
+      setMarkers(true)
+    }, 3900)
+    at(() => {
+      setPhase(3)
+      moveTo(0, 0, 1500)
+    }, 4500)
+    at(() => {
+      setPhase(4)
+      setAligned(true)
+    }, 6200)
+  }
+
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (reduce) showAligned()
+    else run()
+    return clearAll
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const dotColor = aligned ? BLUE : phase >= 2 ? BLUE : RED
+  const corners: [number, number][] = [
+    [SX, SY],
+    [SX + SW, SY],
+    [SX, SY + SH],
+    [SX + SW, SY + SH],
+  ]
+
   return (
-    <div className="relative aspect-[16/9] overflow-hidden bg-[#0A0F1A] border-b border-slate-800">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <div
-        className="absolute top-3 left-3 h-2 w-2 border-l border-t"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute top-3 right-3 h-2 w-2 border-r border-t"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
+    <div className="relative overflow-hidden border border-slate-800 bg-slate-950/50">
+      {/* header — concept status (no numbers / no HMI readout) */}
+      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/40 px-5 py-3">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+          {statusLabel}
+        </span>
+        <span className="flex items-center gap-2">
+          <span
+            className="inline-block h-1.5 w-1.5 rounded-full transition-colors duration-300"
+            style={{ backgroundColor: dotColor }}
+          />
+          <span
+            className="text-[11px] font-medium tracking-wide transition-colors duration-300"
+            style={{ color: aligned ? BLUE : "#94a3b8" }}
+          >
+            {steps[phase]}
+          </span>
+        </span>
+      </div>
+
+      {/* concept SVG */}
+      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full" role="img" aria-label={statusLabel}>
+        <defs>
+          <pattern id="eng-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.6" />
+          </pattern>
+          <marker id="eng-corr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill={BLUE} />
+          </marker>
+        </defs>
+
+        <rect width={W} height={H} fill="url(#eng-grid)" />
+        {/* faint center guides */}
+        <line x1={CX} y1="0" x2={CX} y2={H} stroke="rgba(148,163,184,0.08)" strokeWidth="0.8" />
+        <line x1="0" y1={CY} x2={W} y2={CY} stroke="rgba(148,163,184,0.08)" strokeWidth="0.8" />
+
+        {/* Reference frame (fixed target position) */}
+        <rect x={SX} y={SY} width={SW} height={SH} fill="rgba(15,23,42,0.55)" stroke={SLATE} strokeWidth="1.6" />
+
+        {/* Vision detection sweep (abstract, restarts via key) */}
+        {scan && (
+          <g key={scanKey}>
+            <rect x={SX} y={SY} width={SW} height="2" fill={BLUE} opacity="0">
+              <animate attributeName="y" from={SY} to={SY + SH} dur="1.4s" fill="freeze" />
+              <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.05;0.9;1" dur="1.4s" fill="freeze" />
+            </rect>
+          </g>
+        )}
+
+        {/* Material frame (offset → corrected onto the reference) */}
+        <g transform={tf}>
+          <rect
+            x={SX}
+            y={SY}
+            width={SW}
+            height={SH}
+            fill={aligned ? "rgba(25,118,210,0.12)" : "none"}
+            stroke={aligned ? BLUE : RED}
+            strokeWidth="1.8"
+            strokeDasharray={aligned ? "0" : "9 5"}
+            style={{ transition: "stroke 0.4s ease, fill 0.4s ease" }}
+          />
+        </g>
+
+        {/* Correction-direction hint (offset phase only, abstract) */}
+        {phase === 1 && (
+          <line
+            x1={SX + SW + OFFSET.x}
+            y1={SY + OFFSET.y}
+            x2={SX + SW + 5}
+            y2={SY - 2}
+            stroke={BLUE}
+            strokeWidth="1.3"
+            strokeDasharray="3 2"
+            opacity="0.6"
+            markerEnd="url(#eng-corr)"
+          />
+        )}
+
+        {/* Alignment corner marks (abstract) */}
+        {markers &&
+          corners.map(([px, py], i) => (
+            <g
+              key={i}
+              style={{ transition: "opacity 0.4s ease" }}
+              opacity={aligned ? 0.3 : 0.9}
+              stroke={BLUE}
+              strokeWidth="1.2"
+            >
+              <line x1={px - 9} y1={py} x2={px + 9} y2={py} />
+              <line x1={px} y1={py - 9} x2={px} y2={py + 9} />
+            </g>
+          ))}
+
+        {/* Aligned confirmation — subtle blue frame, no glow */}
+        {aligned && (
+          <rect
+            x={SX - 7}
+            y={SY - 7}
+            width={SW + 14}
+            height={SH + 14}
+            fill="none"
+            stroke="rgba(25,118,210,0.3)"
+            strokeWidth="1"
+          />
+        )}
+      </svg>
+
+      {/* legend + replay */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-800 bg-slate-900/40 px-5 py-3">
+        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="inline-block h-3 w-3 border" style={{ borderColor: SLATE }} />
+          {legendReference}
+        </span>
+        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="inline-block h-3 w-3 border border-dashed" style={{ borderColor: RED }} />
+          {legendMaterial}
+        </span>
+        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
+          <span className="inline-block h-3 w-3 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.18)" }} />
+          {legendAligned}
+        </span>
+        <button
+          type="button"
+          onClick={run}
+          className="ml-auto inline-flex items-center gap-1.5 border border-slate-700 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400 transition-colors hover:border-[#1976D2] hover:text-slate-200"
+        >
+          ↺ {replayLabel}
+        </button>
+      </div>
+
+      {/* correction flow steps (progress with phase) */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-3 border-t border-slate-800 px-5 py-4">
+        {steps.map((step, idx) => {
+          const active = idx === phase
+          const done = idx < phase
+          return (
+            <span key={idx} className="flex items-center gap-2">
+              <span
+                className="inline-flex border px-3 py-1.5 text-[11px] font-medium transition-colors duration-300"
+                style={{
+                  borderColor: active
+                    ? "rgba(25,118,210,0.5)"
+                    : done
+                      ? "rgba(25,118,210,0.25)"
+                      : "rgba(51,65,85,1)",
+                  color: active ? "#1976D2" : done ? "#7ea8d8" : "#64748b",
+                  backgroundColor: active ? "rgba(25,118,210,0.1)" : "transparent",
+                }}
+              >
+                {step}
+              </span>
+              {idx < steps.length - 1 && <ArrowRight className="h-3.5 w-3.5 text-slate-700" />}
+            </span>
+          )
+        })}
+      </div>
+
+      {/* concept note */}
+      <div className="border-t border-slate-800 px-5 py-3">
+        <p className="text-[11px] leading-relaxed text-slate-500">{note}</p>
+      </div>
     </div>
   )
 }
@@ -665,182 +509,169 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
     <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
-      {/* ── Hero ────────────────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
+      {/* ── 1. Hero ──────────────────────────────────────────── */}
+      <section className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.5)_1px,transparent_1px)] bg-[size:40px_40px]" />
         <div
-          className="absolute inset-0 opacity-5 pointer-events-none"
+          className="pointer-events-none absolute inset-0 opacity-5"
           style={{
             background:
               "linear-gradient(105deg, transparent 42%, rgba(25,118,210,0.8) 42.5%, transparent 43%)",
           }}
         />
 
-        <div className="relative mx-auto max-w-5xl px-6 py-32 lg:px-8">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-20 lg:px-8 lg:pt-28 lg:pb-24">
+          <div className="mb-6 flex items-center gap-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-              {t.titleSub}
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+              {t.eyebrow}
             </p>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight whitespace-pre-line mb-8">
-            {t.title}
+          <h1 className="mb-7 max-w-4xl text-5xl font-bold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[64px]">
+            {t.heroTitle}
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400">
-            {t.description}
-          </p>
+          <p className="max-w-2xl text-lg leading-[1.75] text-slate-300">{t.heroBody}</p>
         </div>
       </section>
 
-      {/* ── Why Vertical R2R — Diagram ──────────────────────── */}
+      {/* ── 2. Material Distortion & Alignment Correction ────── */}
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
-          <div className="mb-10">
+        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
+          <div className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Architecture
+              {t.alignLabel}
             </p>
-            <h2 className="text-2xl font-bold text-white mb-4">{t.verticalTitle}</h2>
-            <p className="max-w-3xl text-sm text-slate-400 leading-relaxed">
-              {t.verticalDesc}
+            <h2 className="mb-4 text-2xl font-bold text-white lg:text-3xl">{t.alignTitle}</h2>
+            <p className="max-w-3xl text-sm leading-relaxed text-slate-400">{t.alignBody}</p>
+          </div>
+
+          <div className="max-w-4xl">
+            <AlignmentCorrectionDiagram
+              statusLabel={t.diagramStatus}
+              replayLabel={t.diagramReplay}
+              legendReference={t.legendReference}
+              legendMaterial={t.legendMaterial}
+              legendAligned={t.legendAligned}
+              steps={t.flowSteps}
+              note={t.diagramNote}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. Core Alignment Engineering — 4 cards ──────────── */}
+      <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
+          <div className="mb-12 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              {t.cardsLabel}
             </p>
           </div>
 
-          {/* Schematic diagram — replaces the old text comparison */}
-          <R2RComparisonDiagram
-            horizontalTitle={t.diagramHorizontalTitle}
-            verticalTitle={t.diagramVerticalTitle}
-            horizontalLabels={t.diagramHorizontalLabels}
-            verticalLabels={t.diagramVerticalLabels}
-          />
-
-          {/* 4 numbered advantages below diagram */}
-          <div className="mt-12 grid gap-0 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-slate-800">
-            {t.verticalPoints.map((pt, idx) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:gap-7">
+            {t.cards.map((card, idx) => (
               <div
                 key={idx}
-                className="border-r border-b border-slate-800 bg-slate-950/30 p-6"
+                className="group relative flex flex-col border border-slate-800 bg-slate-950/40 p-8 transition-colors duration-200 hover:border-slate-700 hover:bg-slate-900/40 lg:p-9"
               >
-                <div className="mb-3 flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="mb-5 block h-0.5 w-9"
+                  style={{ backgroundColor: "#1976D2" }}
+                />
+                <div className="mb-2 flex items-baseline gap-3">
                   <span
-                    className="flex h-6 w-6 items-center justify-center text-[10px] font-bold"
-                    style={{
-                      backgroundColor: "rgba(25,118,210,0.12)",
-                      color: "#1976D2",
-                      border: "1px solid rgba(25,118,210,0.3)",
-                    }}
+                    className="font-mono text-[11px] font-bold tracking-[0.2em]"
+                    style={{ color: "rgba(25,118,210,0.85)" }}
                   >
                     {String(idx + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-sm font-semibold text-slate-200">{pt.label}</p>
+                  <h3 className="text-lg font-bold leading-snug text-white lg:text-xl">{card.title}</h3>
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">{pt.desc}</p>
+                {card.sub !== card.title && (
+                  <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.15em] text-slate-500">
+                    {card.sub}
+                  </p>
+                )}
+                <p className="mt-2 text-sm leading-7 text-slate-400">{card.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 6 Pillars ───────────────────────────────────────── */}
-      <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
+      {/* ── 4 + 5. Internal tuning note & confidentiality ────── */}
+      <section className="relative bg-slate-950">
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <p className="mb-14 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            {t.pillarsLabel}
-          </p>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {t.pillars.map((pillar, idx) => (
-              <article
-                key={idx}
-                className="group relative overflow-hidden border border-slate-800 bg-slate-950/40 transition-colors hover:border-slate-700"
-              >
-                {/* Card image — /images/eng-{number}-{slug}.jpg */}
-                <CompetencyImagePlaceholder
-                  src={`/images/eng-${pillar.number}-${pillar.slug}.jpg`}
-                  alt={pillar.title}
-                />
-
-                <div className="p-6">
-                  <p
-                    className="text-[10px] font-bold tracking-[0.25em] mb-3 font-mono"
-                    style={{ color: "rgba(25,118,210,0.7)" }}
-                  >
-                    {pillar.number}
-                  </p>
-                  <h3 className="text-lg font-bold text-white mb-1.5 leading-tight">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-500 mb-4">
-                    {pillar.tagline}
-                  </p>
-
-                  <p className="text-sm text-slate-400 leading-relaxed mb-5">
-                    {pillar.body}
-                  </p>
-
-                  <div className="space-y-1.5 border-t border-slate-800 pt-4">
-                    {pillar.specs.map((spec, sIdx) => (
-                      <div
-                        key={sIdx}
-                        className="flex items-start gap-2 text-xs leading-relaxed tabular-nums text-slate-300"
-                      >
-                        <span
-                          className="h-px w-3 flex-shrink-0 mt-[7px]"
-                          style={{ backgroundColor: "#1976D2", opacity: 0.4 }}
-                        />
-                        <span>{spec}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
+          {/* Internal tuning note — quiet supporting information panel */}
+          <div
+            className="max-w-4xl border border-slate-800 bg-slate-900/30 p-7 lg:p-8"
+            style={{ borderLeftColor: "#1976D2", borderLeftWidth: 2 }}
+          >
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              {t.tuningLabel}
+            </p>
+            <p className="max-w-3xl text-[15px] leading-relaxed text-slate-200">{t.tuningNote}</p>
+            <p className="mt-4 max-w-3xl border-t border-slate-800 pt-4 text-xs leading-relaxed text-slate-500">
+              {t.tuningContext}
+            </p>
           </div>
 
-          {/* Spec disclaimer — standard equipment-documentation note */}
-          <p className="mt-12 max-w-2xl text-xs leading-relaxed text-slate-500">
-            {t.specDisclaimer}
-          </p>
+          {/* Technical confidentiality note */}
+          <div className="mt-10 border-t border-slate-800 pt-8">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              {t.confidentialLabel}
+            </p>
+            <p className="max-w-3xl text-sm leading-relaxed text-slate-400">{t.confidentialNote}</p>
+          </div>
         </div>
       </section>
 
-      {/* ── Component Standards ─────────────────────────────── */}
-      <section className="relative bg-slate-950">
-        <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-            {t.componentLabel}
-          </p>
-          <p className="max-w-xl text-sm text-slate-400 leading-relaxed mb-10">
-            {t.componentBody}
-          </p>
+      {/* ── 6. Standard Components (supporting trust section) ──── */}
+      <section className="relative bg-slate-900">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-          <div className="flex flex-wrap gap-3 mb-12">
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            {t.componentsLabel}
+          </p>
+          <p className="mb-8 max-w-xl text-sm leading-relaxed text-slate-400">{t.componentsBody}</p>
+
+          <div className="mb-5 flex flex-wrap gap-2.5">
             {t.componentBrands.map((brand, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center rounded border border-slate-700 bg-slate-800/40 px-4 py-2 text-sm font-medium text-slate-300"
+                className="inline-flex items-center rounded border border-slate-700 bg-slate-800/40 px-4 py-2 text-sm font-medium text-slate-200"
               >
                 {brand}
               </span>
             ))}
           </div>
+          <p className="max-w-2xl text-xs leading-relaxed text-slate-500">{t.componentNote}</p>
+        </div>
+      </section>
 
-          {/* CTAs */}
+      {/* ── 7. CTA ───────────────────────────────────────────── */}
+      <section className="relative bg-slate-950">
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
+          <p className="mb-6 max-w-2xl text-lg font-semibold leading-snug text-white">{t.ctaLine}</p>
           <div className="flex flex-wrap gap-4">
             <a
               href="/products"
-              className="inline-flex items-center gap-2 rounded px-6 py-3 text-sm font-semibold text-slate-900 transition-opacity hover:opacity-90"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.productsCta}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3.5 text-sm font-semibold text-slate-300 transition-colors hover:border-slate-400 hover:bg-white/5 hover:text-white"
             >
               {t.contactCta}
             </a>
