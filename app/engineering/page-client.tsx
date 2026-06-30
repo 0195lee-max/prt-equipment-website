@@ -20,10 +20,11 @@ const translations = {
       "Leadframe 및 반도체 패키징 공정에서는 도금, 에칭, 열, 장력 이력과 이송 조건에 따라 소재 위치가 미세하게 변할 수 있습니다. PRT 시스템은 Vision 기반 감지와 전용 보정 방식을 통해 노광 전 소재와 마스크 기준의 정렬 편차를 줄이는 데 초점을 둡니다.",
 
     diagramStatus: "Alignment Sequence",
+    sequenceLabel: "Concept Visualization",
     diagramReplay: "다시 보기",
     legendReference: "기준 위치",
     legendMaterial: "소재 편차",
-    legendAligned: "정렬됨",
+    legendAligned: "정렬 위치",
     flowSteps: ["소재 변형", "위치 편차", "Vision 감지", "정렬 보정", "안정적인 노광 정렬"],
     diagramNote: "개념 다이어그램 — 실제 정렬 편차는 도형으로 추상화하여 표현했습니다.",
 
@@ -79,10 +80,11 @@ const translations = {
       "In leadframe and semiconductor packaging processes, material position can shift due to plating, etching, heat, tension history, and transport conditions. PRT systems use vision-based detection and a dedicated correction approach to help reduce substrate-to-mask alignment deviation before exposure.",
 
     diagramStatus: "Alignment Sequence",
+    sequenceLabel: "Concept Visualization",
     diagramReplay: "Replay",
     legendReference: "Reference position",
     legendMaterial: "Material offset",
-    legendAligned: "Aligned",
+    legendAligned: "Aligned position",
     flowSteps: ["Material variation", "Position offset", "Vision detection", "Alignment correction", "Stable exposure alignment"],
     diagramNote: "Concept diagram — alignment offset is shown abstractly as shapes.",
 
@@ -138,10 +140,11 @@ const translations = {
       "在 Leadframe 与半导体封装工艺中，材料位置可能因电镀、蚀刻、热、张力历程与传输条件而发生细微变化。PRT 系统通过基于 Vision 的检测与专用补正方式，致力于在曝光前减少基板与掩膜基准的对准偏差。",
 
     diagramStatus: "Alignment Sequence",
+    sequenceLabel: "Concept Visualization",
     diagramReplay: "重播",
     legendReference: "基准位置",
     legendMaterial: "材料偏差",
-    legendAligned: "对准完成",
+    legendAligned: "对准位置",
     flowSteps: ["材料变形", "位置偏差", "Vision 检测", "对准补正", "稳定的曝光对准"],
     diagramNote: "概念示意图 — 对准偏差以抽象图形表示。",
 
@@ -224,7 +227,7 @@ function AlignmentCorrectionDiagram({
   const CY = H / 2
   const SX = CX - SW / 2
   const SY = CY - SH / 2
-  const OFFSET = { x: 30, y: -20 }
+  const OFFSET = { x: 26, y: -16 }
 
   const [phase, setPhase] = useState(0)
   const [aligned, setAligned] = useState(false)
@@ -236,6 +239,8 @@ function AlignmentCorrectionDiagram({
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
   const raf = useRef(0)
   const pos = useRef({ ...OFFSET })
+  const rootRef = useRef<HTMLDivElement>(null)
+  const started = useRef(false)
 
   const clearAll = () => {
     timers.current.forEach((t) => clearTimeout(t))
@@ -281,33 +286,90 @@ function AlignmentCorrectionDiagram({
     setScan(false)
     setMarkers(false)
     setPhase(0)
-    at(() => setPhase(1), 1000)
+    at(() => setPhase(1), 1100)
     at(() => {
       setPhase(2)
       setScanKey((k) => k + 1)
       setScan(true)
-    }, 2400)
+    }, 2600)
     at(() => {
       setScan(false)
       setMarkers(true)
-    }, 3900)
+    }, 4400)
     at(() => {
       setPhase(3)
-      moveTo(0, 0, 1500)
-    }, 4500)
+      moveTo(0, 0, 1900)
+    }, 5000)
     at(() => {
       setPhase(4)
       setAligned(true)
-    }, 6200)
+    }, 7100)
   }
 
   useEffect(() => {
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-    if (reduce) showAligned()
-    else run()
-    return clearAll
+    if (reduce) {
+      showAligned()
+      return
+    }
+    const el = rootRef.current
+    let io: IntersectionObserver | null = null
+    let onScrollResize: (() => void) | null = null
+
+    const cleanupTriggers = () => {
+      io?.disconnect()
+      io = null
+      if (onScrollResize) {
+        window.removeEventListener("scroll", onScrollResize)
+        window.removeEventListener("resize", onScrollResize)
+        onScrollResize = null
+      }
+    }
+    const start = () => {
+      if (started.current) return
+      started.current = true
+      cleanupTriggers()
+      run()
+    }
+
+    if (!el) {
+      start()
+      return clearAll
+    }
+
+    // Start the sequence only once the diagram is scrolled into view (revealed),
+    // so it isn't already finished by the time the user reaches it. Uses an
+    // IntersectionObserver plus a scroll/resize fallback (same robustness as the
+    // site's reveal system).
+    const inView = () => {
+      const r = el.getBoundingClientRect()
+      return r.top < window.innerHeight * 0.85 && r.bottom > 0
+    }
+    if (typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) start()
+        },
+        { threshold: 0.25 },
+      )
+      io.observe(el)
+    }
+    onScrollResize = () => {
+      if (inView()) start()
+    }
+    window.addEventListener("scroll", onScrollResize, { passive: true })
+    window.addEventListener("resize", onScrollResize, { passive: true })
+    const initial = window.setTimeout(() => {
+      if (inView()) start()
+    }, 120)
+
+    return () => {
+      cleanupTriggers()
+      window.clearTimeout(initial)
+      clearAll()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -320,159 +382,149 @@ function AlignmentCorrectionDiagram({
   ]
 
   return (
-    <div className="relative overflow-hidden border border-slate-800 bg-slate-950/50">
-      {/* header — concept status (no numbers / no HMI readout) */}
-      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/40 px-5 py-3">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+    <div ref={rootRef} className="relative overflow-hidden border border-slate-800 bg-slate-950/60">
+      {/* slim header — quiet phase indicator, no debug readout */}
+      <div className="flex items-center justify-between border-b border-slate-800/80 bg-slate-900/30 px-5 py-3">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">
           {statusLabel}
         </span>
-        <span className="flex items-center gap-2">
-          <span
-            className="inline-block h-1.5 w-1.5 rounded-full transition-colors duration-300"
-            style={{ backgroundColor: dotColor }}
-          />
-          <span
-            className="text-[11px] font-medium tracking-wide transition-colors duration-300"
-            style={{ color: aligned ? BLUE : "#94a3b8" }}
-          >
-            {steps[phase]}
-          </span>
-        </span>
+        <span
+          className="inline-block h-1.5 w-1.5 rounded-full transition-colors duration-500"
+          style={{ backgroundColor: dotColor }}
+        />
       </div>
 
-      {/* concept SVG */}
+      {/* concept SVG — abstract reference / material / aligned frames */}
       <svg viewBox={`0 0 ${W} ${H}`} className="block w-full" role="img" aria-label={statusLabel}>
         <defs>
-          <pattern id="eng-grid" width="28" height="28" patternUnits="userSpaceOnUse">
-            <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.6" />
+          <pattern id="eng-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="rgba(148,163,184,0.05)" strokeWidth="0.6" />
           </pattern>
-          <marker id="eng-corr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill={BLUE} />
-          </marker>
+          <linearGradient id="eng-sheen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.035)" />
+            <stop offset="42%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+          <linearGradient id="eng-scan" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(25,118,210,0)" />
+            <stop offset="50%" stopColor="rgba(25,118,210,0.22)" />
+            <stop offset="100%" stopColor="rgba(25,118,210,0)" />
+          </linearGradient>
         </defs>
 
+        {/* matte base + blueprint grid + soft top sheen */}
+        <rect width={W} height={H} fill="#0a1120" />
         <rect width={W} height={H} fill="url(#eng-grid)" />
+        <rect width={W} height={H} fill="url(#eng-sheen)" />
         {/* faint center guides */}
-        <line x1={CX} y1="0" x2={CX} y2={H} stroke="rgba(148,163,184,0.08)" strokeWidth="0.8" />
-        <line x1="0" y1={CY} x2={W} y2={CY} stroke="rgba(148,163,184,0.08)" strokeWidth="0.8" />
+        <line x1={CX} y1="0" x2={CX} y2={H} stroke="rgba(148,163,184,0.07)" strokeWidth="0.7" />
+        <line x1="0" y1={CY} x2={W} y2={CY} stroke="rgba(148,163,184,0.07)" strokeWidth="0.7" />
 
-        {/* Reference frame (fixed target position) */}
-        <rect x={SX} y={SY} width={SW} height={SH} fill="rgba(15,23,42,0.55)" stroke={SLATE} strokeWidth="1.6" />
+        {/* ── Reference frame (fixed): layered reference plane ── */}
+        <rect x={SX} y={SY} width={SW} height={SH} fill="rgba(148,163,184,0.045)" stroke={SLATE} strokeWidth="1.4" />
+        <rect x={SX + 9} y={SY + 9} width={SW - 18} height={SH - 18} fill="none" stroke="rgba(148,163,184,0.16)" strokeWidth="0.7" />
 
-        {/* Vision detection sweep (abstract, restarts via key) */}
+        {/* ── Vision detection — fine optical scan ── */}
         {scan && (
           <g key={scanKey}>
-            <rect x={SX} y={SY} width={SW} height="2" fill={BLUE} opacity="0">
-              <animate attributeName="y" from={SY} to={SY + SH} dur="1.4s" fill="freeze" />
-              <animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.05;0.9;1" dur="1.4s" fill="freeze" />
+            <rect x={SX} y={SY - 10} width={SW} height="20" fill="url(#eng-scan)" opacity="0">
+              <animate attributeName="y" from={SY - 10} to={SY + SH - 10} dur="1.7s" fill="freeze" />
+              <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.06;0.9;1" dur="1.7s" fill="freeze" />
+            </rect>
+            <rect x={SX} y={SY} width={SW} height="1" fill={BLUE} opacity="0">
+              <animate attributeName="y" from={SY} to={SY + SH} dur="1.7s" fill="freeze" />
+              <animate attributeName="opacity" values="0;0.55;0.55;0" keyTimes="0;0.06;0.9;1" dur="1.7s" fill="freeze" />
             </rect>
           </g>
         )}
 
-        {/* Material frame (offset → corrected onto the reference) */}
+        {/* ── Reference corner marks (appear after detection) ── */}
+        {markers &&
+          corners.map(([px, py], i) => {
+            const dx = px === SX ? 1 : -1
+            const dy = py === SY ? 1 : -1
+            return (
+              <g key={`ref-${i}`} stroke="rgba(148,163,184,0.55)" strokeWidth="1" style={{ transition: "opacity 0.5s ease" }}>
+                <line x1={px} y1={py} x2={px + 11 * dx} y2={py} />
+                <line x1={px} y1={py} x2={px} y2={py + 11 * dy} />
+              </g>
+            )
+          })}
+
+        {/* ── Material frame: offset ghost → corrected onto reference ── */}
         <g transform={tf}>
           <rect
             x={SX}
             y={SY}
             width={SW}
             height={SH}
-            fill={aligned ? "rgba(25,118,210,0.12)" : "none"}
+            fill={aligned ? "rgba(25,118,210,0.10)" : "none"}
             stroke={aligned ? BLUE : RED}
-            strokeWidth="1.8"
-            strokeDasharray={aligned ? "0" : "9 5"}
-            style={{ transition: "stroke 0.4s ease, fill 0.4s ease" }}
+            strokeWidth={aligned ? 1.8 : 1.2}
+            strokeDasharray={aligned ? "0" : "6 5"}
+            opacity={aligned ? 1 : 0.5}
+            style={{ transition: "stroke 0.5s ease, fill 0.5s ease, opacity 0.5s ease, stroke-width 0.5s ease" }}
           />
         </g>
 
-        {/* Correction-direction hint (offset phase only, abstract) */}
-        {phase === 1 && (
-          <line
-            x1={SX + SW + OFFSET.x}
-            y1={SY + OFFSET.y}
-            x2={SX + SW + 5}
-            y2={SY - 2}
-            stroke={BLUE}
-            strokeWidth="1.3"
-            strokeDasharray="3 2"
-            opacity="0.6"
-            markerEnd="url(#eng-corr)"
-          />
-        )}
-
-        {/* Alignment corner marks (abstract) */}
-        {markers &&
-          corners.map(([px, py], i) => (
-            <g
-              key={i}
-              style={{ transition: "opacity 0.4s ease" }}
-              opacity={aligned ? 0.3 : 0.9}
-              stroke={BLUE}
-              strokeWidth="1.2"
-            >
-              <line x1={px - 9} y1={py} x2={px + 9} y2={py} />
-              <line x1={px} y1={py - 9} x2={px} y2={py + 9} />
-            </g>
-          ))}
-
-        {/* Aligned confirmation — subtle blue frame, no glow */}
-        {aligned && (
-          <rect
-            x={SX - 7}
-            y={SY - 7}
-            width={SW + 14}
-            height={SH + 14}
-            fill="none"
-            stroke="rgba(25,118,210,0.3)"
-            strokeWidth="1"
-          />
-        )}
+        {/* ── Aligned accents — blue corner ticks (premium, no glow) ── */}
+        {aligned &&
+          corners.map(([px, py], i) => {
+            const dx = px === SX ? 1 : -1
+            const dy = py === SY ? 1 : -1
+            return (
+              <g key={`al-${i}`} stroke={BLUE} strokeWidth="1.6">
+                <line x1={px} y1={py} x2={px + 13 * dx} y2={py} />
+                <line x1={px} y1={py} x2={px} y2={py + 13 * dy} />
+              </g>
+            )
+          })}
       </svg>
 
-      {/* legend + replay */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-800 bg-slate-900/40 px-5 py-3">
+      {/* legend + subtle replay */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-800/80 bg-slate-900/30 px-5 py-3">
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-3 w-3 border" style={{ borderColor: SLATE }} />
+          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: SLATE }} />
           {legendReference}
         </span>
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-3 w-3 border border-dashed" style={{ borderColor: RED }} />
+          <span className="inline-block h-2.5 w-3.5 border border-dashed" style={{ borderColor: "rgba(239,68,68,0.7)" }} />
           {legendMaterial}
         </span>
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-3 w-3 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.18)" }} />
+          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.16)" }} />
           {legendAligned}
         </span>
         <button
           type="button"
           onClick={run}
-          className="ml-auto inline-flex items-center gap-1.5 border border-slate-700 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400 transition-colors hover:border-[#1976D2] hover:text-slate-200"
+          className="ml-auto text-[10px] font-medium uppercase tracking-[0.14em] text-slate-600 transition-colors hover:text-slate-300"
         >
-          ↺ {replayLabel}
+          ↻ {replayLabel}
         </button>
       </div>
 
-      {/* correction flow steps (progress with phase) */}
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-3 border-t border-slate-800 px-5 py-4">
+      {/* process bar — dots + labels + connectors (not buttons) */}
+      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-3 border-t border-slate-800/80 px-5 py-4">
         {steps.map((step, idx) => {
           const active = idx === phase
           const done = idx < phase
           return (
-            <span key={idx} className="flex items-center gap-2">
-              <span
-                className="inline-flex border px-3 py-1.5 text-[11px] font-medium transition-colors duration-300"
-                style={{
-                  borderColor: active
-                    ? "rgba(25,118,210,0.5)"
-                    : done
-                      ? "rgba(25,118,210,0.25)"
-                      : "rgba(51,65,85,1)",
-                  color: active ? "#1976D2" : done ? "#7ea8d8" : "#64748b",
-                  backgroundColor: active ? "rgba(25,118,210,0.1)" : "transparent",
-                }}
-              >
-                {step}
+            <span key={idx} className="flex items-center gap-2.5">
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="h-1.5 w-1.5 rounded-full transition-colors duration-300"
+                  style={{ backgroundColor: active || done ? BLUE : "#334155" }}
+                />
+                <span
+                  className="text-[11px] tracking-wide transition-colors duration-300"
+                  style={{ color: active ? "#cbd5e1" : done ? "#7ea8d8" : "#64748b", fontWeight: active ? 600 : 400 }}
+                >
+                  {step}
+                </span>
               </span>
-              {idx < steps.length - 1 && <ArrowRight className="h-3.5 w-3.5 text-slate-700" />}
+              {idx < steps.length - 1 && (
+                <span className="h-px w-5" style={{ backgroundColor: "rgba(51,65,85,0.7)" }} />
+              )}
             </span>
           )
         })}
@@ -530,7 +582,7 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div className="mb-12">
+          <div>
             <p data-reveal="label" className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               {t.alignLabel}
             </p>
@@ -542,22 +594,6 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
             >
               {t.alignBody}
             </p>
-          </div>
-
-          <div
-            data-reveal="ui"
-            style={{ "--reveal-delay": "120ms" } as CSSProperties}
-            className="max-w-4xl"
-          >
-            <AlignmentCorrectionDiagram
-              statusLabel={t.diagramStatus}
-              replayLabel={t.diagramReplay}
-              legendReference={t.legendReference}
-              legendMaterial={t.legendMaterial}
-              legendAligned={t.legendAligned}
-              steps={t.flowSteps}
-              note={t.diagramNote}
-            />
           </div>
         </div>
       </section>
@@ -614,7 +650,37 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
         </div>
       </section>
 
-      {/* ── 4 + 5. Internal tuning note & confidentiality ────── */}
+      {/* ── 4. Alignment Sequence — concept visualization of the flow above ── */}
+      <section className="relative bg-slate-900">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
+          <div data-reveal="label" className="mb-10 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              {t.sequenceLabel}
+            </p>
+          </div>
+
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="max-w-4xl"
+          >
+            <AlignmentCorrectionDiagram
+              statusLabel={t.diagramStatus}
+              replayLabel={t.diagramReplay}
+              legendReference={t.legendReference}
+              legendMaterial={t.legendMaterial}
+              legendAligned={t.legendAligned}
+              steps={t.flowSteps}
+              note={t.diagramNote}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5 + 6. Internal tuning note & confidentiality ────── */}
       <section className="relative bg-slate-950">
         <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
           {/* Internal tuning note — quiet supporting information panel */}
