@@ -32,7 +32,7 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision 기반 정렬",
-        body: "노광 전 alignment mark를 확인하여 소재 위치와 정렬 편차를 파악합니다.",
+        body: "노광 전 alignment mark를 확인하여 소재 위치와 정렬 편차를 파악하고, 보정 기준을 설정합니다.",
       },
       {
         title: "Material Deviation Compensation",
@@ -41,13 +41,8 @@ const translations = {
       },
       {
         title: "Production Condition Tuning",
-        sub: "양산 조건 기반 세팅",
-        body: "소재 상태, 웹 이송 특성, 라인 속도, 생산 조건에 맞춰 장비 세팅을 조정합니다.",
-      },
-      {
-        title: "Repeatable Exposure Setup",
-        sub: "반복 생산을 위한 노광 조건 관리",
-        body: "반복 생산에서도 정렬과 노광 조건이 안정적으로 유지되도록 세팅을 관리합니다.",
+        sub: "양산 조건 기반 튜닝",
+        body: "소재 상태, 웹 이송 특성, 라인 속도, 생산 조건에 맞춰 장비 세팅을 조정하여 반복 생산에서의 정렬 안정성을 높입니다.",
       },
     ],
 
@@ -96,22 +91,17 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "Alignment marks are detected to identify substrate position and offset before exposure.",
+        body: "Alignment marks are detected before exposure to identify substrate position and alignment offset, and to set the correction reference.",
       },
       {
         title: "Material Deviation Compensation",
         sub: "Material Deviation Compensation",
-        body: "A dedicated correction approach helps compensate for material-related position deviation caused by tension, process history, or handling conditions.",
+        body: "A dedicated correction approach helps reduce material-related position deviation caused by tension, process history, or handling conditions.",
       },
       {
         title: "Production Condition Tuning",
         sub: "Production Condition Tuning",
-        body: "Equipment setup is tuned according to material condition, web handling behavior, line speed, and production requirements.",
-      },
-      {
-        title: "Repeatable Exposure Setup",
-        sub: "Repeatable Exposure Setup",
-        body: "Alignment and exposure conditions are managed for repeatable operation across production runs.",
+        body: "Equipment setup is tuned according to material condition, web handling behavior, line speed, and production requirements to support repeatable alignment stability.",
       },
     ],
 
@@ -160,7 +150,7 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "在曝光前检测 alignment mark，以识别基板位置与对准偏差。",
+        body: "在曝光前检测 alignment mark，以识别基板位置与对准偏差，并设定补正基准。",
       },
       {
         title: "Material Deviation Compensation",
@@ -170,12 +160,7 @@ const translations = {
       {
         title: "Production Condition Tuning",
         sub: "Production Condition Tuning",
-        body: "根据材料状态、卷材传输特性、产线速度与生产条件调整设备设置。",
-      },
-      {
-        title: "Repeatable Exposure Setup",
-        sub: "Repeatable Exposure Setup",
-        body: "管理对准与曝光条件，使其在重复生产中保持稳定。",
+        body: "根据材料状态、卷材传输特性、产线速度与生产条件调整设备设置，以支持可重复的对准稳定性。",
       },
     ],
 
@@ -589,34 +574,40 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:gap-7">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {t.cards.map((card, idx) => (
               <div
                 key={idx}
                 data-reveal="ui"
                 style={{ "--reveal-delay": `${idx * 70}ms` } as CSSProperties}
-                className="group relative flex flex-col border border-slate-800 bg-slate-950/40 p-8 transition-colors duration-200 hover:border-slate-700 hover:bg-slate-900/40 lg:p-9"
+                className={`group relative flex flex-col border border-slate-800 bg-slate-950/40 p-7 transition-colors duration-200 hover:border-slate-600 hover:bg-slate-900/40 lg:p-8 ${
+                  idx === 2 ? "sm:col-span-2 lg:col-span-1" : ""
+                }`}
               >
-                <span
-                  aria-hidden="true"
-                  className="mb-5 block h-0.5 w-9"
-                  style={{ backgroundColor: "#1976D2" }}
-                />
-                <div className="mb-2 flex items-baseline gap-3">
+                {/* accent line + number on one row; title gets its own full-width
+                    line so it stays on a single line on desktop */}
+                <div className="mb-4 flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="block h-0.5 w-9"
+                    style={{ backgroundColor: "#1976D2" }}
+                  />
                   <span
                     className="font-mono text-[11px] font-bold tracking-[0.2em]"
                     style={{ color: "rgba(25,118,210,0.85)" }}
                   >
                     {String(idx + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="text-lg font-bold leading-snug text-white lg:text-xl">{card.title}</h3>
                 </div>
+                <h3 className="text-lg font-bold leading-snug tracking-tight text-white lg:whitespace-nowrap">
+                  {card.title}
+                </h3>
                 {card.sub !== card.title && (
-                  <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.15em] text-slate-500">
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.15em] text-slate-500">
                     {card.sub}
                   </p>
                 )}
-                <p className="mt-2 text-sm leading-7 text-slate-400">{card.body}</p>
+                <p className="mt-3 text-sm leading-7 text-slate-400">{card.body}</p>
               </div>
             ))}
           </div>
