@@ -324,33 +324,35 @@ section[id],
    To remove: delete this block, the head script + RevealProvider in
    layout.tsx, and the data-reveal attributes.
    ───────────────────────────────────────────────────────────── */
-/* Initial "faint trace" state = each variant's keyframe 0%, so before the
-   reveal the element already sits faintly present (never invisible) and there is
-   no jump when the focus-in animation starts. Staged keyframes (below) make the
-   fade INTO the soft blur gradual (0–25%), hold the blur briefly (45–60%), then
-   resolve to crisp. Linear timing lets the keyframe values define the curve. */
+/* Initial state = fully hidden (opacity 0), so before the reveal nothing shows —
+   no faint "ghost" of the next section's labels / cards / text peeking at the
+   bottom of the viewport. Each variant keeps its own travel/blur so the reveal
+   motion, direction and tone are unchanged; only the starting opacity is 0. The
+   matching keyframes start at opacity 0 too, so there is no jump when the
+   animation begins. Staged keyframes make the fade gradual then resolve to crisp;
+   linear timing lets the keyframe values define the curve. */
 html.reveal-on [data-reveal] {
   /* body copy / mixed containers — light, short, low blur */
-  opacity: 0.18;
+  opacity: 0;
   transform: translateY(7px);
   filter: blur(2px);
   will-change: opacity, transform, filter;
 }
 html.reveal-on [data-reveal="heading"] {
   /* large headings — weightiest reveal: longer travel, slightly stronger blur */
-  opacity: 0.05;
+  opacity: 0;
   transform: translateY(12px);
   filter: blur(5px);
 }
 html.reveal-on [data-reveal="label"] {
   /* small section labels — quiet & precise: opacity-focused, tiny move, no blur */
-  opacity: 0.1;
+  opacity: 0;
   transform: translateY(3px);
   filter: none;
 }
 html.reveal-on [data-reveal="ui"] {
   /* buttons / KPI / cards — opacity + small lift, no blur */
-  opacity: 0.08;
+  opacity: 0;
   transform: translateY(6px);
   filter: none;
 }
@@ -379,7 +381,7 @@ html.reveal-on [data-reveal].reveal-static {
 }
 
 @keyframes prt-reveal-heading {
-  0%   { opacity: 0.05; filter: blur(5px);   transform: translateY(12px); }
+  0%   { opacity: 0;    filter: blur(5px);   transform: translateY(12px); }
   8%   { opacity: 0.07; filter: blur(5px);   transform: translateY(11px); }
   18%  { opacity: 0.12; filter: blur(4.5px); transform: translateY(10px); }
   30%  { opacity: 0.20; filter: blur(4px);   transform: translateY(8px); }
@@ -389,7 +391,7 @@ html.reveal-on [data-reveal].reveal-static {
   100% { opacity: 1;    filter: blur(0);     transform: translateY(0); }
 }
 @keyframes prt-reveal-body {
-  0%   { opacity: 0.18; filter: blur(2px);   transform: translateY(7px); }
+  0%   { opacity: 0;    filter: blur(2px);   transform: translateY(7px); }
   8%   { opacity: 0.20; filter: blur(2px);   transform: translateY(6.5px); }
   18%  { opacity: 0.26; filter: blur(1.6px); transform: translateY(6px); }
   30%  { opacity: 0.34; filter: blur(1.4px); transform: translateY(5px); }
@@ -399,14 +401,14 @@ html.reveal-on [data-reveal].reveal-static {
   100% { opacity: 1;    filter: blur(0);     transform: translateY(0); }
 }
 @keyframes prt-reveal-label {
-  0%   { opacity: 0.10; transform: translateY(3px); }
+  0%   { opacity: 0;    transform: translateY(3px); }
   20%  { opacity: 0.22; transform: translateY(2.5px); }
   45%  { opacity: 0.45; transform: translateY(1.5px); }
   70%  { opacity: 0.72; transform: translateY(0.5px); }
   100% { opacity: 1;    transform: translateY(0); }
 }
 @keyframes prt-reveal-ui {
-  0%   { opacity: 0.08; transform: translateY(6px); }
+  0%   { opacity: 0;    transform: translateY(6px); }
   18%  { opacity: 0.18; transform: translateY(5px); }
   36%  { opacity: 0.34; transform: translateY(3.5px); }
   58%  { opacity: 0.54; transform: translateY(2px); }
