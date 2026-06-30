@@ -22,11 +22,11 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     diagramReplay: "다시 보기",
-    legendReference: "기준 위치",
-    legendMaterial: "소재 위치 편차",
+    legendReference: "기준 형상",
+    legendMaterial: "소재 변형 형상",
     legendAligned: "정렬 완료",
-    flowSteps: ["소재 변형", "위치 편차", "Vision 감지", "정렬 보정", "안정적인 노광 정렬"],
-    diagramNote: "개념 다이어그램 — 실제 정렬 편차는 도형으로 추상화하여 표현했습니다.",
+    flowSteps: ["소재 변형", "정렬 편차", "Vision 감지", "보정", "안정적인 노광 정렬"],
+    diagramNote: "개념 다이어그램 — 변형된 소재 형상을 단계적으로 보정하여 기준 노광 형상에 가깝게 수렴시키는 과정을 추상화한 것입니다.",
 
     cardsLabel: "Core Alignment Engineering",
     cards: [
@@ -82,11 +82,11 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     diagramReplay: "Replay",
-    legendReference: "Reference position",
-    legendMaterial: "Material offset",
-    legendAligned: "Aligned position",
-    flowSteps: ["Material variation", "Position offset", "Vision detection", "Alignment correction", "Stable exposure alignment"],
-    diagramNote: "Concept diagram — alignment offset is shown abstractly as shapes.",
+    legendReference: "Reference geometry",
+    legendMaterial: "Distorted material",
+    legendAligned: "Aligned geometry",
+    flowSteps: ["Material variation", "Alignment offset", "Vision detection", "Correction", "Stable exposure alignment"],
+    diagramNote: "Concept diagram — the distorted substrate geometry is corrected step by step until it converges closely to the reference exposure geometry (abstract, not actual values).",
 
     cardsLabel: "Core Alignment Engineering",
     cards: [
@@ -142,11 +142,11 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     diagramReplay: "重播",
-    legendReference: "基准位置",
-    legendMaterial: "材料位置偏差",
+    legendReference: "基准形状",
+    legendMaterial: "材料变形形状",
     legendAligned: "对准完成",
-    flowSteps: ["材料变形", "位置偏差", "Vision 检测", "对准补正", "稳定的曝光对准"],
-    diagramNote: "概念示意图 — 对准偏差以抽象图形表示。",
+    flowSteps: ["材料变形", "对准偏差", "Vision 检测", "补正", "稳定的曝光对准"],
+    diagramNote: "概念示意图 — 变形的材料形状经过逐步补正，最终接近并收敛于曝光基准形状（抽象表示，非实际数值）。",
 
     cardsLabel: "Core Alignment Engineering",
     cards: [
@@ -217,8 +217,8 @@ function AlignmentCorrectionDiagram({
   note: string
 }) {
   const BLUE = "#1976D2"
+  const PURPLE = "#a855f7"
   const SLATE = "#64748b"
-  const RED = "#ef4444"
   const W = 560
   const H = 290
   const SW = 188
@@ -227,9 +227,66 @@ function AlignmentCorrectionDiagram({
   const CY = H / 2
   const SX = CX - SW / 2
   const SY = CY - SH / 2
-  const OFFSET = { x: 30, y: -18 }
-  // Material enters from slightly above its resting offset, then settles.
-  const ENTER = { x: OFFSET.x, y: OFFSET.y - 16 }
+
+  // Reference geometry (fixed exposure shape, blue) and the distorted material
+  // shape (purple). Distortion is per-corner (a skewed quadrilateral), so the
+  // material is NOT a translated rectangle — during correction it converges,
+  // vertex by vertex, onto the reference shape. Abstract concept only: no real
+  // geometry, coordinates, deviation/correction values, or mechanism.
+  const refPts: [number, number][] = [
+    [SX, SY],
+    [SX + SW, SY],
+    [SX + SW, SY + SH],
+    [SX, SY + SH],
+  ]
+  // 8-point outlines (4 corners + 4 edge midpoints, clockwise from TL). The
+  // reference is the true rectangle. The distorted material is a CONTRACTED
+  // version of it — every point sits INSIDE the reference and the edge midpoints
+  // are pulled in further, so the edges bow inward (concave). This reads as
+  // "material that shrank / contracted, ending up smaller than the reference",
+  // NOT a rotated or tilted shape. Some regions contract more than others
+  // (uneven), but it stays coherent. Abstract concept only — no real values.
+  const refOutline: [number, number][] = [
+    [SX, SY],
+    [SX + SW / 2, SY],
+    [SX + SW, SY],
+    [SX + SW, SY + SH / 2],
+    [SX + SW, SY + SH],
+    [SX + SW / 2, SY + SH],
+    [SX, SY + SH],
+    [SX, SY + SH / 2],
+  ]
+  const distOutline: [number, number][] = [
+    [SX + 20, SY + 16], // TL corner — contracted inward
+    [SX + SW / 2 + 2, SY + 22], // top edge mid — bowed down (inward)
+    [SX + SW - 16, SY + 14], // TR corner — contracted inward
+    [SX + SW - 24, SY + SH / 2 + 2], // right edge mid — bowed left (inward, strong)
+    [SX + SW - 18, SY + SH - 16], // BR corner — contracted inward
+    [SX + SW / 2 + 1, SY + SH - 18], // bottom edge mid — bowed up (inward)
+    [SX + 18, SY + SH - 14], // BL corner — contracted inward
+    [SX + 22, SY + SH / 2 - 2], // left edge mid — bowed right (inward)
+  ]
+  // The 4 corner points within the 8-point outline (for the offset guides).
+  const distCorners: [number, number][] = [distOutline[0], distOutline[2], distOutline[4], distOutline[6]]
+  // Entrance starts a touch more contracted, then settles to the distorted rest.
+  const enterPts = distOutline.map(([x, y]) => [x, y + 6]) as [number, number][]
+  const toStr = (a: [number, number][]) => a.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ")
+  // A partially-relaxed shape: each point spreads its OWN fraction outward from
+  // the contracted outline toward the reference, so edges/corners "unfold" at
+  // slightly different rates (relaxation feel), not a uniform scale-up or a
+  // rotation — the material surface spreads back toward the reference outline.
+  const shapeAt = (f: number[]) =>
+    distOutline.map(([dx, dy], i) => [dx + (refOutline[i][0] - dx) * f[i], dy + (refOutline[i][1] - dy) * f[i]]) as [number, number][]
+  // Stepwise relaxation with ROUGHLY EVEN increments (no big-first / tiny-last):
+  // BASE spreads ~0.14 per step across 7 steps, so each step unfolds a similar
+  // amount. LEAD gives a small per-point lead/lag so edges/corners relax at
+  // different rates. Final ~0.965 — very close to the reference, not a 0-error snap.
+  const BASE = [0.15, 0.29, 0.43, 0.57, 0.71, 0.85, 0.965]
+  const LEAD = [0.05, -0.04, 0.05, -0.05, 0.04, -0.04, 0.05, -0.03]
+  const STEP_FRACS: number[][] = BASE.map((b) =>
+    LEAD.map((l) => Math.max(0, Math.min(0.985, b + l * (1 - b)))),
+  )
+  const finalPts = shapeAt(STEP_FRACS[STEP_FRACS.length - 1])
 
   const [phase, setPhase] = useState(0)
   const [entered, setEntered] = useState(false)
@@ -238,21 +295,22 @@ function AlignmentCorrectionDiagram({
   const [scanKey, setScanKey] = useState(0)
   const [markers, setMarkers] = useState(false)
   const [markerKey, setMarkerKey] = useState(0)
-  const [correcting, setCorrecting] = useState(false)
   const [aligned, setAligned] = useState(false)
-  const [tf, setTf] = useState(`translate(${ENTER.x} ${ENTER.y})`)
+  const [pts, setPts] = useState(toStr(distOutline))
+  const [driftTf, setDriftTf] = useState("translate(0 0)")
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
   const raf = useRef(0)
   const driftRaf = useRef(0)
   const driftOn = useRef(false)
-  const pos = useRef({ ...ENTER })
+  const ptsRef = useRef<[number, number][]>(distOutline.map((p) => [...p]) as [number, number][])
   const rootRef = useRef<HTMLDivElement>(null)
   const started = useRef(false)
 
   const stopDrift = () => {
     driftOn.current = false
     if (driftRaf.current) cancelAnimationFrame(driftRaf.current)
+    setDriftTf("translate(0 0)")
   }
   const clearAll = () => {
     timers.current.forEach((t) => clearTimeout(t))
@@ -263,58 +321,52 @@ function AlignmentCorrectionDiagram({
   const at = (fn: () => void, ms: number) => {
     timers.current.push(setTimeout(fn, ms))
   }
-  // Smooth in-out for entrance; gentle "settle" (mild overshoot) for correction.
   const easeInOut = (p: number) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2)
-  const easeSettle = (p: number) => {
-    const c1 = 1.0
-    const c3 = c1 + 1
-    return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2)
-  }
 
-  const moveTo = (tx: number, ty: number, dur: number, easeFn: (p: number) => number = easeInOut) => {
+  // Morph the material polygon vertex-by-vertex toward a target shape — this is
+  // what turns "rectangle moving" into "distorted geometry converging".
+  const morph = (target: [number, number][], dur: number) => {
     if (raf.current) cancelAnimationFrame(raf.current)
+    const from = ptsRef.current.map((p) => [...p]) as [number, number][]
     const start = performance.now()
-    const fx = pos.current.x
-    const fy = pos.current.y
     const frame = (now: number) => {
       const p = Math.min((now - start) / dur, 1)
-      const e = easeFn(p)
-      const x = fx + (tx - fx) * e
-      const y = fy + (ty - fy) * e
-      pos.current = { x, y }
-      setTf(`translate(${x.toFixed(2)} ${y.toFixed(2)})`)
+      const e = easeInOut(p)
+      const cur = from.map(([fx, fy], i) => [
+        fx + (target[i][0] - fx) * e,
+        fy + (target[i][1] - fy) * e,
+      ]) as [number, number][]
+      ptsRef.current = cur
+      setPts(toStr(cur))
       if (p < 1) raf.current = requestAnimationFrame(frame)
     }
     raf.current = requestAnimationFrame(frame)
   }
 
-  // Subtle pre-correction drift: while offset, the material plane never sits
-  // perfectly still — a sub-pixel sine wander conveys "position not yet settled"
-  // (no shake, no distortion; abstract frame only).
+  // Subtle pre-correction drift (group translate, sub-pixel) so the distorted
+  // material never reads as a frozen picture — no shake or extra distortion.
   const startDrift = () => {
     stopDrift()
-    if (raf.current) cancelAnimationFrame(raf.current)
-    pos.current = { x: OFFSET.x, y: OFFSET.y }
     driftOn.current = true
     const t0 = performance.now()
     const loop = (now: number) => {
       if (!driftOn.current) return
       const t = (now - t0) / 1000
-      const x = OFFSET.x + Math.sin(t * 1.6) * 1.1
-      const y = OFFSET.y + Math.sin(t * 1.05 + 1) * 0.8
-      setTf(`translate(${x.toFixed(2)} ${y.toFixed(2)})`)
+      const x = Math.sin(t * 1.6) * 1.1
+      const y = Math.sin(t * 1.05 + 1) * 0.8
+      setDriftTf(`translate(${x.toFixed(2)} ${y.toFixed(2)})`)
       driftRaf.current = requestAnimationFrame(loop)
     }
     driftRaf.current = requestAnimationFrame(loop)
   }
 
   const showAligned = () => {
-    pos.current = { x: 0, y: 0 }
-    setTf("translate(0 0)")
+    ptsRef.current = finalPts.map((p) => [...p]) as [number, number][]
+    setPts(toStr(finalPts))
+    setDriftTf("translate(0 0)")
     setEntered(true)
     setGuides(false)
     setScan(false)
-    setCorrecting(false)
     setMarkers(true)
     setAligned(true)
     setPhase(steps.length - 1)
@@ -322,53 +374,63 @@ function AlignmentCorrectionDiagram({
 
   const run = () => {
     clearAll()
-    pos.current = { ...ENTER }
-    setTf(`translate(${ENTER.x} ${ENTER.y})`)
+    ptsRef.current = enterPts.map((p) => [...p]) as [number, number][]
+    setPts(toStr(enterPts))
+    setDriftTf("translate(0 0)")
     setEntered(false)
     setGuides(false)
     setScan(false)
     setMarkers(false)
-    setCorrecting(false)
     setAligned(false)
     setPhase(0)
-    // 1 — Material variation: material plane fades in, settles slightly offset,
-    //     then keeps a sub-pixel drift so it never reads as a frozen frame.
+    // 1 — Material variation: contracted material fades in and settles, clearly
+    //     shrunk inward relative to the reference shape.
     at(() => {
       setEntered(true)
-      moveTo(OFFSET.x, OFFSET.y, 760)
+      morph(distOutline, 780)
     }, 60)
-    at(() => startDrift(), 900)
-    // 2 — Position offset: offset guide connectors reveal the displacement.
+    at(() => startDrift(), 850)
+    // 2 — Alignment offset: guides reveal the per-corner deviation (distortion).
     at(() => {
       setPhase(1)
       setGuides(true)
-    }, 1450)
-    // 3 — Vision detection: fine optical scan sweeps the reference plane.
+    }, 1250)
+    // 3 — Vision detection: SHORT — just enough to read; correction is the focus.
     at(() => {
       setPhase(2)
       setScanKey((k) => k + 1)
       setScan(true)
-    }, 2800)
-    // detection complete — reference marks settle in with a brief pulse.
+    }, 2200)
     at(() => {
       setScan(false)
       setMarkers(true)
       setMarkerKey((k) => k + 1)
-    }, 4500)
-    // 4 — Alignment correction: drift stops, material eases on and settles.
+    }, 3250)
+    // 4 — Correction: STEPWISE relaxation (the main act). Seven small, roughly
+    //     EQUAL steps — each a short ease + brief pause — so the contracted shape
+    //     spreads outward steadily from start to finish (no "big first, tiny
+    //     last"). Reads as "the surface unfolds a little at a time", not a snap.
     at(() => {
       setPhase(3)
       setGuides(false)
       stopDrift()
-      setCorrecting(true)
-      moveTo(0, 0, 1650, easeSettle)
-    }, 4950)
-    // 5 — Stable exposure alignment: frames lock, blue outline stabilizes.
-    at(() => {
-      setPhase(4)
-      setCorrecting(false)
-      setAligned(true)
-    }, 6700)
+      const stepDur = 280
+      const pause = 160
+      let i = 0
+      const nextStep = () => {
+        if (i >= STEP_FRACS.length) {
+          // 5 — Stable exposure alignment: outline sits almost exactly on the
+          //     reference, with only a tiny residual (not a mechanical snap).
+          setPhase(4)
+          setAligned(true)
+          return
+        }
+        morph(shapeAt(STEP_FRACS[i]), stepDur)
+        i += 1
+        timers.current.push(setTimeout(nextStep, stepDur + pause))
+      }
+      nextStep()
+    }, 4050)
   }
 
   useEffect(() => {
@@ -438,16 +500,13 @@ function AlignmentCorrectionDiagram({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const dotColor = aligned ? BLUE : phase >= 2 ? BLUE : entered ? RED : SLATE
+  const dotColor = aligned ? BLUE : phase >= 2 ? BLUE : entered ? PURPLE : SLATE
   const corners: [number, number][] = [
     [SX, SY],
     [SX + SW, SY],
     [SX, SY + SH],
     [SX + SW, SY + SH],
   ]
-  // Material-plane centre at its resting offset (for the correction direction cue).
-  const mcx = CX + OFFSET.x
-  const mcy = CY + OFFSET.y
 
   return (
     <div ref={rootRef} className="relative overflow-hidden border border-slate-800 bg-slate-950/60">
@@ -480,20 +539,17 @@ function AlignmentCorrectionDiagram({
             <stop offset="50%" stopColor="rgba(25,118,210,0.22)" />
             <stop offset="100%" stopColor="rgba(25,118,210,0)" />
           </linearGradient>
-          <linearGradient id="eng-glass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(25,118,210,0.18)" />
-            <stop offset="100%" stopColor="rgba(25,118,210,0.05)" />
+          <linearGradient id="eng-ref" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(25,118,210,0.11)" />
+            <stop offset="100%" stopColor="rgba(25,118,210,0.03)" />
           </linearGradient>
-          <linearGradient id="eng-glass-off" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(239,68,68,0.10)" />
-            <stop offset="100%" stopColor="rgba(239,68,68,0.02)" />
+          <linearGradient id="eng-mat" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(168,85,247,0.17)" />
+            <stop offset="100%" stopColor="rgba(168,85,247,0.05)" />
           </linearGradient>
           <filter id="eng-depth" x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow dx="0" dy="5" stdDeviation="7" floodColor="rgba(2,6,23,0.6)" />
           </filter>
-          <marker id="eng-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 1 L8 5 L0 9 z" fill={BLUE} />
-          </marker>
         </defs>
 
         {/* matte base + blueprint grid + soft top sheen */}
@@ -507,27 +563,39 @@ function AlignmentCorrectionDiagram({
         {/* ── Pseudo-3D depth: a faint stacked plane behind the reference ── */}
         <rect x={SX + 8} y={SY + 11} width={SW} height={SH} fill="rgba(148,163,184,0.022)" stroke="rgba(148,163,184,0.10)" strokeWidth="1" />
 
-        {/* ── Reference frame (fixed): layered reference plane ── */}
-        <rect x={SX} y={SY} width={SW} height={SH} fill="rgba(148,163,184,0.05)" stroke={SLATE} strokeWidth="1.4" />
-        <rect x={SX + 9} y={SY + 9} width={SW - 18} height={SH - 18} fill="none" stroke="rgba(148,163,184,0.16)" strokeWidth="0.7" />
+        {/* ── Reference geometry (fixed): blue exposure reference rectangle ── */}
+        <rect x={SX} y={SY} width={SW} height={SH} fill="url(#eng-ref)" stroke={BLUE} strokeWidth="1.5" />
+        <rect x={SX + 9} y={SY + 9} width={SW - 18} height={SH - 18} fill="none" stroke="rgba(25,118,210,0.18)" strokeWidth="0.7" />
+        {/* reference corner ticks (subtle, always present — anchors the reference shape) */}
+        {corners.map(([px, py], i) => {
+          const dx = px === SX ? 1 : -1
+          const dy = py === SY ? 1 : -1
+          return (
+            <g key={`refc-${i}`} stroke={BLUE} strokeWidth="1.3" opacity="0.85">
+              <line x1={px} y1={py} x2={px + 12 * dx} y2={py} />
+              <line x1={px} y1={py} x2={px} y2={py + 12 * dy} />
+            </g>
+          )
+        })}
 
-        {/* ── Position offset: thin dashed connectors from each reference
-               corner to the offset material corner (displacement, no numbers) ── */}
+        {/* ── Alignment offset: dashed connectors from each reference corner to
+               the corresponding distorted material vertex — visualizes the
+               per-corner deviation (shape distortion), no numbers/coordinates ── */}
         <g style={{ opacity: guides ? 1 : 0, transition: "opacity 0.5s ease" }}>
-          {corners.map(([px, py], i) => (
+          {refPts.map(([px, py], i) => (
             <g key={`gd-${i}`}>
               <line
                 x1={px}
                 y1={py}
-                x2={px + OFFSET.x}
-                y2={py + OFFSET.y}
-                stroke="rgba(239,68,68,0.5)"
+                x2={distCorners[i][0]}
+                y2={distCorners[i][1]}
+                stroke="rgba(168,85,247,0.5)"
                 strokeWidth="0.8"
                 strokeDasharray="3 3"
               />
-              <circle cx={px + OFFSET.x} cy={py + OFFSET.y} r="1.6" fill="rgba(239,68,68,0.7)">
+              <circle cx={distCorners[i][0]} cy={distCorners[i][1]} r="1.7" fill="rgba(168,85,247,0.75)">
                 {/* very subtle breathing so the offset state is never a frozen picture */}
-                <animate attributeName="opacity" values="0.75;0.4;0.75" dur="2.4s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.8;0.45;0.8" dur="2.4s" repeatCount="indefinite" />
               </circle>
             </g>
           ))}
@@ -536,40 +604,27 @@ function AlignmentCorrectionDiagram({
         {/* ── Vision detection — fine optical scan + brief corner detection pulses ── */}
         {scan && (
           <g key={scanKey}>
-            {/* soft scan band */}
+            {/* soft scan band — short sweep */}
             <rect x={SX} y={SY - 10} width={SW} height="20" fill="url(#eng-scan)" opacity="0">
-              <animate attributeName="y" from={SY - 10} to={SY + SH - 10} dur="1.7s" fill="freeze" />
-              <animate attributeName="opacity" values="0;0.88;0.88;0" keyTimes="0;0.06;0.9;1" dur="1.7s" fill="freeze" />
+              <animate attributeName="y" from={SY - 10} to={SY + SH - 10} dur="1s" fill="freeze" />
+              <animate attributeName="opacity" values="0;0.88;0.88;0" keyTimes="0;0.1;0.85;1" dur="1s" fill="freeze" />
             </rect>
             {/* precise scan line — fine, not bright */}
             <rect x={SX} y={SY} width={SW} height="1.2" fill={BLUE} opacity="0">
-              <animate attributeName="y" from={SY} to={SY + SH} dur="1.7s" fill="freeze" />
-              <animate attributeName="opacity" values="0;0.82;0.82;0" keyTimes="0;0.06;0.9;1" dur="1.7s" fill="freeze" />
+              <animate attributeName="y" from={SY} to={SY + SH} dur="1s" fill="freeze" />
+              <animate attributeName="opacity" values="0;0.82;0.82;0" keyTimes="0;0.1;0.85;1" dur="1s" fill="freeze" />
             </rect>
             {/* corner detection pulses — staggered as the line sweeps past (2–4) */}
             {corners.map(([px, py], i) => (
               <circle key={`scan-pulse-${i}`} cx={px} cy={py} r="2" fill="none" stroke={BLUE} strokeWidth="1" opacity="0">
-                <animate attributeName="r" values="2;8" dur="0.8s" begin={`${0.25 + i * 0.34}s`} fill="freeze" />
-                <animate attributeName="opacity" values="0;0.58;0" dur="0.8s" begin={`${0.25 + i * 0.34}s`} fill="freeze" />
+                <animate attributeName="r" values="2;8" dur="0.6s" begin={`${0.1 + i * 0.18}s`} fill="freeze" />
+                <animate attributeName="opacity" values="0;0.58;0" dur="0.6s" begin={`${0.1 + i * 0.18}s`} fill="freeze" />
               </circle>
             ))}
           </g>
         )}
 
-        {/* ── Reference corner marks (appear after detection) ── */}
-        {markers &&
-          corners.map(([px, py], i) => {
-            const dx = px === SX ? 1 : -1
-            const dy = py === SY ? 1 : -1
-            return (
-              <g key={`ref-${i}`} stroke="rgba(148,163,184,0.55)" strokeWidth="1" style={{ transition: "opacity 0.5s ease" }}>
-                <line x1={px} y1={py} x2={px + 11 * dx} y2={py} />
-                <line x1={px} y1={py} x2={px} y2={py + 11 * dy} />
-              </g>
-            )
-          })}
-
-        {/* ── Detection pulse — brief, subtle ring at each mark ── */}
+        {/* ── Detection pulse — brief, subtle ring at each reference corner ── */}
         {markers &&
           corners.map(([px, py], i) => (
             <circle key={`pulse-${markerKey}-${i}`} cx={px} cy={py} r="2" fill="none" stroke={BLUE} strokeWidth="1" opacity="0">
@@ -578,72 +633,39 @@ function AlignmentCorrectionDiagram({
             </circle>
           ))}
 
-        {/* ── Material plane: offset glass ghost → corrected onto reference.
-               Opacity wrapper handles the soft entrance; depth filter makes it
-               read as a sheet floating above the reference plane. ── */}
+        {/* ── Distorted material geometry (purple) → converges to the reference
+               shape during correction. Opacity wrapper = soft entrance; group
+               translate = sub-pixel pre-correction drift; depth filter = a sheet
+               floating above the reference. The polygon points are morphed in JS
+               (distorted quadrilateral → reference rectangle). ── */}
         <g style={{ opacity: entered ? 1 : 0, transition: "opacity 0.55s ease" }}>
-          <g transform={tf} filter="url(#eng-depth)">
-            <rect
-              x={SX}
-              y={SY}
-              width={SW}
-              height={SH}
-              fill={aligned ? "url(#eng-glass)" : "url(#eng-glass-off)"}
-              stroke={aligned ? BLUE : RED}
-              strokeWidth={aligned ? 1.8 : 1.2}
+          <g transform={driftTf} filter="url(#eng-depth)">
+            <polygon
+              points={pts}
+              fill={aligned ? "url(#eng-ref)" : "url(#eng-mat)"}
+              stroke={PURPLE}
+              strokeWidth={aligned ? 1.8 : 1.3}
               strokeDasharray={aligned ? "0" : "6 5"}
-              opacity={aligned ? 1 : 0.7}
-              style={{ transition: "stroke 0.5s ease, fill 0.5s ease, opacity 0.5s ease, stroke-width 0.5s ease" }}
+              strokeLinejoin="round"
+              opacity={aligned ? 1 : 0.85}
+              style={{ transition: "stroke-width 0.5s ease, fill 0.5s ease, opacity 0.5s ease, stroke-dasharray 0.5s ease" }}
             />
-            {aligned && (
-              <rect x={SX + 1.5} y={SY + 1.5} width={SW - 3} height={SH - 3} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="0.8" />
-            )}
           </g>
         </g>
-
-        {/* ── Correction direction cue — thin arrow toward the reference,
-               fading as the material settles (not a mechanism, just direction) ── */}
-        {correcting && (
-          <line
-            x1={mcx - OFFSET.x * 0.18}
-            y1={mcy - OFFSET.y * 0.18}
-            x2={CX + OFFSET.x * 0.18}
-            y2={CY + OFFSET.y * 0.18}
-            stroke={BLUE}
-            strokeWidth="1.4"
-            markerEnd="url(#eng-arrow)"
-            opacity="0"
-          >
-            <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.15;0.65;1" dur="1.6s" fill="freeze" />
-          </line>
-        )}
-
-        {/* ── Aligned accents — blue corner ticks (premium, no glow) ── */}
-        {aligned &&
-          corners.map(([px, py], i) => {
-            const dx = px === SX ? 1 : -1
-            const dy = py === SY ? 1 : -1
-            return (
-              <g key={`al-${i}`} stroke={BLUE} strokeWidth="1.6">
-                <line x1={px} y1={py} x2={px + 13 * dx} y2={py} />
-                <line x1={px} y1={py} x2={px} y2={py + 13 * dy} />
-              </g>
-            )
-          })}
       </svg>
 
       {/* legend + subtle replay */}
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-800/80 bg-slate-900/30 px-5 py-3">
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: SLATE }} />
+          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.10)" }} />
           {legendReference}
         </span>
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-2.5 w-3.5 border border-dashed" style={{ borderColor: "rgba(239,68,68,0.7)" }} />
+          <span className="inline-block h-2.5 w-3.5 border border-dashed" style={{ borderColor: PURPLE }} />
           {legendMaterial}
         </span>
         <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.16)" }} />
+          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: PURPLE, backgroundColor: "rgba(25,118,210,0.16)" }} />
           {legendAligned}
         </span>
         <button
