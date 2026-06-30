@@ -141,7 +141,8 @@ const translations = {
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
-    modulesDesc: "메인 장비와 연동되는 라인 구성 모듈은 Web Width, 소재, 공정 조건에 따라 맞춤 설계됩니다.",
+    modulesDesc: "라인 구성 모듈은 Web Width, 소재 특성, 공정 조건에 따라 메인 장비와 연동되도록 구성됩니다.",
+    moduleFlow: ["소재 공급", "표면 / 필름 준비", "클리닝", "Exposure / Lamination"],
     configCta: "라인 조건에 맞는 장비 구성이 필요하신가요?",
     configNote: "Web width · 소재 사양 · 처리 속도 · 자동화 수준 · 기존 라인 조건을 기준으로 검토합니다.",
     contactCta: "장비 상담 문의",
@@ -203,9 +204,9 @@ const translations = {
       },
     ],
     modules: [
-      { title: "Unwinder / Rewinder", desc: "소재 공급과 권취를 위한 정밀 릴 시스템입니다. 안정적인 장력 제어로 연속 공정을 지원합니다." },
-      { title: "Pre-Heater", desc: "Lamination 전 소재 조건을 안정화하기 위한 예열 모듈입니다." },
-      { title: "Cleaning Unit", desc: "Lamination 및 Exposure 전 표면 이물 제거를 위한 웹 클리닝 모듈입니다." },
+      { title: "Unwinder / Rewinder", desc: "소재 공급과 권취를 위한 전·후단 모듈입니다. 안정적인 장력 제어와 연속 공정 운용을 지원합니다." },
+      { title: "Pre-Heater", desc: "Lamination 전 소재 조건을 안정화하기 위한 예열 모듈입니다. 소재와 공정 조건에 따라 온도 구성이 조정됩니다." },
+      { title: "Cleaning Unit", desc: "Lamination 및 Exposure 전 표면 이물 제거를 위한 클리닝 모듈입니다. 공정 안정성과 품질 편차 저감을 지원합니다." },
     ],
     whyLabel: "WHY PRT?",
     whyPoints: [
@@ -234,7 +235,8 @@ const translations = {
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
-    modulesDesc: "Line configuration systems integrated with main production equipment. Engineered to match web width, material, and process requirements.",
+    modulesDesc: "Line configuration modules are configured to work with the main equipment according to web width, material characteristics, and process conditions.",
+    moduleFlow: ["Material Feed", "Surface / Film Preparation", "Cleaning", "Exposure / Lamination"],
     configCta: "Need to configure equipment for your line conditions?",
     configNote: "We review web width, material specifications, throughput, automation level, and existing line conditions.",
     contactCta: "Contact Sales",
@@ -296,9 +298,9 @@ const translations = {
       },
     ],
     modules: [
-      { title: "Unwinder / Rewinder", desc: "High-precision reel system for material supply and take-up with stable tension control." },
-      { title: "Pre-Heater", desc: "Material preheating system for optimal lamination process conditions." },
-      { title: "Cleaning Unit", desc: "Web cleaning system for surface particle removal before lamination and exposure." },
+      { title: "Unwinder / Rewinder", desc: "Front and rear modules for material feeding and rewinding. They support stable tension control and continuous process operation." },
+      { title: "Pre-Heater", desc: "Pre-heating module for stabilizing material conditions before lamination. Temperature configuration is adjusted according to material and process conditions." },
+      { title: "Cleaning Unit", desc: "Cleaning module for removing surface particles before lamination and exposure. It supports process stability and reduction of quality variation." },
     ],
     whyLabel: "WHY PRT?",
     whyPoints: [
@@ -327,7 +329,8 @@ const translations = {
     laminatorSection: "Laminator",
     exposureSection: "Exposure System",
     modulesSection: "Line Configuration Modules",
-    modulesDesc: "与主生产设备集成的生产线配置系统。根据 Web Width、材料和工艺要求进行设计。",
+    modulesDesc: "线配置模块根据 Web Width、材料特性与工艺条件，配置为与主设备协同运行。",
+    moduleFlow: ["材料供给", "表面 / 薄膜准备", "清洁", "Exposure / Lamination"],
     configCta: "需要为您的产线配置设备吗？",
     configNote: "我们依据 web width、材料规格、处理速度、自动化水平与现有产线条件进行评估。",
     contactCta: "Contact Sales",
@@ -386,9 +389,9 @@ const translations = {
       },
     ],
     modules: [
-      { title: "Unwinder / Rewinder", desc: "具有稳定张力控制的高精度卷轴系统，用于材料供应和收取。" },
-      { title: "Pre-Heater", desc: "用于最佳 Lamination 工艺条件的材料预热系统。" },
-      { title: "Cleaning Unit", desc: "Lamination 与 Exposure 前表面颗粒去除的卷材清洁系统。" },
+      { title: "Unwinder / Rewinder", desc: "用于材料供给与收卷的前后端模块。支持稳定的张力控制与连续工艺运行。" },
+      { title: "Pre-Heater", desc: "用于在 Lamination 前稳定材料状态的预热模块。根据材料与工艺条件调整温度配置。" },
+      { title: "Cleaning Unit", desc: "用于在 Lamination 与 Exposure 前去除表面颗粒的清洁模块。支持工艺稳定性并降低质量偏差。" },
     ],
     whyLabel: "WHY PRT?",
     whyPoints: [
@@ -695,12 +698,24 @@ function LaminatorCard({
   )
 }
 
-/* Compact module entry — LIGHT (not a full equipment model). */
-function ModuleCard({ title, desc }: { title: string; desc: string }) {
+/* Compact module entry — LIGHT (not a full equipment model). Reads as a
+   technical module card: small index + thin PRT-Blue accent line, clear title,
+   two-line body. Subtle hover (border/background only — no shadow/scale/glow). */
+function ModuleCard({ index, title, desc }: { index: number; title: string; desc: string }) {
   return (
-    <div id={`module-${slug(title)}`} data-anchor className="border border-neutral-200 bg-white p-5">
-      <h4 className="mb-2 text-sm font-semibold text-neutral-900">{title}</h4>
-      <p className="text-xs leading-relaxed text-neutral-600">{desc}</p>
+    <div
+      id={`module-${slug(title)}`}
+      data-anchor
+      className="group flex h-full flex-col border border-neutral-200 bg-white p-6 transition-colors duration-200 hover:border-neutral-300 hover:bg-neutral-50/70"
+    >
+      <div className="mb-4 flex items-center gap-3">
+        <span className="font-mono text-[11px] font-bold tracking-[0.2em]" style={{ color: "#1976D2" }}>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="h-px flex-1" style={{ backgroundColor: "rgba(25,118,210,0.22)" }} />
+      </div>
+      <h4 className="mb-2 text-base font-semibold tracking-tight text-neutral-900">{title}</h4>
+      <p className="text-[13px] leading-relaxed text-neutral-600">{desc}</p>
     </div>
   )
 }
@@ -796,11 +811,30 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
           {/* Active category content */}
           <section id={active.id} data-anchor className="mb-20">
             {active.group === "modules" ? (
-              <div className="pt-8">
-                <p className="mb-8 max-w-2xl text-sm text-neutral-600">{t.modulesDesc}</p>
-                <div className="grid gap-4 sm:grid-cols-3">
+              <div className="pt-8 pb-6">
+                <p className="mb-8 max-w-2xl text-sm leading-relaxed text-neutral-600">{t.modulesDesc}</p>
+
+                {/* Process flow — thin, restrained chips with subtle PRT-Blue
+                    connectors. Conveys that these modules sit around the main
+                    Exposure / Lamination equipment. Wraps cleanly on mobile. */}
+                <div className="mb-10 flex flex-wrap items-center gap-x-1.5 gap-y-2.5">
+                  {t.moduleFlow.map((step, i) => (
+                    <span key={i} className="flex items-center gap-1.5">
+                      <span className="rounded-[3px] border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-[12px] font-medium text-neutral-700">
+                        {step}
+                      </span>
+                      {i < t.moduleFlow.length - 1 && (
+                        <span aria-hidden="true" className="px-0.5 text-sm" style={{ color: "rgba(25,118,210,0.55)" }}>
+                          →
+                        </span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-3">
                   {t.modules.map((m, i) => (
-                    <ModuleCard key={i} title={m.title} desc={m.desc} />
+                    <ModuleCard key={i} index={i} title={m.title} desc={m.desc} />
                   ))}
                 </div>
               </div>
