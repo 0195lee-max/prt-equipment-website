@@ -240,12 +240,13 @@ function AlignmentCorrectionDiagram({
     [SX, SY + SH],
   ]
   // 8-point outlines (4 corners + 4 edge midpoints, clockwise from TL). The
-  // reference is the true rectangle. The distorted material is a CONTRACTED
-  // version of it — every point sits INSIDE the reference and the edge midpoints
-  // are pulled in further, so the edges bow inward (concave). This reads as
-  // "material that shrank / contracted, ending up smaller than the reference",
-  // NOT a rotated or tilted shape. Some regions contract more than others
-  // (uneven), but it stays coherent. Abstract concept only — no real values.
+  // reference is the true rectangle. The distorted material reads as a TRAPEZOID
+  // (a contracted/warped sheet): top and bottom edges stay roughly parallel while
+  // the left/right legs splay at slightly different slopes, so it's clearly a
+  // four-sided trapezoid — not a rhombus, parallelogram, or random polygon. The
+  // edge midpoints are placed exactly on each straight edge (so the four sides
+  // stay straight). It overlaps the reference heavily with some corners poking
+  // OUT (top, left, bottom-right) and one pulled IN (top-right). Abstract only.
   const refOutline: [number, number][] = [
     [SX, SY],
     [SX + SW / 2, SY],
@@ -256,36 +257,49 @@ function AlignmentCorrectionDiagram({
     [SX, SY + SH],
     [SX, SY + SH / 2],
   ]
+  // Trapezoid corners (TL, TR, BR, BL) — wider at the bottom, slightly tilted.
+  const tzTL: [number, number] = [SX + 24, SY - 6]
+  const tzTR: [number, number] = [SX + SW - 24, SY + 2]
+  const tzBR: [number, number] = [SX + SW + 18, SY + SH + 4]
+  const tzBL: [number, number] = [SX - 14, SY + SH - 4]
+  const mid = (a: [number, number], b: [number, number]): [number, number] => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
+  // Corners + true edge midpoints → the four sides render as straight lines.
   const distOutline: [number, number][] = [
-    [SX + 20, SY + 16], // TL corner — contracted inward
-    [SX + SW / 2 + 2, SY + 22], // top edge mid — bowed down (inward)
-    [SX + SW - 16, SY + 14], // TR corner — contracted inward
-    [SX + SW - 24, SY + SH / 2 + 2], // right edge mid — bowed left (inward, strong)
-    [SX + SW - 18, SY + SH - 16], // BR corner — contracted inward
-    [SX + SW / 2 + 1, SY + SH - 18], // bottom edge mid — bowed up (inward)
-    [SX + 18, SY + SH - 14], // BL corner — contracted inward
-    [SX + 22, SY + SH / 2 - 2], // left edge mid — bowed right (inward)
+    tzTL,
+    mid(tzTL, tzTR),
+    tzTR,
+    mid(tzTR, tzBR),
+    tzBR,
+    mid(tzBR, tzBL),
+    tzBL,
+    mid(tzBL, tzTL),
   ]
   // The 4 corner points within the 8-point outline (for the offset guides).
-  const distCorners: [number, number][] = [distOutline[0], distOutline[2], distOutline[4], distOutline[6]]
-  // Entrance starts a touch more contracted, then settles to the distorted rest.
-  const enterPts = distOutline.map(([x, y]) => [x, y + 6]) as [number, number][]
+  const distCorners: [number, number][] = [tzTL, tzTR, tzBR, tzBL]
+  // Entrance starts a touch higher, then settles to the distorted rest.
+  const enterPts = distOutline.map(([x, y]) => [x, y - 8]) as [number, number][]
   const toStr = (a: [number, number][]) => a.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ")
-  // A partially-relaxed shape: each point spreads its OWN fraction outward from
-  // the contracted outline toward the reference, so edges/corners "unfold" at
-  // slightly different rates (relaxation feel), not a uniform scale-up or a
-  // rotation — the material surface spreads back toward the reference outline.
+  // A partially-corrected shape: each point moves its OWN fraction toward the
+  // reference. By advancing ONE corner's fraction per step (below) the correction
+  // reads as "this corner gets pressed into place, then the next", not a uniform
+  // shrink/scale or a rotation.
   const shapeAt = (f: number[]) =>
     distOutline.map(([dx, dy], i) => [dx + (refOutline[i][0] - dx) * f[i], dy + (refOutline[i][1] - dy) * f[i]]) as [number, number][]
-  // Stepwise relaxation with ROUGHLY EVEN increments (no big-first / tiny-last):
-  // BASE spreads ~0.14 per step across 7 steps, so each step unfolds a similar
-  // amount. LEAD gives a small per-point lead/lag so edges/corners relax at
-  // different rates. Final ~0.965 — very close to the reference, not a 0-error snap.
-  const BASE = [0.15, 0.29, 0.43, 0.57, 0.71, 0.85, 0.965]
-  const LEAD = [0.05, -0.04, 0.05, -0.05, 0.04, -0.04, 0.05, -0.03]
-  const STEP_FRACS: number[][] = BASE.map((b) =>
-    LEAD.map((l) => Math.max(0, Math.min(0.985, b + l * (1 - b)))),
-  )
+  // Corner-by-corner correction. Per-step per-vertex fractions
+  // [TL, Tmid, TR, Rmid, BR, Bmid, BL, Lmid]; monotonically non-decreasing.
+  // Each early step advances mainly ONE corner (with a small nudge to its
+  // neighbouring edges): lower-left → upper-right → upper-left → lower-right,
+  // then the edges settle, then a near-aligned finish (tiny uneven residual,
+  // not a 0-error snap). Order matches the requested LL → UR → UL → LR rhythm.
+  const STEP_FRACS: number[][] = [
+    [0.1, 0.05, 0.05, 0.05, 0.05, 0.25, 0.55, 0.3], // 1 — lower-left
+    [0.18, 0.4, 0.6, 0.42, 0.1, 0.28, 0.58, 0.34], // 2 — upper-right
+    [0.62, 0.55, 0.64, 0.46, 0.2, 0.34, 0.62, 0.55], // 3 — upper-left
+    [0.66, 0.58, 0.68, 0.62, 0.64, 0.56, 0.66, 0.58], // 4 — lower-right
+    [0.78, 0.78, 0.8, 0.8, 0.78, 0.8, 0.8, 0.8], // 5 — edge settling
+    [0.88, 0.9, 0.9, 0.9, 0.88, 0.9, 0.9, 0.9], // 6 — settle further
+    [0.965, 0.97, 0.96, 0.97, 0.965, 0.97, 0.96, 0.97], // 7 — near-aligned
+  ]
   const finalPts = shapeAt(STEP_FRACS[STEP_FRACS.length - 1])
 
   const [phase, setPhase] = useState(0)
@@ -383,8 +397,8 @@ function AlignmentCorrectionDiagram({
     setMarkers(false)
     setAligned(false)
     setPhase(0)
-    // 1 — Material variation: contracted material fades in and settles, clearly
-    //     shrunk inward relative to the reference shape.
+    // 1 — Material variation: distorted material fades in and settles —
+    //     overlapping the reference but twisted unevenly (some parts out, some in).
     at(() => {
       setEntered(true)
       morph(distOutline, 780)
@@ -406,16 +420,17 @@ function AlignmentCorrectionDiagram({
       setMarkers(true)
       setMarkerKey((k) => k + 1)
     }, 3250)
-    // 4 — Correction: STEPWISE relaxation (the main act). Seven small, roughly
-    //     EQUAL steps — each a short ease + brief pause — so the contracted shape
-    //     spreads outward steadily from start to finish (no "big first, tiny
-    //     last"). Reads as "the surface unfolds a little at a time", not a snap.
+    // 4 — Correction: CORNER-BY-CORNER (the main act). Seven steps — each a short
+    //     ease + brief pause — advancing mainly one corner at a time (lower-left →
+    //     upper-right → upper-left → lower-right), then the edges settle, then a
+    //     near-aligned finish. Reads as "pressed into place a corner at a time",
+    //     not a single snap and not a whole-shape rotation/translation.
     at(() => {
       setPhase(3)
       setGuides(false)
       stopDrift()
-      const stepDur = 280
-      const pause = 160
+      const stepDur = 340
+      const pause = 180
       let i = 0
       const nextStep = () => {
         if (i >= STEP_FRACS.length) {
