@@ -31,6 +31,7 @@ const LAMINATOR_BASE = [
     ],
     materials: "C7025 / CDA194 / AL42",
     application: "Leadframe / Semiconductor Packaging / VCM Spring",
+    convenience: ["DFR Auto Tacking Unit", "DFR / Removal Roll Moving Type"],
   },
   {
     model: "PRTLA-500A-T",
@@ -57,7 +58,7 @@ const LAMINATOR_BASE = [
     type: "Roll-to-Roll Laminator",
     specs: [
       { label: "Material Width", value: "500 mm" },
-      { label: "Material Thickness", value: "0.05 ~ 0.3 mm" },
+      { label: "Material Thickness", value: "0.05 ~ 0.2 mm" },
       { label: "Laminator Roller", value: "ø80, Silicon Rubber Coating (2EA × 1Set)" },
       { label: "Heater", value: "Tube Heater (220V, 1.5kW)" },
       { label: "Temperature", value: "130°C Max" },
@@ -111,21 +112,21 @@ const LAMINATOR_BASE = [
 const LAMINATOR_DESC = {
   ko: [
     "Lead Frame 및 VCM Spring 공정용 Roll-to-Roll Laminator입니다.",
-    "FPCB 및 TSP 공정용 Roll-to-Roll Laminator입니다.",
+    "Leadframe · FPCB · TSP 공정용 Roll-to-Roll Laminator입니다.",
     "FPCB 및 플렉시블 소재 공정용 Roll-to-Roll Laminator입니다.",
     "FPCB 및 PCB 공정용 Sheet Manual Laminator입니다.",
     "FPD · 유리 · 보드 공정용 Sheet-to-Sheet Laminator입니다.",
   ],
   en: [
     "Roll-to-Roll Laminator for Lead Frame and VCM Spring applications.",
-    "Roll-to-Roll Laminator for FPCB and TSP applications.",
+    "Roll-to-Roll laminator for Leadframe, FPCB, and TSP processes.",
     "Roll-to-Roll Laminator for FPCB and flexible material applications.",
     "Sheet Manual Laminator for FPCB and PCB applications.",
     "Sheet-to-Sheet Laminator for FPD, glass, and board applications.",
   ],
   zh: [
     "用于 Lead Frame 与 VCM Spring 应用的 Roll-to-Roll Laminator。",
-    "用于 FPCB 与 TSP 应用的 Roll-to-Roll Laminator。",
+    "用于 Leadframe、FPCB 与 TSP 工艺的 Roll-to-Roll Laminator。",
     "用于 FPCB 与柔性材料应用的 Roll-to-Roll Laminator。",
     "用于 FPCB 与 PCB 应用的 Sheet Manual Laminator。",
     "用于 FPD、玻璃与基板应用的 Sheet-to-Sheet Laminator。",
@@ -147,35 +148,11 @@ const translations = {
     specsLabel: "주요 사양",
     materialsLabel: "대응 소재",
     applicationLabel: "적용 공정",
+    convenienceLabel: "편의사항",
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.ko[i] })),
     exposures: [
       {
-        model: "PRTEX-380VAN-LF-LED",
-        type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: (
-          <>
-            Leadframe 패터닝 공정을 위한 Vertical{" "}
-            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 시스템입니다.
-            <br className="hidden md:block" />{" "}
-            Vision 자동 정렬과 안정적인 <span className="whitespace-nowrap">UV 노광</span>으로 대량 양산
-            라인에 대응합니다.
-          </>
-        ),
-        specs: [
-          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
-          { label: "Alignment Accuracy", value: "±5 μm" },
-          { label: "UV Source", value: "LED UV" },
-          { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
-          { label: "Web Width", value: "250–380 mm" },
-          { label: "Tact Time", value: "12 sec" },
-          { label: "Vision System", value: "8CCD Vision Alignment" },
-        ],
-        materials: "Leadframe (C7025, CDA194, AL42)",
-        application: "Leadframe RTR Exposure Process",
-      },
-      {
-        model: "PRTEX-380AN-LF-LED",
+        model: "PRTEX-350A-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
         desc: (
           <>
@@ -191,7 +168,32 @@ const translations = {
           { label: "Alignment Accuracy", value: "±5 μm" },
           { label: "UV Source", value: "LED UV" },
           { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
+          { label: "Web Width", value: "250–380 mm" },
+          { label: "Tact Time", value: "12 sec" },
+          { label: "Vision System", value: "8CCD Vision Alignment" },
+        ],
+        materials: "Leadframe (C7025, CDA194, AL42)",
+        application: "Leadframe RTR Exposure Process",
+      },
+      {
+        model: "PRTEX-350VA-LF-LED",
+        type: "Vertical Roll-to-Roll LED Exposure System",
+        desc: (
+          <>
+            Leadframe 패터닝 공정을 위한 Vertical{" "}
+            <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 시스템입니다.
+            <br className="hidden md:block" />{" "}
+            Vision 자동 정렬과 안정적인 <span className="whitespace-nowrap">UV 노광</span>으로 대량 양산
+            라인에 대응합니다.
+          </>
+        ),
+        specs: [
+          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
+          { label: "Alignment Accuracy", value: "±5 μm" },
+          { label: "UV Source", value: "LED UV" },
+          { label: "UV Wavelength", value: "365 nm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
           { label: "Web Width", value: "250–380 mm" },
           { label: "Tact Time", value: "12 sec" },
           { label: "Vision System", value: "8CCD Vision Alignment" },
@@ -239,35 +241,11 @@ const translations = {
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
     applicationLabel: "Application",
+    convenienceLabel: "Convenience Features",
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.en[i] })),
     exposures: [
       {
-        model: "PRTEX-380VAN-LF-LED",
-        type: "Vertical Roll-to-Roll LED Exposure System",
-        desc: (
-          <>
-            Vertical <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system for
-            Leadframe patterning.
-            <br className="hidden md:block" />{" "}
-            Vision auto-alignment and stable <span className="whitespace-nowrap">UV exposure</span>{" "}
-            support high-volume production lines.
-          </>
-        ),
-        specs: [
-          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
-          { label: "Alignment Accuracy", value: "±5 μm" },
-          { label: "UV Source", value: "LED UV" },
-          { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
-          { label: "Web Width", value: "250–380 mm" },
-          { label: "Tact Time", value: "12 sec" },
-          { label: "Vision System", value: "8CCD Vision Alignment" },
-        ],
-        materials: "Leadframe (C7025, CDA194, AL42)",
-        application: "Leadframe RTR Exposure Process",
-      },
-      {
-        model: "PRTEX-380AN-LF-LED",
+        model: "PRTEX-350A-LF-LED",
         type: "Horizontal Roll-to-Roll LED Exposure System",
         desc: (
           <>
@@ -283,7 +261,32 @@ const translations = {
           { label: "Alignment Accuracy", value: "±5 μm" },
           { label: "UV Source", value: "LED UV" },
           { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
+          { label: "Web Width", value: "250–380 mm" },
+          { label: "Tact Time", value: "12 sec" },
+          { label: "Vision System", value: "8CCD Vision Alignment" },
+        ],
+        materials: "Leadframe (C7025, CDA194, AL42)",
+        application: "Leadframe RTR Exposure Process",
+      },
+      {
+        model: "PRTEX-350VA-LF-LED",
+        type: "Vertical Roll-to-Roll LED Exposure System",
+        desc: (
+          <>
+            Vertical <span className="whitespace-nowrap">Roll-to-Roll</span> LED exposure system for
+            Leadframe patterning.
+            <br className="hidden md:block" />{" "}
+            Vision auto-alignment and stable <span className="whitespace-nowrap">UV exposure</span>{" "}
+            support high-volume production lines.
+          </>
+        ),
+        specs: [
+          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
+          { label: "Alignment Accuracy", value: "±5 μm" },
+          { label: "UV Source", value: "LED UV" },
+          { label: "UV Wavelength", value: "365 nm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
           { label: "Web Width", value: "250–380 mm" },
           { label: "Tact Time", value: "12 sec" },
           { label: "Vision System", value: "8CCD Vision Alignment" },
@@ -331,10 +334,34 @@ const translations = {
     specsLabel: "Specifications",
     materialsLabel: "Compatible Materials",
     applicationLabel: "Application",
+    convenienceLabel: "便利配置",
     laminators: LAMINATOR_BASE.map((m, i) => ({ ...m, desc: LAMINATOR_DESC.zh[i] })),
     exposures: [
       {
-        model: "PRTEX-380VAN-LF-LED",
+        model: "PRTEX-350A-LF-LED",
+        type: "Horizontal Roll-to-Roll LED Exposure System",
+        desc: (
+          <>
+            采用水平布局的 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
+            <br className="hidden md:block" />
+            可适配产线布局条件，提供稳定的对准与 <span className="whitespace-nowrap">UV 曝光</span>性能。
+          </>
+        ),
+        specs: [
+          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
+          { label: "Alignment Accuracy", value: "±5 μm" },
+          { label: "UV Source", value: "LED UV" },
+          { label: "UV Wavelength", value: "365 nm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
+          { label: "Web Width", value: "250–380 mm" },
+          { label: "Tact Time", value: "12 sec" },
+          { label: "Vision System", value: "8CCD Vision Alignment" },
+        ],
+        materials: "Leadframe (C7025, CDA194, AL42)",
+        application: "Leadframe RTR Exposure Process",
+      },
+      {
+        model: "PRTEX-350VA-LF-LED",
         type: "Vertical Roll-to-Roll LED Exposure System",
         desc: (
           <>
@@ -349,30 +376,7 @@ const translations = {
           { label: "Alignment Accuracy", value: "±5 μm" },
           { label: "UV Source", value: "LED UV" },
           { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
-          { label: "Web Width", value: "250–380 mm" },
-          { label: "Tact Time", value: "12 sec" },
-          { label: "Vision System", value: "8CCD Vision Alignment" },
-        ],
-        materials: "Leadframe (C7025, CDA194, AL42)",
-        application: "Leadframe RTR Exposure Process",
-      },
-      {
-        model: "PRTEX-380AN-LF-LED",
-        type: "Horizontal Roll-to-Roll LED Exposure System",
-        desc: (
-          <>
-            采用水平布局的 <span className="whitespace-nowrap">Roll-to-Roll</span> LED Exposure 系统。
-            <br className="hidden md:block" />
-            可适配产线布局条件，提供稳定的对准与 <span className="whitespace-nowrap">UV 曝光</span>性能。
-          </>
-        ),
-        specs: [
-          { label: "Resolution", value: "20 μm ±2 μm (Cr Mask)" },
-          { label: "Alignment Accuracy", value: "±5 μm" },
-          { label: "UV Source", value: "LED UV" },
-          { label: "UV Wavelength", value: "365 nm" },
-          { label: "Exposure Area", value: "380(W) × 550(L) mm" },
+          { label: "Exposure Area", value: "350(W) × 530(L) mm" },
           { label: "Web Width", value: "250–380 mm" },
           { label: "Tact Time", value: "12 sec" },
           { label: "Vision System", value: "8CCD Vision Alignment" },
@@ -433,8 +437,8 @@ const CATEGORY_IMAGE: Record<string, string> = {
 // Each carries its own container aspect so object-contain fills with
 // no letterbox (aspect = the trimmed image's width/height).
 const MODEL_IMAGE: Record<string, { src: string; aspect: string }> = {
-  "PRTEX-380VAN-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
-  "PRTEX-380AN-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
+  "PRTEX-350A-LF-LED": { src: "/images/equipment_exposure2.png", aspect: "aspect-[1441/796]" },
+  "PRTEX-350VA-LF-LED": { src: "/images/equipment_exposure111-v2.png", aspect: "aspect-[1648/667]" },
   "PRTLA-350A-LF": { src: "/images/equipment_lami1.png", aspect: "aspect-[1377/870]" },
   "PRTLA-500A-T": { src: "/images/equipment_lami2.png", aspect: "aspect-[1325/1086]" },
   "PRTLA-500A-F": { src: "/images/equipment_lami3-v2.png", aspect: "aspect-[1048/1078]" },
@@ -453,6 +457,7 @@ interface Model {
   specs: SpecRow[]
   materials: string
   application: string
+  convenience?: string[]
 }
 
 /* Wide product showcase: info on top, large full-width image below
@@ -572,7 +577,7 @@ function LaminatorCard({
   model: Model
   categoryLabel: string
   image?: string
-  labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; contactCta: string }
+  labels: { specsLabel: string; materialsLabel: string; applicationLabel: string; convenienceLabel: string; contactCta: string }
   wide?: boolean
   onOpenImage?: (images: LightboxImage[], index: number) => void
   priority?: boolean
@@ -632,6 +637,12 @@ function LaminatorCard({
         <span className="min-w-[120px] text-xs text-neutral-500">{labels.applicationLabel}</span>
         <span className="text-xs text-neutral-800">{model.application}</span>
       </div>
+      {model.convenience && model.convenience.length > 0 && (
+        <div className="flex items-start gap-3">
+          <span className="min-w-[120px] text-xs text-neutral-500">{labels.convenienceLabel}</span>
+          <span className="text-xs text-neutral-800">{model.convenience.join(" / ")}</span>
+        </div>
+      )}
     </div>
   )
 
@@ -718,6 +729,7 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
     specsLabel: t.specsLabel,
     materialsLabel: t.materialsLabel,
     applicationLabel: t.applicationLabel,
+    convenienceLabel: t.convenienceLabel,
     contactCta: t.contactCta,
   }
 
