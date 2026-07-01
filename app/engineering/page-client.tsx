@@ -12,20 +12,28 @@ const translations = {
     eyebrow: "Alignment Stability Engineering",
     heroTitle: "Alignment Stability for Real Production.",
     heroBody:
-      "PRT는 실제 양산 환경에서 발생하는 소재 위치 편차를 고려하여, 노광 전 소재와 마스크 기준의 정렬 안정성을 높이는 엔지니어링에 집중합니다.",
+      "PRT는 노광 전 소재와 마스크 기준의 정렬 안정성을 높이는 엔지니어링에 집중합니다.",
 
     alignLabel: "Alignment Engineering",
     alignTitle: "Material Distortion & Alignment Correction",
-    alignBody:
-      "Leadframe 및 반도체 패키징 공정에서는 도금, 에칭, 열, 장력 이력과 이송 조건에 따라 소재 위치가 미세하게 변할 수 있습니다. PRT 시스템은 Vision 기반 감지와 전용 보정 방식을 통해 노광 전 소재와 마스크 기준의 정렬 편차를 줄이는 데 초점을 둡니다.",
+    alignBody: [
+      "Leadframe 및 반도체 패키징 공정에서는 도금, 에칭, 열처리 과정에서 소재가 미세하게 수축·변형될 수 있습니다.",
+      "PRT 시스템은 Vision 기반 감지와 전용 보정 방식을 통해 노광 전 정렬 편차를 줄이는 데 초점을 둡니다.",
+    ],
 
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
+    sequenceTitle: "정렬 보정 시퀀스",
+    diagramPlain: "변형된 소재를 노광 전에 기준 위치에 가깝게 조금씩 보정하는 과정입니다.",
     diagramReplay: "다시 보기",
-    legendReference: "기준 형상",
-    legendMaterial: "소재 변형 형상",
+    legendReference: "파란색 · 기준 노광 위치",
+    legendMaterial: "보라색 · 변형된 소재 위치",
     legendAligned: "정렬 완료",
-    flowSteps: ["소재 변형", "정렬 편차", "Vision 감지", "보정", "안정적인 노광 정렬"],
+    refTag: "기준",
+    matTag: "소재",
+    monitorCta: "실제 모니터 예시 보기",
+    monitorPlaceholder: "실제 모니터 영상은 추후 업데이트 예정입니다.",
+    flowSteps: ["소재 변형", "위치 차이 확인", "Vision 감지", "단계별 보정", "안정적 정렬"],
     diagramNote: "개념 다이어그램 — 변형된 소재 형상을 단계적으로 보정하여 기준 노광 형상에 가깝게 수렴시키는 과정을 추상화한 것입니다.",
 
     cardsLabel: "Core Alignment Engineering",
@@ -33,17 +41,17 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision 기반 정렬",
-        body: "노광 전 alignment mark를 확인하여 소재 위치와 정렬 편차를 파악하고, 보정 기준을 설정합니다.",
+        body: "노광 전 alignment mark를 확인하여 소재 위치와 기준 형상 간의 정렬 편차를 파악합니다.",
       },
       {
         title: "Material Deviation Compensation",
         sub: "소재 위치 편차 보정",
-        body: "장력, 공정 이력, 이송 조건 등으로 발생한 소재 위치 편차를 전용 보정 방식으로 줄입니다.",
+        body: "도금, 에칭, 열처리 과정에서 발생한 소재 수축·변형을 단계적으로 보정합니다.",
       },
       {
         title: "Production Condition Tuning",
         sub: "양산 조건 기반 튜닝",
-        body: "소재 상태, 웹 이송 특성, 라인 속도, 생산 조건에 맞춰 장비 세팅을 조정하여 반복 생산에서의 정렬 안정성을 높입니다.",
+        body: "소재 상태와 라인 속도에 맞춰 장비 조건을 조정하여 양산 라인에서 안정적인 정렬 상태를 유지합니다.",
       },
     ],
 
@@ -72,20 +80,28 @@ const translations = {
     eyebrow: "Alignment Stability Engineering",
     heroTitle: "Alignment Stability for Real Production.",
     heroBody:
-      "PRT focuses on alignment stability before exposure, helping manage material position variation under real production conditions.",
+      "PRT focuses on engineering that improves substrate-to-mask alignment stability before exposure.",
 
     alignLabel: "Alignment Engineering",
     alignTitle: "Material Distortion & Alignment Correction",
-    alignBody:
-      "In leadframe and semiconductor packaging processes, material position can shift due to plating, etching, heat, tension history, and transport conditions. PRT systems use vision-based detection and a dedicated correction approach to help reduce substrate-to-mask alignment deviation before exposure.",
+    alignBody: [
+      "Leadframe and semiconductor packaging processes can cause subtle material shrinkage and deformation through plating, etching, and heat treatment.",
+      "PRT systems focus on reducing alignment deviation before exposure through vision-based detection and dedicated correction methods.",
+    ],
 
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
+    sequenceTitle: "Alignment Correction Sequence",
+    diagramPlain: "Distorted material is gradually corrected toward the reference position before exposure.",
     diagramReplay: "Replay",
-    legendReference: "Reference geometry",
-    legendMaterial: "Distorted material",
-    legendAligned: "Aligned geometry",
-    flowSteps: ["Material variation", "Alignment offset", "Vision detection", "Correction", "Stable exposure alignment"],
+    legendReference: "Blue · Reference exposure position",
+    legendMaterial: "Purple · Distorted material position",
+    legendAligned: "Aligned",
+    refTag: "Reference",
+    matTag: "Material",
+    monitorCta: "View Real Monitor Example",
+    monitorPlaceholder: "Real monitor footage will be added later.",
+    flowSteps: ["Material distortion", "Position offset", "Vision detection", "Step-by-step correction", "Stable alignment"],
     diagramNote: "Concept diagram — the distorted substrate geometry is corrected step by step until it converges closely to the reference exposure geometry (abstract, not actual values).",
 
     cardsLabel: "Core Alignment Engineering",
@@ -93,17 +109,17 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "Alignment marks are detected before exposure to identify substrate position and alignment offset, and to set the correction reference.",
+        body: "Alignment marks are checked before exposure to identify deviation between the substrate position and the reference geometry.",
       },
       {
         title: "Material Deviation Compensation",
         sub: "Material Deviation Compensation",
-        body: "A dedicated correction approach helps reduce material-related position deviation caused by tension, process history, or handling conditions.",
+        body: "Material shrinkage and deformation caused by plating, etching, and heat treatment are corrected step by step.",
       },
       {
         title: "Production Condition Tuning",
         sub: "Production Condition Tuning",
-        body: "Equipment setup is tuned according to material condition, web handling behavior, line speed, and production requirements to support repeatable alignment stability.",
+        body: "Equipment conditions are adjusted according to material condition and line speed to maintain stable alignment in production lines.",
       },
     ],
 
@@ -132,20 +148,28 @@ const translations = {
     eyebrow: "Alignment Stability Engineering",
     heroTitle: "Alignment Stability for Real Production.",
     heroBody:
-      "PRT 专注于曝光前的对准稳定性，在真实量产条件下帮助管理材料位置偏差。",
+      "PRT 专注于提升曝光前基板与掩膜基准的对准稳定性。",
 
     alignLabel: "Alignment Engineering",
     alignTitle: "Material Distortion & Alignment Correction",
-    alignBody:
-      "在 Leadframe 与半导体封装工艺中，材料位置可能因电镀、蚀刻、热、张力历程与传输条件而发生细微变化。PRT 系统通过基于 Vision 的检测与专用补正方式，致力于在曝光前减少基板与掩膜基准的对准偏差。",
+    alignBody: [
+      "在 Leadframe 与半导体封装工艺中，材料可能在电镀、蚀刻与热处理过程中发生细微的收缩或变形。",
+      "PRT 系统通过基于 Vision 的检测与专用补正方式，致力于在曝光前减少对准偏差。",
+    ],
 
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
+    sequenceTitle: "对准补正流程",
+    diagramPlain: "在曝光前将变形的材料逐步补正至接近基准位置的过程。",
     diagramReplay: "重播",
-    legendReference: "基准形状",
-    legendMaterial: "材料变形形状",
+    legendReference: "蓝色 · 基准曝光位置",
+    legendMaterial: "紫色 · 变形材料位置",
     legendAligned: "对准完成",
-    flowSteps: ["材料变形", "对准偏差", "Vision 检测", "补正", "稳定的曝光对准"],
+    refTag: "基准",
+    matTag: "材料",
+    monitorCta: "查看实际监控示例",
+    monitorPlaceholder: "实际监控视频将于稍后添加。",
+    flowSteps: ["材料变形", "位置偏差确认", "Vision 检测", "分步补正", "稳定对准"],
     diagramNote: "概念示意图 — 变形的材料形状经过逐步补正，最终接近并收敛于曝光基准形状（抽象表示，非实际数值）。",
 
     cardsLabel: "Core Alignment Engineering",
@@ -153,17 +177,17 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "在曝光前检测 alignment mark，以识别基板位置与对准偏差，并设定补正基准。",
+        body: "在曝光前检查 alignment mark，以识别基板位置与基准形状之间的对准偏差。",
       },
       {
         title: "Material Deviation Compensation",
         sub: "Material Deviation Compensation",
-        body: "通过专用补正方式，减少因张力、工艺历程或搬运条件而产生的材料位置偏差。",
+        body: "对电镀、蚀刻与热处理过程中产生的材料收缩与变形进行逐步补正。",
       },
       {
         title: "Production Condition Tuning",
         sub: "Production Condition Tuning",
-        body: "根据材料状态、卷材传输特性、产线速度与生产条件调整设备设置，以支持可重复的对准稳定性。",
+        body: "根据材料状态与产线速度调整设备条件，在量产线中保持稳定的对准状态。",
       },
     ],
 
@@ -204,7 +228,11 @@ function AlignmentCorrectionDiagram({
   replayLabel,
   legendReference,
   legendMaterial,
-  legendAligned,
+  refTag,
+  matTag,
+  monitorLabel,
+  monitorPlaceholder,
+  realVideoSrc,
   steps,
   note,
 }: {
@@ -212,7 +240,11 @@ function AlignmentCorrectionDiagram({
   replayLabel: string
   legendReference: string
   legendMaterial: string
-  legendAligned: string
+  refTag: string
+  matTag: string
+  monitorLabel: string
+  monitorPlaceholder: string
+  realVideoSrc?: string
   steps: string[]
   note: string
 }) {
@@ -298,7 +330,10 @@ function AlignmentCorrectionDiagram({
     [0.66, 0.58, 0.68, 0.62, 0.64, 0.56, 0.66, 0.58], // 4 — lower-right
     [0.78, 0.78, 0.8, 0.8, 0.78, 0.8, 0.8, 0.8], // 5 — edge settling
     [0.88, 0.9, 0.9, 0.9, 0.88, 0.9, 0.9, 0.9], // 6 — settle further
-    [0.965, 0.97, 0.96, 0.97, 0.965, 0.97, 0.96, 0.97], // 7 — near-aligned
+    // 7 — near-aligned: intentionally NOT 1.0. Leaves a small, asymmetric
+    // residual (~1–2px) so it reads as "corrected, but not a perfect 0-error
+    // snap" — upper-right and lower-left corners keep slightly more offset.
+    [0.94, 0.95, 0.93, 0.95, 0.955, 0.94, 0.92, 0.955],
   ]
   const finalPts = shapeAt(STEP_FRACS[STEP_FRACS.length - 1])
 
@@ -312,6 +347,7 @@ function AlignmentCorrectionDiagram({
   const [aligned, setAligned] = useState(false)
   const [pts, setPts] = useState(toStr(distOutline))
   const [driftTf, setDriftTf] = useState("translate(0 0)")
+  const [showMonitor, setShowMonitor] = useState(false)
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
   const raf = useRef(0)
@@ -562,9 +598,6 @@ function AlignmentCorrectionDiagram({
             <stop offset="0%" stopColor="rgba(168,85,247,0.17)" />
             <stop offset="100%" stopColor="rgba(168,85,247,0.05)" />
           </linearGradient>
-          <filter id="eng-depth" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="5" stdDeviation="7" floodColor="rgba(2,6,23,0.6)" />
-          </filter>
         </defs>
 
         {/* matte base + blueprint grid + soft top sheen */}
@@ -575,12 +608,10 @@ function AlignmentCorrectionDiagram({
         <line x1={CX} y1="0" x2={CX} y2={H} stroke="rgba(148,163,184,0.07)" strokeWidth="0.7" />
         <line x1="0" y1={CY} x2={W} y2={CY} stroke="rgba(148,163,184,0.07)" strokeWidth="0.7" />
 
-        {/* ── Pseudo-3D depth: a faint stacked plane behind the reference ── */}
-        <rect x={SX + 8} y={SY + 11} width={SW} height={SH} fill="rgba(148,163,184,0.022)" stroke="rgba(148,163,184,0.10)" strokeWidth="1" />
-
-        {/* ── Reference geometry (fixed): blue exposure reference rectangle ── */}
-        <rect x={SX} y={SY} width={SW} height={SH} fill="url(#eng-ref)" stroke={BLUE} strokeWidth="1.5" />
-        <rect x={SX + 9} y={SY + 9} width={SW - 18} height={SH - 18} fill="none" stroke="rgba(25,118,210,0.18)" strokeWidth="0.7" />
+        {/* ── Reference geometry (fixed): a SINGLE blue exposure reference
+               rectangle — no backing plane, no inner box, so it reads clearly as
+               THE reference for first-time viewers ── */}
+        <rect x={SX} y={SY} width={SW} height={SH} fill="url(#eng-ref)" stroke={BLUE} strokeWidth="1.6" />
         {/* reference corner ticks (subtle, always present — anchors the reference shape) */}
         {corners.map(([px, py], i) => {
           const dx = px === SX ? 1 : -1
@@ -654,7 +685,7 @@ function AlignmentCorrectionDiagram({
                floating above the reference. The polygon points are morphed in JS
                (distorted quadrilateral → reference rectangle). ── */}
         <g style={{ opacity: entered ? 1 : 0, transition: "opacity 0.55s ease" }}>
-          <g transform={driftTf} filter="url(#eng-depth)">
+          <g transform={driftTf}>
             <polygon
               points={pts}
               fill={aligned ? "url(#eng-ref)" : "url(#eng-mat)"}
@@ -667,55 +698,87 @@ function AlignmentCorrectionDiagram({
             />
           </g>
         </g>
+
+        {/* small static color-key tags in the corners (plain words, no numbers) —
+            reinforce "blue = reference, purple = material" for first-time viewers */}
+        <text x="14" y="25" fontSize="11" fill={PURPLE} opacity="0.9" style={{ letterSpacing: "0.04em" }}>
+          {matTag}
+        </text>
+        <text x={W - 14} y="25" fontSize="11" fill={BLUE} opacity="0.95" textAnchor="end" style={{ letterSpacing: "0.04em" }}>
+          {refTag}
+        </text>
       </svg>
 
       {/* legend + subtle replay */}
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-800/80 bg-slate-900/30 px-5 py-3">
-        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
+        <span className="inline-flex items-center gap-2 text-[12px] text-slate-300">
           <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: BLUE, backgroundColor: "rgba(25,118,210,0.10)" }} />
           {legendReference}
         </span>
-        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
+        <span className="inline-flex items-center gap-2 text-[12px] text-slate-300">
           <span className="inline-block h-2.5 w-3.5 border border-dashed" style={{ borderColor: PURPLE }} />
           {legendMaterial}
         </span>
-        <span className="inline-flex items-center gap-2 text-[11px] text-slate-400">
-          <span className="inline-block h-2.5 w-3.5 border" style={{ borderColor: PURPLE, backgroundColor: "rgba(25,118,210,0.16)" }} />
-          {legendAligned}
+        <span className="ml-auto flex items-center gap-4">
+          <button
+            type="button"
+            onClick={run}
+            className="text-[10px] font-medium uppercase tracking-[0.14em] text-slate-600 transition-colors hover:text-slate-300"
+          >
+            ↻ {replayLabel}
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowMonitor((v) => !v)}
+            aria-expanded={showMonitor}
+            className="text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500 transition-colors hover:text-slate-200"
+          >
+            {showMonitor ? "▾" : "▸"} {monitorLabel}
+          </button>
         </span>
-        <button
-          type="button"
-          onClick={run}
-          className="ml-auto text-[10px] font-medium uppercase tracking-[0.14em] text-slate-600 transition-colors hover:text-slate-300"
-        >
-          ↻ {replayLabel}
-        </button>
       </div>
 
-      {/* process bar — dots + labels + connectors (not buttons) */}
-      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-3 border-t border-slate-800/80 px-5 py-4">
+      {/* process bar — dots + labels + connectors (not buttons). Active step is
+          emphasized (larger, bolder, brighter blue + a soft highlight); completed
+          steps are muted blue; not-yet-reached steps are dimmed. Restrained, no
+          neon — just a clear "you are here" for first-time viewers. */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-3.5 border-t border-slate-800/80 px-5 py-5">
         {steps.map((step, idx) => {
           const active = idx === phase
           const done = idx < phase
           return (
-            <span key={idx} className="flex items-center gap-2.5">
-              <span className="flex items-center gap-1.5">
+            <span key={idx} className="flex items-center gap-3">
+              <span
+                className="flex items-center gap-2 transition-opacity duration-300"
+                style={{ opacity: active ? 1 : done ? 0.9 : 0.55 }}
+              >
                 <span
-                  className="h-1.5 w-1.5 rounded-full transition-all duration-300"
+                  className="rounded-full transition-all duration-300"
                   style={{
-                    backgroundColor: active ? "#4ea6f5" : done ? BLUE : "#334155",
-                    transform: active ? "scale(1.5)" : "scale(1)",
+                    height: 6,
+                    width: 6,
+                    backgroundColor: active ? "#5aacf7" : done ? BLUE : "#334155",
+                    transform: active ? "scale(1.8)" : "scale(1)",
+                    boxShadow: active ? "0 0 0 4px rgba(78,166,245,0.14)" : "none",
                   }}
                 />
                 <span
-                  className="text-[11px] tracking-wide transition-colors duration-300"
-                  style={{ color: active ? "#7cbcf5" : done ? "#7ea8d8" : "#64748b", fontWeight: active ? 600 : 400 }}
+                  className="tracking-wide transition-all duration-300"
+                  style={{
+                    fontSize: active ? "13.5px" : "12px",
+                    fontWeight: active ? 700 : done ? 500 : 400,
+                    color: active ? "#8fc4ff" : done ? "#7ea8d8" : "#64748b",
+                    textShadow: active ? "0 0 8px rgba(78,166,245,0.28)" : "none",
+                  }}
                 >
                   {step}
                 </span>
               </span>
               {idx < steps.length - 1 && (
-                <span className="h-px w-5" style={{ backgroundColor: "rgba(51,65,85,0.7)" }} />
+                <span
+                  className="h-px w-6 transition-colors duration-300"
+                  style={{ backgroundColor: done ? "rgba(25,118,210,0.4)" : "rgba(51,65,85,0.6)" }}
+                />
               )}
             </span>
           )
@@ -726,6 +789,28 @@ function AlignmentCorrectionDiagram({
       <div className="border-t border-slate-800 px-5 py-3">
         <p className="text-[11px] leading-relaxed text-slate-500">{note}</p>
       </div>
+
+      {/* optional real-monitor example — inline expandable, closed by default.
+          Shows a <video> once realVideoSrc is supplied; otherwise a placeholder.
+          Secondary supporting material, so it never sits above the diagram. */}
+      {showMonitor && (
+        <div className="border-t border-slate-800 px-5 py-4">
+          {realVideoSrc ? (
+            <video
+              src={realVideoSrc}
+              controls
+              muted
+              loop
+              playsInline
+              className="mx-auto block max-h-64 w-full rounded-sm border border-slate-800 bg-black object-contain"
+            />
+          ) : (
+            <div className="flex items-center justify-center rounded-sm border border-dashed border-slate-700 bg-slate-900/40 px-4 py-10 text-center text-[12px] text-slate-500">
+              {monitorPlaceholder}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -749,66 +834,47 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
           }}
         />
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-20 lg:px-8 lg:pt-28 lg:pb-24">
-          <div data-reveal="label" className="mb-6 flex items-center gap-3">
+        <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-16 lg:px-8 lg:pt-24 lg:pb-40">
+          <div data-reveal="label" className="mb-5 flex items-center gap-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.eyebrow}
             </p>
           </div>
-          <h1 data-reveal="heading" className="mb-7 max-w-4xl text-5xl font-bold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[64px]">
+          <h1 data-reveal="heading" className="mb-5 max-w-5xl text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[56px]">
             {t.heroTitle}
           </h1>
           <p
             data-reveal
             style={{ "--reveal-delay": "120ms" } as CSSProperties}
-            className="max-w-2xl text-lg leading-[1.75] text-slate-300"
+            className="max-w-4xl text-lg leading-[1.6] text-slate-300"
           >
             {t.heroBody}
           </p>
         </div>
       </section>
 
-      {/* ── 2. Material Distortion & Alignment Correction ────── */}
-      <section className="relative bg-slate-900">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
-        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div>
-            <p data-reveal="label" className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              {t.alignLabel}
-            </p>
-            <h2 data-reveal="heading" className="mb-4 text-2xl font-bold text-white lg:text-3xl">{t.alignTitle}</h2>
-            <p
-              data-reveal
-              style={{ "--reveal-delay": "120ms" } as CSSProperties}
-              className="max-w-3xl text-sm leading-relaxed text-slate-400"
-            >
-              {t.alignBody}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Core Alignment Engineering — 4 cards ──────────── */}
+      {/* ── 2. Core Alignment Engineering — cards in a COMPACT blue-gray band.
+             The band is sized to the cards (no large empty gray area), and it no
+             longer contains Material, so the cards don't float in a tall band. ── */}
       <section style={{ backgroundColor: "rgb(30, 41, 59)" }} className="relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div data-reveal="label" className="mb-12 flex items-center gap-3">
+        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-14 lg:px-8 lg:pt-16 lg:pb-16">
+          <div data-reveal="label" className="mb-8 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               {t.cardsLabel}
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {t.cards.map((card, idx) => (
               <div
                 key={idx}
                 data-reveal="ui"
                 style={{ "--reveal-delay": `${idx * 70}ms` } as CSSProperties}
-                className={`group relative flex flex-col border border-slate-800 bg-slate-950/40 p-7 transition-colors duration-200 hover:border-slate-600 hover:bg-slate-900/40 lg:p-8 ${
+                className={`group relative flex flex-col border border-slate-800 bg-slate-950/40 px-7 py-8 transition-colors duration-200 hover:border-slate-600 hover:bg-slate-900/40 lg:px-8 lg:py-10 ${
                   idx === 2 ? "sm:col-span-2 lg:col-span-1" : ""
                 }`}
               >
@@ -817,11 +883,11 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
                 <div className="mb-4 flex items-center gap-3">
                   <span
                     aria-hidden="true"
-                    className="block h-0.5 w-9"
+                    className="block h-0.5 w-10"
                     style={{ backgroundColor: "#1976D2" }}
                   />
                   <span
-                    className="font-mono text-[11px] font-bold tracking-[0.2em]"
+                    className="font-mono text-[12px] font-bold tracking-[0.2em]"
                     style={{ color: "rgba(25,118,210,0.85)" }}
                   >
                     {String(idx + 1).padStart(2, "0")}
@@ -835,39 +901,78 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
                     {card.sub}
                   </p>
                 )}
-                <p className="mt-3 text-sm leading-7 text-slate-400">{card.body}</p>
+                <p className="mt-4 text-[15px] leading-7 text-slate-400">{card.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 4. Alignment Sequence — concept visualization of the flow above ── */}
+      {/* ── 3. Concept Visualization — the page's KEY visual: the alignment
+             correction sequence. Accent-line label + heading + short lead give it
+             clear hierarchy, then the diagram as the focal asset. ── */}
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8">
-          <div data-reveal="label" className="mb-10 flex items-center gap-3">
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
+          <div data-reveal="label" className="mb-4 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               {t.sequenceLabel}
             </p>
           </div>
+          <h2 data-reveal="heading" className="mb-4 text-2xl font-bold text-white lg:text-3xl">{t.sequenceTitle}</h2>
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mb-10 max-w-2xl text-[15px] leading-relaxed text-slate-300"
+          >
+            {t.diagramPlain}
+          </p>
 
           <div
             data-reveal="ui"
-            style={{ "--reveal-delay": "120ms" } as CSSProperties}
-            className="max-w-4xl"
+            style={{ "--reveal-delay": "160ms" } as CSSProperties}
+            className="max-w-6xl"
           >
             <AlignmentCorrectionDiagram
               statusLabel={t.diagramStatus}
               replayLabel={t.diagramReplay}
               legendReference={t.legendReference}
               legendMaterial={t.legendMaterial}
-              legendAligned={t.legendAligned}
+              refTag={t.refTag}
+              matTag={t.matTag}
+              monitorLabel={t.monitorCta}
+              monitorPlaceholder={t.monitorPlaceholder}
               steps={t.flowSteps}
               note={t.diagramNote}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Material Distortion & Alignment Correction — the "why" behind the
+             correction (rationale/evidence), placed after the visual. Standalone
+             navy section with accent-line label + heading, not a note. ── */}
+      <section className="relative bg-slate-950">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
+          <div data-reveal="label" className="mb-4 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              {t.alignLabel}
+            </p>
+          </div>
+          <h2 data-reveal="heading" className="mb-4 text-2xl font-bold text-white lg:text-3xl">{t.alignTitle}</h2>
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="max-w-3xl space-y-2.5 text-[15px] leading-relaxed text-slate-300"
+          >
+            {t.alignBody.map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
           </div>
         </div>
       </section>
