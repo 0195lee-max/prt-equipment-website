@@ -21,7 +21,10 @@ export function PostHeroVideoBand() {
   return (
     <div className="bg-[#0A0A0A]">
       <div className="mx-auto max-w-7xl px-6 pb-12 lg:px-8 lg:pb-16">
-        <div className="relative h-[200px] overflow-hidden bg-black sm:h-[260px] md:h-[340px] lg:h-[420px]">
+        <div
+          data-reveal="ui"
+          className="relative h-[200px] overflow-hidden bg-black sm:h-[260px] md:h-[340px] lg:h-[420px]"
+        >
           <video
             ref={videoRef}
             autoPlay

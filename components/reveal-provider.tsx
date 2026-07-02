@@ -40,7 +40,9 @@ export function RevealProvider() {
         (entries) => {
           for (const entry of entries) if (entry.isIntersecting) reveal(entry.target)
         },
-        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+        // Reveal as soon as a section starts entering the viewport (small
+        // bottom dead-zone) so content never sits blank while already on screen.
+        { threshold: 0.1, rootMargin: "0px 0px -4% 0px" },
       )
     }
 
@@ -49,7 +51,7 @@ export function RevealProvider() {
     // if IO is unavailable or slow (e.g. older browsers, restored scroll).
     const inViewBand = (el: Element) => {
       const r = el.getBoundingClientRect()
-      return r.top < window.innerHeight * 0.92 && r.bottom > 0
+      return r.top < window.innerHeight * 0.96 && r.bottom > 0
     }
     const sweep = () => {
       for (const el of [...pending]) if (inViewBand(el)) reveal(el)

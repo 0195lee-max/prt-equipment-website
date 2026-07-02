@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import { ArrowUpRight } from "lucide-react"
 
 // Equipment quick navigation — sits directly below the post-Hero video
@@ -17,11 +18,18 @@ export function EquipmentQuickNav() {
       <div className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <div className="border-t border-slate-800 pt-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+            <p
+              data-reveal="label"
+              className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500"
+            >
               Explore Equipment
             </p>
             {/* Equipment controls grouped together as one action bar. */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div
+              data-reveal="ui"
+              style={{ "--reveal-delay": "100ms" } as CSSProperties}
+              className="flex flex-wrap items-center gap-3 sm:gap-4"
+            >
               {QUICK_LINKS.map((link) => (
                 <a
                   key={link.href}

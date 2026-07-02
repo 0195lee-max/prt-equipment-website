@@ -1,5 +1,6 @@
 "use client"
 
+import type { CSSProperties } from "react"
 import { Calendar, Tag, ArrowRight } from "lucide-react"
 
 type Language = "ko" | "en" | "zh"
@@ -82,7 +83,7 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
 
       <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
-          <div className="flex items-center gap-3">
+          <div data-reveal="label" className="flex items-center gap-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.label}
@@ -90,6 +91,8 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
           </div>
           <a
             href="/news"
+            data-reveal="ui"
+            style={{ "--reveal-delay": "80ms" } as CSSProperties}
             className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 border-b border-slate-700 pb-1 hover:text-slate-200 hover:border-slate-500 transition-all"
           >
             {t.viewAll} <ArrowRight className="h-3 w-3 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
@@ -102,6 +105,8 @@ export function NewsTeaser({ lang }: NewsTeaserProps) {
             <a
               key={idx}
               href="/news"
+              data-reveal="ui"
+              style={{ "--reveal-delay": `${120 + idx * 90}ms` } as CSSProperties}
               className="group relative overflow-hidden border-r border-b border-slate-800 bg-slate-950/40 p-6 transition-colors hover:bg-slate-900/70"
             >
               {/* quiet blue top accent that draws in on hover — subtle connection

@@ -369,7 +369,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       <div className="relative bg-[#0A0F1A] border-b border-slate-800/60">
         <div className="relative mx-auto max-w-6xl px-6 py-16 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[auto_1fr] lg:items-center">
-            <div className="flex items-center gap-3">
+            <div data-reveal="ui" className="flex items-center gap-3">
               <div
                 className="flex items-center gap-2 px-3 py-1.5 border"
                 style={{
@@ -386,7 +386,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 </span>
               </div>
             </div>
-            <div>
+            <div data-reveal style={{ "--reveal-delay": "120ms" } as CSSProperties}>
               <p className="text-lg font-semibold text-white mb-3">
                 {t.repeatLabel}
               </p>
@@ -401,7 +401,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       {/* ── Country Badge Grid ───────────────────────────── */}
       <div className="relative bg-[#07090F] border-b border-slate-800/60">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
-          <div className="flex items-center gap-3 mb-10">
+          <div data-reveal="label" className="flex items-center gap-3 mb-10">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.regionsLabel}
@@ -412,6 +412,8 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
             {t.regions.map((r, idx) => (
               <div
                 key={idx}
+                data-reveal="ui"
+                style={{ "--reveal-delay": `${idx * 80}ms` } as CSSProperties}
                 className="relative border-r border-b border-slate-800 bg-slate-950/30 p-6 hover:bg-slate-900/40 transition-colors"
               >
                 {/* Country code as a small technical label (no flag / emoji) —
@@ -444,15 +446,25 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       {/* ── Delivery Records Table ───────────────────────── */}
       <div className="relative bg-[#0A0F1A] border-b border-slate-800/60">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
-          <div className="flex items-center gap-3 mb-3">
+          <div data-reveal="label" className="flex items-center gap-3 mb-3">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
               {t.recordsLabel}
             </p>
           </div>
-          <p className="mb-10 text-sm leading-relaxed text-slate-400">{t.recordsNote}</p>
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "100ms" } as CSSProperties}
+            className="mb-10 text-sm leading-relaxed text-slate-400"
+          >
+            {t.recordsNote}
+          </p>
 
-          <div className="overflow-x-auto border border-slate-800">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "180ms" } as CSSProperties}
+            className="overflow-x-auto border border-slate-800"
+          >
             <table className="w-full text-sm">
               <thead className="bg-slate-950/60">
                 <tr className="border-b border-slate-700/70">
@@ -495,7 +507,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
       {/* ── Named Customers + CTA ────────────────────────── */}
       <div className="relative bg-[#07090F]">
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
-          <div className="flex items-center gap-3 mb-8">
+          <div data-reveal="label" className="flex items-center gap-3 mb-8">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
               {t.customersLabel}
@@ -505,10 +517,18 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           {/* Conservative reference message (no public customer names for now) +
               non-name category pills so the section is not empty. The Request
               References CTA below is the action to obtain details. */}
-          <p className="mb-6 max-w-2xl text-[15px] leading-relaxed text-slate-300">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "100ms" } as CSSProperties}
+            className="mb-6 max-w-2xl text-[15px] leading-relaxed text-slate-300"
+          >
             {t.customersBody}
           </p>
-          <div className="mb-10 flex flex-wrap gap-2">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "180ms" } as CSSProperties}
+            className="mb-10 flex flex-wrap gap-2"
+          >
             {t.customerTags.map((tag, idx) => (
               <span
                 key={idx}
@@ -520,7 +540,11 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-3 pt-8 border-t border-slate-800">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="flex flex-wrap gap-3 pt-8 border-t border-slate-800"
+          >
             <a
               href="/contact"
               className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#0D47A1]"

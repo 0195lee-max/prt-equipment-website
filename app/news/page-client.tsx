@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, type CSSProperties } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { NewsCardVisual } from "@/components/news-card-visual"
@@ -239,8 +239,8 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
 
       {/* ── Latest Updates ───────────────────────────────── */}
       <section className="relative bg-[#07090F] py-14">
-        <div data-reveal className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
+          <div data-reveal="label" className="flex items-center gap-3 mb-6">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.latestLabel}
@@ -248,11 +248,13 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
           </div>
 
           <div className="grid gap-0 sm:grid-cols-2 border-t border-l border-slate-800">
-            {t.newsItems.map((item) => (
+            {t.newsItems.map((item, idx) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => openNews(item)}
+                data-reveal="ui"
+                style={{ "--reveal-delay": `${idx * 90}ms` } as CSSProperties}
                 className="group relative block w-full text-left border-r border-b border-slate-800 bg-slate-950/50 transition-colors hover:bg-slate-950/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#1976D2]"
               >
                 <NewsCardVisual src={item.images[0]} alt={item.imageAlt} kind={item.imageKind} />
@@ -298,7 +300,7 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
             ))}
           </div>
 
-          <p className="mt-8 text-xs text-slate-600 italic">{t.emptyNote}</p>
+          <p data-reveal className="mt-8 text-xs text-slate-600 italic">{t.emptyNote}</p>
         </div>
       </section>
 

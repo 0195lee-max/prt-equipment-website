@@ -367,14 +367,23 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             </p>
           </div>
 
-          {/* Factory overview — wide horizontal band directly below. Image,
-              label and caption are all stable content: visible immediately, no
-              reveal (reveal is reserved for the hero text above). */}
+          {/* Factory overview — wide horizontal band directly below. Label +
+              image + caption reveal together (fade-up). The image box keeps a
+              fixed height/aspect so there is no layout shift, and the reveal is
+              opacity/lift only (no blur) so it never looks like a slow-loading
+              image. */}
           <div className="mt-8 lg:mt-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
+            <p
+              data-reveal="label"
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-400"
+            >
               {t.factoryLabel}
             </p>
-            <div className="relative h-[290px] w-full overflow-hidden border border-slate-700/60 bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]">
+            <div
+              data-reveal="ui"
+              style={{ "--reveal-delay": "90ms" } as CSSProperties}
+              className="relative h-[290px] w-full overflow-hidden border border-slate-700/60 bg-black sm:h-[380px] lg:h-auto lg:aspect-[1915/788]"
+            >
               <Image
                 src="/images/company_factory_overview-v2.png"
                 alt="PRT production and assembly floor"
@@ -403,7 +412,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
                 style={{ boxShadow: "inset 0 0 0 1px rgba(25,118,210,0.1)" }}
               />
             </div>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+            <p
+              data-reveal
+              style={{ "--reveal-delay": "160ms" } as CSSProperties}
+              className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400"
+            >
               {t.factoryCaption}
             </p>
           </div>
@@ -415,11 +428,15 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-16 lg:px-8 lg:pb-20">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <p data-reveal="label" className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.specializationLabel}
           </p>
-          <h2 className="mb-6 text-3xl font-bold text-white lg:text-4xl">{t.specializationTitle}</h2>
-          <p className="mb-12 max-w-3xl text-lg leading-relaxed text-slate-300">
+          <h2 data-reveal="heading" className="mb-6 text-3xl font-bold text-white lg:text-4xl">{t.specializationTitle}</h2>
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mb-12 max-w-3xl text-lg leading-relaxed text-slate-300"
+          >
             {t.specializationBody}
           </p>
 
@@ -427,6 +444,8 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             {t.specializationCards.map((card, idx) => (
               <div
                 key={idx}
+                data-reveal="ui"
+                style={{ "--reveal-delay": `${idx * 90}ms` } as CSSProperties}
                 className="relative overflow-hidden border border-slate-700 bg-slate-900/60 p-8"
               >
                 <div
@@ -458,13 +477,17 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
       {/* ── Assembly & Control Detail — four-image proof section ─ */}
       <section className="relative border-t border-slate-800/60 bg-slate-950">
         <div className="mx-auto max-w-7xl px-6 pt-14 pb-16 lg:px-8 lg:pt-16 lg:pb-20">
-          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+          <p data-reveal="label" className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
             {t.engLabel}
           </p>
-          <h2 className="mb-5 max-w-3xl text-2xl font-bold leading-snug text-white lg:text-3xl">
+          <h2 data-reveal="heading" className="mb-5 max-w-3xl text-2xl font-bold leading-snug text-white lg:text-3xl">
             {t.engHeading}
           </h2>
-          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-300 lg:text-lg">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mb-10 max-w-3xl text-base leading-relaxed text-slate-300 lg:text-lg"
+          >
             {t.engCopy}
           </p>
 
@@ -472,7 +495,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
               Row 1: 3 larger landscape shots. Row 2: 4 portrait detail shots —
               cells are orientation-matched so object-cover keeps the detail in
               frame. Click opens the shared lightbox. Subtle hover only. */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "60ms" } as CSSProperties}
+            className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
+          >
             {ASSEMBLY_IMAGES.slice(0, 3).map((im, i) => (
               <button
                 key={im.src}
@@ -498,7 +525,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
               </button>
             ))}
           </div>
-          <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-4 lg:grid-cols-4">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "140ms" } as CSSProperties}
+            className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-4 lg:grid-cols-4"
+          >
             {ASSEMBLY_IMAGES.slice(3).map((im, i) => (
               <button
                 key={im.src}
@@ -536,13 +567,18 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
 
         <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
           {/* Why Customers Choose PRT */}
-          <p className="mb-12 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+          <p data-reveal="label" className="mb-12 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
             {t.whyLabel}
           </p>
 
           <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {t.whyPoints.map((point, idx) => (
-              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.45)" }}>
+              <div
+                key={idx}
+                data-reveal="ui"
+                className="border-l-2 pl-6"
+                style={{ borderColor: "rgba(25,118,210,0.45)", "--reveal-delay": `${idx * 90}ms` } as CSSProperties}
+              >
                 <h3 className="mb-2.5 text-lg font-bold text-white">{point.title}</h3>
                 <p className="text-base leading-relaxed text-slate-300">{point.desc}</p>
               </div>
@@ -552,7 +588,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
           {/* Patent Background — supporting trust row inside the SAME band; a
               subtle divider + spacing separates it from the four reasons without
               turning it into a card. */}
-          <div className="mt-14 border-t border-slate-800/70 pt-12">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mt-14 border-t border-slate-800/70 pt-12"
+          >
             <div className="flex items-center gap-6 sm:gap-8">
               <div className="relative h-12 w-12 flex-shrink-0 sm:h-16 sm:w-16">
                 <Image
@@ -582,11 +622,15 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
              section before the footer, carrying the contact row and CTAs. ─── */}
       <section className="relative border-t border-slate-800/60 bg-slate-950">
         <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
-          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <p data-reveal="label" className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.infoLabel}
           </p>
 
-          <div className="mb-12 grid gap-x-12 gap-y-4 sm:grid-cols-2">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "80ms" } as CSSProperties}
+            className="mb-12 grid gap-x-12 gap-y-4 sm:grid-cols-2"
+          >
             {t.infoItems.map((item, idx) => (
               <div key={idx} className="border-b border-slate-800 pb-4">
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-500">{item.label}</p>
@@ -596,7 +640,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
           </div>
 
           {/* Contact info row */}
-          <div className="mb-12 flex flex-wrap gap-6 text-sm">
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mb-12 flex flex-wrap gap-6 text-sm"
+          >
             <div className="flex items-center gap-2 text-slate-400">
               <Phone className="h-4 w-4 flex-shrink-0" style={{ color: "#1976D2" }} />
               <a href="tel:+82314691103" className="transition-colors hover:text-white">+82-31-469-1103</a>
@@ -612,7 +660,11 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4">
+          <div
+            data-reveal="ui"
+            style={{ "--reveal-delay": "160ms" } as CSSProperties}
+            className="flex flex-wrap gap-4"
+          >
             <a
               href="/products"
               className="group inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0D47A1]"

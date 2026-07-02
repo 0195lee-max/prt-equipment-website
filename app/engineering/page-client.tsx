@@ -848,6 +848,7 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
   // held frames; Replay Sequence re-runs the whole thing on demand.
   const monitorVideoRef = useRef<HTMLVideoElement>(null)
   const monitorHoldTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const monitorStartTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [monitorPhase, setMonitorPhase] = useState<"initial" | "playing" | "done">("initial")
 
   // Run the guided sequence: hold the first frame ~2s (so the initial deviation
@@ -868,21 +869,65 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
     monitorHoldTimer.current = setTimeout(() => {
       setMonitorPhase("playing")
       v.playbackRate = 1.8
-      void v.play()
+      // Muted autoplay may still be blocked; swallow the rejection so the
+      // console stays clean (the frame simply stays paused in that case).
+      v.play().catch(() => {})
     }, 2000)
   }, [])
 
-  // Auto-start once the first frame is available. readyState check covers the
-  // case where the video is already buffered before this effect attaches
-  // (e.g. StrictMode remount / cached src) so the initial hold always runs.
+  // Start the guided sequence ~300ms AFTER the block scrolls into view (not on
+  // page load) — the viewer sees the block reveal first, then the first-frame
+  // hold begins. Runs once. Honors reduced-motion: hold the first frame with no
+  // autoplay (the Replay button still works on demand).
   useEffect(() => {
     const v = monitorVideoRef.current
     if (!v) return
-    const onLoaded = () => runMonitorSequence()
-    if (v.readyState >= 2) runMonitorSequence()
-    else v.addEventListener("loadeddata", onLoaded, { once: true })
+    let started = false
+    const reduce =
+      typeof window !== "undefined" &&
+      !!window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    const begin = () => {
+      if (started) return
+      started = true
+      monitorStartTimer.current = setTimeout(() => {
+        if (reduce) {
+          try {
+            v.currentTime = 0
+          } catch {
+            /* ignore */
+          }
+          v.pause()
+          setMonitorPhase("initial")
+          return
+        }
+        runMonitorSequence()
+      }, 300)
+    }
+
+    let io: IntersectionObserver | null = null
+    if ("IntersectionObserver" in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              begin()
+              io?.disconnect()
+              break
+            }
+          }
+        },
+        { threshold: 0.35 },
+      )
+      io.observe(v)
+    } else {
+      begin()
+    }
+
     return () => {
-      v.removeEventListener("loadeddata", onLoaded)
+      io?.disconnect()
+      if (monitorStartTimer.current) clearTimeout(monitorStartTimer.current)
       if (monitorHoldTimer.current) clearTimeout(monitorHoldTimer.current)
     }
   }, [runMonitorSequence])
