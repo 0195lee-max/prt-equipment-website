@@ -2,6 +2,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Extra-wide breakpoint used only by the Header (navbar) to spread the
+   desktop menu further apart on large monitors without overflow. */
+@theme {
+  --breakpoint-3xl: 120rem; /* 1920px — kept in rem so it sorts after the default 2xl (96rem); wide-menu spacing only kicks in where the logo (at 10% gutter) won't collide with the centered menu */
+}
+
 :root {
   /* ── PRT Official Color System (final) ──────────────────────
      PRT Blue is the SVG logo fill (#1976D2) — the single accent.

@@ -182,7 +182,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
         } ${navBgClass}`}
       >
         {/* Logo */}
-        <div className="flex justify-start md:justify-center 2xl:justify-start md:w-[22vw] 2xl:w-auto flex-1 md:flex-none">
+        <div className="flex flex-1 justify-start">
           <a href="/" className="flex items-center transition-opacity hover:opacity-80">
             <img
               src="/images/PRT_logo.svg"
@@ -192,8 +192,8 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
           </a>
         </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden flex-1 items-center justify-center gap-16 md:flex lg:gap-24 2xl:absolute 2xl:left-1/2 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2">
+        {/* Desktop Menu — intrinsic width, centered by equal flex-1 side columns */}
+        <div className="hidden items-center justify-center md:flex md:gap-4 lg:gap-8 xl:gap-16 2xl:gap-24 3xl:gap-30">
           {navLinks.map((link) =>
             link.href === "/products" ? (
               // Equipment item + hover/focus dropdown of categories
@@ -232,8 +232,8 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
           )}
         </div>
 
-        {/* Right cluster: Lang + Mobile Hamburger */}
-        <div className="flex items-center gap-2 md:w-[22vw] 2xl:w-auto md:justify-start 2xl:justify-end 2xl:ml-auto">
+        {/* Right cluster: Lang + Mobile Hamburger — flex-1 balances the logo column so the menu stays centered; always right-aligned */}
+        <div className="flex flex-1 items-center justify-end gap-2 2xl:translate-x-20">
           {/* Language selector */}
           <div ref={langRef} className="relative">
             <button
@@ -245,7 +245,7 @@ export function Navbar({ lang, setLang, theme = "dark" }: NavbarProps) {
             </button>
 
             {isLangOpen && (
-              <div className={`absolute right-0 md:left-0 md:right-auto top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border z-50 ${menuPanelClass}`}>
+              <div className={`absolute right-0 top-full mt-2 min-w-[140px] overflow-hidden rounded-lg border z-50 ${menuPanelClass}`}>
                 {(["en", "zh", "ko"] as Language[]).map((l) => (
                   <button
                     key={l}
