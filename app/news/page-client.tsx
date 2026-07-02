@@ -4,83 +4,92 @@ import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { NewsCardVisual } from "@/components/news-card-visual"
-import { Calendar, ArrowRight, Tag, X } from "lucide-react"
+import { Calendar, ArrowRight, Tag, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { useLanguage, type Language } from "@/hooks/use-language"
 
-type NewsType =
-  | "Exhibition"
-  | "Shipment"
-  | "Installation"
-  | "FAT"
-  | "Repeat Order"
-  | "Engineering"
-  | "Expansion"
+// ── Data model ───────────────────────────────────────────────
+// Categories are intentionally limited to what we actually have material
+// for today. Adding a new category later is just a new union member + a
+// label entry; adding a new story is one more object in each locale's
+// `newsItems`. Multiple photos per story go in `images[]` and the modal
+// gallery lights up automatically (thumbnails + prev/next).
+type Category = "exhibition" | "shipment"
+type NewsStatus = "Upcoming" | "Scheduled"
 
-interface NewsItem {
-  type: NewsType
+interface NewsBase {
+  id: string
+  category: Category
   date: string
+  status?: NewsStatus
+  images: string[]
+  imageAlt: string
+  imageKind: "logo" | "photo"
+}
+
+interface NewsItem extends NewsBase {
   title: string
-  description: string
-  status?: "Upcoming" | "Scheduled"
-  image?: string
-  imageKind?: "logo" | "photo"
+  summary: string
 }
 
-// Shipment card — type/date/title/status/image identical across locales;
-// only the body copy is localized (title stays English as a product name).
-const SHIPMENT_BASE = {
-  type: "Shipment" as NewsType,
-  date: "2026",
-  title: "Equipment Delivery — Roll-to-Roll Exposure System",
-  status: "Scheduled" as const,
-  image: "/images/news_shipment_delivery_blue_wrapped.jpg",
-  imageKind: "photo" as const,
-}
-
-// Localized display labels for the card type + status pills. Section/proper
-// nouns stay English; en/zh fall back to the English NewsType/status keys.
-const TYPE_LABELS: Record<Language, Partial<Record<NewsType, string>>> = {
-  ko: { Exhibition: "전시", Shipment: "출하" },
-  en: {},
-  zh: {},
-}
-const STATUS_LABELS: Record<Language, Partial<Record<NonNullable<NewsItem["status"]>, string>>> = {
-  ko: { Upcoming: "예정", Scheduled: "예정" },
-  en: {},
-  zh: {},
-}
-
-// Exhibition card — type/date/title/status English in every locale;
-// only the body copy is localized.
-const EXHIBITION_BASE = {
-  type: "Exhibition" as NewsType,
+// Locale-independent fields shared by every locale (only title/summary are
+// localized). Titles stay English as they are product / proper names.
+const EXHIBITION_BASE: NewsBase = {
+  id: "cpca-show-plus-2026",
+  category: "exhibition",
   date: "October 27–29, 2026",
-  title: "CPCA Show Plus 2026",
-  status: "Upcoming" as const,
-  image: "/images/cpca_show_plus_logo.jpg",
-  imageKind: "logo" as const,
+  status: "Upcoming",
+  images: ["/images/cpca_show_plus_logo.jpg"],
+  imageAlt: "CPCA Show Plus 2026",
+  imageKind: "logo",
+}
+
+const SHIPMENT_BASE: NewsBase = {
+  id: "rtr-exposure-shipment-2026",
+  category: "shipment",
+  date: "2026",
+  status: "Scheduled",
+  images: ["/images/news_shipment_delivery_blue_wrapped.jpg"],
+  imageAlt: "Equipment Delivery — Roll-to-Roll Exposure System",
+  imageKind: "photo",
+}
+
+// Localized display labels for the category + status pills. Section/proper
+// nouns stay English in en/zh; ko gets native labels.
+const CATEGORY_LABELS: Record<Language, Record<Category, string>> = {
+  ko: { exhibition: "전시", shipment: "출하" },
+  en: { exhibition: "Exhibition", shipment: "Shipment" },
+  zh: { exhibition: "Exhibition", shipment: "Shipment" },
+}
+const STATUS_LABELS: Record<Language, Record<NewsStatus, string>> = {
+  ko: { Upcoming: "예정", Scheduled: "예정" },
+  en: { Upcoming: "Upcoming", Scheduled: "Scheduled" },
+  zh: { Upcoming: "Upcoming", Scheduled: "Scheduled" },
 }
 
 const translations = {
   ko: {
     meta: "News",
     title: "News & Updates",
-    headline: "PRT 엔지니어링, 생산 및 현장 활동",
+    headline: "PRT 엔지니어링, 생산 현장 및 출하 소식",
     description:
       "장비 출하, 엔지니어링 활동, 생산 지원 및 산업 전시 소식을 전합니다.",
     ctaPrimary: "Contact Sales",
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
-    emptyNote: "추가 소식은 생산 및 현장 일정에 따라 업데이트됩니다.",
+    viewLabel: "자세히 보기",
+    closeLabel: "닫기",
+    emptyNote: "추가 소식은 생산 및 출하 일정에 따라 업데이트됩니다.",
     newsItems: [
       {
         ...EXHIBITION_BASE,
-        description:
+        title: "CPCA Show Plus 2026",
+        summary:
           "PRT는 2026년 10월 27일부터 29일까지 열리는 CPCA Show Plus 2026 전시회에 참가할 예정입니다. 부스 정보 및 미팅 관련 세부 내용은 추후 공지됩니다.",
       },
       {
         ...SHIPMENT_BASE,
-        description:
+        title: "Equipment Delivery — Roll-to-Roll Exposure System",
+        summary:
           "아시아 양산 라인으로 납품 예정인 Roll-to-Roll Exposure System 출하 소식입니다.",
       },
     ] as NewsItem[],
@@ -94,16 +103,20 @@ const translations = {
     ctaPrimary: "Contact Sales",
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
+    viewLabel: "View",
+    closeLabel: "Close",
     emptyNote: "Additional updates will be published as production milestones occur.",
     newsItems: [
       {
         ...EXHIBITION_BASE,
-        description:
+        title: "CPCA Show Plus 2026",
+        summary:
           "PRT will participate in CPCA Show Plus 2026, held from October 27 to 29, 2026. Booth details and meeting information will be announced.",
       },
       {
         ...SHIPMENT_BASE,
-        description:
+        title: "Equipment Delivery — Roll-to-Roll Exposure System",
+        summary:
           "Scheduled delivery of Roll-to-Roll Exposure System to an Asia production line.",
       },
     ] as NewsItem[],
@@ -117,69 +130,47 @@ const translations = {
     ctaPrimary: "Contact Sales",
     ctaSecondary: "Book a Meeting",
     latestLabel: "Latest Updates",
-    emptyNote: "Additional updates will be published as production milestones occur.",
+    viewLabel: "查看",
+    closeLabel: "关闭",
+    emptyNote: "更多消息将随生产与出货进度陆续更新。",
     newsItems: [
       {
         ...EXHIBITION_BASE,
-        description:
+        title: "CPCA Show Plus 2026",
+        summary:
           "PRT 将参加于 2026 年 10 月 27 日至 29 日举办的 CPCA Show Plus 2026 展会。展位信息及会议安排将另行公布。",
       },
       {
         ...SHIPMENT_BASE,
-        description:
+        title: "Equipment Delivery — Roll-to-Roll Exposure System",
+        summary:
           "面向亚洲量产产线交付的 Roll-to-Roll Exposure System 出货信息。",
       },
     ] as NewsItem[],
   },
 }
 
-function NewsImagePlaceholder({ label }: { label: string }) {
-  return (
-    <div className="relative aspect-[16/9] overflow-hidden bg-[#0A0F1A] border-b border-slate-800/60">
-      {/* Image swap target: <Image src="/images/news/{slug}.jpg" alt="" fill className="object-cover" /> */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <div
-        className="absolute top-3 left-3 h-2 w-2 border-l border-t"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute top-3 right-3 h-2 w-2 border-r border-t"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute bottom-3 left-3 h-2 w-2 border-l border-b"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div
-        className="absolute bottom-3 right-3 h-2 w-2 border-r border-b"
-        style={{ borderColor: "rgba(25,118,210,0.4)" }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-600">
-          {label}
-        </span>
-      </div>
-    </div>
-  )
-}
-
 export default function NewsPage({ initialLang }: { initialLang?: Language }) {
   const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
+
+  // Modal gallery state. `active` = the story being viewed; `imgIndex` = the
+  // photo currently shown within that story's images[].
+  const [active, setActive] = useState<NewsItem | null>(null)
+  const [imgIndex, setImgIndex] = useState(0)
+
+  const openNews = (item: NewsItem) => {
+    setActive(item)
+    setImgIndex(0)
+  }
 
   useEffect(() => {
-    if (!lightbox) return
+    if (!active) return
+    const count = active.images.length
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(null)
+      if (e.key === "Escape") setActive(null)
+      else if (count > 1 && e.key === "ArrowLeft") setImgIndex((i) => (i - 1 + count) % count)
+      else if (count > 1 && e.key === "ArrowRight") setImgIndex((i) => (i + 1) % count)
     }
     document.addEventListener("keydown", onKey)
     document.body.style.overflow = "hidden"
@@ -187,14 +178,16 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
       document.removeEventListener("keydown", onKey)
       document.body.style.overflow = ""
     }
-  }, [lightbox])
+  }, [active])
+
+  const hasGallery = !!active && active.images.length > 1
 
   return (
     <main className="min-h-svh bg-[#07090F]">
       <Navbar lang={lang} setLang={setLang} />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center bg-[#07090F] border-b border-slate-800/60">
+      <section className="relative flex min-h-[40vh] items-center bg-[#07090F] border-b border-slate-800/60">
         <div
           aria-hidden="true"
           className="absolute inset-0 opacity-20"
@@ -205,8 +198,8 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
           }}
         />
 
-        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8 w-full">
-          <div className="flex items-center gap-3 mb-6">
+        <div data-reveal className="relative mx-auto max-w-5xl px-6 py-16 lg:px-8 lg:py-20 w-full">
+          <div className="flex items-center gap-3 mb-5">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.meta}
@@ -216,12 +209,12 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
             {t.title}
           </h1>
           <p
-            className="text-xl font-light leading-relaxed mb-6 sm:text-2xl max-w-3xl"
+            className="text-xl font-light leading-relaxed mb-4 sm:text-2xl max-w-3xl"
             style={{ color: "#1976D2" }}
           >
             {t.headline}
           </p>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-400 mb-10">
+          <p className="max-w-2xl text-base leading-relaxed text-slate-400 mb-7">
             {t.description}
           </p>
 
@@ -244,10 +237,10 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
         </div>
       </section>
 
-      {/* ── News Grid ────────────────────────────────────── */}
-      <section className="relative bg-[#07090F] py-20">
+      {/* ── Latest Updates ───────────────────────────────── */}
+      <section className="relative bg-[#07090F] py-14">
         <div data-reveal className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-10">
+          <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
               {t.latestLabel}
@@ -255,35 +248,24 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
           </div>
 
           <div className="grid gap-0 sm:grid-cols-2 border-t border-l border-slate-800">
-            {t.newsItems.map((item, idx) => (
-              <article
-                key={idx}
-                className="group relative border-r border-b border-slate-800 bg-slate-950/50 transition-colors hover:bg-slate-950/80"
+            {t.newsItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => openNews(item)}
+                className="group relative block w-full text-left border-r border-b border-slate-800 bg-slate-950/50 transition-colors hover:bg-slate-950/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#1976D2]"
               >
-                {item.image && item.imageKind === "photo" ? (
-                  <button
-                    type="button"
-                    onClick={() => setLightbox({ src: item.image!, alt: item.title })}
-                    aria-label="Enlarge image"
-                    className="block w-full cursor-zoom-in"
-                  >
-                    <NewsCardVisual src={item.image} alt={item.title} kind="photo" />
-                  </button>
-                ) : item.image && item.imageKind === "logo" ? (
-                  <NewsCardVisual src={item.image} alt={item.title} kind="logo" />
-                ) : (
-                  <NewsImagePlaceholder label={item.type} />
-                )}
+                <NewsCardVisual src={item.images[0]} alt={item.imageAlt} kind={item.imageKind} />
 
-                <div className="p-6 lg:p-7">
-                  {/* Type + Date */}
+                <div className="p-5 lg:p-6">
+                  {/* Category + Date + Status */}
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <span
                       className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
                       style={{ color: "#1976D2" }}
                     >
                       <Tag className="h-3 w-3" />
-                      {TYPE_LABELS[lang][item.type] ?? item.type}
+                      {CATEGORY_LABELS[lang][item.category]}
                     </span>
                     <span className="h-3 w-px bg-slate-700" />
                     <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -294,7 +276,7 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
                       <>
                         <span className="h-3 w-px bg-slate-700" />
                         <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                          {STATUS_LABELS[lang][item.status] ?? item.status}
+                          {STATUS_LABELS[lang][item.status]}
                         </span>
                       </>
                     )}
@@ -304,42 +286,137 @@ export default function NewsPage({ initialLang }: { initialLang?: Language }) {
                     {item.title}
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    {item.description}
+                    {item.summary}
                   </p>
+
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500 transition-colors group-hover:text-[#1976D2]">
+                    {t.viewLabel}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
+                  </span>
                 </div>
-              </article>
+              </button>
             ))}
           </div>
 
-          <p className="mt-10 text-xs text-slate-600 italic">{t.emptyNote}</p>
+          <p className="mt-8 text-xs text-slate-600 italic">{t.emptyNote}</p>
         </div>
       </section>
 
       <Footer lang={lang} />
 
-      {/* ── Image lightbox (shipment photo) ──────────────── */}
-      {lightbox && (
+      {/* ── Modal gallery ────────────────────────────────── */}
+      {active && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 sm:p-6"
+          onClick={() => setActive(null)}
           role="dialog"
           aria-modal="true"
+          aria-label={active.title}
         >
-          <button
-            type="button"
-            onClick={() => setLightbox(null)}
-            aria-label="Close"
-            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center border border-white/30 text-white/80 transition-colors hover:border-white/70 hover:text-white"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
+          <div
+            className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden border border-slate-700 bg-[#0A0F1A] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[88vh] max-w-[92vw] border border-white/10 object-contain"
-          />
+          >
+            <button
+              type="button"
+              onClick={() => setActive(null)}
+              aria-label={t.closeLabel}
+              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center border border-white/30 bg-black/40 text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Image stage — logos sit on white, photos on black; both object-contain (never cropped) */}
+            <div
+              className={`relative flex items-center justify-center ${
+                active.imageKind === "logo" ? "bg-white p-8" : "bg-black"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={active.images[imgIndex]}
+                alt={active.imageAlt}
+                className="max-h-[50vh] w-full object-contain"
+              />
+
+              {hasGallery && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setImgIndex((i) => (i - 1 + active.images.length) % active.images.length)}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/40 text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setImgIndex((i) => (i + 1) % active.images.length)}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/40 text-white/80 backdrop-blur-sm transition-colors hover:border-white/70 hover:text-white"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                  <span className="absolute bottom-3 right-3 bg-black/60 px-2 py-0.5 text-[11px] font-medium text-white/80">
+                    {imgIndex + 1} / {active.images.length}
+                  </span>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnails — only when there is more than one photo */}
+            {hasGallery && (
+              <div className="flex gap-2 overflow-x-auto border-t border-slate-800 bg-[#080B12] p-3">
+                {active.images.map((src, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setImgIndex(i)}
+                    aria-label={`Image ${i + 1}`}
+                    className={`relative h-14 w-20 shrink-0 overflow-hidden border transition-opacity ${
+                      i === imgIndex
+                        ? "border-[#1976D2] opacity-100"
+                        : "border-slate-700 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt="" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Content */}
+            <div className="overflow-y-auto p-6 lg:p-7">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <span
+                  className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
+                  style={{ color: "#1976D2" }}
+                >
+                  <Tag className="h-3 w-3" />
+                  {CATEGORY_LABELS[lang][active.category]}
+                </span>
+                <span className="h-3 w-px bg-slate-700" />
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  <Calendar className="h-3 w-3" />
+                  {active.date}
+                </span>
+                {active.status && (
+                  <>
+                    <span className="h-3 w-px bg-slate-700" />
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                      {STATUS_LABELS[lang][active.status]}
+                    </span>
+                  </>
+                )}
+              </div>
+
+              <h3 className="text-xl font-semibold text-white mb-3 leading-snug">
+                {active.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-slate-300">{active.summary}</p>
+            </div>
+          </div>
         </div>
       )}
     </main>
