@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef, type CSSProperties } from "react"
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from "react"
 import { Navbar } from "@/components/navbar"
-import { ArrowRight, RotateCcw } from "lucide-react"
+import { ArrowRight, ArrowDown, RotateCcw } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage, type Language } from "@/hooks/use-language"
 
@@ -24,7 +24,7 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     sequenceTitle: "정렬 보정 시퀀스",
-    diagramPlain: "변형된 소재를 노광 전에 기준 위치에 가깝게 조금씩 보정하는 과정입니다.",
+    diagramPlain: "변형된 소재를 기준 위치에 가깝게 조금씩 보정하는 과정입니다.",
     diagramReplay: "다시 보기",
     legendReference: "파란색 · 기준 노광 위치",
     legendMaterial: "보라색 · 변형된 소재 위치",
@@ -38,15 +38,18 @@ const translations = {
 
     monitorSectionLabel: "Actual Monitor Example",
     monitorHeading: "실제 모니터 예시",
-    monitorDesc: "노광 전 정렬 보정 과정을 보여주는 실제 모니터 캡처 시퀀스입니다.",
+    monitorDesc: "정렬 보정 과정을 보여주는 실제 모니터 캡처 시퀀스입니다.",
+    monitorInitialLabel: "초기 편차",
+    monitorResultLabel: "보정 결과",
+    monitorFlow: "초기 편차 → 보정 결과",
     resultLabel: "보정 결과 예시",
-    resultIntro: "해당 예시에서는 노광 전 코너 편차가 평균 17.1 µm에서 5.4 µm 수준으로 감소했습니다.",
+    resultIntro: "해당 예시에서는 코너 편차가 평균 17.1 µm에서 5.4 µm 수준으로 감소했습니다.",
     resultColCorner: "코너",
     resultColBefore: "보정 전",
     resultColAfter: "보정 후",
     resultAvgLabel: "평균 편차",
     resultReduction: "약 68% 감소",
-    resultCaution: "보정 결과는 소재 상태, 라인 조건, 공정 환경에 따라 달라질 수 있습니다.",
+    resultCaution: "보정 결과는 소재 변형 정도에 따라 달라질 수 있습니다.",
     monitorReplay: "시퀀스 다시 보기",
 
     cardsLabel: "Core Alignment Engineering",
@@ -54,7 +57,7 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision 기반 정렬",
-        body: "노광 전 alignment mark를 확인하여 소재 위치와 기준 형상 간의 정렬 편차를 파악합니다.",
+        body: "alignment mark를 확인하여 소재 위치와 기준 형상 간의 정렬 편차를 파악합니다.",
       },
       {
         title: "Material Deviation Compensation",
@@ -70,7 +73,7 @@ const translations = {
 
     tuningLabel: "Internal Tuning Note",
     tuningNote:
-      "PRT 노광 시스템은 노광 전 소재 변형으로 인한 정렬 편차를 보정하도록 설계되었습니다. 정해진 소재 및 공정 조건에서는 20–30µm 수준의 편차를 10µm 전후 또는 그 이하 수준으로 보정할 수 있습니다.",
+      "PRT 노광 시스템은 소재 변형으로 인한 정렬 편차를 보정하도록 설계되었습니다. 정해진 소재 및 공정 조건에서는 20–30µm 수준의 편차를 10µm 전후 또는 그 이하 수준으로 보정할 수 있습니다.",
     tuningContext:
       "이 수치는 변형된 양산 소재 기준의 보정 후 편차이며, 장비 자체의 공칭 정렬 정밀도 사양과는 구분됩니다.",
 
@@ -105,7 +108,7 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     sequenceTitle: "Alignment Correction Sequence",
-    diagramPlain: "Distorted material is gradually corrected toward the reference position before exposure.",
+    diagramPlain: "Distorted material is gradually corrected toward the reference position.",
     diagramReplay: "Replay",
     legendReference: "Blue · Reference exposure position",
     legendMaterial: "Purple · Distorted material position",
@@ -119,9 +122,12 @@ const translations = {
 
     monitorSectionLabel: "Actual Monitor Example",
     monitorHeading: "Actual Monitor Example",
-    monitorDesc: "Actual monitor capture sequence showing alignment correction before exposure.",
+    monitorDesc: "Actual monitor capture sequence showing alignment correction.",
+    monitorInitialLabel: "Initial Deviation",
+    monitorResultLabel: "Corrected Result",
+    monitorFlow: "Initial Deviation → Corrected Result",
     resultLabel: "Correction Result Example",
-    resultIntro: "In this sample sequence, corner deviation was reduced from an average of 17.1 µm to 5.4 µm before exposure.",
+    resultIntro: "In this sample sequence, corner deviation was reduced from an average of 17.1 µm to 5.4 µm.",
     resultColCorner: "Corner",
     resultColBefore: "Before",
     resultColAfter: "After",
@@ -135,7 +141,7 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "Alignment marks are checked before exposure to identify deviation between the substrate position and the reference geometry.",
+        body: "Alignment marks are checked to identify deviation between the substrate position and the reference geometry.",
       },
       {
         title: "Material Deviation Compensation",
@@ -151,7 +157,7 @@ const translations = {
 
     tuningLabel: "Internal Tuning Note",
     tuningNote:
-      "PRT exposure systems are designed to compensate for material-related alignment deviation before exposure. Under defined material and process conditions, deviation in the 20–30 µm range can be corrected to the around-10 µm level or below.",
+      "PRT exposure systems are designed to compensate for material-related alignment deviation. Under defined material and process conditions, deviation in the 20–30 µm range can be corrected to the around-10 µm level or below.",
     tuningContext:
       "These figures refer to compensated deviation on deformed production material, and are distinct from the equipment's nominal alignment accuracy specification.",
 
@@ -186,7 +192,7 @@ const translations = {
     diagramStatus: "Alignment Sequence",
     sequenceLabel: "Concept Visualization",
     sequenceTitle: "对准补正流程",
-    diagramPlain: "在曝光前将变形的材料逐步补正至接近基准位置的过程。",
+    diagramPlain: "将变形的材料逐步补正至接近基准位置的过程。",
     diagramReplay: "重播",
     legendReference: "蓝色 · 基准曝光位置",
     legendMaterial: "紫色 · 变形材料位置",
@@ -200,9 +206,12 @@ const translations = {
 
     monitorSectionLabel: "Actual Monitor Example",
     monitorHeading: "实际监控画面示例",
-    monitorDesc: "展示曝光前对位校正过程的实际监控画面序列。",
+    monitorDesc: "展示对位校正过程的实际监控画面序列。",
+    monitorInitialLabel: "初始偏差",
+    monitorResultLabel: "校正结果",
+    monitorFlow: "初始偏差 → 校正结果",
     resultLabel: "校正结果示例",
-    resultIntro: "在该示例中，曝光前角点偏差由平均 17.1 µm 降至 5.4 µm。",
+    resultIntro: "在该示例中，角点偏差由平均 17.1 µm 降至 5.4 µm。",
     resultColCorner: "角点",
     resultColBefore: "校正前",
     resultColAfter: "校正后",
@@ -216,7 +225,7 @@ const translations = {
       {
         title: "Vision-Based Alignment",
         sub: "Vision-Based Alignment",
-        body: "在曝光前检查 alignment mark，以识别基板位置与基准形状之间的对准偏差。",
+        body: "检查 alignment mark，以识别基板位置与基准形状之间的对准偏差。",
       },
       {
         title: "Material Deviation Compensation",
@@ -232,7 +241,7 @@ const translations = {
 
     tuningLabel: "Internal Tuning Note",
     tuningNote:
-      "PRT 曝光系统旨在于曝光前补正由材料变形引起的对准偏差。在特定的材料与工艺条件下，20–30µm 范围的偏差可补正至 10µm 前后或更低水平。",
+      "PRT 曝光系统旨在补正由材料变形引起的对准偏差。在特定的材料与工艺条件下，20–30µm 范围的偏差可补正至 10µm 前后或更低水平。",
     tuningContext:
       "该数值为基于变形量产材料的补正后偏差，与设备本身的标称对准精度规格不同。",
 
@@ -831,15 +840,52 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
   const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
 
-  // Monitor example plays once (no loop) and holds on the final, corrected
-  // frame; users can restart it on demand via the Replay Sequence button.
+  // Actual Monitor Example plays as a guided sequence (NO loop):
+  //   ① hold the first frame ~2s so the initial deviation is legible
+  //   ② play the correction faster (playbackRate)
+  //   ③ stop and hold the final corrected frame
+  // A phase label ("Initial Deviation" / "Corrected Result") is shown over the
+  // held frames; Replay Sequence re-runs the whole thing on demand.
   const monitorVideoRef = useRef<HTMLVideoElement>(null)
-  const replayMonitor = () => {
+  const monitorHoldTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [monitorPhase, setMonitorPhase] = useState<"initial" | "playing" | "done">("initial")
+
+  // Run the guided sequence: hold the first frame ~2s (so the initial deviation
+  // is legible) → play the correction faster → the video's onEnded settles the
+  // final corrected frame. No loop. A single top-center pill reflects the phase.
+  const runMonitorSequence = useCallback(() => {
     const v = monitorVideoRef.current
     if (!v) return
-    v.currentTime = 0
-    void v.play()
-  }
+    if (monitorHoldTimer.current) clearTimeout(monitorHoldTimer.current)
+    v.pause()
+    try {
+      v.currentTime = 0
+    } catch {
+      /* ignore */
+    }
+    v.playbackRate = 1
+    setMonitorPhase("initial")
+    monitorHoldTimer.current = setTimeout(() => {
+      setMonitorPhase("playing")
+      v.playbackRate = 1.8
+      void v.play()
+    }, 2000)
+  }, [])
+
+  // Auto-start once the first frame is available. readyState check covers the
+  // case where the video is already buffered before this effect attaches
+  // (e.g. StrictMode remount / cached src) so the initial hold always runs.
+  useEffect(() => {
+    const v = monitorVideoRef.current
+    if (!v) return
+    const onLoaded = () => runMonitorSequence()
+    if (v.readyState >= 2) runMonitorSequence()
+    else v.addEventListener("loadeddata", onLoaded, { once: true })
+    return () => {
+      v.removeEventListener("loadeddata", onLoaded)
+      if (monitorHoldTimer.current) clearTimeout(monitorHoldTimer.current)
+    }
+  }, [runMonitorSequence])
 
   return (
     <main className="min-h-svh bg-slate-950">
@@ -996,39 +1042,57 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
           </p>
 
           <div className="grid gap-6 lg:grid-cols-[1.85fr_1fr] lg:items-start">
-            {/* Monitor sequence video — autoplay / muted / playsInline, NO loop
-                (settles on the final corrected frame; Replay button restarts it) */}
+            {/* Monitor sequence video — autoplay / muted / playsInline, NO loop.
+                Guided: initial-frame hold → faster correction → stop on final
+                frame. Phase label overlays the held frames. */}
             <div
               data-reveal="ui"
               style={{ "--reveal-delay": "160ms" } as CSSProperties}
             >
-              <div className="overflow-hidden rounded-sm border border-slate-800 bg-black">
+              <div className="relative overflow-hidden rounded-sm border border-slate-800 bg-black">
                 <video
                   ref={monitorVideoRef}
                   src={MONITOR_VIDEO}
-                  autoPlay
                   muted
                   playsInline
+                  preload="auto"
                   onEnded={(e) => {
-                    // No loop: settle on the final corrected frame.
+                    // No loop: settle and hold the final corrected frame.
                     const v = e.currentTarget
                     v.pause()
                     if (Number.isFinite(v.duration)) v.currentTime = Math.max(0, v.duration - 0.05)
+                    setMonitorPhase("done")
                   }}
                   className="mx-auto block max-h-[480px] w-full object-contain"
                 />
+                {/* State pill — top-center, shown ONLY on the held frames
+                    (initial / final). The middle correction is conveyed by the
+                    video motion itself, so no label there. Sits at the very top
+                    so it never covers the center readout (no glow, no red/yellow). */}
+                {monitorPhase !== "playing" && (
+                  <div
+                    className="pointer-events-none absolute left-1/2 top-4 flex max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center gap-2 rounded-sm border bg-slate-950/85 px-3.5 py-1.5 shadow-sm shadow-black/30 backdrop-blur-sm"
+                    style={{ borderColor: "rgba(25,118,210,0.75)" }}
+                  >
+                    <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ backgroundColor: "#5aacf7" }} />
+                    <span className="whitespace-nowrap text-[15px] font-bold tracking-wide text-white">
+                      {monitorPhase === "initial" ? t.monitorInitialLabel : t.monitorResultLabel}
+                    </span>
+                  </div>
+                )}
               </div>
-              {/* Video control — subtle secondary button, bottom-left, clearly a
-                  button (bordered) so it reads as "replay this clip". */}
-              <div className="mt-4 flex justify-start">
+              {/* Replay control (left) + restrained step-flow caption (right).
+                  Flow lives BELOW the video so it never clutters the frame. */}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                 <button
                   type="button"
-                  onClick={replayMonitor}
+                  onClick={runMonitorSequence}
                   className="inline-flex items-center gap-2 border border-slate-600 px-5 py-2.5 text-[13px] font-medium tracking-wide text-slate-200 transition-colors hover:border-slate-400 hover:bg-white/5 hover:text-white"
                 >
                   <RotateCcw className="h-4 w-4" />
                   {t.monitorReplay}
                 </button>
+                <p className="text-[11px] tracking-wide text-slate-500">{t.monitorFlow}</p>
               </div>
             </div>
 
@@ -1041,54 +1105,63 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
                 className="border border-slate-700/70 bg-slate-900/40 p-6"
                 style={{ borderLeftColor: "#1976D2", borderLeftWidth: 2 }}
               >
-                <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
                   {t.resultLabel}
                 </p>
-                <p className="mb-5 text-[13px] leading-relaxed text-slate-400">
-                  {t.resultIntro}
-                </p>
 
-                {/* Key summary first — average before → after is the focal number */}
-                <div className="mb-5 border-y border-slate-700/70 bg-slate-900/50 px-4 py-4">
+                {/* 1) Average before → after is THE focal number; 2) the
+                    reduction gets its own emphasized line right below it. */}
+                <div className="border-y border-slate-700/70 bg-slate-900/50 px-4 py-4">
                   <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                     {t.resultAvgLabel}
                   </p>
-                  <p className="font-mono text-[20px] leading-none">
-                    <span className="text-slate-300">17.1 µm</span>
-                    <span className="mx-2 text-slate-500">→</span>
-                    <span className="font-bold" style={{ color: "#5aacf7" }}>5.4 µm</span>
+                  <p className="font-mono text-[22px] leading-none">
+                    <span className="text-slate-400">17.1</span>
+                    <span className="ml-1 text-[13px] text-slate-500">µm</span>
+                    <span className="mx-2.5 text-slate-500">→</span>
+                    <span className="font-bold" style={{ color: "#5aacf7" }}>5.4</span>
+                    <span className="ml-1 text-[13px] text-slate-400">µm</span>
                   </p>
-                  <p className="mt-2 text-[11px] font-medium text-slate-500">{t.resultReduction}</p>
+                  <p
+                    className="mt-3 flex items-center gap-1.5 text-[15px] font-semibold text-slate-100"
+                  >
+                    <ArrowDown className="h-4 w-4" style={{ color: "#5aacf7" }} />
+                    {t.resultReduction}
+                  </p>
                 </div>
 
-                {/* Per-corner before → after (arrow makes the direction unmistakable;
-                    subtle zebra + dividers separate the E7/E8/E3/E4 rows) */}
-                <div className="mb-1 flex items-baseline justify-between text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                {/* 3) Per-corner before → after — clearer header, brighter after
+                    values, zebra + dividers to separate the E7/E8/E3/E4 rows. */}
+                <div className="mb-1 mt-5 flex items-baseline justify-between text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">
                   <span>{t.resultColCorner}</span>
                   <span>
-                    {t.resultColBefore} <span className="text-slate-600">→</span> {t.resultColAfter}
+                    {t.resultColBefore} <span className="text-slate-500">→</span> {t.resultColAfter}
                   </span>
                 </div>
-                <div className="border-t border-slate-700/70">
+                <div className="border-t border-slate-700/60">
                   {CORRECTION_RESULTS.map((r, i) => (
                     <div
                       key={r.id}
-                      className={`flex items-baseline justify-between border-b border-slate-800/70 px-2 py-2 ${
-                        i % 2 === 1 ? "bg-white/[0.02]" : ""
+                      className={`flex items-baseline justify-between border-b border-slate-700/50 px-2 py-2 ${
+                        i % 2 === 1 ? "bg-white/[0.025]" : ""
                       }`}
                     >
-                      <span className="font-mono text-[13px] font-medium text-slate-200">{r.id}</span>
-                      <span className="font-mono text-[13px]">
+                      <span className="font-mono text-[13px] font-semibold text-slate-200">{r.id}</span>
+                      <span className="font-mono text-[13px] tabular-nums">
                         <span className="text-slate-500">{r.before}</span>
                         <span className="mx-1.5 text-slate-600">→</span>
-                        <span className="font-semibold text-white">{r.after}</span>
-                        <span className="ml-1 text-slate-500">µm</span>
+                        <span className="font-bold text-white">{r.after}</span>
+                        <span className="ml-1 text-[11px] text-slate-500">µm</span>
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <p className="mt-4 border-t border-slate-800 pt-3 text-[11px] leading-relaxed text-slate-500">
+                {/* 4) Supporting text + caveat, lowest in the hierarchy. */}
+                <p className="mt-4 text-[12px] leading-relaxed text-slate-400">
+                  {t.resultIntro}
+                </p>
+                <p className="mt-3 border-t border-slate-800 pt-3 text-[11px] leading-relaxed text-slate-500">
                   {t.resultCaution}
                 </p>
               </div>
