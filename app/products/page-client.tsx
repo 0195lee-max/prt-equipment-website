@@ -479,6 +479,7 @@ function ModelShowcase({
   imageShadow = false,
   onOpenImage,
   priority = false,
+  firstItem = false,
 }: {
   model: Model
   categoryLabel: string
@@ -488,12 +489,13 @@ function ModelShowcase({
   imageShadow?: boolean
   onOpenImage?: (images: LightboxImage[], index: number) => void
   priority?: boolean
+  firstItem?: boolean
 }) {
   return (
-    <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-200 py-12 first:border-t-0 first:pt-4">
+    <section id={`model-${slug(model.model)}`} data-anchor className="border-t border-neutral-300 pt-16 pb-12 first:border-t-0 first:pt-4">
       {/* 1. Model intro */}
       <div className="max-w-3xl">
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "#1976D2" }}>
+        <p className="mb-2.5 text-[11px] font-bold uppercase tracking-[0.24em]" style={{ color: "#1976D2" }}>
           {categoryLabel}
         </p>
         <p className="text-sm font-semibold tracking-widest text-neutral-500">{model.model}</p>
@@ -534,14 +536,15 @@ function ModelShowcase({
           )}
       </div>
 
-      {/* 3. Product information / key specifications / CTA */}
-      <div className="mt-8 max-w-3xl">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">{labels.specsLabel}</p>
-        <div className="mb-6 divide-y divide-neutral-200 border-t border-neutral-200">
+      {/* 3. Product information / key specifications / CTA. The first product's
+          image sits a touch closer to its spec table (mt-6); others keep mt-8. */}
+      <div className={`${firstItem ? "mt-6" : "mt-8"} max-w-3xl`}>
+        <p className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-neutral-800">{labels.specsLabel}</p>
+        <div className="mb-6 divide-y divide-neutral-300 border-t border-neutral-300">
           {model.specs.map((spec, i) => (
-            <div key={i} className="flex items-baseline justify-between gap-4 py-2.5">
-              <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
-              <span className="text-sm font-semibold leading-relaxed tabular-nums text-neutral-900 text-right">{spec.value}</span>
+            <div key={i} className="flex items-baseline justify-between gap-4 py-3">
+              <span className="text-[13px] font-medium leading-relaxed text-neutral-600">{spec.label}:</span>
+              <span className="text-[15px] font-semibold leading-relaxed tabular-nums text-neutral-950 text-right">{spec.value}</span>
             </div>
           ))}
         </div>
@@ -622,9 +625,9 @@ function LaminatorCard({
   )
 
   const specRow = (spec: SpecRow, key: number) => (
-    <div key={key} className="flex items-baseline justify-between gap-4 py-2.5">
-      <span className="text-xs font-medium leading-relaxed text-neutral-500">{spec.label}:</span>
-      <span className="text-right text-sm font-semibold leading-relaxed tabular-nums text-neutral-900">
+    <div key={key} className="flex items-baseline justify-between gap-4 py-3">
+      <span className="text-[13px] font-medium leading-relaxed text-neutral-600">{spec.label}:</span>
+      <span className="text-right text-[15px] font-semibold leading-relaxed tabular-nums text-neutral-950">
         {spec.value}
       </span>
     </div>
@@ -667,10 +670,10 @@ function LaminatorCard({
           </div>
           {/* Right: specifications (kept wide so values read cleanly) */}
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            <p className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-neutral-800">
               {labels.specsLabel}
             </p>
-            <div className="divide-y divide-neutral-200 border-t border-neutral-200">
+            <div className="divide-y divide-neutral-300 border-t border-neutral-300">
               {model.specs.map((spec, i) => specRow(spec, i))}
             </div>
             {materialsApp}
@@ -687,10 +690,10 @@ function LaminatorCard({
       <div className="mt-6 px-2 sm:px-6">
         <div className="relative h-[345px] w-full sm:h-[390px] lg:h-[437px]">{imageInner}</div>
       </div>
-      <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+      <p className="mt-8 mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-neutral-800">
         {labels.specsLabel}
       </p>
-      <div className="divide-y divide-neutral-200 border-t border-neutral-200">
+      <div className="divide-y divide-neutral-300 border-t border-neutral-300">
         {model.specs.map((spec, i) => specRow(spec, i))}
       </div>
       {materialsApp}
@@ -724,6 +727,7 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
   const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
   const [activeCat, setActiveCat] = useState("cat-exposure")
+  const [activeModel, setActiveModel] = useState("")
   const [lightbox, setLightbox] = useState<{ images: LightboxImage[]; index: number } | null>(null)
   const openLightbox = (images: LightboxImage[], index: number) => setLightbox({ images, index })
 
@@ -738,6 +742,27 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
     window.addEventListener("hashchange", apply)
     return () => window.removeEventListener("hashchange", apply)
   }, [])
+
+  // Scroll-spy: highlight the model jump button whose section is in view, so the
+  // reader always knows which model they're looking at. Re-binds when the active
+  // category (or language) changes since the model sections are re-rendered.
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-anchor][id^='model-'], [data-anchor][id^='module-']"))
+    if (els.length === 0) return
+    setActiveModel(els[0].id)
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        if (visible[0]) setActiveModel(visible[0].target.id)
+      },
+      { rootMargin: "-18% 0px -72% 0px", threshold: 0 },
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCat, lang])
 
   const active = CATEGORIES.find((c) => c.id === activeCat) ?? CATEGORIES[0]
   const labels = {
@@ -784,8 +809,8 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
                     setActiveCat(c.id)
                     if (typeof window !== "undefined") history.replaceState(null, "", `#${c.id}`)
                   }}
-                  className={`-mb-px border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive ? "text-neutral-900" : "border-transparent text-neutral-500 hover:text-neutral-800"
+                  className={`-mb-px border-b-2 px-4 py-3 text-sm transition-colors ${
+                    isActive ? "font-semibold text-neutral-900" : "border-transparent font-medium text-neutral-500 hover:text-neutral-800"
                   }`}
                   style={isActive ? { borderColor: "#1976D2" } : undefined}
                 >
@@ -795,17 +820,26 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
             })}
           </div>
 
-          {/* Model jump buttons (active category) */}
-          <div className="mb-4 flex flex-wrap gap-2">
-            {jumpTargets.map((jt) => (
-              <a
-                key={jt.id}
-                href={`#${jt.id}`}
-                className="border border-neutral-300 px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-500 hover:text-neutral-900"
-              >
-                {jt.label}
-              </a>
-            ))}
+          {/* Model jump buttons (active category) — active = the model whose
+              section is currently in view (scroll-spy). */}
+          <div className="mb-6 flex flex-wrap gap-2">
+            {jumpTargets.map((jt) => {
+              const isActive = jt.id === activeModel
+              return (
+                <a
+                  key={jt.id}
+                  href={`#${jt.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`border px-3.5 py-2 text-xs transition-colors ${
+                    isActive
+                      ? "border-[#1976D2] bg-[#1976D2]/[0.06] font-semibold text-[#1976D2]"
+                      : "border-neutral-300 font-medium text-neutral-600 hover:border-neutral-500 hover:text-neutral-900"
+                  }`}
+                >
+                  {jt.label}
+                </a>
+              )
+            })}
           </div>
 
           {/* Active category content */}
@@ -869,6 +903,7 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
                   labels={labels}
                   onOpenImage={openLightbox}
                   priority={i === 0}
+                  firstItem={i === 0}
                 />
               ))
             )}
@@ -878,22 +913,22 @@ export default function ProductsPage({ initialLang }: { initialLang?: Language }
               directly on the page so it reads as "four reasons", not a white panel.
               Only a thin divider under the section label provides structure. */}
           <div className="mb-20">
-            <div className="mb-9 flex items-center gap-3 border-b border-neutral-200 pb-5">
+            <div className="mb-9 flex items-center gap-3 border-b border-neutral-300 pb-5">
               <span aria-hidden="true" className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-700">{t.whyLabel}</p>
+              <p className="text-[13px] font-bold uppercase tracking-[0.2em] text-neutral-900">{t.whyLabel}</p>
             </div>
-            <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
               {t.whyPoints.map((pt, idx) => (
                 <div key={idx} className="relative pl-5">
                   {/* uniform accent — identical length / thickness / offset on every
                       item so the four reasons share one visual rhythm */}
                   <span
                     aria-hidden="true"
-                    className="absolute left-0 top-1 h-8 w-0.5"
+                    className="absolute left-0 top-1 h-9 w-0.5"
                     style={{ backgroundColor: "#1976D2" }}
                   />
-                  <h3 className="mb-2.5 text-sm font-semibold leading-snug text-neutral-900">{pt.title}</h3>
-                  <p className="text-xs leading-relaxed text-neutral-600">{pt.desc}</p>
+                  <h3 className="mb-2.5 text-[15px] font-bold leading-snug text-neutral-900">{pt.title}</h3>
+                  <p className="text-[13px] leading-relaxed text-neutral-600">{pt.desc}</p>
                 </div>
               ))}
             </div>
