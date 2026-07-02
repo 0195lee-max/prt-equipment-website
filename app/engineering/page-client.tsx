@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, type CSSProperties } from "react"
 import { Navbar } from "@/components/navbar"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, RotateCcw } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { useLanguage, type Language } from "@/hooks/use-language"
 
@@ -36,6 +36,19 @@ const translations = {
     flowSteps: ["소재 변형", "위치 차이 확인", "Vision 감지", "단계별 보정", "안정적 정렬"],
     diagramNote: "개념 다이어그램 — 변형된 소재 형상을 단계적으로 보정하여 기준 노광 형상에 가깝게 수렴시키는 과정을 추상화한 것입니다.",
 
+    monitorSectionLabel: "Actual Monitor Example",
+    monitorHeading: "실제 모니터 예시",
+    monitorDesc: "노광 전 정렬 보정 과정을 보여주는 실제 모니터 캡처 시퀀스입니다.",
+    resultLabel: "보정 결과 예시",
+    resultIntro: "해당 예시에서는 노광 전 코너 편차가 평균 17.1 µm에서 5.4 µm 수준으로 감소했습니다.",
+    resultColCorner: "코너",
+    resultColBefore: "보정 전",
+    resultColAfter: "보정 후",
+    resultAvgLabel: "평균 편차",
+    resultReduction: "약 68% 감소",
+    resultCaution: "보정 결과는 소재 상태, 라인 조건, 공정 환경에 따라 달라질 수 있습니다.",
+    monitorReplay: "시퀀스 다시 보기",
+
     cardsLabel: "Core Alignment Engineering",
     cards: [
       {
@@ -68,7 +81,7 @@ const translations = {
     componentsLabel: "Standard Components for Long-Term Serviceability",
     componentsBody:
       "PRT 장비는 장기 운용, 부품 교체성, 생산 환경에서의 안정성을 고려해 표준 산업 부품을 적용합니다.",
-    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
+    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence", "SPG", "기타 산업용 부품"],
     componentNote: "적용 부품 브랜드는 장비 모델, 구성, 고객 요구 조건에 따라 달라질 수 있습니다.",
 
     ctaLine: "양산 라인의 정렬 안정성 검토가 필요하신가요?",
@@ -104,6 +117,19 @@ const translations = {
     flowSteps: ["Material distortion", "Position offset", "Vision detection", "Step-by-step correction", "Stable alignment"],
     diagramNote: "Concept diagram — the distorted substrate geometry is corrected step by step until it converges closely to the reference exposure geometry (abstract, not actual values).",
 
+    monitorSectionLabel: "Actual Monitor Example",
+    monitorHeading: "Actual Monitor Example",
+    monitorDesc: "Actual monitor capture sequence showing alignment correction before exposure.",
+    resultLabel: "Correction Result Example",
+    resultIntro: "In this sample sequence, corner deviation was reduced from an average of 17.1 µm to 5.4 µm before exposure.",
+    resultColCorner: "Corner",
+    resultColBefore: "Before",
+    resultColAfter: "After",
+    resultAvgLabel: "Average deviation",
+    resultReduction: "Approx. 68% reduction",
+    resultCaution: "Results may vary depending on material condition, line setup, and process environment.",
+    monitorReplay: "Replay Sequence",
+
     cardsLabel: "Core Alignment Engineering",
     cards: [
       {
@@ -136,8 +162,8 @@ const translations = {
     componentsLabel: "Standard Components for Long-Term Serviceability",
     componentsBody:
       "PRT equipment uses standard industrial components selected for long-term serviceability, replacement availability, and stable operation in production environments.",
-    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
-    componentNote: "Component brands may vary depending on model, configuration, and customer requirements.",
+    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence", "SPG", "Other Components"],
+    componentNote: "Applied component brands may vary depending on model, configuration, and customer requirements.",
 
     ctaLine: "Need to review alignment stability for your production line?",
     productsCta: "View Equipment",
@@ -172,6 +198,19 @@ const translations = {
     flowSteps: ["材料变形", "位置偏差确认", "Vision 检测", "分步补正", "稳定对准"],
     diagramNote: "概念示意图 — 变形的材料形状经过逐步补正，最终接近并收敛于曝光基准形状（抽象表示，非实际数值）。",
 
+    monitorSectionLabel: "Actual Monitor Example",
+    monitorHeading: "实际监控画面示例",
+    monitorDesc: "展示曝光前对位校正过程的实际监控画面序列。",
+    resultLabel: "校正结果示例",
+    resultIntro: "在该示例中，曝光前角点偏差由平均 17.1 µm 降至 5.4 µm。",
+    resultColCorner: "角点",
+    resultColBefore: "校正前",
+    resultColAfter: "校正后",
+    resultAvgLabel: "平均偏差",
+    resultReduction: "约 68% 降低",
+    resultCaution: "校正结果可能会因材料状态、产线条件和工艺环境而有所不同。",
+    monitorReplay: "重新播放序列",
+
     cardsLabel: "Core Alignment Engineering",
     cards: [
       {
@@ -204,14 +243,24 @@ const translations = {
     componentsLabel: "Standard Components for Long-Term Serviceability",
     componentsBody:
       "PRT 设备采用标准工业部件，以兼顾长期运维、部件更换可得性与量产环境下的稳定运行。",
-    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence"],
-    componentNote: "所采用的部件品牌可能因设备型号、配置与客户需求而异。",
+    componentBrands: ["THK", "Rexroth", "SMC", "Omron", "Mitsubishi", "Panasonic", "Keyence", "SPG", "其他工业部件"],
+    componentNote: "所用部件品牌可能会因设备型号、配置和客户要求而有所不同。",
 
     ctaLine: "需要评估您产线的对准稳定性吗？",
     productsCta: "View Equipment",
     contactCta: "Engineering Inquiry",
   },
 }
+
+// Actual monitor-capture sequence (public asset) + the sample corner-deviation
+// results shown beside it. Values are locale-independent; only µm labels differ.
+const MONITOR_VIDEO = "/videos/homepage_alignment_monitor_sequence_16frames_smooth.mp4"
+const CORRECTION_RESULTS: { id: string; before: string; after: string }[] = [
+  { id: "E7", before: "14.2", after: "3.0" },
+  { id: "E8", before: "17.1", after: "5.3" },
+  { id: "E3", before: "17.7", after: "4.0" },
+  { id: "E4", before: "19.3", after: "9.3" },
+]
 
 /**
  * Abstract alignment-correction CONCEPT diagram (animated, restrained).
@@ -230,9 +279,6 @@ function AlignmentCorrectionDiagram({
   legendMaterial,
   refTag,
   matTag,
-  monitorLabel,
-  monitorPlaceholder,
-  realVideoSrc,
   steps,
   note,
 }: {
@@ -242,9 +288,6 @@ function AlignmentCorrectionDiagram({
   legendMaterial: string
   refTag: string
   matTag: string
-  monitorLabel: string
-  monitorPlaceholder: string
-  realVideoSrc?: string
   steps: string[]
   note: string
 }) {
@@ -347,7 +390,6 @@ function AlignmentCorrectionDiagram({
   const [aligned, setAligned] = useState(false)
   const [pts, setPts] = useState(toStr(distOutline))
   const [driftTf, setDriftTf] = useState("translate(0 0)")
-  const [showMonitor, setShowMonitor] = useState(false)
 
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
   const raf = useRef(0)
@@ -727,14 +769,6 @@ function AlignmentCorrectionDiagram({
           >
             ↻ {replayLabel}
           </button>
-          <button
-            type="button"
-            onClick={() => setShowMonitor((v) => !v)}
-            aria-expanded={showMonitor}
-            className="text-[10px] font-medium uppercase tracking-[0.14em] text-slate-500 transition-colors hover:text-slate-200"
-          >
-            {showMonitor ? "▾" : "▸"} {monitorLabel}
-          </button>
         </span>
       </div>
 
@@ -789,28 +823,6 @@ function AlignmentCorrectionDiagram({
       <div className="border-t border-slate-800 px-5 py-3">
         <p className="text-[11px] leading-relaxed text-slate-500">{note}</p>
       </div>
-
-      {/* optional real-monitor example — inline expandable, closed by default.
-          Shows a <video> once realVideoSrc is supplied; otherwise a placeholder.
-          Secondary supporting material, so it never sits above the diagram. */}
-      {showMonitor && (
-        <div className="border-t border-slate-800 px-5 py-4">
-          {realVideoSrc ? (
-            <video
-              src={realVideoSrc}
-              controls
-              muted
-              loop
-              playsInline
-              className="mx-auto block max-h-64 w-full rounded-sm border border-slate-800 bg-black object-contain"
-            />
-          ) : (
-            <div className="flex items-center justify-center rounded-sm border border-dashed border-slate-700 bg-slate-900/40 px-4 py-10 text-center text-[12px] text-slate-500">
-              {monitorPlaceholder}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   )
 }
@@ -818,6 +830,16 @@ function AlignmentCorrectionDiagram({
 export default function EngineeringPage({ initialLang }: { initialLang?: Language }) {
   const [lang, setLang] = useLanguage(initialLang)
   const t = translations[lang]
+
+  // Monitor example plays once (no loop) and holds on the final, corrected
+  // frame; users can restart it on demand via the Replay Sequence button.
+  const monitorVideoRef = useRef<HTMLVideoElement>(null)
+  const replayMonitor = () => {
+    const v = monitorVideoRef.current
+    if (!v) return
+    v.currentTime = 0
+    void v.play()
+  }
 
   return (
     <main className="min-h-svh bg-slate-950">
@@ -942,8 +964,6 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
               legendMaterial={t.legendMaterial}
               refTag={t.refTag}
               matTag={t.matTag}
-              monitorLabel={t.monitorCta}
-              monitorPlaceholder={t.monitorPlaceholder}
               steps={t.flowSteps}
               note={t.diagramNote}
             />
@@ -951,13 +971,139 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
         </div>
       </section>
 
-      {/* ── 4. Material Distortion & Alignment Correction — the "why" behind the
+      {/* ── 4. Actual Monitor Example — a real monitor-capture sequence that
+             SUPPORTS the concept diagram above (secondary; sized at/under the
+             diagram, never louder than it). Concept → actual example → result. ── */}
+      <section className="relative border-y border-slate-800/60 bg-slate-950">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
+          <div data-reveal="label" className="mb-4 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+              {t.monitorSectionLabel}
+            </p>
+          </div>
+          <h2 data-reveal="heading" className="mb-4 text-2xl font-bold text-white lg:text-3xl">
+            {t.monitorHeading}
+          </h2>
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
+            className="mb-10 max-w-2xl text-[15px] leading-relaxed text-slate-300"
+          >
+            {t.monitorDesc}
+          </p>
+
+          <div className="grid gap-6 lg:grid-cols-[1.85fr_1fr] lg:items-start">
+            {/* Monitor sequence video — autoplay / muted / playsInline, NO loop
+                (settles on the final corrected frame; Replay button restarts it) */}
+            <div
+              data-reveal="ui"
+              style={{ "--reveal-delay": "160ms" } as CSSProperties}
+            >
+              <div className="overflow-hidden rounded-sm border border-slate-800 bg-black">
+                <video
+                  ref={monitorVideoRef}
+                  src={MONITOR_VIDEO}
+                  autoPlay
+                  muted
+                  playsInline
+                  onEnded={(e) => {
+                    // No loop: settle on the final corrected frame.
+                    const v = e.currentTarget
+                    v.pause()
+                    if (Number.isFinite(v.duration)) v.currentTime = Math.max(0, v.duration - 0.05)
+                  }}
+                  className="mx-auto block max-h-[480px] w-full object-contain"
+                />
+              </div>
+              {/* Video control — subtle secondary button, bottom-left, clearly a
+                  button (bordered) so it reads as "replay this clip". */}
+              <div className="mt-4 flex justify-start">
+                <button
+                  type="button"
+                  onClick={replayMonitor}
+                  className="inline-flex items-center gap-2 border border-slate-600 px-5 py-2.5 text-[13px] font-medium tracking-wide text-slate-200 transition-colors hover:border-slate-400 hover:bg-white/5 hover:text-white"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  {t.monitorReplay}
+                </button>
+              </div>
+            </div>
+
+            {/* Correction result — restrained technical-data card, not a sales panel */}
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "200ms" } as CSSProperties}
+            >
+              <div
+                className="border border-slate-700/70 bg-slate-900/40 p-6"
+                style={{ borderLeftColor: "#1976D2", borderLeftWidth: 2 }}
+              >
+                <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
+                  {t.resultLabel}
+                </p>
+                <p className="mb-5 text-[13px] leading-relaxed text-slate-400">
+                  {t.resultIntro}
+                </p>
+
+                {/* Key summary first — average before → after is the focal number */}
+                <div className="mb-5 border-y border-slate-700/70 bg-slate-900/50 px-4 py-4">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                    {t.resultAvgLabel}
+                  </p>
+                  <p className="font-mono text-[20px] leading-none">
+                    <span className="text-slate-300">17.1 µm</span>
+                    <span className="mx-2 text-slate-500">→</span>
+                    <span className="font-bold" style={{ color: "#5aacf7" }}>5.4 µm</span>
+                  </p>
+                  <p className="mt-2 text-[11px] font-medium text-slate-500">{t.resultReduction}</p>
+                </div>
+
+                {/* Per-corner before → after (arrow makes the direction unmistakable;
+                    subtle zebra + dividers separate the E7/E8/E3/E4 rows) */}
+                <div className="mb-1 flex items-baseline justify-between text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+                  <span>{t.resultColCorner}</span>
+                  <span>
+                    {t.resultColBefore} <span className="text-slate-600">→</span> {t.resultColAfter}
+                  </span>
+                </div>
+                <div className="border-t border-slate-700/70">
+                  {CORRECTION_RESULTS.map((r, i) => (
+                    <div
+                      key={r.id}
+                      className={`flex items-baseline justify-between border-b border-slate-800/70 px-2 py-2 ${
+                        i % 2 === 1 ? "bg-white/[0.02]" : ""
+                      }`}
+                    >
+                      <span className="font-mono text-[13px] font-medium text-slate-200">{r.id}</span>
+                      <span className="font-mono text-[13px]">
+                        <span className="text-slate-500">{r.before}</span>
+                        <span className="mx-1.5 text-slate-600">→</span>
+                        <span className="font-semibold text-white">{r.after}</span>
+                        <span className="ml-1 text-slate-500">µm</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-4 border-t border-slate-800 pt-3 text-[11px] leading-relaxed text-slate-500">
+                  {t.resultCaution}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Material Distortion & Alignment Correction — the "why" behind the
              correction (rationale/evidence), placed after the visual. Standalone
              navy section with accent-line label + heading, not a note. ── */}
       <section className="relative bg-slate-950">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
+        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-20 lg:px-8 lg:pt-16 lg:pb-24">
           <div data-reveal="label" className="mb-4 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -1014,13 +1160,13 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
-          <p data-reveal="label" className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <p data-reveal="label" className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
             {t.componentsLabel}
           </p>
           <p
             data-reveal
             style={{ "--reveal-delay": "120ms" } as CSSProperties}
-            className="mb-8 max-w-xl text-sm leading-relaxed text-slate-400"
+            className="mb-8 max-w-2xl text-sm leading-relaxed text-slate-300"
           >
             {t.componentsBody}
           </p>
@@ -1033,7 +1179,7 @@ export default function EngineeringPage({ initialLang }: { initialLang?: Languag
             {t.componentBrands.map((brand, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center rounded-[3px] border border-slate-700/60 bg-slate-900/40 px-3 py-1.5 text-[13px] font-normal text-slate-300 transition-all duration-200 hover:-translate-y-px hover:border-[#1976D2]/60 hover:bg-slate-800/50 hover:text-slate-100"
+                className="inline-flex items-center rounded-[3px] border border-slate-600/70 bg-slate-800/50 px-3 py-1.5 text-[13px] font-medium text-slate-200 transition-colors duration-200 hover:border-[#1976D2]/60 hover:bg-slate-800/70 hover:text-white"
               >
                 {brand}
               </span>
