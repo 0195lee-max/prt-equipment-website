@@ -527,28 +527,60 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
         </div>
       </section>
 
-      {/* ── Why Customers Choose PRT ───────────────────────── */}
+      {/* ── Trust block: Why Customers Choose PRT + Patent Background share ONE
+             blue-gray band (single background + grid). Patent reads as a trust
+             supporting row under the four reasons, NOT a separate boxed section.
+             Company Information below switches back to dark navy. ─── */}
       <section className="relative bg-slate-900">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-8">
-          <p className="mb-12 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+          {/* Why Customers Choose PRT */}
+          <p className="mb-12 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
             {t.whyLabel}
           </p>
 
           <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {t.whyPoints.map((point, idx) => (
-              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.35)" }}>
-                <h3 className="mb-2.5 text-lg font-semibold text-white">{point.title}</h3>
-                <p className="text-base leading-relaxed text-slate-400">{point.desc}</p>
+              <div key={idx} className="border-l-2 pl-6" style={{ borderColor: "rgba(25,118,210,0.45)" }}>
+                <h3 className="mb-2.5 text-lg font-bold text-white">{point.title}</h3>
+                <p className="text-base leading-relaxed text-slate-300">{point.desc}</p>
               </div>
             ))}
+          </div>
+
+          {/* Patent Background — supporting trust row inside the SAME band; a
+              subtle divider + spacing separates it from the four reasons without
+              turning it into a card. */}
+          <div className="mt-14 border-t border-slate-800/70 pt-12">
+            <div className="flex items-center gap-6 sm:gap-8">
+              <div className="relative h-12 w-12 flex-shrink-0 sm:h-16 sm:w-16">
+                <Image
+                  src="/images/company_patent_seal.png"
+                  alt=""
+                  fill
+                  sizes="64px"
+                  className="object-contain transition-transform duration-300 ease-out hover:scale-[1.18]"
+                  style={{ opacity: 0.85, transformOrigin: "center" }}
+                  aria-hidden="true"
+                />
+              </div>
+              <div>
+                <p className="mb-2.5 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                  {t.patentLabel}
+                </p>
+                <p className="max-w-2xl text-[15px] leading-relaxed text-slate-300">
+                  {t.patentBody}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Company Info — quiet, factual, data-sheet-like ─── */}
-      <section className="relative bg-slate-950">
+      {/* ── Company Info — quiet, factual, data-sheet-like. Now the closing
+             section before the footer, carrying the contact row and CTAs. ─── */}
+      <section className="relative border-t border-slate-800/60 bg-slate-950">
         <div className="relative mx-auto max-w-5xl px-6 py-20 lg:px-8">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
             {t.infoLabel}
@@ -591,37 +623,10 @@ export default function CompanyPage({ initialLang }: { initialLang?: Language })
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 border border-slate-600 px-7 py-3.5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:bg-white/5 hover:text-white"
+              className="inline-flex items-center gap-2 border border-slate-500 px-7 py-3.5 text-sm font-semibold text-slate-100 transition-colors hover:border-slate-300 hover:bg-white/5 hover:text-white"
             >
               {t.contactCta}
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Patent Background — quiet credibility layer (gold seal emblem) ─── */}
-      <section className="relative border-t border-slate-800/60 bg-slate-950">
-        <div className="relative mx-auto max-w-5xl px-6 py-16 lg:px-8">
-          <div className="flex items-center gap-6 sm:gap-8">
-            <div className="relative h-12 w-12 flex-shrink-0 sm:h-16 sm:w-16">
-              <Image
-                src="/images/company_patent_seal.png"
-                alt=""
-                fill
-                sizes="64px"
-                className="object-contain transition-transform duration-300 ease-out hover:scale-[1.18]"
-                style={{ opacity: 0.9, transformOrigin: "center" }}
-                aria-hidden="true"
-              />
-            </div>
-            <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                {t.patentLabel}
-              </p>
-              <p className="max-w-2xl text-sm leading-relaxed text-slate-400">
-                {t.patentBody}
-              </p>
-            </div>
           </div>
         </div>
       </section>
