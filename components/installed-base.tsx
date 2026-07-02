@@ -25,7 +25,7 @@ const translations = {
       { title: "2", sub: "Core Process Areas" },
       { title: "Re‑selected", sub: "By Customers" },
     ],
-    repeatBadge: "Repeat Orders",
+    repeatBadge: "Returning Customers",
     repeatLabel: "Validated by Returning Customers",
     repeatText: (
       <>
@@ -108,7 +108,7 @@ const translations = {
       { title: "2", sub: "Core Process Areas" },
       { title: "Re‑selected", sub: "By Customers" },
     ],
-    repeatBadge: "Repeat Orders",
+    repeatBadge: "Returning Customers",
     repeatLabel: "Validated by Returning Customers",
     repeatText: (
       <>
@@ -192,7 +192,7 @@ const translations = {
       { title: "2", sub: "Core Process Areas" },
       { title: "Re‑selected", sub: "By Customers" },
     ],
-    repeatBadge: "Repeat Orders",
+    repeatBadge: "Returning Customers",
     repeatLabel: "Validated by Returning Customers",
     repeatText: (
       <>
@@ -417,24 +417,24 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 {/* Country code as a small technical label (no flag / emoji) —
                     muted, PRT-blue accent, consistent with the premium B2B tone. */}
                 <span
-                  className="mb-4 inline-flex items-center border border-slate-700/70 px-2 py-0.5 text-[10px] font-semibold tracking-[0.2em] text-slate-400"
+                  className="mb-4 inline-flex items-center border border-slate-600/70 px-2 py-0.5 text-[10px] font-semibold tracking-[0.2em] text-slate-300"
                 >
                   {r.code}
                 </span>
-                <h3 className="text-base font-bold text-white mb-3 tracking-wide">
+                <h3 className="text-lg font-bold text-white mb-3 tracking-wide">
                   {r.country}
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {r.equipmentTypes.map((eq, eIdx) => (
                     <span
                       key={eIdx}
-                      className="inline-flex items-center rounded-[3px] border border-slate-700/60 px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-400"
+                      className="inline-flex items-center rounded-[3px] border border-slate-600/70 px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-300"
                     >
                       {eq}
                     </span>
                   ))}
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">{r.desc}</p>
+                <p className="text-[13px] text-slate-400 leading-relaxed">{r.desc}</p>
               </div>
             ))}
           </div>
@@ -459,7 +459,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                   {[t.recordPeriod, t.recordRegion, t.recordType, t.recordNotes].map((h, i) => (
                     <th
                       key={i}
-                      className="py-3.5 px-4 text-left text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400"
+                      className="py-3.5 px-4 text-left text-[11px] font-bold uppercase tracking-[0.2em] text-slate-300"
                     >
                       {h}
                     </th>
@@ -470,7 +470,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
                 {t.records.map((row, idx) => (
                   <tr
                     key={idx}
-                    className="border-b border-slate-800 hover:bg-slate-900/40 transition-colors"
+                    className="border-b border-slate-700/50 hover:bg-slate-900/40 transition-colors"
                   >
                     <td className="py-4 px-4 text-[13px] font-semibold text-slate-100 whitespace-nowrap">
                       {row.period}
@@ -497,7 +497,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
         <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-8">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-px w-8" style={{ backgroundColor: "#1976D2" }} />
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
               {t.customersLabel}
             </p>
           </div>
@@ -505,14 +505,14 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           {/* Conservative reference message (no public customer names for now) +
               non-name category pills so the section is not empty. The Request
               References CTA below is the action to obtain details. */}
-          <p className="mb-6 max-w-2xl text-sm leading-relaxed text-slate-400">
+          <p className="mb-6 max-w-2xl text-[15px] leading-relaxed text-slate-300">
             {t.customersBody}
           </p>
           <div className="mb-10 flex flex-wrap gap-2">
             {t.customerTags.map((tag, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center border border-slate-800 bg-slate-900/30 px-3 py-1.5 text-xs font-medium text-slate-400"
+                className="inline-flex items-center border border-slate-700 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-slate-300"
               >
                 {tag}
               </span>
@@ -523,7 +523,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
           <div className="flex flex-wrap gap-3 pt-8 border-t border-slate-800">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 transition-colors hover:bg-[#0D47A1]"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#0D47A1]"
               style={{ backgroundColor: "#1976D2" }}
             >
               {t.contactCta}
@@ -531,7 +531,7 @@ export function InstalledBase({ lang: externalLang }: InstalledBaseProps) {
             </a>
             <a
               href="/products"
-              className="inline-flex items-center gap-2 border border-slate-600 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-300 hover:border-slate-400 hover:bg-white/5 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-500 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-slate-100 hover:border-slate-300 hover:bg-white/5 hover:text-white transition-colors"
             >
               {t.productsCta}
             </a>
