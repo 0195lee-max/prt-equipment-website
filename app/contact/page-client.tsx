@@ -13,6 +13,7 @@ const translations = {
   ko: {
     title: "Contact Sales",
     subtitle: "장비 도입, 사양 확인, 기술 지원 등 궁금하신 내용을 남겨주세요.",
+    replyNote: "문의 내용 확인 후 영업일 기준 1~2일 내 회신드립니다.",
     formSection: "Send a Message",
     infoSection: "Contact Information",
     name: "이름",
@@ -47,7 +48,8 @@ const translations = {
   },
   en: {
     title: "Contact Sales",
-    subtitle: "Equipment inquiries, technical specifications, and field support.",
+    subtitle: "For equipment inquiries, line specifications, and engineering support.",
+    replyNote: "We usually respond within 1–2 business days.",
     formSection: "Send a Message",
     infoSection: "Contact Information",
     name: "Name",
@@ -82,7 +84,8 @@ const translations = {
   },
   zh: {
     title: "Contact Sales",
-    subtitle: "如需设备咨询、技术规格确认或现场支持，请填写以下表格。",
+    subtitle: "如需设备咨询、产线规格或工程支持，请填写以下表格。",
+    replyNote: "我们通常会在 1–2 个工作日内回复。",
     formSection: "Send a Message",
     infoSection: "Contact Information",
     name: "姓名",
@@ -170,7 +173,7 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
     <main className="min-h-svh bg-slate-950">
       <Navbar lang={lang} setLang={setLang} />
 
-      <div className="relative min-h-svh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-6 py-24 lg:px-8">
+      <div className="relative min-h-svh bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-6 pt-14 pb-24 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.4)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
         <div className="relative mx-auto max-w-6xl">
@@ -281,14 +284,14 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
               </div>
 
               {/* Equipment consultation guidance — compact, practical B2B note */}
-              <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-5">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: "#1976D2" }}>
+              <div className="rounded-lg border border-slate-700/70 bg-slate-900/40 p-5">
+                <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider" style={{ color: "#3b8fe6" }}>
                   {t.consultTitle}
                 </p>
-                <p className="mb-4 text-xs leading-relaxed text-slate-400">{t.consultIntro}</p>
-                <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                <p className="mb-4 text-xs leading-relaxed text-slate-300">{t.consultIntro}</p>
+                <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                   {t.consultItems.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                    <li key={idx} className="flex items-center gap-2 text-xs text-slate-200">
                       <span aria-hidden="true" className="h-1 w-1 flex-shrink-0 rounded-full" style={{ backgroundColor: "#1976D2" }} />
                       {item}
                     </li>
@@ -396,10 +399,9 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                   <Textarea
                     id="message"
                     required
-                    rows={6}
+                    className="min-h-[190px] border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                     value={formData.message}
                     onChange={(e) => update("message", e.target.value)}
-                    className="border-slate-700 bg-slate-800/50 text-white placeholder:text-slate-600 transition-colors focus-visible:border-[#1976D2] focus-visible:ring-2 focus-visible:ring-[#1976D2]/25"
                   />
                 </div>
 
@@ -410,16 +412,19 @@ export default function ContactPage({ initialLang }: { initialLang?: Language })
                   <p className="text-sm text-red-400">{t.error}</p>
                 )}
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto font-semibold text-white transition-colors hover:bg-[#0D47A1]"
-                  style={{ backgroundColor: "#1976D2" }}
-                >
-                  {isSubmitting ? t.sending : t.send}
-                  <Send className="ml-2 h-4 w-4" />
-                </Button>
+                <div>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto font-semibold text-white transition-colors hover:bg-[#0D47A1]"
+                    style={{ backgroundColor: "#1976D2" }}
+                  >
+                    {isSubmitting ? t.sending : t.send}
+                    <Send className="ml-2 h-4 w-4" />
+                  </Button>
+                  <p className="mt-3 text-xs leading-relaxed text-slate-500">{t.replyNote}</p>
+                </div>
               </form>
             </div>
           </div>
